@@ -11,6 +11,7 @@ public class PlaceholderMovementScript : MonoBehaviour
     {
         Debug.Log(PlayerInputs.LookDelta.ToString());
         Vector3 nextRotation = new (-PlayerInputs.LookDelta.y * mouseSensitivity, -PlayerInputs.LookDelta.x * mouseSensitivity, 0);
-        followTarget.transform.Rotate(nextRotation);
+        //followTarget.transform.Rotate(nextRotation);
+        followTarget.transform.rotation *= Quaternion.AngleAxis(-PlayerInputs.LookDelta.x , Vector3.up);
     }
 }
