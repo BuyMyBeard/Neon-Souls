@@ -13,12 +13,17 @@ public static class PlayerInputs
     {
         get => inputs.PlayerControls.Look.ReadValue<Vector2>();
     }
+    public static Vector2 MoveDirection
+    {
+        get => inputs.PlayerControls.MoveController.ReadValue<Vector2>();
+    }
 
     public static bool RunInput { get; private set; } = false;
     public static bool JumpPress { get; private set; } = false;
     public static bool JumpHold { get; private set; } = false;
     public static bool InteractPress { get; private set; } = false;
     public static bool InteractHold { get; private set; } = false;
+
     static PlayerInputs()
     {
         inputs = new ActionMap();

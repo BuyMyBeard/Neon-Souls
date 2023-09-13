@@ -37,10 +37,19 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Move"",
+                    ""name"": ""MoveKeyboard"",
                     ""type"": ""Value"",
                     ""id"": ""344d699c-5bc7-43f9-bcb4-2e18fde5301f"",
                     ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MoveController"",
+                    ""type"": ""Value"",
+                    ""id"": ""a0846e7d-c15f-4acd-bc62-6b1cd558c462"",
+                    ""expectedControlType"": ""Stick"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -65,7 +74,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""MoveKeyboard"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -76,7 +85,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""MoveKeyboard"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -87,7 +96,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""MoveKeyboard"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -98,7 +107,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""MoveKeyboard"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -109,64 +118,20 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""MoveKeyboard"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""3ba71535-e4c2-4658-9e8f-25757cdd5629"",
-                    ""path"": ""2DVector(mode=2)"",
+                    ""name"": """",
+                    ""id"": ""4bbcdc69-a6c1-4dfe-9049-6d19d642afd8"",
+                    ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": true,
+                    ""action"": ""MoveController"",
+                    ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""c6c1cbe4-2b15-4807-9a45-0c6e09a9a2c1"",
-                    ""path"": ""<Gamepad>/leftStick/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""42ac88f1-94f8-4c92-82a0-bca9b095a643"",
-                    ""path"": ""<Gamepad>/leftStick/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""cbb22cbf-2103-44bb-9e6c-fd9cac16d019"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""15b72e23-b448-4b43-8eea-dab3388d0a6e"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -176,7 +141,8 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         // PlayerControls
         m_PlayerControls = asset.FindActionMap("PlayerControls", throwIfNotFound: true);
         m_PlayerControls_Look = m_PlayerControls.FindAction("Look", throwIfNotFound: true);
-        m_PlayerControls_Move = m_PlayerControls.FindAction("Move", throwIfNotFound: true);
+        m_PlayerControls_MoveKeyboard = m_PlayerControls.FindAction("MoveKeyboard", throwIfNotFound: true);
+        m_PlayerControls_MoveController = m_PlayerControls.FindAction("MoveController", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -239,13 +205,15 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_PlayerControls;
     private List<IPlayerControlsActions> m_PlayerControlsActionsCallbackInterfaces = new List<IPlayerControlsActions>();
     private readonly InputAction m_PlayerControls_Look;
-    private readonly InputAction m_PlayerControls_Move;
+    private readonly InputAction m_PlayerControls_MoveKeyboard;
+    private readonly InputAction m_PlayerControls_MoveController;
     public struct PlayerControlsActions
     {
         private @ActionMap m_Wrapper;
         public PlayerControlsActions(@ActionMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @Look => m_Wrapper.m_PlayerControls_Look;
-        public InputAction @Move => m_Wrapper.m_PlayerControls_Move;
+        public InputAction @MoveKeyboard => m_Wrapper.m_PlayerControls_MoveKeyboard;
+        public InputAction @MoveController => m_Wrapper.m_PlayerControls_MoveController;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -258,9 +226,12 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
-            @Move.started += instance.OnMove;
-            @Move.performed += instance.OnMove;
-            @Move.canceled += instance.OnMove;
+            @MoveKeyboard.started += instance.OnMoveKeyboard;
+            @MoveKeyboard.performed += instance.OnMoveKeyboard;
+            @MoveKeyboard.canceled += instance.OnMoveKeyboard;
+            @MoveController.started += instance.OnMoveController;
+            @MoveController.performed += instance.OnMoveController;
+            @MoveController.canceled += instance.OnMoveController;
         }
 
         private void UnregisterCallbacks(IPlayerControlsActions instance)
@@ -268,9 +239,12 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
-            @Move.started -= instance.OnMove;
-            @Move.performed -= instance.OnMove;
-            @Move.canceled -= instance.OnMove;
+            @MoveKeyboard.started -= instance.OnMoveKeyboard;
+            @MoveKeyboard.performed -= instance.OnMoveKeyboard;
+            @MoveKeyboard.canceled -= instance.OnMoveKeyboard;
+            @MoveController.started -= instance.OnMoveController;
+            @MoveController.performed -= instance.OnMoveController;
+            @MoveController.canceled -= instance.OnMoveController;
         }
 
         public void RemoveCallbacks(IPlayerControlsActions instance)
@@ -291,6 +265,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
     public interface IPlayerControlsActions
     {
         void OnLook(InputAction.CallbackContext context);
-        void OnMove(InputAction.CallbackContext context);
+        void OnMoveKeyboard(InputAction.CallbackContext context);
+        void OnMoveController(InputAction.CallbackContext context);
     }
 }
