@@ -133,6 +133,8 @@ GameObject:
   m_Component:
   - component: {fileID: 268296577}
   - component: {fileID: 268296576}
+  - component: {fileID: 268296579}
+  - component: {fileID: 268296578}
   m_Layer: 0
   m_Name: ThirdPersonCam
   m_TagString: Untagged
@@ -195,6 +197,52 @@ Transform:
   - {fileID: 1948718246}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &268296578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268296575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4700f9f03ad19f94baf0367cb7a9c988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Width: 2
+  m_Damping: 1
+  m_MinFOV: 3
+  m_MaxFOV: 60
+--- !u!114 &268296579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268296575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e501d18bb52cf8c40b1853ca4904654f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CollideAgainst:
+    serializedVersion: 2
+    m_Bits: 1
+  m_IgnoreTag: Player
+  m_TransparentLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_MinimumDistanceFromTarget: 0.1
+  m_AvoidObstacles: 1
+  m_DistanceLimit: 0
+  m_MinimumOcclusionTime: 0
+  m_CameraRadius: 0.1
+  m_Strategy: 1
+  m_MaximumEffort: 4
+  m_SmoothingTime: 0
+  m_Damping: 0
+  m_DampingWhenOccluded: 0
+  m_OptimalTargetDistance: 0
 --- !u!1 &447026515
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,6 +290,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followTarget: {fileID: 588326561}
+  camMinClamp: -30
+  camMaxClamp: 40
+  lerpSpeed: 0.5
   mouseSensitivity: 0.53
 --- !u!1 &588326560
 GameObject:
@@ -381,9 +432,9 @@ GameObject:
   - component: {fileID: 1153740988}
   - component: {fileID: 1153740987}
   - component: {fileID: 1153740990}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PlaceholderPlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -598,7 +649,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 60.000004
+  field of view: 17.30737
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -846,7 +897,7 @@ GameObject:
   - component: {fileID: 2050225527}
   - component: {fileID: 2050225526}
   - component: {fileID: 2050225525}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
