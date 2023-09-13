@@ -77,6 +77,17 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
+                    ""name"": """",
+                    ""id"": ""8b4c88af-528d-482e-97de-b98dbf7cd3d6"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
                     ""name"": ""2D Vector"",
                     ""id"": ""a3341eba-938d-4568-8f48-f9c780b777b0"",
                     ""path"": ""2DVector"",

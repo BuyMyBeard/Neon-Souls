@@ -48,11 +48,12 @@ public class PlayerMovement : MonoBehaviour
 
 
         movement = Quaternion.Euler(0, cameraMain.transform.eulerAngles.y, 0) * movement; //handle camera rotation
+
+        Quaternion movementForward = Quaternion.LookRotation(direction, Vector3.up);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, movementForward, 100);
+
         controller.Move(movement);
-
-        Quaternion i = Quaternion.LookRotation(direction, Vector3.up);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, i, 100);
-
+        Grounded = controller.isGrounded;
         //transform.rotation = Quaternion.Euler(movement);
     }
 
@@ -64,8 +65,8 @@ public class PlayerMovement : MonoBehaviour
         joystickV *= joystickV.magnitude > 0.99 ? runningSpeed : walkingSpeed;
 
         if (joystickV.magnitude != 0)
-            direction = new Vector3(joystickV.x, 0, joystickV.y);
-        
+            direction = Quaternion.Euler(0, cameraMain.transform.eulerAngles.y, 0) * new Vector3(joystickV.x, 0, joystickV.y);
+
         joystickV *= Time.deltaTime;
 
         movement.x = joystickV.x;
@@ -78,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
         keyboardV *= PlayerInputs.IsRunning ? runningSpeed : walkingSpeed;
         
         if(keyboardV.magnitude != 0)
-            direction = new Vector3(keyboardV.x, 0, keyboardV.y);
+            direction = Quaternion.Euler(0, cameraMain.transform.eulerAngles.y, 0) * new Vector3(keyboardV.x, 0, keyboardV.y);
         
         keyboardV *= Time.deltaTime;
         
