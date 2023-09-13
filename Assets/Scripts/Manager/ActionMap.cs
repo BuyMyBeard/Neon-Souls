@@ -53,6 +53,15 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Run"",
+                    ""type"": ""Button"",
+                    ""id"": ""d4efa461-cbd2-49e9-ae28-5b5071afe1ff"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -132,6 +141,17 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""action"": ""MoveController"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6b7ab5e0-5a05-4dca-98f1-a9e1c68e5b65"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -143,6 +163,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         m_PlayerControls_Look = m_PlayerControls.FindAction("Look", throwIfNotFound: true);
         m_PlayerControls_MoveKeyboard = m_PlayerControls.FindAction("MoveKeyboard", throwIfNotFound: true);
         m_PlayerControls_MoveController = m_PlayerControls.FindAction("MoveController", throwIfNotFound: true);
+        m_PlayerControls_Run = m_PlayerControls.FindAction("Run", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -207,6 +228,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerControls_Look;
     private readonly InputAction m_PlayerControls_MoveKeyboard;
     private readonly InputAction m_PlayerControls_MoveController;
+    private readonly InputAction m_PlayerControls_Run;
     public struct PlayerControlsActions
     {
         private @ActionMap m_Wrapper;
@@ -214,6 +236,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_PlayerControls_Look;
         public InputAction @MoveKeyboard => m_Wrapper.m_PlayerControls_MoveKeyboard;
         public InputAction @MoveController => m_Wrapper.m_PlayerControls_MoveController;
+        public InputAction @Run => m_Wrapper.m_PlayerControls_Run;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -232,6 +255,9 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @MoveController.started += instance.OnMoveController;
             @MoveController.performed += instance.OnMoveController;
             @MoveController.canceled += instance.OnMoveController;
+            @Run.started += instance.OnRun;
+            @Run.performed += instance.OnRun;
+            @Run.canceled += instance.OnRun;
         }
 
         private void UnregisterCallbacks(IPlayerControlsActions instance)
@@ -245,6 +271,9 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @MoveController.started -= instance.OnMoveController;
             @MoveController.performed -= instance.OnMoveController;
             @MoveController.canceled -= instance.OnMoveController;
+            @Run.started -= instance.OnRun;
+            @Run.performed -= instance.OnRun;
+            @Run.canceled -= instance.OnRun;
         }
 
         public void RemoveCallbacks(IPlayerControlsActions instance)
@@ -267,5 +296,6 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnMoveKeyboard(InputAction.CallbackContext context);
         void OnMoveController(InputAction.CallbackContext context);
+        void OnRun(InputAction.CallbackContext context);
     }
 }

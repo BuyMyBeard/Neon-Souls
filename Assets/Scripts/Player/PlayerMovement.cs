@@ -10,13 +10,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float walkingSpeed;
     [SerializeField] float runningSpeed;
     [SerializeField] bool Grounded;
-    Camera camera;
+    Camera cameraMain;
     Vector3 movement;
+    Vector3 direction;
     float dropSpeed = 0;
     void Awake()
     {
         controller = GetComponent<CharacterController>();
-        camera = Camera.main;
+        cameraMain = Camera.main;
     }
 
     void HandleGravity()
@@ -31,24 +32,57 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         movement.y = 0;
+        Vector2 joystickV = PlayerInputs.MoveControllerDirection;
         HandleGravity();
-        HandleJoystickMovement();
-        //handleClavierMouvement;
 
-        movement = Quaternion.Euler(0, camera.transform.eulerAngles.y, 0) * movement; //handle camera rotation
+
+        if (joystickV.magnitude > 0)
+        {
+            HandleJoystickMovement(joystickV);
+        }
+        else
+        {
+            HandleKeyboardMovement();
+        }
+
+
+
+        movement = Quaternion.Euler(0, cameraMain.transform.eulerAngles.y, 0) * movement; //handle camera rotation
         controller.Move(movement);
+
+        Quaternion i = Quaternion.LookRotation(direction, Vector3.up);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, i, 100);
+
+        //transform.rotation = Quaternion.Euler(movement);
     }
 
-    void HandleJoystickMovement()
+    void HandleJoystickMovement(Vector3 joystickV)
     {
-        Debug.Log($"X: {PlayerInputs.MoveDirection.x}, Y: {PlayerInputs.MoveDirection.y}");
+        Debug.Log($"X: {PlayerInputs.MoveControllerDirection.x}, Y: {PlayerInputs.MoveControllerDirection.y}");
 
-        Vector2 joystickV = PlayerInputs.MoveDirection;
 
-        joystickV *= joystickV.magnitude > 0.95 ? runningSpeed : walkingSpeed;
+        joystickV *= joystickV.magnitude > 0.99 ? runningSpeed : walkingSpeed;
 
-        movement.x = joystickV.x * Time.deltaTime;
-        movement.z = joystickV.y * Time.deltaTime;
+        if (joystickV.magnitude != 0)
+            direction = new Vector3(joystickV.x, 0, joystickV.y);
+        
+        joystickV *= Time.deltaTime;
+
+        movement.x = joystickV.x;
+        movement.z = joystickV.y;
+
     }
-
+    void HandleKeyboardMovement()
+    {
+        Vector2 keyboardV = PlayerInputs.MoveKeyboardDirection;
+        keyboardV *= PlayerInputs.IsRunning ? runningSpeed : walkingSpeed;
+        
+        if(keyboardV.magnitude != 0)
+            direction = new Vector3(keyboardV.x, 0, keyboardV.y);
+        
+        keyboardV *= Time.deltaTime;
+        
+        movement.x = keyboardV.x;
+        movement.z = keyboardV.y;
+    }
 }

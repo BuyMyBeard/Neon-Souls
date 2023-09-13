@@ -13,12 +13,15 @@ public static class PlayerInputs
     {
         get => inputs.PlayerControls.Look.ReadValue<Vector2>();
     }
-    public static Vector2 MoveDirection
+    public static Vector2 MoveControllerDirection
     {
         get => inputs.PlayerControls.MoveController.ReadValue<Vector2>();
     }
-
-    public static bool RunInput { get; private set; } = false;
+    public static Vector2 MoveKeyboardDirection
+    {
+        get => inputs.PlayerControls.MoveKeyboard.ReadValue<Vector2>();
+    }
+    public static bool IsRunning { get; private set; } = false;
     public static bool JumpPress { get; private set; } = false;
     public static bool JumpHold { get; private set; } = false;
     public static bool InteractPress { get; private set; } = false;
@@ -27,13 +30,13 @@ public static class PlayerInputs
     static PlayerInputs()
     {
         inputs = new ActionMap();
-        // runAction = inputs.FindAction("Run");
+        runAction = inputs.FindAction("Run");
         // jumpAction = inputs.FindAction("Jump");
         // interactAction = inputs.FindAction("Interact");
 
         inputs.Enable();
-        //runAction.started += (_) => RunInput = true;
-        //runAction.canceled += (_) => RunInput = false;
+        runAction.started += (_) => IsRunning = true;
+        runAction.canceled += (_) => IsRunning = false;
         //jumpAction.started += (_) => { JumpHold = true; BufferJump(); };
         //jumpAction.canceled += (_) => JumpHold = false;
         //interactAction.started += (_) => { InteractHold = true; BufferInteract(); };
