@@ -12,7 +12,7 @@ public class PlaceholderMovementScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Quaternion cameraRotation = followTarget.transform.rotation *= Quaternion.AngleAxis(-PlayerInputs.LookDelta.x , Vector3.up);
+        Quaternion cameraRotation = followTarget.transform.rotation *= Quaternion.AngleAxis(PlayerInputs.LookDelta.x , Vector3.up);
         cameraRotation *= Quaternion.AngleAxis(-PlayerInputs.LookDelta.y, Vector3.right);
 
         Vector3 cameraAngles = cameraRotation.eulerAngles;
