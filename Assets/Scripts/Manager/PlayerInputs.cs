@@ -8,18 +8,19 @@ public static class PlayerInputs
 {
     static readonly int buffer = 100;
     static readonly ActionMap inputs;
-    static readonly InputAction runAction, jumpAction, interactAction;
+    static readonly InputAction runAction, jumpAction, interactAction, lookAction;
     public static Vector2 LookDelta
     {
         get => inputs.PlayerControls.Look.ReadValue<Vector2>();
     }
-    public static Vector2 MoveControllerDirection
+    public static Vector2 MoveInput
     {
-        get => inputs.PlayerControls.MoveController.ReadValue<Vector2>();
+        get => inputs.PlayerControls.Move.ReadValue<Vector2>();
     }
-    public static Vector2 MoveKeyboardDirection
+
+    public static InputControl ActiveLookControl
     {
-        get => inputs.PlayerControls.MoveKeyboard.ReadValue<Vector2>();
+        get => lookAction.activeControl;
     }
     public static bool IsRunning { get; private set; } = false;
     public static bool JumpPress { get; private set; } = false;
@@ -41,6 +42,8 @@ public static class PlayerInputs
         //jumpAction.canceled += (_) => JumpHold = false;
         //interactAction.started += (_) => { InteractHold = true; BufferInteract(); };
         //interactAction.canceled += (_) => InteractHold = false;
+        lookAction = inputs.FindAction("Look");
+        
     }
 
     private static void BufferJump()

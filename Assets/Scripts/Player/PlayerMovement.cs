@@ -32,21 +32,9 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         movement.y = 0;
-        Vector2 joystickV = PlayerInputs.MoveControllerDirection;
+
         HandleGravity();
-
-
-        if (joystickV.magnitude > 0)
-        {
-            HandleJoystickMovement(joystickV);
-        }
-        else
-        {
-            HandleKeyboardMovement();
-        }
-
-
-
+        HandleMovement();
         movement = Quaternion.Euler(0, cameraMain.transform.eulerAngles.y, 0) * movement; //handle camera rotation
 
         Quaternion movementForward = Quaternion.LookRotation(direction, Vector3.up);
@@ -57,33 +45,19 @@ public class PlayerMovement : MonoBehaviour
         //transform.rotation = Quaternion.Euler(movement);
     }
 
-    void HandleJoystickMovement(Vector3 joystickV)
+    void HandleMovement()
     {
-        Debug.Log($"X: {PlayerInputs.MoveControllerDirection.x}, Y: {PlayerInputs.MoveControllerDirection.y}");
+        Vector2 movementInput = PlayerInputs.MoveInput;
+        Debug.Log($"X: {PlayerInputs.MoveInput.x}, Y: {PlayerInputs.MoveInput.y}");
 
+        movementInput *= movementInput.magnitude > 0.99 ? runningSpeed : walkingSpeed;
 
-        joystickV *= joystickV.magnitude > 0.99 ? runningSpeed : walkingSpeed;
+        if (movementInput.magnitude != 0)
+            direction = Quaternion.Euler(0, cameraMain.transform.eulerAngles.y, 0) * new Vector3(movementInput.x, 0, movementInput.y);
 
-        if (joystickV.magnitude != 0)
-            direction = Quaternion.Euler(0, cameraMain.transform.eulerAngles.y, 0) * new Vector3(joystickV.x, 0, joystickV.y);
+        movementInput *= Time.deltaTime;
 
-        joystickV *= Time.deltaTime;
-
-        movement.x = joystickV.x;
-        movement.z = joystickV.y;
-
-    }
-    void HandleKeyboardMovement()
-    {
-        Vector2 keyboardV = PlayerInputs.MoveKeyboardDirection;
-        keyboardV *= PlayerInputs.IsRunning ? runningSpeed : walkingSpeed;
-        
-        if(keyboardV.magnitude != 0)
-            direction = Quaternion.Euler(0, cameraMain.transform.eulerAngles.y, 0) * new Vector3(keyboardV.x, 0, keyboardV.y);
-        
-        keyboardV *= Time.deltaTime;
-        
-        movement.x = keyboardV.x;
-        movement.z = keyboardV.y;
+        movement.x = movementInput.x;
+        movement.z = movementInput.y;
     }
 }

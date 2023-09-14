@@ -46,7 +46,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""MoveController"",
+                    ""name"": ""Move"",
                     ""type"": ""Value"",
                     ""id"": ""a0846e7d-c15f-4acd-bc62-6b1cd558c462"",
                     ""expectedControlType"": ""Stick"",
@@ -149,9 +149,64 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""MoveController"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""6bc9a36c-6349-4971-b0f5-8059a0c525ae"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""539f230b-db24-4eea-aeb2-95d525017e91"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""0782e5b2-ef63-48b9-bc25-dff17d1946e0"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""38df96d8-7cb0-41b2-815f-eccfc5ab5c7f"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""bdb060f6-1261-4bce-9342-fe143dc2c991"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
@@ -167,13 +222,41 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""Keyboard&Mouse"",
+            ""bindingGroup"": ""Keyboard&Mouse"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Gamepad"",
+            ""bindingGroup"": ""Gamepad"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
         // PlayerControls
         m_PlayerControls = asset.FindActionMap("PlayerControls", throwIfNotFound: true);
         m_PlayerControls_Look = m_PlayerControls.FindAction("Look", throwIfNotFound: true);
         m_PlayerControls_MoveKeyboard = m_PlayerControls.FindAction("MoveKeyboard", throwIfNotFound: true);
-        m_PlayerControls_MoveController = m_PlayerControls.FindAction("MoveController", throwIfNotFound: true);
+        m_PlayerControls_Move = m_PlayerControls.FindAction("Move", throwIfNotFound: true);
         m_PlayerControls_Run = m_PlayerControls.FindAction("Run", throwIfNotFound: true);
     }
 
@@ -238,7 +321,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
     private List<IPlayerControlsActions> m_PlayerControlsActionsCallbackInterfaces = new List<IPlayerControlsActions>();
     private readonly InputAction m_PlayerControls_Look;
     private readonly InputAction m_PlayerControls_MoveKeyboard;
-    private readonly InputAction m_PlayerControls_MoveController;
+    private readonly InputAction m_PlayerControls_Move;
     private readonly InputAction m_PlayerControls_Run;
     public struct PlayerControlsActions
     {
@@ -246,7 +329,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         public PlayerControlsActions(@ActionMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @Look => m_Wrapper.m_PlayerControls_Look;
         public InputAction @MoveKeyboard => m_Wrapper.m_PlayerControls_MoveKeyboard;
-        public InputAction @MoveController => m_Wrapper.m_PlayerControls_MoveController;
+        public InputAction @Move => m_Wrapper.m_PlayerControls_Move;
         public InputAction @Run => m_Wrapper.m_PlayerControls_Run;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
@@ -263,9 +346,9 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @MoveKeyboard.started += instance.OnMoveKeyboard;
             @MoveKeyboard.performed += instance.OnMoveKeyboard;
             @MoveKeyboard.canceled += instance.OnMoveKeyboard;
-            @MoveController.started += instance.OnMoveController;
-            @MoveController.performed += instance.OnMoveController;
-            @MoveController.canceled += instance.OnMoveController;
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
             @Run.started += instance.OnRun;
             @Run.performed += instance.OnRun;
             @Run.canceled += instance.OnRun;
@@ -279,9 +362,9 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @MoveKeyboard.started -= instance.OnMoveKeyboard;
             @MoveKeyboard.performed -= instance.OnMoveKeyboard;
             @MoveKeyboard.canceled -= instance.OnMoveKeyboard;
-            @MoveController.started -= instance.OnMoveController;
-            @MoveController.performed -= instance.OnMoveController;
-            @MoveController.canceled -= instance.OnMoveController;
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
             @Run.started -= instance.OnRun;
             @Run.performed -= instance.OnRun;
             @Run.canceled -= instance.OnRun;
@@ -302,11 +385,29 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         }
     }
     public PlayerControlsActions @PlayerControls => new PlayerControlsActions(this);
+    private int m_KeyboardMouseSchemeIndex = -1;
+    public InputControlScheme KeyboardMouseScheme
+    {
+        get
+        {
+            if (m_KeyboardMouseSchemeIndex == -1) m_KeyboardMouseSchemeIndex = asset.FindControlSchemeIndex("Keyboard&Mouse");
+            return asset.controlSchemes[m_KeyboardMouseSchemeIndex];
+        }
+    }
+    private int m_GamepadSchemeIndex = -1;
+    public InputControlScheme GamepadScheme
+    {
+        get
+        {
+            if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
+            return asset.controlSchemes[m_GamepadSchemeIndex];
+        }
+    }
     public interface IPlayerControlsActions
     {
         void OnLook(InputAction.CallbackContext context);
         void OnMoveKeyboard(InputAction.CallbackContext context);
-        void OnMoveController(InputAction.CallbackContext context);
+        void OnMove(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
     }
 }
