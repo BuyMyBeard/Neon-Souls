@@ -10,9 +10,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float walkingSpeed;
     [SerializeField] float runningSpeed;
     [SerializeField] bool Grounded;
+    [SerializeField] float turnSpeed = 100;
     Camera cameraMain;
     Vector3 movement;
-    Vector3 direction;
+    Vector3 direction = Vector3.forward;
     float dropSpeed = 0;
     void Awake()
     {
@@ -20,6 +21,10 @@ public class PlayerMovement : MonoBehaviour
         cameraMain = Camera.main;
     }
 
+    private void Start()
+    {
+        // direction = Vector3.zero;
+    }
     void HandleGravity()
     {
         if (controller.isGrounded)
@@ -38,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
         movement = Quaternion.Euler(0, cameraMain.transform.eulerAngles.y, 0) * movement; //handle camera rotation
 
         Quaternion movementForward = Quaternion.LookRotation(direction, Vector3.up);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, movementForward, 100);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, movementForward, turnSpeed * Time.deltaTime);
 
         controller.Move(movement);
         Grounded = controller.isGrounded;
@@ -48,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
     void HandleMovement()
     {
         Vector2 movementInput = PlayerInputs.MoveInput;
-        Debug.Log($"X: {PlayerInputs.MoveInput.x}, Y: {PlayerInputs.MoveInput.y}");
+        // Debug.Log($"X: {PlayerInputs.MoveInput.x}, Y: {PlayerInputs.MoveInput.y}");
 
         movementInput *= movementInput.magnitude > 0.99 ? runningSpeed : walkingSpeed;
 

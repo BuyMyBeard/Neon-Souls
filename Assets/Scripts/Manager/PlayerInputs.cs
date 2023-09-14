@@ -43,7 +43,6 @@ public static class PlayerInputs
         //interactAction.started += (_) => { InteractHold = true; BufferInteract(); };
         //interactAction.canceled += (_) => InteractHold = false;
         lookAction = inputs.FindAction("Look");
-        
     }
 
     private static void BufferJump()

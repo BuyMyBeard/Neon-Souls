@@ -13,7 +13,8 @@ public class CameraMovement : MonoBehaviour
     void Update()
     {
         // TODO: Must be a better way to do this, this will do for now though
-        float appliedSensitivity = PlayerInputs.ActiveLookControl.device is Gamepad ? controllerSensitivity : mouseSensitivity;
+        // float appliedSensitivity = PlayerInputs.ActiveLookControl.device == null || PlayerInputs.ActiveLookControl.device is Gamepad ? controllerSensitivity : mouseSensitivity;
+        float appliedSensitivity = mouseSensitivity;
 
         // Quaternion * Quaternion is the same as applying rotation from second to first
         Quaternion cameraRotation = followTarget.transform.rotation *= Quaternion.AngleAxis(PlayerInputs.LookDelta.x * appliedSensitivity, Vector3.up);
