@@ -22,10 +22,12 @@ public class CameraMovement : MonoBehaviour
     public float mouseSensitivity = .1f;
     public float controllerSensitivity = 1f;
 
-    CharacterController playerMovement;
+    CharacterController characterController;
+    PlayerController playerController;
     void Awake()
-    {
-        playerMovement = GetComponentInChildren<CharacterController>();
+    {   
+        characterController = GetComponentInChildren<CharacterController>();
+        playerController = GetComponent<PlayerController>();
     }
     void Update()
     {
@@ -34,9 +36,9 @@ public class CameraMovement : MonoBehaviour
         float appliedSensitivity = mouseSensitivity;
 
         // Quaternion * Quaternion is the same as applying rotation from second to first
-        Quaternion cameraRotation = followTarget.transform.rotation *= Quaternion.AngleAxis(PlayerInputs.LookDelta.x * appliedSensitivity, Vector3.up);
+        Quaternion cameraRotation = followTarget.transform.rotation *= Quaternion.AngleAxis(playerController.LookDelta.x * appliedSensitivity, Vector3.up);
 
-        cameraRotation *= Quaternion.AngleAxis(-PlayerInputs.LookDelta.y * appliedSensitivity, Vector3.right);
+        cameraRotation *= Quaternion.AngleAxis(-playerController.LookDelta.y * appliedSensitivity, Vector3.right);
 
         Vector3 cameraAngles = cameraRotation.eulerAngles;
 
@@ -54,13 +56,13 @@ public class CameraMovement : MonoBehaviour
         // followTarget.transform.rotation = Quaternion.Lerp(transform.rotation, y, Time.deltaTime * lerpSpeed);
         
         // Moves Camera behind the player when no look input is given
-        Vector3 movementDirection = playerMovement.velocity;
+        Vector3 movementDirection = characterController.velocity;
         movementDirection.y = 0;
         if (movementDirection.magnitude > 0 && PlayerInputs.LookDelta.magnitude == 0)
         {
 
             Vector2 camDirection = new Vector2(followTarget.transform.forward.x, followTarget.transform.forward.z);
-            Vector2 playerDirection = new Vector2(playerMovement.velocity.x, playerMovement.velocity.z).normalized;
+            Vector2 playerDirection = new Vector2(characterController.velocity.x, characterController.velocity.z).normalized;
 
             float dot = Vector2.Dot(playerDirection, camDirection);
 

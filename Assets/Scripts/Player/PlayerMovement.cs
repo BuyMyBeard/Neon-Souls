@@ -3,69 +3,60 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
-    CharacterController controller;
+    CharacterController characterController;
     [SerializeField] float walkingSpeed;
     [SerializeField] float runningSpeed;
     [SerializeField] float runTreshold = .7f;
     [SerializeField] float deadZone = .1f;
     [SerializeField] bool Grounded;
     [SerializeField] float turnSpeed = 100;
-    Camera cameraMain;
+    new Camera camera;
     Vector3 movement;
     Vector3 direction = Vector3.forward;
+    PlayerController playerController;
 
     public Vector2 MovementDirection { get; private set; } = Vector2.zero;
     float dropSpeed = 0;
     void Awake()
     {
-        controller = GetComponent<CharacterController>();
-        cameraMain = Camera.main;
+        characterController = GetComponentInChildren<CharacterController>();
+        camera = Camera.main;
+        playerController = GetComponent<PlayerController>();
     }
 
-    private void Start()
-    {
-        // direction = Vector3.zero;
-    }
     void HandleGravity()
     {
-        if (controller.isGrounded)
+        if (characterController.isGrounded)
             dropSpeed = -1f;
 
         dropSpeed += Physics.gravity.y * Time.deltaTime;
         movement.y += dropSpeed * Time.deltaTime;
     }
-    // Update is called once per frame
     void Update()
     {
         movement.y = 0;
 
         HandleGravity();
         HandleMovement();
-        movement = Quaternion.Euler(0, cameraMain.transform.eulerAngles.y, 0) * movement; //handle camera rotation
+        movement = Quaternion.Euler(0, camera.transform.eulerAngles.y, 0) * movement; //handle camera rotation
 
         Quaternion movementForward = Quaternion.LookRotation(direction, Vector3.up);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, movementForward, turnSpeed * Time.deltaTime);
+        characterController.transform.rotation = Quaternion.RotateTowards(characterController.transform.rotation, movementForward, turnSpeed * Time.deltaTime);
 
-        controller.Move(movement);
-        Grounded = controller.isGrounded;
-        //transform.rotation = Quaternion.Euler(movement);
+        characterController.Move(movement);
+        Grounded = characterController.isGrounded;
     }
 
     void HandleMovement()
     {
-        Vector2 movementInput = PlayerInputs.MoveInput;
-        // Debug.Log($"X: {PlayerInputs.MoveInput.x}, Y: {PlayerInputs.MoveInput.y}");
-        
-        //movementInput *= movementInput.magnitude > 0.99 ? runningSpeed : walkingSpeed;
-        
+        Vector2 movementInput = playerController.MoveInput; 
         float movementMagnitude = movementInput.magnitude;
 
         if (movementMagnitude >= deadZone)
         {
-            direction = Quaternion.Euler(0, cameraMain.transform.eulerAngles.y, 0) * new Vector3(movementInput.x, 0, movementInput.y);
+            direction = Quaternion.Euler(0, camera.transform.eulerAngles.y, 0) * new Vector3(movementInput.x, 0, movementInput.y);
 
             if (movementMagnitude >= runTreshold)
             {
@@ -82,11 +73,8 @@ public class PlayerMovement : MonoBehaviour
         {
             movementInput *= 0;
         }
-        // if (movementInput.magnitude != 0)
-        //     direction = Quaternion.Euler(0, cameraMain.transform.eulerAngles.y, 0) * new Vector3(movementInput.x, 0, movementInput.y);
 
         movementInput *= Time.deltaTime;
-
         movement.x = movementInput.x;
         movement.z = movementInput.y;
         MovementDirection = movementInput * direction;
