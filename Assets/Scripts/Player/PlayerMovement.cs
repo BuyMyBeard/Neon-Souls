@@ -67,16 +67,20 @@ public class PlayerMovement : MonoBehaviour
         {
             direction = Quaternion.Euler(0, cameraMain.transform.eulerAngles.y, 0) * new Vector3(movementInput.x, 0, movementInput.y);
 
-            if (movementMagnitude >= runningSpeed)
+            if (movementMagnitude >= runTreshold)
             {
-                movementInput *= runningSpeed;
+                movementInput = runningSpeed * movementInput.normalized;
                 // TODO: set animation state
             }
             else
             {
-                movementInput *= walkingSpeed;
+                movementInput = walkingSpeed * movementInput.normalized;
                 // TODO: set animation state
             }
+        }
+        else
+        {
+            movementInput *= 0;
         }
         // if (movementInput.magnitude != 0)
         //     direction = Quaternion.Euler(0, cameraMain.transform.eulerAngles.y, 0) * new Vector3(movementInput.x, 0, movementInput.y);

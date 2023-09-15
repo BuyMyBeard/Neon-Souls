@@ -49,7 +49,7 @@ public class CameraMovement : MonoBehaviour
         if (movementDirection.magnitude > 0 && PlayerInputs.LookDelta.magnitude == 0)
         {
             Quaternion to = Quaternion.LookRotation(movementDirection, Vector3.up);
-            followTarget.transform.rotation = Quaternion.RotateTowards(followTarget.transform.rotation, to, Time.deltaTime * driftBehindPlayerSpeed);
+            followTarget.transform.rotation = Quaternion.Lerp(followTarget.transform.rotation, to, Time.deltaTime * driftBehindPlayerSpeed);
         }
     }
 }

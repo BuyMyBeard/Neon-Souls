@@ -443,7 +443,7 @@ Transform:
   m_GameObject: {fileID: 1387690101}
   serializedVersion: 2
   m_LocalRotation: {x: 0.13441685, y: -0.0002805774, z: 0.000038059727, w: 0.99092484}
-  m_LocalPosition: {x: 5.905561, y: 3.4099965, z: -6.0543585}
+  m_LocalPosition: {x: 5.805561, y: 3.4099965, z: -6.0943584}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -556,49 +556,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2219920370839793065, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.10338068
-      objectReference: {fileID: 0}
-    - target: {fileID: 2219920370839793065, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.0699964
-      objectReference: {fileID: 0}
-    - target: {fileID: 2219920370839793065, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -5.93
-      objectReference: {fileID: 0}
-    - target: {fileID: 2219920370839793065, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.13441685
-      objectReference: {fileID: 0}
-    - target: {fileID: 2219920370839793065, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.0002805774
-      objectReference: {fileID: 0}
-    - target: {fileID: 2219920370839793065, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.000038059727
-      objectReference: {fileID: 0}
     - target: {fileID: 4932959492501321979, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
       propertyPath: m_Name
       value: ThirdPersonPlayer
-      objectReference: {fileID: 0}
-    - target: {fileID: 4947763422662117358, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
-      propertyPath: m_Name
-      value: VCam
-      objectReference: {fileID: 0}
-    - target: {fileID: 6826148646903702685, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
-      propertyPath: m_Damping
-      value: 7.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7423352681165717698, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
-      propertyPath: m_Damping
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7423352681165717698, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
-      propertyPath: m_SmoothingTime
-      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 8660387723329054874, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
       propertyPath: m_LocalPosition.x
