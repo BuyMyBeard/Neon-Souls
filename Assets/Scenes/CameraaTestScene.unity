@@ -584,6 +584,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThirdPersonPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 4947763422662117358, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
+      propertyPath: m_Name
+      value: VCam
+      objectReference: {fileID: 0}
+    - target: {fileID: 6826148646903702685, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
+      propertyPath: m_Damping
+      value: 7.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423352681165717698, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
+      propertyPath: m_Damping
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423352681165717698, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
+      propertyPath: m_SmoothingTime
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8660387723329054874, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.8021803

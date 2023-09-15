@@ -9,11 +9,15 @@ public class PlayerMovement : MonoBehaviour
     CharacterController controller;
     [SerializeField] float walkingSpeed;
     [SerializeField] float runningSpeed;
+    [SerializeField] float runTreshold = .7f;
+    [SerializeField] float deadZone = .1f;
     [SerializeField] bool Grounded;
     [SerializeField] float turnSpeed = 100;
     Camera cameraMain;
     Vector3 movement;
     Vector3 direction = Vector3.forward;
+
+    public Vector2 MovementDirection { get; private set; } = Vector2.zero;
     float dropSpeed = 0;
     void Awake()
     {
@@ -54,15 +58,33 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 movementInput = PlayerInputs.MoveInput;
         // Debug.Log($"X: {PlayerInputs.MoveInput.x}, Y: {PlayerInputs.MoveInput.y}");
+        
+        //movementInput *= movementInput.magnitude > 0.99 ? runningSpeed : walkingSpeed;
+        
+        float movementMagnitude = movementInput.magnitude;
 
-        movementInput *= movementInput.magnitude > 0.99 ? runningSpeed : walkingSpeed;
-
-        if (movementInput.magnitude != 0)
+        if (movementMagnitude >= deadZone)
+        {
             direction = Quaternion.Euler(0, cameraMain.transform.eulerAngles.y, 0) * new Vector3(movementInput.x, 0, movementInput.y);
+
+            if (movementMagnitude >= runningSpeed)
+            {
+                movementInput *= runningSpeed;
+                // TODO: set animation state
+            }
+            else
+            {
+                movementInput *= walkingSpeed;
+                // TODO: set animation state
+            }
+        }
+        // if (movementInput.magnitude != 0)
+        //     direction = Quaternion.Euler(0, cameraMain.transform.eulerAngles.y, 0) * new Vector3(movementInput.x, 0, movementInput.y);
 
         movementInput *= Time.deltaTime;
 
         movement.x = movementInput.x;
         movement.z = movementInput.y;
+        MovementDirection = movementInput * direction;
     }
 }

@@ -3,13 +3,20 @@ using UnityEngine.InputSystem;
 
 public class CameraMovement : MonoBehaviour
 {
+    
     [SerializeField] Transform followTarget;
     [SerializeField] float camMinClamp = -90;
     [SerializeField] float camMaxClamp = 90;
-    [SerializeField] float lerpSpeed = .5f;
+    [SerializeField] float driftBehindPlayerSpeed = 10;
     public float mouseSensitivity = .1f;
     public float controllerSensitivity = 1f;
+    public float timeCameraInactive = 0;
+    public CharacterController playerMovement;
 
+    void Awake()
+    {
+        playerMovement = GetComponentInChildren<CharacterController>();
+    }
     void Update()
     {
         // TODO: Must be a better way to do this, this will do for now though
@@ -35,7 +42,14 @@ public class CameraMovement : MonoBehaviour
         // Quaternion y = Quaternion.Euler(angles.x, angles.y, 0);
         // rotationTarget = y;
         // followTarget.transform.rotation = Quaternion.Lerp(transform.rotation, y, Time.deltaTime * lerpSpeed);
-
         
+        // Moves Camera behind the player when no look input is given
+        Vector3 movementDirection = playerMovement.velocity;
+        movementDirection.y = 0;
+        if (movementDirection.magnitude > 0 && PlayerInputs.LookDelta.magnitude == 0)
+        {
+            Quaternion to = Quaternion.LookRotation(movementDirection, Vector3.up);
+            followTarget.transform.rotation = Quaternion.RotateTowards(followTarget.transform.rotation, to, Time.deltaTime * driftBehindPlayerSpeed);
+        }
     }
 }
