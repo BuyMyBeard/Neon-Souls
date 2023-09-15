@@ -3,16 +3,26 @@ using UnityEngine.InputSystem;
 
 public class CameraMovement : MonoBehaviour
 {
-    
     [SerializeField] Transform followTarget;
+    [Header("Pitch clamping")]
+    [Range(-90, 90)]
     [SerializeField] float camMinClamp = -90;
+    [Range(-90, 90)]
     [SerializeField] float camMaxClamp = 90;
-    [SerializeField] float driftBehindPlayerSpeed = 10;
+
+    [Header("Drift behind player")]
+    /// <summary>
+    /// speed at which the camera drifts behind the player when moving and not touching the camera
+    /// </summary>
+    [SerializeField] float driftSpeed = 10;
+    [Range(-1, 0)]
+    [SerializeField] float driftDeadZone = -.9f;
+
+    [Header("Sensitivity")]
     public float mouseSensitivity = .1f;
     public float controllerSensitivity = 1f;
-    public float timeCameraInactive = 0;
-    public CharacterController playerMovement;
 
+    CharacterController playerMovement;
     void Awake()
     {
         playerMovement = GetComponentInChildren<CharacterController>();
@@ -48,8 +58,19 @@ public class CameraMovement : MonoBehaviour
         movementDirection.y = 0;
         if (movementDirection.magnitude > 0 && PlayerInputs.LookDelta.magnitude == 0)
         {
-            Quaternion to = Quaternion.LookRotation(movementDirection, Vector3.up);
-            followTarget.transform.rotation = Quaternion.Lerp(followTarget.transform.rotation, to, Time.deltaTime * driftBehindPlayerSpeed);
+
+            Vector2 camDirection = new Vector2(followTarget.transform.forward.x, followTarget.transform.forward.z);
+            Vector2 playerDirection = new Vector2(playerMovement.velocity.x, playerMovement.velocity.z).normalized;
+
+            float dot = Vector2.Dot(playerDirection, camDirection);
+
+            /// if player walks towards camera, camera doesn't try to drift behind player
+            if (dot > driftDeadZone)
+            {
+                float dotFactor = 1 - Mathf.Abs(dot);
+                Quaternion to = Quaternion.LookRotation(movementDirection, Vector3.up);
+                followTarget.transform.rotation = Quaternion.Lerp(followTarget.transform.rotation, to, Time.deltaTime * dotFactor * driftSpeed);
+            }
         }
     }
 }
