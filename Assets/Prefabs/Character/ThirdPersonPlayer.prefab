@@ -165,7 +165,6 @@ GameObject:
   - component: {fileID: 3362663846068651726}
   - component: {fileID: 8745005448504600642}
   - component: {fileID: 7585043390333502910}
-  - component: {fileID: 7804009065537256382}
   m_Layer: 10
   m_Name: PlayerPlaceHolder
   m_TagString: Player
@@ -288,24 +287,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7804009065537256382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2159701467801589995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cc7dd6b8007bdd4d9db2481e6436bd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkingSpeed: 3
-  runningSpeed: 8
-  runTreshold: 0.7
-  deadZone: 0.25
-  Grounded: 0
-  turnSpeed: 600
 --- !u!1 &4932959492501321979
 GameObject:
   m_ObjectHideFlags: 0
