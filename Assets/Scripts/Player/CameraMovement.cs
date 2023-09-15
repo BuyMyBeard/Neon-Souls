@@ -31,6 +31,7 @@ public class CameraMovement : MonoBehaviour
     }
     void Update()
     {
+        followTarget.position = characterController.transform.position;
         // TODO: Must be a better way to do this, this will do for now though
         // float appliedSensitivity = PlayerInputs.ActiveLookControl.device == null || PlayerInputs.ActiveLookControl.device is Gamepad ? controllerSensitivity : mouseSensitivity;
         float appliedSensitivity = mouseSensitivity;
@@ -51,10 +52,11 @@ public class CameraMovement : MonoBehaviour
 
         followTarget.transform.localEulerAngles = new Vector3(cameraAngles.x, cameraAngles.y, 0);
 
-        // Quaternion y = Quaternion.Euler(angles.x, angles.y, 0);
-        // rotationTarget = y;
-        // followTarget.transform.rotation = Quaternion.Lerp(transform.rotation, y, Time.deltaTime * lerpSpeed);
-        
+        ApplyCameraDrift();
+    }
+
+    private void ApplyCameraDrift()
+    {
         // Moves Camera behind the player when no look input is given
         Vector3 movementDirection = characterController.velocity;
         movementDirection.y = 0;
