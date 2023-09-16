@@ -14,9 +14,11 @@ public class PlayerController : MonoBehaviour
     public bool GamepadActive { get => CurrentControlScheme == "Gamepad"; }
 
     PlayerInput playerInput;
+    ButtonPrompt interatableManager;
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
+        interatableManager = FindObjectOfType<ButtonPrompt>();
     }
 
     void OnMove(InputValue val) => Move = val.Get<Vector2>();
@@ -42,7 +44,7 @@ public class PlayerController : MonoBehaviour
     }
     void OnInteract()
     {
-
+       interatableManager.Interact();
     }
     void OnConsumable()
     {

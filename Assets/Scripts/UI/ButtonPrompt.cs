@@ -6,13 +6,15 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Collider))]
 public abstract class Interactable : MonoBehaviour
 {
     ButtonPrompt buttonPrompt;
     public string promptMessage = "Interact";
     protected virtual void Awake()
     {
-        buttonPrompt = FindObjectOfType<ButtonPrompt>();
+        buttonPrompt = FindObjectOfType<ButtonPrompt>(); 
+        GetComponent<Collider>().isTrigger = true;
     }
     protected void Prompt()
     {
@@ -48,10 +50,10 @@ public class ButtonPrompt : MonoBehaviour
         // player = FindObjectOfType<PlayerMove>().transform;
         HidePrompt();
     }
-    void Update()
+    public void Interact()
     {
         // TODO: link this to input manager 
-        // if (currentPrompt != null && PlayerInputs.InteractPress && Time.timeScale != 0)
+        if (currentPrompt != null && Time.timeScale != 0)
         {
             currentPrompt.Interact();
             CancelPrompt(currentPrompt);
