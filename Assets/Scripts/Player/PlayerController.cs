@@ -3,11 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Windows;
-
 public class PlayerController : MonoBehaviour
 {
+    
     public Vector2 LookDelta { get; private set; } = Vector2.zero;
     public Vector2 MoveInput { get; private set; } = Vector2.zero;
+
+    public string CurrentControlScheme
+    {
+        get => playerInput.currentControlScheme;
+    }
+
+    public bool KeyboardAndMouseActive
+    {
+        get => CurrentControlScheme == "Keyboard&Mouse";
+    }
+
+    public bool GamepadActive
+    {
+        get => CurrentControlScheme == "Gamepad";
+    }
 
     PlayerInput playerInput;
     private void Awake()
@@ -16,7 +31,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-
+       
     }
     //void OnLook(InputValue val)
     //{
@@ -31,5 +46,8 @@ public class PlayerController : MonoBehaviour
     {
         LookDelta = val.Get<Vector2>();
     }
-
+    void OnControlsChanged()
+    {
+        Debug.Log(CurrentControlScheme);
+    }
 }
