@@ -8,9 +8,10 @@ public class PlayerMovement : MonoBehaviour
     CharacterController characterController;
     [SerializeField] float walkingSpeed;
     [SerializeField] float runningSpeed;
-    [SerializeField] float runTreshold = .7f;
+    [Range(0, 1)]
+    [SerializeField] float runThreshold = .7f;
+    [Range(0, 1)]
     [SerializeField] float deadZone = .1f;
-    [SerializeField] bool Grounded;
     [SerializeField] float turnSpeed = 100;
     new Camera camera;
     Vector3 movement;
@@ -46,19 +47,18 @@ public class PlayerMovement : MonoBehaviour
         characterController.transform.rotation = Quaternion.RotateTowards(characterController.transform.rotation, movementForward, turnSpeed * Time.deltaTime);
 
         characterController.Move(movement);
-        Grounded = characterController.isGrounded;
     }
 
     void HandleMovement()
     {
-        Vector2 movementInput = playerController.MoveInput; 
+        Vector2 movementInput = playerController.Move; 
         float movementMagnitude = movementInput.magnitude;
 
         if (movementMagnitude >= deadZone)
         {
             direction = Quaternion.Euler(0, camera.transform.eulerAngles.y, 0) * new Vector3(movementInput.x, 0, movementInput.y);
 
-            if (movementMagnitude >= runTreshold)
+            if (movementMagnitude >= runThreshold)
             {
                 movementInput = runningSpeed * movementInput.normalized;
                 // TODO: set animation state
@@ -71,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            movementInput *= 0;
+            movementInput = Vector2.zero;
         }
 
         movementInput *= Time.deltaTime;

@@ -457,25 +457,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 401005182249197887, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
-      propertyPath: driftSpeed
-      value: 1.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 401005182249197887, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
-      propertyPath: mouseSensitivity
-      value: 0.19
-      objectReference: {fileID: 0}
     - target: {fileID: 4932959492501321979, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
       propertyPath: m_Name
       value: ThirdPersonPlayer
-      objectReference: {fileID: 0}
-    - target: {fileID: 7423352681165717698, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
-      propertyPath: m_Damping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7423352681165717698, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
-      propertyPath: m_SmoothingTime
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8660387723329054874, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
       propertyPath: m_LocalPosition.x

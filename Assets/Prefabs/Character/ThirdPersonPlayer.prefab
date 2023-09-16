@@ -326,9 +326,9 @@ MonoBehaviour:
   followTarget: {fileID: 7364829176809384961}
   camMinClamp: -40
   camMaxClamp: 50
-  driftSpeed: 1
+  driftSpeed: 1.25
   driftDeadZone: -0.9
-  mouseSensitivity: 0.4
+  mouseSensitivity: 0.19
   controllerSensitivity: 0.7
 --- !u!114 &1268877080257715196
 MonoBehaviour:
@@ -386,9 +386,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkingSpeed: 3
   runningSpeed: 6
-  runTreshold: 0.7
+  runThreshold: 0.7
   deadZone: 0.25
-  Grounded: 0
   turnSpeed: 600
 --- !u!1 &4947763422662117358
 GameObject:
@@ -490,8 +489,8 @@ MonoBehaviour:
   m_CameraRadius: 0.1
   m_Strategy: 0
   m_MaximumEffort: 4
-  m_SmoothingTime: 0.2
-  m_Damping: 1.5
+  m_SmoothingTime: 0
+  m_Damping: 0
   m_DampingWhenOccluded: 0
   m_OptimalTargetDistance: 0
 --- !u!114 &6826148646903702685

@@ -11,15 +11,17 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] float camMaxClamp = 90;
 
     [Header("Drift behind player")]
-    /// <summary>
-    /// speed at which the camera drifts behind the player when moving and not touching the camera
-    /// </summary>
+    [Tooltip("Speed at which the camera drifts behind the player when moving and not touching the camera")]
     [SerializeField] float driftSpeed = 10;
+
     [Range(-1, 0)]
+    [Tooltip("Dot product between player and camera which doesn't make camera drift. Used when running towards camera")]
     [SerializeField] float driftDeadZone = -.9f;
 
     [Header("Sensitivity")]
+    [Range(.01f, 5)]
     public float mouseSensitivity = .1f;
+    [Range(.01f, 5)]
     public float controllerSensitivity = 1f;
 
     CharacterController characterController;
@@ -35,9 +37,9 @@ public class CameraMovement : MonoBehaviour
         float appliedSensitivity = playerController.GamepadActive ? controllerSensitivity : mouseSensitivity;
 
         // Quaternion * Quaternion is the same as applying rotation from second to first
-        Quaternion cameraRotation = followTarget.transform.rotation *= Quaternion.AngleAxis(playerController.LookDelta.x * appliedSensitivity, Vector3.up);
+        Quaternion cameraRotation = followTarget.transform.rotation *= Quaternion.AngleAxis(playerController.Look.x * appliedSensitivity, Vector3.up);
 
-        cameraRotation *= Quaternion.AngleAxis(-playerController.LookDelta.y * appliedSensitivity, Vector3.right);
+        cameraRotation *= Quaternion.AngleAxis(-playerController.Look.y * appliedSensitivity, Vector3.right);
 
         Vector3 cameraAngles = cameraRotation.eulerAngles;
 
@@ -58,7 +60,7 @@ public class CameraMovement : MonoBehaviour
         // Moves Camera behind the player when no look input is given
         Vector3 movementDirection = characterController.velocity;
         movementDirection.y = 0;
-        if (movementDirection.magnitude > 0 && PlayerInputs.LookDelta.magnitude == 0)
+        if (movementDirection.magnitude > 0 && playerController.Look.magnitude == 0)
         {
 
             Vector2 camDirection = new Vector2(followTarget.transform.forward.x, followTarget.transform.forward.z);
