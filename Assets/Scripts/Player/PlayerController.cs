@@ -14,9 +14,11 @@ public class PlayerController : MonoBehaviour
     public bool GamepadActive { get => CurrentControlScheme == "Gamepad"; }
 
     PlayerInput playerInput;
+    PotionDisplay potions;
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
+        potions = FindObjectOfType<PotionDisplay>();
     }
 
     void OnMove(InputValue val) => Move = val.Get<Vector2>();
@@ -30,23 +32,23 @@ public class PlayerController : MonoBehaviour
     }
     void OnLightAttack()
     {
-
+        potions.Add(3);
     }
     void OnHeavyAttack()
     {
-
+        potions.Clear();
     }
     void OnDodge()
     {
-
+        potions.PotionCount = 2;
     }
     void OnInteract()
     {
-
+        potions.AddOne();
     }
     void OnConsumable()
     {
-
+        potions.RemoveOne();
     }
     void OnControlsChanged()
     {
