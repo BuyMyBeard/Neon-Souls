@@ -36,22 +36,22 @@ public class PlayerController : MonoBehaviour
     void OnLightAttack()
     {
         potions.Add(3);
-        enemyHealthbar.Remove(5, 50);
+        enemyHealthbar.Remove(5, 50, true);
     }
     void OnHeavyAttack()
     {
         potions.Clear();
-        enemyHealthbar.Remove(15, 50);
+        enemyHealthbar.Remove(15, 50, true);
     }
     void OnDodge()
     {
         potions.PotionCount = 2;
-        enemyHealthbar.Add(7.5f, 50);
+        enemyHealthbar.Add(7, 50);
     }
     void OnInteract()
     {
         potions.AddOne();
-        enemyHealthbar.Add(18.9999f, 50);
+        enemyHealthbar.Add(18, 50);
     }
     void OnConsumable()
     {

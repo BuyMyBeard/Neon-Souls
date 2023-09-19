@@ -68,7 +68,7 @@ public class DisplayBar : MonoBehaviour
     /// <param name="max">Value the display bar would take if it was full</param>
     public void Add(int value, int max)
     {
-        TrueValue += value / max;
+        TrueValue += (float)value / max;
 
         if (lingerTimerStarted)
         {
@@ -96,7 +96,7 @@ public class DisplayBar : MonoBehaviour
     /// <param name="showValue">If true, stacked value is displayed near the display bar</param>
     public void Remove(int value, int max, bool showValue)
     {
-        TrueValue -= value / max;
+        TrueValue -= (float)value / max;
         displayBarTimer = 0;
         damageValueTimer = 0;
         lingerTimerCoroutine = LingerTimer();
