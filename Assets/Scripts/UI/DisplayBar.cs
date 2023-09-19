@@ -6,6 +6,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Class reprensenting Health bars and Stamina bars. Manages the values of Sliders linked to it.
+/// </summary>
 public class DisplayBar : MonoBehaviour
 {
     protected Slider trueHealth, displayedHealth;
@@ -43,6 +46,7 @@ public class DisplayBar : MonoBehaviour
     }
     protected virtual void Awake()
     {   
+        // Would be more logical to set up as SerializeField for ease of use
         displayedHealth = GetComponent<Slider>();
         trueHealth = GetComponentsInChildren<Slider>()[1];
         
@@ -57,8 +61,12 @@ public class DisplayBar : MonoBehaviour
         DisplayDamageValue = false;
     }
 
-    // TODO: Have yet to test any of this
-    public void Add(float value, float max)
+    /// <summary>
+    /// Adds a value to the display bar
+    /// </summary>
+    /// <param name="value">Value added</param>
+    /// <param name="max">Value the display bar would take if it was full</param>
+    public void Add(int value, int max)
     {
         TrueValue += value / max;
 
@@ -80,7 +88,13 @@ public class DisplayBar : MonoBehaviour
             StartCoroutine(catchUpCoroutine);
         }
     }
-    public void Remove(float value, float max)
+    /// <summary>
+    /// Removes a value from the display bar
+    /// </summary>
+    /// <param name="value">Value removed</param>
+    /// <param name="max">Value the display bar would take if it was full</param>
+    /// <param name="showValue">If true, stacked value is displayed near the display bar</param>
+    public void Remove(int value, int max, bool showValue)
     {
         TrueValue -= value / max;
         displayBarTimer = 0;
@@ -88,10 +102,13 @@ public class DisplayBar : MonoBehaviour
         lingerTimerCoroutine = LingerTimer();
         if (!lingerTimerStarted)
             StartCoroutine(lingerTimerCoroutine);
-        stackedValue += value;
-        DamageValue = stackedValue.ToString();
-        if (!DisplayDamageValue)
-            StartCoroutine(DamageDisplayTimer());
+        if (showValue)
+        {
+            stackedValue += value;
+            DamageValue = stackedValue.ToString();
+            if (!DisplayDamageValue)
+                StartCoroutine(DamageDisplayTimer());
+        }
     }
 
     IEnumerator DamageDisplayTimer()
