@@ -816,7 +816,7 @@ RectTransform:
   m_Father: {fileID: 6045134836510921742}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1177,7 +1177,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8985402073696676627
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1499,7 +1499,7 @@ GameObject:
   - component: {fileID: 1283858283864350334}
   m_Layer: 0
   m_Name: EnemyHealthbar
-  m_TagString: DisplayedHealth
+  m_TagString: EnemyHealthbar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1589,9 +1589,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageValue: {fileID: 5905848619608645771}
-  lingerTime: 0.5
-  damageValueLingerTime: 2
-  catchUpSpeed: 5.49
+  lingerTime: 0.4
+  damageValueLingerTime: 1.5
+  catchUpSpeed: 8
   trackedEnemy: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
 --- !u!1 &6522829509186446821
@@ -2024,7 +2024,7 @@ RectTransform:
   m_Father: {fileID: 6045134836510921742}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

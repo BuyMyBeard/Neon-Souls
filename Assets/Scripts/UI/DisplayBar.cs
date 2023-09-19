@@ -61,10 +61,24 @@ public class DisplayBar : MonoBehaviour
     public void Add(float value, float max)
     {
         TrueValue += value / max;
+
         if (lingerTimerStarted)
+        {
             StopCoroutine(lingerTimerCoroutine);
+            lingerTimerStarted = false;
+        }
         if (isCatchingUp)
-            StartCoroutine(UpdateWhenDoneCatchingUp());
+        {
+            StopCoroutine(catchUpCoroutine);
+            isCatchingUp = false;
+        }
+        if (TrueValue > DisplayedValue)
+            DisplayedValue = TrueValue;
+        else
+        {
+            catchUpCoroutine = CatchUp(TrueValue);
+            StartCoroutine(catchUpCoroutine);
+        }
     }
     public void Remove(float value, float max)
     {
@@ -108,10 +122,5 @@ public class DisplayBar : MonoBehaviour
         }
         DisplayedValue = goal;
         isCatchingUp = false;
-    }
-    IEnumerator UpdateWhenDoneCatchingUp()
-    {
-        yield return new WaitUntil(() => !isCatchingUp);
-        DisplayedValue = TrueValue;
     }
 }
