@@ -1264,6 +1264,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageValue: {fileID: 0}
+  lingerTime: 0.4
+  damageValueLingerTime: 2
+  catchUpSpeed: 5
   trackedEnemy: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
 --- !u!1 &6049337065234825778
@@ -1586,6 +1589,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageValue: {fileID: 5905848619608645771}
+  lingerTime: 0.5
+  damageValueLingerTime: 2
+  catchUpSpeed: 5.49
   trackedEnemy: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
 --- !u!1 &6522829509186446821

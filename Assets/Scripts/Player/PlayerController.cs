@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Windows;
@@ -15,10 +16,12 @@ public class PlayerController : MonoBehaviour
 
     PlayerInput playerInput;
     PotionDisplay potions;
+    EnemyHealthbar enemyHealthbar;
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
         potions = FindObjectOfType<PotionDisplay>();
+        enemyHealthbar = FindObjectsOfType<EnemyHealthbar>().First(e => e.transform.CompareTag("EnemyHealthbar"));
     }
 
     void OnMove(InputValue val) => Move = val.Get<Vector2>();
@@ -33,18 +36,22 @@ public class PlayerController : MonoBehaviour
     void OnLightAttack()
     {
         potions.Add(3);
+        enemyHealthbar.Remove(5, 50);
     }
     void OnHeavyAttack()
     {
         potions.Clear();
+        enemyHealthbar.Remove(15, 50);
     }
     void OnDodge()
     {
         potions.PotionCount = 2;
+        enemyHealthbar.Add(7.5f, 50);
     }
     void OnInteract()
     {
         potions.AddOne();
+        enemyHealthbar.Add(18.9999f, 50);
     }
     void OnConsumable()
     {

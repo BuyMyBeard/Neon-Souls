@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -9,11 +10,14 @@ public class DisplayBar : MonoBehaviour
 {
     protected Slider trueHealth, displayedHealth;
     [SerializeField] protected TextMeshProUGUI damageValue;
-    [SerializeField] float lingerTime = 1.5f;
-    [SerializeField] float catchUpSpeed = 1;
-    float timeSinceLastUpdated = 0;
+    [SerializeField] float lingerTime = 0.5f;
+    [SerializeField] float damageValueLingerTime = 2f;
+    [SerializeField] float catchUpSpeed = 2f;
+    float displayBarTimer = 0;
+    float damageValueTimer = 0;
     bool lingerTimerStarted = false;
     bool isCatchingUp = false;
+    float stackedValue = 0;
     IEnumerator lingerTimerCoroutine;
     IEnumerator catchUpCoroutine;
 
@@ -40,12 +44,17 @@ public class DisplayBar : MonoBehaviour
     protected virtual void Awake()
     {   
         displayedHealth = GetComponent<Slider>();
-        trueHealth = GetComponentInChildren<Slider>();
-
+        trueHealth = GetComponentsInChildren<Slider>()[1];
+        
     }
     private void Update()
     {
-        timeSinceLastUpdated += Time.deltaTime;
+        displayBarTimer += Time.deltaTime;
+        damageValueTimer += Time.deltaTime;
+    }
+    private void OnEnable()
+    {
+        DisplayDamageValue = false;
     }
 
     // TODO: Have yet to test any of this
@@ -60,22 +69,32 @@ public class DisplayBar : MonoBehaviour
     public void Remove(float value, float max)
     {
         TrueValue -= value / max;
+        displayBarTimer = 0;
+        damageValueTimer = 0;
         lingerTimerCoroutine = LingerTimer();
         if (!lingerTimerStarted)
             StartCoroutine(lingerTimerCoroutine);
-        timeSinceLastUpdated = 0;
+        stackedValue += value;
+        DamageValue = stackedValue.ToString();
+        if (!DisplayDamageValue)
+            StartCoroutine(DamageDisplayTimer());
+    }
+
+    IEnumerator DamageDisplayTimer()
+    {
         DisplayDamageValue = true;
-        DamageValue = value.ToString();
+        yield return new WaitUntil(() => damageValueTimer > damageValueLingerTime);
+        DisplayDamageValue = false;
+        stackedValue = 0;
     }
 
     IEnumerator LingerTimer()
     {
         lingerTimerStarted = true;
-        yield return new WaitUntil(() => timeSinceLastUpdated > lingerTime);
+        yield return new WaitUntil(() => displayBarTimer > lingerTime);
         catchUpCoroutine = CatchUp(TrueValue);
         StartCoroutine(catchUpCoroutine);
         lingerTimerStarted = false;
-        DisplayDamageValue = false;
     }
 
     IEnumerator CatchUp(float goal)
