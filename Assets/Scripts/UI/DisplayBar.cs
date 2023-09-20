@@ -21,8 +21,7 @@ public class DisplayBar : MonoBehaviour
     bool lingerTimerStarted = false;
     bool isCatchingUp = false;
     float stackedValue = 0;
-    IEnumerator lingerTimerCoroutine;
-    IEnumerator catchUpCoroutine;
+    IEnumerator lingerTimerCoroutine, catchUpCoroutine;
 
     /// <summary>
     /// Slider value displayed. Goes from 0 to 1

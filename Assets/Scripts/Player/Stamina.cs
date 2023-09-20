@@ -14,8 +14,7 @@ public class Stamina : MonoBehaviour
     [SerializeField] int heavyAttackStamina = 40;
     [SerializeField] float exhaustionTime = 0.5f;
     float exhaustionTimer = 0;
-    IEnumerator exhaustionTimerCoroutine;
-    IEnumerator regenStaminaCoroutine;
+    IEnumerator exhaustionTimerCoroutine, regenStaminaCoroutine;
     bool exhaustionTimerStarted = false;
     bool isRegenerating = false;
     public bool IsExhausted { get => currentStamina <= 0; }
