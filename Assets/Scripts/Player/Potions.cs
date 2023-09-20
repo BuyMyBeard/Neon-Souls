@@ -9,7 +9,10 @@ public class Potions : MonoBehaviour
     [SerializeField] int maxPotions = 3;
     [SerializeField] int potions;
     [SerializeField] int restoreValue = 60;
+    [SerializeField] float timeToDrinkOne = .5f;
     Health health;
+    bool isRefillingHealth = false;
+    IEnumerator refillHealthCoroutine;
     public float FillLevel
     {
         get => potionMat.GetFloat("_Height");
@@ -22,11 +25,12 @@ public class Potions : MonoBehaviour
     }
     public void DrinkOnePotion()
     {
-        if (potions > 0)
+        if (potions > 0 && !isRefillingHealth)
         {
             potions--;
             UpdateFillLevel();
-            health.Heal(restoreValue);
+            refillHealthCoroutine = RefillHealth();
+            StartCoroutine(refillHealthCoroutine);
         }
     }
     public void ResetPotions()
@@ -43,18 +47,25 @@ public class Potions : MonoBehaviour
     {
         ResetPotions();
     }
-    /*TODO: Implement.
-    IEnumerator CatchUp(float goal)
+    IEnumerator RefillHealth()
     {
-        isCatchingUp = true;
-        float start = DisplayedValue;
-        for (float t = 0; t <= 1; t += Time.deltaTime * catchUpSpeed)
+        isRefillingHealth = true;
+        float t = 0;
+        while (t <= timeToDrinkOne)
         {
+            t += Time.deltaTime;
+            float healthRegained;
+            if (t > timeToDrinkOne)
+            {
+                float prev = t - Time.deltaTime;
+                healthRegained = (timeToDrinkOne - prev) * restoreValue / timeToDrinkOne;
+            }
+            else 
+                healthRegained = Time.deltaTime * restoreValue / timeToDrinkOne;
+            health.Heal(healthRegained);
             yield return null;
-            DisplayedValue = Mathf.Lerp(start, goal, t);
         }
-        DisplayedValue = goal;
-        isCatchingUp = false;
-    }*/
-
+        health.Round();
+        isRefillingHealth = false;
+    }
 }

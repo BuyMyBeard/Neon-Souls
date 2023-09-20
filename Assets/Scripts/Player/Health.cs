@@ -6,8 +6,8 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     DisplayBar playerHealthbar;
-    [SerializeField] int maxHealth = 100;
-    int currentHealth;
+    [SerializeField] float maxHealth = 100;
+    float currentHealth;
 
     void Awake()
     {
@@ -32,7 +32,7 @@ public class Health : MonoBehaviour
         throw new NotImplementedException();
     }
 
-    public void Heal(int healthRestored)
+    public void Heal(float healthRestored)
     {
         currentHealth += healthRestored;
         if (currentHealth > maxHealth)
@@ -53,4 +53,5 @@ public class Health : MonoBehaviour
     {
         TakeDamage(20);
     }
+    public void Round() => currentHealth = Mathf.RoundToInt(currentHealth);
 }
