@@ -15,10 +15,12 @@ public class PlayerController : MonoBehaviour
 
     PlayerInput playerInput;
     ButtonPrompt interatableManager;
+    RespawnManager respawnManager;
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
         interatableManager = FindObjectOfType<ButtonPrompt>();
+        respawnManager = FindObjectOfType<RespawnManager>();
     }
 
     void OnMove(InputValue val) => Move = val.Get<Vector2>();
@@ -32,7 +34,7 @@ public class PlayerController : MonoBehaviour
     }
     void OnLightAttack()
     {
-
+        
     }
     void OnHeavyAttack()
     {
@@ -40,7 +42,7 @@ public class PlayerController : MonoBehaviour
     }
     void OnDodge()
     {
-
+        respawnManager.Respawn();
     }
     void OnInteract()
     {

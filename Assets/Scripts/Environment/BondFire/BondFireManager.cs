@@ -6,6 +6,8 @@ using UnityEngine;
 public class BonefirerManager : MonoBehaviour
 {
     [SerializeField]BoneFireInteratable startingBondFire;
+    RespawnManager respawnManager;
+
 
     //a enlever
     [SerializeField]Material spawningMats;
@@ -17,7 +19,7 @@ public class BonefirerManager : MonoBehaviour
     private void Awake()
     {
         boneFireInteratables.AddRange(FindObjectsOfType<BoneFireInteratable>());
-
+        respawnManager = FindObjectOfType<RespawnManager>();
     }
     private void Start()
     {
@@ -36,19 +38,21 @@ public class BonefirerManager : MonoBehaviour
     public void SetSpawningBoneFire(BoneFireInteratable bonefire) 
     {
         spawningBonefire.GetComponent<Renderer>().material = activeMats;
-
-        foreach (BoneFireInteratable bondFireInteratable in boneFireInteratables)
+        respawnManager.SetRepawn(bonefire.transform.position);
+        foreach (BoneFireInteratable bonFireInteratable in boneFireInteratables)
         {
-            if (bondFireInteratable.gameObject == bonefire.gameObject)
+            if (bonFireInteratable.gameObject == bonefire.gameObject)
             {
-                spawningBonefire = bondFireInteratable;
+                spawningBonefire = bonFireInteratable;
 
                 // Implement the spawning here instead
                 spawningBonefire.GetComponent<Renderer>().material = spawningMats;
+                
                 Debug.Log(spawningBonefire.name);
                 //
                 break;
             }
         }
+       
     }
 }
