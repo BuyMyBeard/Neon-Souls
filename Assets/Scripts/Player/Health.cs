@@ -9,6 +9,7 @@ public class Health : MonoBehaviour
     [SerializeField] float maxHealth = 100;
     float currentHealth;
 
+    public float CurrentHealth { get => currentHealth; }
     void Awake()
     {
         playerHealthbar = GameObject.FindGameObjectWithTag("PlayerHealthbar").GetComponent<DisplayBar>();    
@@ -23,6 +24,7 @@ public class Health : MonoBehaviour
         playerHealthbar.Remove(damage, maxHealth, true);//TODO: change to false.
         if(currentHealth <= 0) 
         {
+            currentHealth = 0;
             Die();
         }
     }
