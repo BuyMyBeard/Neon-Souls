@@ -20,7 +20,7 @@ public class Health : MonoBehaviour
     }
     private void OnEnable()
     {
-        currentHealth = maxHealth;
+        ResetHealth();
     }
     public void TakeDamage(int damage)
     {
