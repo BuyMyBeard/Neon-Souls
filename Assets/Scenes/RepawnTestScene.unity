@@ -964,6 +964,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: PlayerHealthbar
       objectReference: {fileID: 0}
+    - target: {fileID: 3673255855384146069, guid: fa6d5b97262db7743a0d073caec2571e, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3673255855384146069, guid: fa6d5b97262db7743a0d073caec2571e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3673255855384146069, guid: fa6d5b97262db7743a0d073caec2571e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3673255855384146069, guid: fa6d5b97262db7743a0d073caec2571e, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3673255855384146069, guid: fa6d5b97262db7743a0d073caec2571e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3673255855384146069, guid: fa6d5b97262db7743a0d073caec2571e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3673255855384146069, guid: fa6d5b97262db7743a0d073caec2571e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8101953007460202681, guid: fa6d5b97262db7743a0d073caec2571e, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1059,6 +1087,14 @@ PrefabInstance:
     - target: {fileID: 8391562851235734551, guid: fa6d5b97262db7743a0d073caec2571e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8708760962042454882, guid: fa6d5b97262db7743a0d073caec2571e, type: 3}
+      propertyPath: m_fontSize
+      value: 10.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 8708760962042454882, guid: fa6d5b97262db7743a0d073caec2571e, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 10.59
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
