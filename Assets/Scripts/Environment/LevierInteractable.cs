@@ -13,12 +13,10 @@ public class LevierInteractable : Interactable
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-        Debug.Log("Levier detected!");
     }
 
     protected override void OnTriggerExit(Collider other)
     {
         base.OnTriggerExit(other);
-        Debug.Log("Levier quited");
     }
 }

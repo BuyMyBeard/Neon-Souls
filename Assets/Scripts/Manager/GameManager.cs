@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     RespawnManager respawnManager;
     ButtonPrompt interactionManager;
 
-    
     List<IRechargeable> rechargeables = new();
 
     private void Awake()
