@@ -15,48 +15,15 @@ public class PlayerController : MonoBehaviour
     public bool GamepadActive { get => CurrentControlScheme == "Gamepad"; }
 
     PlayerInput playerInput;
-    PotionDisplay potions;
-    EnemyHealthbar enemyHealthbar;
+    
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
-        potions = FindObjectOfType<PotionDisplay>();
-        enemyHealthbar = FindObjectsOfType<EnemyHealthbar>().First(e => e.transform.CompareTag("EnemyHealthbar"));
     }
 
     void OnMove(InputValue val) => Move = val.Get<Vector2>();
     void OnLook(InputValue val) => Look = val.Get<Vector2>();
 
-    // TODO: Bind these actions to the correct code
-    // We could do a priority queue system
-    void OnBlock()
-    {
-
-    }
-    void OnLightAttack()
-    {
-        potions.Add(3);
-        enemyHealthbar.Remove(5, 50, true);
-    }
-    void OnHeavyAttack()
-    {
-        potions.Clear();
-        enemyHealthbar.Remove(15, 50, true);
-    }
-    void OnDodge()
-    {
-        potions.PotionCount = 2;
-        enemyHealthbar.Add(7, 50);
-    }
-    void OnInteract()
-    {
-        potions.AddOne();
-        enemyHealthbar.Add(18, 50);
-    }
-    void OnConsumable()
-    {
-        potions.RemoveOne();
-    }
     void OnControlsChanged()
     {
         // TODO: Change button prompts
