@@ -8,7 +8,7 @@ public class Stamina : MonoBehaviour
     DisplayBar playerStaminabar;
     [SerializeField] int maxStamina = 100;
     [SerializeField] float currentStamina;
-    [SerializeField] float staminaRegenRate = 10000f;
+    [SerializeField] float staminaRegenRate = 100f;
     [SerializeField] int dodgeStamina = 20;
     [SerializeField] int lightAttackStamina = 25;
     [SerializeField] int heavyAttackStamina = 40;
@@ -40,8 +40,10 @@ public class Stamina : MonoBehaviour
             if (!exhaustionTimerStarted)
                 exhaustionTimerCoroutine = StartCoroutine(ExhaustionTimer());
             else
+            {
                 StopCoroutine(exhaustionTimerCoroutine);
-
+                StopCoroutine(regenStaminaCoroutine);
+            }         
         }
 
     }
