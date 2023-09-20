@@ -25,7 +25,7 @@ public class Potions : MonoBehaviour
     }
     public void DrinkOnePotion()
     {
-        if (currentPotions > 0 && !isRefillingHealth)
+        if (currentPotions > 0)
         {
             currentPotions--;
             UpdateFillLevel();
