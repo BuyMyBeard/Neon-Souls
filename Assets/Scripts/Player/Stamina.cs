@@ -34,22 +34,7 @@ public class Stamina : MonoBehaviour
     }
     private void OnDodge()//Maybe change to receive the stamina consumption from another component.
     {
-        if(!IsExhausted)
-        {
-            exhaustionTimer = 0;
-            currentStamina -= dodgeStamina;
-            if (currentStamina < 0) 
-                currentStamina = 0;
-            playerStaminabar.Remove(dodgeStamina, maxStamina, true);
-            if (isRegenerating)
-                StopCoroutine(regenStaminaCoroutine);
-            if (!exhaustionTimerStarted)
-            {
-                exhaustionTimerCoroutine = ExhaustionTimer();
-                StartCoroutine(exhaustionTimerCoroutine);   
-            }
-        }
-
+        Remove(dodgeStamina);
     }
     private void OnLightAttack()
     {
@@ -62,6 +47,28 @@ public class Stamina : MonoBehaviour
     private void ResetStamina()
     {
         currentStamina = maxStamina;
+    }
+    /// <summary>
+    /// Remove a defined amount of stamina
+    /// </summary>
+    /// <param name="value">Amount to remove</param>
+    public void Remove(float value)
+    {
+        if (!IsExhausted)
+        {
+            exhaustionTimer = 0;
+            currentStamina -= value;
+            if (currentStamina < 0)
+                currentStamina = 0;
+            playerStaminabar.Remove(value, maxStamina, true);
+            if (isRegenerating)
+                StopCoroutine(regenStaminaCoroutine);
+            if (!exhaustionTimerStarted)
+            {
+                exhaustionTimerCoroutine = ExhaustionTimer();
+                StartCoroutine(exhaustionTimerCoroutine);
+            }
+        }
     }
     private IEnumerator ExhaustionTimer()
     {
