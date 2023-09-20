@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     {
         respawnManager = GetComponent<RespawnManager>();
         interactionManager = GetComponent<ButtonPrompt>();
+        rechargeables = FindObjectsOfType<MonoBehaviour>().OfType<IRechargeable>().ToList();
     }
     public void PlayerDie()
     {
