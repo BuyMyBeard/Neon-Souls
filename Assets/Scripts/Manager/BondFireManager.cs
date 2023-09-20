@@ -14,19 +14,24 @@ public class BonefirerManager : MonoBehaviour
     [SerializeField]Material activeMats;
     //
 
-    List<BoneFireInteractble> boneFireInteratables = new();
+    //List<BoneFireInteractble> boneFireInteratables = new();
     BoneFireInteractble spawningBonefire;
     private void Awake()
     {
-        boneFireInteratables.AddRange(FindObjectsOfType<BoneFireInteractble>());
+       // boneFireInteratables.AddRange(FindObjectsOfType<BoneFireInteractble>());
         respawnManager = FindObjectOfType<RespawnManager>();
         spawningBonefire = GameObject.FindGameObjectWithTag("StartingBonfire").GetComponent<BoneFireInteractble>();
     }
     
     private void Start()
     {
+        //set up Game
+
+        // active first bonfire
         spawningBonefire.Interact();
-        spawningBonefire.Interact();
+
+        //set spawnpoint at the first bonfire
+        spawningBonefire.Interact(); 
     }
 
     public void ActivateBonfire(BoneFireInteractble bonefire) 
@@ -38,21 +43,26 @@ public class BonefirerManager : MonoBehaviour
 
     public void SetSpawningBoneFire(BoneFireInteractble bonefire) 
     {
+        // a enlever
         spawningBonefire.GetComponent<Renderer>().material = activeMats;
+        //
+        
         respawnManager.SetRepawn(bonefire.transform.position);
+        spawningBonefire = bonefire;
+        spawningBonefire.GetComponent<Renderer>().material = spawningMats;
+
+        /*
         foreach (BoneFireInteractble bonFireInteratable in boneFireInteratables)
         {
             if (bonFireInteratable.gameObject == bonefire.gameObject)
             {
                 spawningBonefire = bonFireInteratable;
-
-                // Implement the spawning here instead
+                //a enlever
                 spawningBonefire.GetComponent<Renderer>().material = spawningMats;
-                Debug.Log(spawningBonefire.name);
                 //
                 break;
             }
-        }
-       
+        }*/
+
     }
 }
