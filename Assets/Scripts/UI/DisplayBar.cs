@@ -11,7 +11,7 @@ using UnityEngine.UI;
 /// </summary>
 public class DisplayBar : MonoBehaviour
 {
-    protected Slider trueHealth, displayedHealth;
+    protected Slider trueValueSlider, lingeredValueSlider;
     [SerializeField] protected TextMeshProUGUI damageValue;
     [SerializeField] float lingerTime = 0.5f;
     [SerializeField] float damageValueLingerTime = 2f;
@@ -24,22 +24,34 @@ public class DisplayBar : MonoBehaviour
     IEnumerator lingerTimerCoroutine;
     IEnumerator catchUpCoroutine;
 
+    /// <summary>
+    /// Slider value displayed. Goes from 0 to 1
+    /// </summary>
     protected float TrueValue
     {
-        get => trueHealth.value;
-        set => trueHealth.value = value;
+        get => trueValueSlider.value;
+        set => trueValueSlider.value = value;
     }
-    protected float DisplayedValue
+    /// <summary>
+    /// Slider value displayed. Lags behind TrueValue when dropping. Goes from 0 to 1
+    /// </summary>
+    protected float LingeredValue
     {
-        get => displayedHealth.value;
-        set => displayedHealth.value = value;
+        get => lingeredValueSlider.value;
+        set => lingeredValueSlider.value = value;
     }
+    /// <summary>
+    /// Stacked value displayed near slider to show stacked damage or debugging value
+    /// </summary>
     protected string DamageValue
     {
         get => damageValue.text;
         set => damageValue.SetText(value);
     }
-    protected bool DisplayDamageValue
+    /// <summary>
+    /// If true, Stacked value is shown
+    /// </summary>
+    protected bool ShowDamageValue
     {
         get => damageValue.gameObject.activeSelf;
         set => damageValue.gameObject.SetActive(value);
@@ -47,8 +59,8 @@ public class DisplayBar : MonoBehaviour
     protected virtual void Awake()
     {   
         // Would be more logical to set up as SerializeField for ease of use
-        displayedHealth = GetComponent<Slider>();
-        trueHealth = GetComponentsInChildren<Slider>()[1];
+        lingeredValueSlider = GetComponent<Slider>();
+        trueValueSlider = GetComponentsInChildren<Slider>()[1];
         
     }
     private void Update()
@@ -58,7 +70,7 @@ public class DisplayBar : MonoBehaviour
     }
     private void OnEnable()
     {
-        DisplayDamageValue = false;
+        ShowDamageValue = false;
     }
 
     /// <summary>
@@ -80,8 +92,8 @@ public class DisplayBar : MonoBehaviour
             StopCoroutine(catchUpCoroutine);
             isCatchingUp = false;
         }
-        if (TrueValue > DisplayedValue)
-            DisplayedValue = TrueValue;
+        if (TrueValue > LingeredValue)
+            LingeredValue = TrueValue;
         else
         {
             catchUpCoroutine = CatchUp(TrueValue);
@@ -106,16 +118,16 @@ public class DisplayBar : MonoBehaviour
         {
             stackedValue += value;
             DamageValue = stackedValue.ToString();
-            if (!DisplayDamageValue)
+            if (!ShowDamageValue)
                 StartCoroutine(DamageDisplayTimer());
         }
     }
 
     IEnumerator DamageDisplayTimer()
     {
-        DisplayDamageValue = true;
+        ShowDamageValue = true;
         yield return new WaitUntil(() => damageValueTimer > damageValueLingerTime);
-        DisplayDamageValue = false;
+        ShowDamageValue = false;
         stackedValue = 0;
     }
 
@@ -131,13 +143,13 @@ public class DisplayBar : MonoBehaviour
     IEnumerator CatchUp(float goal)
     {
         isCatchingUp = true;
-        float start = DisplayedValue;
+        float start = LingeredValue;
         for (float t = 0; t <= 1; t += Time.deltaTime * catchUpSpeed)
         {
             yield return null;
-            DisplayedValue = Mathf.Lerp(start, goal, t);
+            LingeredValue = Mathf.Lerp(start, goal, t);
         }
-        DisplayedValue = goal;
+        LingeredValue = goal;
         isCatchingUp = false;
     }
 }
