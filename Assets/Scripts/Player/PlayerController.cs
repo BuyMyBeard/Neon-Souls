@@ -16,11 +16,13 @@ public class PlayerController : MonoBehaviour
 
     PlayerInput playerInput;
     EnemyHealthbar enemyHealthbar;
+    RespawnManager respawnManager;
     
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
         enemyHealthbar = FindObjectsOfType<EnemyHealthbar>().First(e => e.transform.CompareTag("EnemyHealthbar"));
+        respawnManager = FindObjectOfType<RespawnManager>();
     }
 
     void OnMove(InputValue val) => Move = val.Get<Vector2>();
@@ -43,6 +45,7 @@ public class PlayerController : MonoBehaviour
     void OnDodge()
     {
         enemyHealthbar.Add(7, 50);
+        respawnManager.Respawn();
     }
     void OnInteract()
     {
