@@ -6,9 +6,10 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     DisplayBar playerHealthbar;
-    [SerializeField] int maxHealth = 100;
-    int currentHealth;
+    [SerializeField] float maxHealth = 100;
+    float currentHealth;
 
+    public float CurrentHealth { get => currentHealth; }
     void Awake()
     {
         playerHealthbar = GameObject.FindGameObjectWithTag("PlayerHealthbar").GetComponent<DisplayBar>();    
@@ -23,6 +24,7 @@ public class Health : MonoBehaviour
         playerHealthbar.Remove(damage, maxHealth, true);//TODO: change to false.
         if(currentHealth <= 0) 
         {
+            currentHealth = 0;
             Die();
         }
     }
@@ -32,7 +34,7 @@ public class Health : MonoBehaviour
         throw new NotImplementedException();
     }
 
-    public void Heal(int healthRestored)
+    public void Heal(float healthRestored)
     {
         currentHealth += healthRestored;
         if (currentHealth > maxHealth)
@@ -45,4 +47,13 @@ public class Health : MonoBehaviour
     {
         currentHealth = maxHealth;
     }
+    void OnLightAttack()
+    {
+        TakeDamage(10);
+    }
+    void OnHeavyAttack()
+    {
+        TakeDamage(20);
+    }
+    public void Round() => currentHealth = Mathf.RoundToInt(currentHealth);
 }

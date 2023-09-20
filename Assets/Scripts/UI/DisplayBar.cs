@@ -56,10 +56,9 @@ public class DisplayBar : MonoBehaviour
         set => damageValue.gameObject.SetActive(value);
     }
     protected virtual void Awake()
-    {   
+    {
         lingeredValueSlider = GetComponent<Slider>();
         trueValueSlider = GetComponentsInChildren<Slider>()[1];
-        
     }
     private void Update()
     {
