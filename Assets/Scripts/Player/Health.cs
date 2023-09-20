@@ -7,16 +7,11 @@ public class Health : MonoBehaviour
 {
     DisplayBar playerHealthbar;
     [SerializeField] int maxHealth = 100;
-    [SerializeField] int currentHealth;
+    int currentHealth;
 
     void Awake()
     {
         playerHealthbar = GameObject.FindGameObjectWithTag("PlayerHealthbar").GetComponent<DisplayBar>();    
-    }
-
-    void Update()
-    {
-        
     }
     private void OnEnable()
     {
@@ -49,13 +44,5 @@ public class Health : MonoBehaviour
     private void ResetHealth()
     {
         currentHealth = maxHealth;
-    }
-    void OnLightAttack()
-    {
-        TakeDamage(10);
-    }
-    void OnHeavyAttack()
-    {
-        TakeDamage(20);
     }
 }

@@ -57,7 +57,6 @@ public class DisplayBar : MonoBehaviour
     }
     protected virtual void Awake()
     {   
-        // Would be more logical to set up as SerializeField for ease of use
         lingeredValueSlider = GetComponent<Slider>();
         trueValueSlider = GetComponentsInChildren<Slider>()[1];
         
