@@ -4,5 +4,6 @@ using UnityEngine;
 
 public interface IRechargeable
 {
+    GameManager manager;
     public void Recharge();
 }
