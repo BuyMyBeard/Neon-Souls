@@ -37,11 +37,11 @@ public class Stamina : MonoBehaviour
     }
     private void OnLightAttack()
     {
-
+        Remove(lightAttackStamina);
     }
     private void OnHeavyAttack()
     {
-
+        Remove(heavyAttackStamina);
     }
     private void ResetStamina()
     {

@@ -7,7 +7,7 @@ public class Potions : MonoBehaviour
 
     [SerializeField] Material potionMat;
     [SerializeField] int maxPotions = 3;
-    [SerializeField] int potions;
+    [SerializeField] int currentPotions;
     [SerializeField] int restoreValue = 60;
     Health health;
     public float FillLevel
@@ -17,31 +17,27 @@ public class Potions : MonoBehaviour
     }
     void Awake()
     {
-        health = FindObjectOfType<Health>();
+        health = GetComponent<Health>();
         ResetPotions();
     }
     public void DrinkOnePotion()
     {
-        if (potions > 0)
+        if (currentPotions > 0)
         {
-            potions--;
+            currentPotions--;
             UpdateFillLevel();
             health.Heal(restoreValue);
         }
     }
     public void ResetPotions()
     {
-        potions = maxPotions;
+        currentPotions = maxPotions;
         UpdateFillLevel();
     }
-    void UpdateFillLevel() => FillLevel = (float) potions / maxPotions;
+    void UpdateFillLevel() => FillLevel = (float) currentPotions / maxPotions;
     void OnConsumable()
     {
         DrinkOnePotion();
-    }
-    void OnInteract()
-    {
-        ResetPotions();
     }
     /*TODO: Implement.
     IEnumerator CatchUp(float goal)
