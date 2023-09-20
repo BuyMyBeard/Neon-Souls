@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class BoneFireInteractble : Interactable
 {
-    BonefirerManager bonefirerManager;
+    BonfirerManager bonefirerManager;
     public bool active = false;
 
     protected override void Awake()
     {
         base.Awake();
-        bonefirerManager = FindObjectOfType<BonefirerManager>();
+        bonefirerManager = FindObjectOfType<BonfirerManager>();
     }
     public override void Interact()
     {
