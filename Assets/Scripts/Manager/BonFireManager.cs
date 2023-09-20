@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class BonefirerManager : MonoBehaviour
+public class BonfirerManager : MonoBehaviour
 {
     RespawnManager respawnManager;
 
@@ -14,11 +14,9 @@ public class BonefirerManager : MonoBehaviour
     [SerializeField]Material activeMats;
     //
 
-    //List<BoneFireInteractble> boneFireInteratables = new();
     BoneFireInteractble spawningBonefire;
     private void Awake()
     {
-       // boneFireInteratables.AddRange(FindObjectsOfType<BoneFireInteractble>());
         respawnManager = FindObjectOfType<RespawnManager>();
         spawningBonefire = GameObject.FindGameObjectWithTag("StartingBonfire").GetComponent<BoneFireInteractble>();
     }
@@ -46,23 +44,15 @@ public class BonefirerManager : MonoBehaviour
         // a enlever
         spawningBonefire.GetComponent<Renderer>().material = activeMats;
         //
-        
-        respawnManager.SetRepawn(bonefire.transform.position);
+
         spawningBonefire = bonefire;
+
+
+        // Ajouter Le Siting Animation et Tout autre behaviour quand le hero s'assie sur un bonfire
+        respawnManager.SetRepawn(bonefire.transform.position);
+
+        //
+
         spawningBonefire.GetComponent<Renderer>().material = spawningMats;
-
-        /*
-        foreach (BoneFireInteractble bonFireInteratable in boneFireInteratables)
-        {
-            if (bonFireInteratable.gameObject == bonefire.gameObject)
-            {
-                spawningBonefire = bonFireInteratable;
-                //a enlever
-                spawningBonefire.GetComponent<Renderer>().material = spawningMats;
-                //
-                break;
-            }
-        }*/
-
     }
 }

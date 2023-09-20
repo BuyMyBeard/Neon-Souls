@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+    GameManager gameManager;
     DisplayBar playerHealthbar;
     RespawnManager respawnManager;
     [SerializeField] int maxHealth = 100;
@@ -13,7 +14,7 @@ public class Health : MonoBehaviour
     void Awake()
     {
         playerHealthbar = GameObject.FindGameObjectWithTag("PlayerHealthbar").GetComponent<DisplayBar>();    
-        respawnManager = FindObjectOfType<RespawnManager>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     void Update()
@@ -36,8 +37,8 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
-        respawnManager.Respawn();
-        ResetHealth();
+        gameManager.PlayerDie();
+        Heal(100);
     }
 
     public void Heal(int healthRestored)
@@ -61,4 +62,5 @@ public class Health : MonoBehaviour
     {
         TakeDamage(20);
     }
+
 }
