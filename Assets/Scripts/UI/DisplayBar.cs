@@ -78,9 +78,9 @@ public class DisplayBar : MonoBehaviour
     /// </summary>
     /// <param name="value">Value added</param>
     /// <param name="max">Value the display bar would take if it was full</param>
-    public void Add(int value, int max)
+    public void Add(float value, float max)
     {
-        TrueValue += (float)value / max;
+        TrueValue += value / max;
 
         if (lingerTimerStarted)
         {
@@ -106,9 +106,9 @@ public class DisplayBar : MonoBehaviour
     /// <param name="value">Value removed</param>
     /// <param name="max">Value the display bar would take if it was full</param>
     /// <param name="showValue">If true, stacked value is displayed near the display bar</param>
-    public void Remove(int value, int max, bool showValue)
+    public void Remove(float value, float max, bool showValue)
     {
-        TrueValue -= (float)value / max;
+        TrueValue -= value / max;
         displayBarTimer = 0;
         damageValueTimer = 0;
         lingerTimerCoroutine = LingerTimer();
@@ -117,7 +117,7 @@ public class DisplayBar : MonoBehaviour
         if (showValue)
         {
             stackedValue += value;
-            DamageValue = stackedValue.ToString();
+            DamageValue = Mathf.RoundToInt(stackedValue).ToString();
             if (!ShowDamageValue)
                 StartCoroutine(DamageDisplayTimer());
         }

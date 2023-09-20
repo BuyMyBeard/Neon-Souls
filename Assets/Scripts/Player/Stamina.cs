@@ -14,9 +14,10 @@ public class Stamina : MonoBehaviour
     [SerializeField] int heavyAttackStamina = 40;
     [SerializeField] float exhaustionTime = 0.5f;
     float exhaustionTimer = 0;
-    Coroutine exhaustionTimerCoroutine;
-    Coroutine regenStaminaCoroutine;
+    IEnumerator exhaustionTimerCoroutine;
+    IEnumerator regenStaminaCoroutine;
     bool exhaustionTimerStarted = false;
+    bool isRegenerating = false;
     public bool IsExhausted { get => currentStamina <= 0; }
 
     private void Awake()
@@ -35,15 +36,18 @@ public class Stamina : MonoBehaviour
     {
         if(!IsExhausted)
         {
+            exhaustionTimer = 0;
             currentStamina -= dodgeStamina;
+            if (currentStamina < 0) 
+                currentStamina = 0;
             playerStaminabar.Remove(dodgeStamina, maxStamina, true);
-            if (!exhaustionTimerStarted)
-                exhaustionTimerCoroutine = StartCoroutine(ExhaustionTimer());
-            else
-            {
-                StopCoroutine(exhaustionTimerCoroutine);
+            if (isRegenerating)
                 StopCoroutine(regenStaminaCoroutine);
-            }         
+            if (!exhaustionTimerStarted)
+            {
+                exhaustionTimerCoroutine = ExhaustionTimer();
+                StartCoroutine(exhaustionTimerCoroutine);   
+            }
         }
 
     }
@@ -63,23 +67,22 @@ public class Stamina : MonoBehaviour
     {
         exhaustionTimerStarted = true;
         yield return new WaitUntil(() => exhaustionTimer > exhaustionTime);
-        regenStaminaCoroutine = StartCoroutine(RegenStamina());
-        
-
+        exhaustionTimerStarted = false;
+        regenStaminaCoroutine = RegenStamina();
+        StartCoroutine(regenStaminaCoroutine);
     }
     private IEnumerator RegenStamina()
-    {  
-        exhaustionTimer = 0;
-
+    {
+        isRegenerating = true;
         while(currentStamina < maxStamina)
         {
             yield return null;
             float staminaToRegen = (staminaRegenRate * Time.deltaTime);
             currentStamina += staminaToRegen;
-            playerStaminabar.Add((int)staminaToRegen, maxStamina);     
+            playerStaminabar.Add(staminaToRegen, maxStamina);
         }
         ResetStamina();
-        exhaustionTimerStarted = false;
+        isRegenerating = false;
     }
 
 }
