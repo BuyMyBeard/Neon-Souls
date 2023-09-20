@@ -6,12 +6,14 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     DisplayBar playerHealthbar;
+    RespawnManager respawnManager;
     [SerializeField] int maxHealth = 100;
     [SerializeField] int currentHealth;
 
     void Awake()
     {
         playerHealthbar = GameObject.FindGameObjectWithTag("PlayerHealthbar").GetComponent<DisplayBar>();    
+        respawnManager = FindObjectOfType<RespawnManager>();
     }
 
     void Update()
@@ -34,7 +36,8 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
-        throw new NotImplementedException();
+        respawnManager.Respawn();
+        ResetHealth();
     }
 
     public void Heal(int healthRestored)

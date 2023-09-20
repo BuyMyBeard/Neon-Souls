@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoneFireInteratable : Interactable
+public class BoneFireInteractble : Interactable
 {
     BonefirerManager bonefirerManager;
     public bool active = false;
@@ -21,6 +21,7 @@ public class BoneFireInteratable : Interactable
         else
         {
             bonefirerManager.ActivateBonfire(this);
+            this.promptMessage = "Set Spawnpoint to this bonfire";
             active = true;
         }
     }
