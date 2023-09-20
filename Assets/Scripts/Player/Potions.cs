@@ -51,7 +51,6 @@ public class Potions : MonoBehaviour
     {
         isRefillingHealth = true;
         float t = 0;
-        Debug.Log(health.CurrentHealth);
         while (t <= timeToDrinkOne)
         {
             t += Time.deltaTime;
@@ -67,7 +66,6 @@ public class Potions : MonoBehaviour
             yield return null;
         }
         health.Round();
-        Debug.Log(health.CurrentHealth);
         isRefillingHealth = false;
     }
 }
