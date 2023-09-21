@@ -433,6 +433,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4932959492501321979, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
   m_PrefabInstance: {fileID: 1410705718}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &760627428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 760627417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc9cd712765086248a3ca627bed530db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightAttackStaminaCost: 15
+  heavyAttackStaminaCost: 30
+  lightAttackDamage: 25
+  heavyAttackDamage: 50
 --- !u!1 &858060239
 GameObject:
   m_ObjectHideFlags: 0
@@ -1089,10 +1105,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1851722061374171116, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4932959492501321979, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 760627428}
   m_SourcePrefab: {fileID: 100100000, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
 --- !u!1 &1449896094
 GameObject:
