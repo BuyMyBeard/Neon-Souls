@@ -8,7 +8,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Rigidbody))]
 public class Sword : MonoBehaviour
 {
-    [SerializeField] UnityEvent<Collider> onTrigger;
+    [HideInInspector] public UnityEvent<Collider> onTrigger;
     new Collider collider;
     public bool ColliderEnabled
     {
@@ -24,6 +24,5 @@ public class Sword : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         onTrigger.Invoke(other);
-        Debug.Log("MOM! IT WORKED!");
     }
 }
