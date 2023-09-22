@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+
 enum PlayerAttackType { Light, Heavy }
+
+[RequireComponent(typeof(Stamina))]
+[RequireComponent(typeof(PlayerInput))]
 public class PlayerMeleeAttack : MeleeAttack
 {
-
     [SerializeField] int lightAttackStaminaCost = 15;
     [SerializeField] int heavyAttackStaminaCost = 30;
     [SerializeField] int lightAttackDamage = 25;
@@ -25,17 +29,15 @@ public class PlayerMeleeAttack : MeleeAttack
             attackType = PlayerAttackType.Light;
         }
     }
-
     void OnHeavyAttack()
     {
 
     }
-
-    protected override void DamageEnemy(Health opponentHealth)
+    protected override void DamageOpponent(Health opponentHealth)
     {
         if (attackType == PlayerAttackType.Light)
         {
-            opponentHealth.TakeDamage(lightAttackDamage);
+            opponentHealth.InflictDamage(lightAttackDamage);
         }
     }
 
