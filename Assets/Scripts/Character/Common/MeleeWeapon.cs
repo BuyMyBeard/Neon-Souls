@@ -18,6 +18,9 @@ public class MeleeWeapon : MonoBehaviour
     void Awake()
     {
         collider = GetComponent<Collider>();
+    }
+    private void Start()
+    {
         collider.isTrigger = true;
         GetComponent<Rigidbody>().isKinematic = true;
     }
