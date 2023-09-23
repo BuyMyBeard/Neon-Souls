@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class EnemyHealthbar : DisplayBar
 {
-    public GameObject trackedEnemy; //TODO: Change to abstract class from which all ennemies inherit
+    public Health trackedEnemy; //TODO: Change to abstract class from which all ennemies inherit
     [SerializeField] Vector3 offset;
     Camera cam;
     Canvas canvas;
