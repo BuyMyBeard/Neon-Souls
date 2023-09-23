@@ -14,9 +14,9 @@ public class Stamina : MonoBehaviour
     [SerializeField] int heavyAttackStamina = 40;
     [SerializeField] float exhaustionTime = 0.5f;
     float exhaustionTimer = 0;
-    Coroutine exhaustionTimerCoroutine;
-    Coroutine regenStaminaCoroutine;
+    IEnumerator exhaustionTimerCoroutine, regenStaminaCoroutine;
     bool exhaustionTimerStarted = false;
+    bool isRegenerating = false;
     public bool IsExhausted { get => currentStamina <= 0; }
 
     private void Awake()
@@ -33,53 +33,62 @@ public class Stamina : MonoBehaviour
     }
     private void OnDodge()//Maybe change to receive the stamina consumption from another component.
     {
-        if(!IsExhausted)
-        {
-            currentStamina -= dodgeStamina;
-            playerStaminabar.Remove(dodgeStamina, maxStamina, true);
-            if (!exhaustionTimerStarted)
-                exhaustionTimerCoroutine = StartCoroutine(ExhaustionTimer());
-            else
-            {
-                StopCoroutine(exhaustionTimerCoroutine);
-                StopCoroutine(regenStaminaCoroutine);
-            }         
-        }
-
+        Remove(dodgeStamina);
     }
     private void OnLightAttack()
     {
-
+        Remove(lightAttackStamina);
     }
     private void OnHeavyAttack()
     {
-
+        Remove(heavyAttackStamina);
     }
     private void ResetStamina()
     {
         currentStamina = maxStamina;
     }
+    /// <summary>
+    /// Remove a defined amount of stamina
+    /// </summary>
+    /// <param name="value">Amount to remove</param>
+    public void Remove(float value)
+    {
+        if (!IsExhausted)
+        {
+            exhaustionTimer = 0;
+            currentStamina -= value;
+            if (currentStamina < 0)
+                currentStamina = 0;
+            playerStaminabar.Remove(value, maxStamina, true);
+            if (isRegenerating)
+                StopCoroutine(regenStaminaCoroutine);
+            if (!exhaustionTimerStarted)
+            {
+                exhaustionTimerCoroutine = ExhaustionTimer();
+                StartCoroutine(exhaustionTimerCoroutine);
+            }
+        }
+    }
     private IEnumerator ExhaustionTimer()
     {
         exhaustionTimerStarted = true;
         yield return new WaitUntil(() => exhaustionTimer > exhaustionTime);
-        regenStaminaCoroutine = StartCoroutine(RegenStamina());
-        
-
+        exhaustionTimerStarted = false;
+        regenStaminaCoroutine = RegenStamina();
+        StartCoroutine(regenStaminaCoroutine);
     }
     private IEnumerator RegenStamina()
-    {  
-        exhaustionTimer = 0;
-
+    {
+        isRegenerating = true;
         while(currentStamina < maxStamina)
         {
             yield return null;
             float staminaToRegen = (staminaRegenRate * Time.deltaTime);
             currentStamina += staminaToRegen;
-            playerStaminabar.Add((int)staminaToRegen, maxStamina);     
+            playerStaminabar.Add(staminaToRegen, maxStamina);
         }
         ResetStamina();
-        exhaustionTimerStarted = false;
+        isRegenerating = false;
     }
 
 }

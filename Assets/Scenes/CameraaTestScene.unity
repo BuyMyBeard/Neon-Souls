@@ -913,7 +913,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   potionMat: {fileID: 2100000, guid: 21d5ff8b15d9d45449cb46f8bc4be029, type: 2}
   maxPotions: 5
-  potions: 0
+  currentPotions: 0
   restoreValue: 60
 --- !u!114 &1547704087
 MonoBehaviour:
@@ -928,7 +928,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  currentHealth: 0
 --- !u!114 &1547704093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -943,7 +942,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxStamina: 100
   currentStamina: 0
-  staminaRegenRate: 100
+  staminaRegenRate: 20
   dodgeStamina: 20
   lightAttackStamina: 25
   heavyAttackStamina: 40
