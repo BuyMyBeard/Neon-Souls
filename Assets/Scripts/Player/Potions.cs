@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Potions : MonoBehaviour
+public class Potions : MonoBehaviour,IRechargeable
 {
 
     [SerializeField] Material potionMat;
@@ -25,7 +25,7 @@ public class Potions : MonoBehaviour
     }
     public void DrinkOnePotion()
     {
-        if (currentPotions > 0)
+        if (currentPotions > 0 && !isRefillingHealth)
         {
             currentPotions--;
             UpdateFillLevel();
@@ -42,10 +42,6 @@ public class Potions : MonoBehaviour
     void OnConsumable()
     {
         DrinkOnePotion();
-    }
-    void OnInteract()
-    {
-        ResetPotions();
     }
     IEnumerator RefillHealth()
     {
@@ -67,5 +63,10 @@ public class Potions : MonoBehaviour
         }
         health.Round();
         isRefillingHealth = false;
+    }
+
+    public void Recharge()
+    {
+        ResetPotions();
     }
 }
