@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : MonoBehaviour
+public class Health : MonoBehaviour, IRechargeable
 {
+    GameManager gameManager;
     DisplayBar playerHealthbar;
     [SerializeField] float maxHealth = 100;
     float currentHealth;
@@ -12,7 +13,8 @@ public class Health : MonoBehaviour
     public float CurrentHealth { get => currentHealth; }
     void Awake()
     {
-        playerHealthbar = GameObject.FindGameObjectWithTag("PlayerHealthbar").GetComponent<DisplayBar>();    
+        playerHealthbar = GameObject.FindGameObjectWithTag("PlayerHealthbar").GetComponent<DisplayBar>();
+        gameManager =FindObjectOfType<GameManager>();
     }
     private void OnEnable()
     {
@@ -31,7 +33,7 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
-        throw new NotImplementedException();
+        gameManager.PlayerDie();
     }
 
     public void Heal(float healthRestored)
@@ -46,6 +48,7 @@ public class Health : MonoBehaviour
     private void ResetHealth()
     {
         currentHealth = maxHealth;
+        playerHealthbar.Add(maxHealth, maxHealth);
     }
     void OnLightAttack()
     {
@@ -56,4 +59,9 @@ public class Health : MonoBehaviour
         TakeDamage(20);
     }
     public void Round() => currentHealth = Mathf.RoundToInt(currentHealth);
+
+    public void Recharge()
+    {
+        ResetHealth();
+    }
 }

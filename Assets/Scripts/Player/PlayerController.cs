@@ -15,15 +15,16 @@ public class PlayerController : MonoBehaviour
     public bool GamepadActive { get => CurrentControlScheme == "Gamepad"; }
 
     PlayerInput playerInput;
-    
+    ButtonPrompt interactorManager;
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
+        interactorManager = FindObjectOfType<ButtonPrompt>();
     }
 
     void OnMove(InputValue val) => Move = val.Get<Vector2>();
     void OnLook(InputValue val) => Look = val.Get<Vector2>();
-
+    void OnInteract() => interactorManager.Interact();
     void OnControlsChanged()
     {
         // TODO: Change button prompts

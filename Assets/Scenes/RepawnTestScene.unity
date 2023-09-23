@@ -283,6 +283,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4932959492501321979, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 967333369}
+    - targetCorrespondingSourceObject: {fileID: 4932959492501321979, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 967333375}
   m_SourcePrefab: {fileID: 100100000, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
 --- !u!1001 &564029781
 PrefabInstance:
@@ -364,7 +367,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  currentHealth: 0
 --- !u!114 &967333369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,6 +386,23 @@ MonoBehaviour:
   lightAttackStamina: 25
   heavyAttackStamina: 40
   exhaustionTime: 0.5
+--- !u!114 &967333375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 967333362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a061673e4fa32e646aa69f166f4635cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  potionMat: {fileID: 2100000, guid: 21d5ff8b15d9d45449cb46f8bc4be029, type: 2}
+  maxPotions: 3
+  currentPotions: 0
+  restoreValue: 60
+  timeToDrinkOne: 0.5
 --- !u!1001 &974609736
 PrefabInstance:
   m_ObjectHideFlags: 0

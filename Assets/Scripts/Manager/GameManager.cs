@@ -7,14 +7,11 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     RespawnManager respawnManager;
-    ButtonPrompt interactionManager;
-
     List<IRechargeable> rechargeables = new();
 
     private void Awake()
     {
         respawnManager = GetComponent<RespawnManager>();
-        interactionManager = GetComponent<ButtonPrompt>();
         rechargeables = FindObjectsOfType<MonoBehaviour>().OfType<IRechargeable>().ToList();
     }
     public void PlayerDie()
@@ -24,6 +21,8 @@ public class GameManager : MonoBehaviour
     }
     public void RechargeEverything()
     {
+        //fait : potion, stamina, health
+        //To do : Enemy Spawns
         foreach (IRechargeable rechargeable in rechargeables)
         {
             rechargeable.Recharge();
