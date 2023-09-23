@@ -5,21 +5,14 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    GameManager gameManager;
     DisplayBar playerHealthbar;
-    RespawnManager respawnManager;
-    [SerializeField] int maxHealth = 100;
-    [SerializeField] int currentHealth;
+    [SerializeField] float maxHealth = 100;
+    float currentHealth;
 
+    public float CurrentHealth { get => currentHealth; }
     void Awake()
     {
         playerHealthbar = GameObject.FindGameObjectWithTag("PlayerHealthbar").GetComponent<DisplayBar>();    
-        gameManager = FindObjectOfType<GameManager>();
-    }
-
-    void Update()
-    {
-        
     }
     private void OnEnable()
     {
@@ -31,17 +24,17 @@ public class Health : MonoBehaviour
         playerHealthbar.Remove(damage, maxHealth, true);//TODO: change to false.
         if(currentHealth <= 0) 
         {
+            currentHealth = 0;
             Die();
         }
     }
 
     private void Die()
     {
-        gameManager.PlayerDie();
-        Heal(100);
+        throw new NotImplementedException();
     }
 
-    public void Heal(int healthRestored)
+    public void Heal(float healthRestored)
     {
         currentHealth += healthRestored;
         if (currentHealth > maxHealth)
@@ -62,5 +55,5 @@ public class Health : MonoBehaviour
     {
         TakeDamage(20);
     }
-
+    public void Round() => currentHealth = Mathf.RoundToInt(currentHealth);
 }

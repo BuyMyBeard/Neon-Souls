@@ -334,7 +334,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""8d1dc4e6-6628-4789-b87f-c5668f9a3882"",
+                    ""id"": ""ce912c8f-d6cd-42d3-b333-2383c477f73d"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",

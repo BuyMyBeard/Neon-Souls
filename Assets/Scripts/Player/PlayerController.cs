@@ -15,46 +15,15 @@ public class PlayerController : MonoBehaviour
     public bool GamepadActive { get => CurrentControlScheme == "Gamepad"; }
 
     PlayerInput playerInput;
-    EnemyHealthbar enemyHealthbar;
-    ButtonPrompt interactionManager;
     
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
-        enemyHealthbar = FindObjectsOfType<EnemyHealthbar>().First(e => e.transform.CompareTag("EnemyHealthbar"));
-        interactionManager = FindObjectOfType<ButtonPrompt>();
     }
 
     void OnMove(InputValue val) => Move = val.Get<Vector2>();
     void OnLook(InputValue val) => Look = val.Get<Vector2>();
 
-    // TODO: Bind these actions to the correct code
-    // We could do a priority queue system
-    void OnBlock()
-    {
-
-    }
-    void OnLightAttack()
-    {
-        enemyHealthbar.Remove(5, 50, true);
-    }
-    void OnHeavyAttack()
-    {
-        enemyHealthbar.Remove(15, 50, true);
-    }
-    void OnDodge()
-    {
-        enemyHealthbar.Add(7, 50);
-    }
-    void OnInteract()
-    {
-        interactionManager.Interact();
-        enemyHealthbar.Add(18, 50);
-    }
-    void OnConsumable()
-    {
-        
-    }
     void OnControlsChanged()
     {
         // TODO: Change button prompts
