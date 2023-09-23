@@ -11,17 +11,18 @@ public class BoneFireInteractble : Interactable
     {
         base.Awake();
         bonefirerManager = FindObjectOfType<BonfirerManager>();
+        this.promptMessage = "Ligth Fire";
     }
     public override void Interact()
     {
         if (active) 
         {
-            bonefirerManager.SetSpawningBoneFire(this);
+            bonefirerManager.SitAtBonFire(this);
         }
         else
         {
             bonefirerManager.ActivateBonfire(this);
-            this.promptMessage = "Set Spawnpoint to this bonfire";
+            this.promptMessage = "Sit";
             active = true;
         }
     }
