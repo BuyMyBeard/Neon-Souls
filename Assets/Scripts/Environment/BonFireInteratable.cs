@@ -21,9 +21,16 @@ public class BoneFireInteractble : Interactable
         }
         else
         {
-            bonefirerManager.ActivateBonfire(this);
-            this.promptMessage = "Sit";
             active = true;
+            bonefirerManager.ActivateBonfire(this);
+            StartCoroutine(FlickerCollider());
+            this.promptMessage = "Sit";
         }
+    }
+    IEnumerator FlickerCollider()
+    {
+        GetComponent<Collider>().enabled = false;
+        yield return new WaitForFixedUpdate();
+        GetComponent<Collider>().enabled = true;
     }
 }
