@@ -217,18 +217,6 @@ PrefabInstance:
       propertyPath: m_LocalRotation.x
       value: 0.03137824
       objectReference: {fileID: 0}
-    - target: {fileID: 3269839476878118833, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
-      propertyPath: m_Radius
-      value: 0.9602016
-      objectReference: {fileID: 0}
-    - target: {fileID: 3269839476878118833, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
-      propertyPath: m_Center.x
-      value: -0.1884762
-      objectReference: {fileID: 0}
-    - target: {fileID: 3269839476878118833, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
-      propertyPath: m_Center.y
-      value: -0.18283725
-      objectReference: {fileID: 0}
     - target: {fileID: 4932959492501321979, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
       propertyPath: m_Name
       value: ThirdPersonPlayer
@@ -276,16 +264,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4932959492501321979, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 967333368}
-    - targetCorrespondingSourceObject: {fileID: 4932959492501321979, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 967333369}
-    - targetCorrespondingSourceObject: {fileID: 4932959492501321979, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 967333375}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
 --- !u!1001 &564029781
 PrefabInstance:
@@ -349,60 +328,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2198729423093586703, guid: 190de15ab61dd20438c529467528db7d, type: 3}
   m_PrefabInstance: {fileID: 564029781}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &967333362 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4932959492501321979, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
-  m_PrefabInstance: {fileID: 211830410}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &967333368
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 967333362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57971b542bab2124bb39a7fa301b52c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
---- !u!114 &967333369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 967333362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d78676ad87fda2468a8a896b16504e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxStamina: 100
-  currentStamina: 0
-  staminaRegenRate: 100
-  dodgeStamina: 20
-  lightAttackStamina: 25
-  heavyAttackStamina: 40
-  exhaustionTime: 0.5
---- !u!114 &967333375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 967333362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a061673e4fa32e646aa69f166f4635cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  potionMat: {fileID: 2100000, guid: 21d5ff8b15d9d45449cb46f8bc4be029, type: 2}
-  maxPotions: 3
-  currentPotions: 0
-  restoreValue: 60
-  timeToDrinkOne: 0.5
 --- !u!1001 &974609736
 PrefabInstance:
   m_ObjectHideFlags: 0

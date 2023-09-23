@@ -3,15 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : MonoBehaviour
+public class Health : MonoBehaviour,IRechargeable
 {
     [SerializeField] float maxHealth = 100;
     [SerializeField] string healthbarTag = "PlayerHealthbar";
     float currentHealth;
     DisplayBar healthbar;
+    GameManager manager;
     void Awake()
     {
         healthbar = GameObject.FindGameObjectWithTag(healthbarTag).GetComponent<DisplayBar>();    
+        manager = FindObjectOfType<GameManager>();
     }
     private void OnEnable()
     {
@@ -33,7 +35,7 @@ public class Health : MonoBehaviour
     }
     private void Die()
     {
-        throw new NotImplementedException();
+        manager.PlayerDie();
     }
     /// <summary>
     /// Restores health
@@ -45,7 +47,6 @@ public class Health : MonoBehaviour
         if (currentHealth > maxHealth)
             currentHealth = maxHealth;
         healthbar.Add(healthRestored, maxHealth);
-        
     }
 
     /// <summary>
@@ -59,4 +60,10 @@ public class Health : MonoBehaviour
     /// Rounds current health to the nearest integer. Used to avoid float imprecision caused by healing over time
     /// </summary>
     public void Round() => currentHealth = Mathf.RoundToInt(currentHealth);
+
+    public void Recharge()
+    {
+        ResetHealth();
+        healthbar.Add(maxHealth, maxHealth);
+    }
 }
