@@ -19,7 +19,7 @@ public class LockOn : MonoBehaviour
     }
     public void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.Find("PlayerPlaceHolder").transform; // a changer pour le nom du vrai model.
         camFollowTarget = GameObject.FindGameObjectWithTag("FollowTarget").transform;
     }
     private void Update()
@@ -35,9 +35,34 @@ public class LockOn : MonoBehaviour
     {
         if (isLocked)
         {
+
             return;
         }
-        camFollowTarget.rotation = Quaternion.LookRotation(capsule.transform.forward, Vector3.up);
-        Debug.Log(player.forward);
+        else if (enemiesInSight.Count > 0)
+        {
+            Debug.Log("enemies is more than 0");
+        }
+        else
+        {
+            StartCoroutine(ResetCam());
+           
+        }
+        
+        
+    }
+    /// <summary>
+    /// Lerp fonctionne pas mais la camera snap au bon endroit. So, it kinda works.
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator ResetCam()
+    {
+        float elapsedTime = 0f;
+        float lerpTime = 0.5f;
+        while (elapsedTime < lerpTime)
+        {
+            camFollowTarget.rotation = Quaternion.Lerp(player.rotation, camFollowTarget.rotation, elapsedTime / lerpTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
     }
 }
