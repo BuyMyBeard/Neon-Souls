@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 movement;
     Vector3 direction = Vector3.forward;
     PlayerController playerController;
+    Animator animator;
 
     public Vector2 MovementDirection { get; private set; } = Vector2.zero;
     float dropSpeed = 0;
@@ -25,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
         characterController = GetComponentInChildren<CharacterController>();
         camera = Camera.main;
         playerController = GetComponent<PlayerController>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     void HandleGravity()
@@ -53,26 +55,30 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 movementInput = playerController.Move; 
         float movementMagnitude = movementInput.magnitude;
-
-        if (movementMagnitude >= deadZone)
+        animator.ResetTrigger("QuickWalk");
+        animator.ResetTrigger("Walk");
+        animator.ResetTrigger("Idle");
+        if (movementMagnitude >= deadZone) 
         {
             direction = Quaternion.Euler(0, camera.transform.eulerAngles.y, 0) * new Vector3(movementInput.x, 0, movementInput.y);
 
             if (movementMagnitude >= runThreshold)
             {
                 movementInput = runningSpeed * movementInput.normalized;
-                // TODO: set animation state
+                animator.SetTrigger("QuickWalk");
             }
             else
             {
                 movementInput = walkingSpeed * movementInput.normalized;
-                // TODO: set animation state
+                animator.SetTrigger("Walk");
             }
         }
         else
         {
             movementInput = Vector2.zero;
+            animator.SetTrigger("Idle");
         }
+        animator.SetFloat("Speed", movementInput.magnitude);
 
         movementInput *= Time.deltaTime;
         movement.x = movementInput.x;

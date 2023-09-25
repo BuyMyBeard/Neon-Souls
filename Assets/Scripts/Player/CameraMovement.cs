@@ -24,6 +24,9 @@ public class CameraMovement : MonoBehaviour
     [Range(.01f, 5)]
     public float controllerSensitivity = 1f;
 
+    [Range(0, 2)]
+    [SerializeField] float followTargetVerticalOffset = 0;
+
     CharacterController characterController;
     PlayerController playerController;
     void Awake()
@@ -33,7 +36,7 @@ public class CameraMovement : MonoBehaviour
     }
     void Update()
     {
-        followTarget.position = characterController.transform.position;
+        followTarget.position = characterController.transform.position + Vector3.up * followTargetVerticalOffset;
         float appliedSensitivity = playerController.GamepadActive ? controllerSensitivity : mouseSensitivity;
 
         // Quaternion * Quaternion is the same as applying rotation from second to first
