@@ -7,6 +7,7 @@ public class Health : MonoBehaviour,IRechargeable
 {
     [SerializeField] float maxHealth = 100;
     [SerializeField] string healthbarTag = "PlayerHealthbar";
+    [SerializeField] bool debugDieOnHeal = false;
     float currentHealth;
     DisplayBar healthbar;
     GameManager manager;
@@ -47,6 +48,8 @@ public class Health : MonoBehaviour,IRechargeable
         if (currentHealth > maxHealth)
             currentHealth = maxHealth;
         healthbar.Add(healthRestored, maxHealth);
+        if (debugDieOnHeal)
+            Die();
     }
 
     /// <summary>

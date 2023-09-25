@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class BonfirerManager : MonoBehaviour
+public class BonfireManager : MonoBehaviour
 {
     RespawnManager respawnManager;
     GameManager gameManager;
@@ -13,12 +13,12 @@ public class BonfirerManager : MonoBehaviour
     [SerializeField]Material activeMats;
     //
 
-    BoneFireInteractble spawningBonefire;
+    Bonfire currentBonfire;
     private void Awake()
     {
         respawnManager = FindObjectOfType<RespawnManager>();
         gameManager = FindObjectOfType<GameManager>();
-        spawningBonefire = GameObject.FindGameObjectWithTag("StartingBonfire").GetComponent<BoneFireInteractble>();
+        currentBonfire = GameObject.FindGameObjectWithTag("StartingBonfire").GetComponent<Bonfire>();
     }
     
     private void Start()
@@ -26,28 +26,28 @@ public class BonfirerManager : MonoBehaviour
         //set up Game
 
         // active first bonfire
-        spawningBonefire.Interact();
+        currentBonfire.Interact();
 
         //set spawnpoint at the first bonfire
-        spawningBonefire.Interact(); 
+        currentBonfire.Interact();
     }
-    public void SetSpawningBonFire(BoneFireInteractble bonefire)
+    public void SetCurrentBonfire(Bonfire bonfire)
     {
-        spawningBonefire = bonefire;
-        respawnManager.SetRepawn(bonefire.transform.position);
+        currentBonfire = bonfire;
+        respawnManager.SetRepawn(bonfire.transform.position + bonfire.RespawnOffset);
     }
 
-    public void ActivateBonfire(BoneFireInteractble bonefire) 
+    public void ActivateBonfire(Bonfire bonefire) 
     {
-        SetSpawningBonFire(bonefire);
+        SetCurrentBonfire(bonefire);
         //a remplacer par animation de feu ou effet
         bonefire.GetComponent<Renderer>().material = activeMats;
         //
     }
-    public void SitAtBonFire(BoneFireInteractble bonefire)
+    public void SitAtBonfire(Bonfire bonefire)
     {
         // Ajouter Le Siting Animation et Tout autre behaviour quand le hero inteeragie avec le bonfire une fois activé
-        SetSpawningBonFire(bonefire);
+        SetCurrentBonfire(bonefire);
         gameManager.RechargeEverything();
     }
 }
