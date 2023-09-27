@@ -12,9 +12,9 @@ public class BonfireManager : MonoBehaviour
 
     GameManager gameManager;
     //a enlever
+    //[SerializeField]Material spawningMats;
     [SerializeField]Material activeMats;
     //
-
     Bonfire currentBonfire;
     private void Awake()
     {
@@ -27,7 +27,7 @@ public class BonfireManager : MonoBehaviour
     {
         //set up Game
         if(playerCharacter == null)
-            throw new MissingComponentException("Character Controler component missing on character or Player tag is not set");
+            throw new MissingComponentException("Character Controller component missing on character or Player tag is not set");
 
         // active first bonfire
         currentBonfire.Interact();
@@ -50,10 +50,11 @@ public class BonfireManager : MonoBehaviour
     }
     public void SitAtBonfire(Bonfire bonefire)
     {
-        // Ajouter Le Siting Animation et Tout autre behaviour quand le hero inteeragie avec le bonfire une fois activé
+        // Ajouter Le Siting Animation et Tout autre behaviour quand le hero interagie avec le bonfire une fois activé
         SetCurrentBonfire(bonefire);
         gameManager.RechargeEverything();
     }
+
     public void SetRepawn(Vector3 position)
     {
         respawnPosition = position;

@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 direction = Vector3.forward;
     PlayerController playerController;
     Animator animator;
-
+    public bool frozen = false;
     public Vector2 MovementDirection { get; private set; } = Vector2.zero;
     float dropSpeed = 0;
     void Awake()
@@ -40,9 +40,9 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         movement.y = 0;
-
         HandleGravity();
         HandleMovement();
+
         movement = Quaternion.Euler(0, camera.transform.eulerAngles.y, 0) * movement; //handle camera rotation
 
         Quaternion movementForward = Quaternion.LookRotation(direction, Vector3.up);
@@ -53,11 +53,15 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleMovement()
     {
+        if (frozen)
+            return;
+
         Vector2 movementInput = playerController.Move; 
         float movementMagnitude = movementInput.magnitude;
         animator.ResetTrigger("QuickWalk");
         animator.ResetTrigger("Walk");
         animator.ResetTrigger("Idle");
+        
         if (movementMagnitude >= deadZone) 
         {
             direction = Quaternion.Euler(0, camera.transform.eulerAngles.y, 0) * new Vector3(movementInput.x, 0, movementInput.y);
@@ -85,4 +89,5 @@ public class PlayerMovement : MonoBehaviour
         movement.z = movementInput.y;
         MovementDirection = movementInput * direction;
     }
+    
 }
