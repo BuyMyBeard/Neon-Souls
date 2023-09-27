@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
     Vector3 direction = Vector3.forward;
     PlayerController playerController;
     Animator animator;
+
+    [HideInInspector]
     public bool frozen = false;
     public Vector2 MovementDirection { get; private set; } = Vector2.zero;
     float dropSpeed = 0;
@@ -40,6 +42,10 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         movement.y = 0;
+
+        if (frozen)
+            return;
+
         HandleGravity();
         HandleMovement();
 
@@ -53,14 +59,13 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleMovement()
     {
-        if (frozen)
-            return;
-
-        Vector2 movementInput = playerController.Move; 
-        float movementMagnitude = movementInput.magnitude;
         animator.ResetTrigger("QuickWalk");
         animator.ResetTrigger("Walk");
         animator.ResetTrigger("Idle");
+        
+
+        Vector2 movementInput = playerController.Move; 
+        float movementMagnitude = movementInput.magnitude;
         
         if (movementMagnitude >= deadZone) 
         {
