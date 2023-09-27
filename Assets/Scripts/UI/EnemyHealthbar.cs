@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class EnemyHealthbar : DisplayBar
 {
-    public GameObject trackedEnemy; //TODO: Change to abstract class from which all ennemies inherit
+    public Health trackedEnemy;
     [SerializeField] Vector3 offset;
     Camera cam;
     Canvas canvas;
@@ -16,7 +16,10 @@ public class EnemyHealthbar : DisplayBar
         base.Awake();
         cam = Camera.main;
         canvas = GetComponentInParent<Canvas>();
-        damageValue = GetComponentInChildren<TextMeshProUGUI>();
+        damageValue = GetComponentInChildren<TextMeshProUGUI>(); 
+    }
+    private void Start()
+    {
         if (trackedEnemy == null)
             gameObject.SetActive(false);
     }
