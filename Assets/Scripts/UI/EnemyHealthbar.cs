@@ -8,8 +8,10 @@ public class EnemyHealthbar : DisplayBar
 {
     public Health trackedEnemy;
     [SerializeField] Vector3 offset;
+    [SerializeField] RectTransform indicator;
     Camera cam;
     Canvas canvas;
+
 
     protected override void Awake()
     {
@@ -34,5 +36,17 @@ public class EnemyHealthbar : DisplayBar
         var sp = canvas.worldCamera.ViewportToScreenPoint(vp);
         RectTransformUtility.ScreenPointToWorldPointInRectangle(parent, sp, canvas.worldCamera, out Vector3 worldPoint);
         rt.position = worldPoint + offset;
+        indicator.position = worldPoint;
+    }
+
+    public override void Hide()
+    {
+        base.Hide();
+        indicator.gameObject.SetActive(false);
+    }
+    public override void Show()
+    {
+        base.Show();
+        indicator.gameObject.SetActive(true);
     }
 }
