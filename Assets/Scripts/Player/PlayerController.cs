@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     void OnLook(InputValue val) => Look = val.Get<Vector2>();
     void OnInteract()
     {
-        // interactorManager.Interact();
+        interactorManager.Interact();
         Animator animator = GetComponentInChildren<Animator>();
         animator.SetTrigger("Interact");
     }
