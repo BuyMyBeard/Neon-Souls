@@ -22,8 +22,7 @@ public class EnemyHealthbar : DisplayBar
     }
     private void Start()
     {
-        if (trackedEnemy == null)
-            gameObject.SetActive(false);
+        Hide();
     }
 
     // Followed this implementation: https://gist.github.com/snlehton/27d2aa9591588fdacf75c8ab65bfb5f4

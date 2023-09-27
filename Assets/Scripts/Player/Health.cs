@@ -11,6 +11,7 @@ public class Health : MonoBehaviour
     [SerializeField] string healthbarTag = "PlayerHealthbar";
 
     public float CurrentHealth { get => currentHealth; }
+    public float MaxHealth { get => maxHealth; }
     void Awake()
     {
 

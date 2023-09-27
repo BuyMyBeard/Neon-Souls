@@ -11,7 +11,9 @@ public class LockOn : MonoBehaviour
     [SerializeField] LayerMask lockableMask;
     [SerializeField] LayerMask environmentMask;
     [SerializeField] float detectionRefresh = 0.2f;
-    [SerializeField] float yAxisLockOffset = 3.5f;
+    [SerializeField] float yAxisLockOffset = 1.5f;
+    [SerializeField, Range(1,2)] 
+    float maxLockOnDistance;
     List<Transform> enemiesInSight = new();
     Transform targetEnemy = null;
     EnemyHealthbar enemyHealthbar;
@@ -34,7 +36,7 @@ public class LockOn : MonoBehaviour
         if (isLocked)
         {
             isLocked = false;
-            enemyHealthbar.gameObject.SetActive(false);
+            enemyHealthbar.Hide();
 
         }
         else if (!isLocked && enemiesInSight.Count > 0)
@@ -44,7 +46,8 @@ public class LockOn : MonoBehaviour
             Health enemyHealth = targetEnemy.gameObject.GetComponentInParent<Health>();
             enemyHealthbar.trackedEnemy = enemyHealth;
             enemyHealth.displayHealthbar = enemyHealthbar;
-            enemyHealthbar.gameObject.SetActive(true);
+            enemyHealthbar.Set(enemyHealth.CurrentHealth, enemyHealth.MaxHealth);
+            enemyHealthbar.Show();
 
             Debug.DrawLine(camFollowTarget.position, targetEnemy.position,Color.blue,1);
             StartCoroutine(CamLockedOnTarget(targetEnemy));
@@ -60,6 +63,11 @@ public class LockOn : MonoBehaviour
         while (isLocked)
         {
             camFollowTarget.LookAt(new Vector3(targetEnemy.position.x, targetEnemy.position.y - yAxisLockOffset, targetEnemy.position.z));
+            if(Vector3.Distance(camFollowTarget.position, targetEnemy.position) > viewRadius * maxLockOnDistance)
+            {
+                isLocked = false;
+                enemyHealthbar.Hide();
+            }
             yield return null;
         }
     }
@@ -116,7 +124,8 @@ public class LockOn : MonoBehaviour
     }
     Transform FindClosestEnemy() 
     {
-        return enemiesInSight.Aggregate((e1, e2) => (e1.transform.position - camFollowTarget.transform.position).magnitude < (e2.transform.position - camFollowTarget.transform.position).magnitude ? e1 : e2);
+        return enemiesInSight.Aggregate((e1, e2) => (e1.transform.position - camFollowTarget.transform.position).magnitude < 
+               (e2.transform.position - camFollowTarget.transform.position).magnitude ? e1 : e2);
     }
     private void OnDrawGizmos()
     {
