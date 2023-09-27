@@ -63,7 +63,10 @@ public class Health : MonoBehaviour,IRechargeable
     /// Rounds current health to the nearest integer. Used to avoid float imprecision caused by healing over time
     /// </summary>
     public void Round() => currentHealth = Mathf.RoundToInt(currentHealth);
-
+    void OnLightAttack()
+    {
+        InflictDamage(10);
+    }
     public void Recharge()
     {
         ResetHealth();
