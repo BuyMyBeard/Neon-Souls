@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    DisplayBar playerHealthbar;
+    public DisplayBar displayHealthbar;
     [SerializeField] float maxHealth = 100;
     float currentHealth;
     [SerializeField] string healthbarTag = "PlayerHealthbar";
@@ -13,7 +13,8 @@ public class Health : MonoBehaviour
     public float CurrentHealth { get => currentHealth; }
     void Awake()
     {
-        playerHealthbar = GameObject.FindGameObjectWithTag(healthbarTag).GetComponent<DisplayBar>();    
+
+        displayHealthbar = GameObject.FindGameObjectWithTag(healthbarTag).GetComponent<DisplayBar>();    
     }
     private void OnEnable()
     {
@@ -22,7 +23,8 @@ public class Health : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        playerHealthbar.Remove(damage, maxHealth, true);//TODO: change to false.
+        if(displayHealthbar != null)
+            displayHealthbar.Remove(damage, maxHealth, true);//TODO: change to false.
         if(currentHealth <= 0) 
         {
             currentHealth = 0;
@@ -40,7 +42,7 @@ public class Health : MonoBehaviour
         currentHealth += healthRestored;
         if (currentHealth > maxHealth)
             currentHealth = maxHealth;
-        playerHealthbar.Add(healthRestored, maxHealth);
+        displayHealthbar.Add(healthRestored, maxHealth);
         
     }
 
