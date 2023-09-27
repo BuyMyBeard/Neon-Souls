@@ -6,17 +6,17 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    RespawnManager respawnManager;
+    BonfireManager bonfireManager;
     List<IRechargeable> rechargeables = new();
 
     private void Awake()
     {
-        respawnManager = GetComponent<RespawnManager>();
+        bonfireManager = GetComponent<BonfireManager>();
         rechargeables = FindObjectsOfType<MonoBehaviour>().OfType<IRechargeable>().ToList();
     }
     public void PlayerDie()
     {
-        respawnManager.Respawn();
+        bonfireManager.Respawn();
         RechargeEverything();
     }
     public void RechargeEverything()

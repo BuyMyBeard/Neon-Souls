@@ -261,6 +261,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8745005448504600642, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -646,8 +650,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.6278648, y: 1, z: 2.1171265}
+  m_Center: {x: 0.31393242, y: 0, z: 0.05025482}
 --- !u!23 &1170205011
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -889,11 +893,6 @@ Transform:
   - {fileID: 180971512}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!143 &1684348650 stripped
-CharacterController:
-  m_CorrespondingSourceObject: {fileID: 7585043390333502910, guid: b9cd1f6bfcc4d224ab30ef2dbc68998a, type: 3}
-  m_PrefabInstance: {fileID: 211830410}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1787637564
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1466,7 +1465,6 @@ GameObject:
   - component: {fileID: 8168394895628694484}
   - component: {fileID: 6647133864251876539}
   - component: {fileID: 8131032413876175965}
-  - component: {fileID: 1664580225278014616}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1474,19 +1472,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1664580225278014616
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 843969823560251210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd4fdce280d86a04bbd963a82c233636, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerCharacter: {fileID: 1684348650}
 --- !u!114 &6647133864251876539
 MonoBehaviour:
   m_ObjectHideFlags: 0
