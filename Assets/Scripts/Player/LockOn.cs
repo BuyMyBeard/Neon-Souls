@@ -51,7 +51,7 @@ public class LockOn : MonoBehaviour
             enemyHealthbar.Show();
 
             Debug.DrawLine(camFollowTarget.position, targetEnemy.position,Color.blue,1);
-            StartCoroutine(SmoothLook(Quaternion.LookRotation(new Vector3(targetEnemy.position.x, targetEnemy.position.y - yAxisLockOffset, targetEnemy.position.z))));
+            StartCoroutine(SmoothLook(Quaternion.LookRotation(new Vector3(targetEnemy.position.x, targetEnemy.position.y - yAxisLockOffset, targetEnemy.position.z) - camFollowTarget.position)));
             StartCoroutine(CamLockedOnTarget(targetEnemy));
         }
         else
@@ -77,6 +77,8 @@ public class LockOn : MonoBehaviour
             yield return null;
         }
     }
+    // This function was inspired by Sebastian Lague
+    // https://www.youtube.com/watch?v=rQG9aUWarwE&ab_channel=SebastianLague
     void FindEnemiesInSight()
     {
         enemiesInSight.Clear();
@@ -90,7 +92,7 @@ public class LockOn : MonoBehaviour
                 float distanceToTarget = Vector3.Distance(Camera.main.transform.position, enemy.position);
                 if (!Physics.Raycast(Camera.main.transform.position, directionToEnemy, distanceToTarget, environmentMask))
                 {
-                   Debug.DrawRay(Camera.main.transform.position, directionToEnemy * distanceToTarget, Color.magenta, 1);
+                   //Debug.DrawRay(Camera.main.transform.position, directionToEnemy * distanceToTarget, Color.magenta, 1);
                    enemiesInSight.Add(enemy);
                 }
             }
@@ -104,12 +106,11 @@ public class LockOn : MonoBehaviour
             yield return new WaitForSeconds(detectionRefresh);
         }
     }
-
     IEnumerator SmoothLook(Quaternion at)
     {
         isSmoothLooking = true;
         float elapsedTime = 0f;
-        const float LERPTIME = 0.1f;
+        const float LERPTIME = 0.05f;
         Quaternion initialRotation = camFollowTarget.rotation;
         while (elapsedTime < LERPTIME)
         {
@@ -119,31 +120,22 @@ public class LockOn : MonoBehaviour
         }
         isSmoothLooking = false;
     }
-
-    public Vector3 DirectionFromAngle(float angleInDegrees, bool angleIsGlobal)
-    {
-        if (!angleIsGlobal)
-        {
-            angleInDegrees += camFollowTarget.transform.eulerAngles.y;
-        }
-        return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
-    }
     Transform FindClosestEnemy() 
     {
         return enemiesInSight.Aggregate((e1, e2) => (e1.transform.position - camFollowTarget.transform.position).magnitude < 
                (e2.transform.position - camFollowTarget.transform.position).magnitude ? e1 : e2);
     }
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(camFollowTarget.position, viewRadius);
-        Quaternion leftRayRotation = Quaternion.AngleAxis(-viewAngle / 2, Vector3.up);
-        Quaternion rightRayRotation = Quaternion.AngleAxis(viewAngle / 2, Vector3.up);
-        Vector3 leftRayDirection = leftRayRotation * camFollowTarget.forward;
-        Vector3 rightRayDirection = rightRayRotation * camFollowTarget.forward;
-        Gizmos.color = Color.green;
-        Gizmos.DrawRay(Camera.main.transform.position, leftRayDirection * viewRadius);
-        Gizmos.DrawRay(Camera.main.transform.position, rightRayDirection * viewRadius);
+    //void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireSphere(camFollowTarget.position, viewRadius);
+    //    Quaternion leftRayRotation = Quaternion.AngleAxis(-viewAngle / 2, Vector3.up);
+    //    Quaternion rightRayRotation = Quaternion.AngleAxis(viewAngle / 2, Vector3.up);
+    //    Vector3 leftRayDirection = leftRayRotation * camFollowTarget.forward;
+    //    Vector3 rightRayDirection = rightRayRotation * camFollowTarget.forward;
+    //    Gizmos.color = Color.green;
+    //    Gizmos.DrawRay(Camera.main.transform.position, leftRayDirection * viewRadius);
+    //    Gizmos.DrawRay(Camera.main.transform.position, rightRayDirection * viewRadius);
 
-    }
+    //}
 }
