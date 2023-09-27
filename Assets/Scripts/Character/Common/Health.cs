@@ -7,7 +7,6 @@ public class Health : MonoBehaviour
 {
     public DisplayBar displayHealthbar;
     [SerializeField] float maxHealth = 100;
-    float currentHealth;
     [SerializeField] string healthbarTag = "PlayerHealthbar";
 
     public float CurrentHealth { get => currentHealth; }
@@ -21,7 +20,11 @@ public class Health : MonoBehaviour
     {
         ResetHealth();
     }
-    public void TakeDamage(int damage)
+    /// <summary>
+    /// Apply damage to health
+    /// </summary>
+    /// <param name="damage">Amount of damage applied</param>
+    public void InflictDamage(int damage)
     {
         currentHealth -= damage;
         if(displayHealthbar != null)
@@ -32,12 +35,14 @@ public class Health : MonoBehaviour
             Die();
         }
     }
-
     private void Die()
     {
         throw new NotImplementedException();
     }
-
+    /// <summary>
+    /// Restores health
+    /// </summary>
+    /// <param name="healthRestored">Amount of health restored</param>
     public void Heal(float healthRestored)
     {
         currentHealth += healthRestored;
@@ -47,9 +52,15 @@ public class Health : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Returns current health back to full
+    /// </summary>
     private void ResetHealth()
     {
         currentHealth = maxHealth;
     }
+    /// <summary>
+    /// Rounds current health to the nearest integer. Used to avoid float imprecision caused by healing over time
+    /// </summary>
     public void Round() => currentHealth = Mathf.RoundToInt(currentHealth);
 }

@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 [RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(Rigidbody))]
-public class Sword : MonoBehaviour
+public class MeleeWeapon : MonoBehaviour
 {
     [HideInInspector] public UnityEvent<Collider> onTrigger;
     new Collider collider;
@@ -18,6 +18,9 @@ public class Sword : MonoBehaviour
     void Awake()
     {
         collider = GetComponent<Collider>();
+    }
+    private void Start()
+    {
         collider.isTrigger = true;
         GetComponent<Rigidbody>().isKinematic = true;
     }
