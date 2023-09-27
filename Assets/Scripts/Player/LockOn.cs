@@ -19,6 +19,7 @@ public class LockOn : MonoBehaviour
     EnemyHealthbar enemyHealthbar;
     Transform player;
     Transform camFollowTarget;
+    bool isSmoothLooking = false;
 
     public void Awake()
     {
@@ -50,17 +51,23 @@ public class LockOn : MonoBehaviour
             enemyHealthbar.Show();
 
             Debug.DrawLine(camFollowTarget.position, targetEnemy.position,Color.blue,1);
+            StartCoroutine(SmoothLook(Quaternion.LookRotation(new Vector3(targetEnemy.position.x, targetEnemy.position.y - yAxisLockOffset, targetEnemy.position.z))));
             StartCoroutine(CamLockedOnTarget(targetEnemy));
         }
         else
         {
-            StartCoroutine(ResetCam());
+            StartCoroutine(SmoothLook(Quaternion.LookRotation(player.forward)));
         }
     }
     IEnumerator CamLockedOnTarget(Transform targetEnemy)
     {
         while (isLocked)
         {
+            if (isSmoothLooking)
+            {
+                yield return null;
+                continue;
+            }
             camFollowTarget.LookAt(new Vector3(targetEnemy.position.x, targetEnemy.position.y - yAxisLockOffset, targetEnemy.position.z));
             if(Vector3.Distance(camFollowTarget.position, targetEnemy.position) > viewRadius * maxLockOnDistance)
             {
@@ -98,23 +105,21 @@ public class LockOn : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Lerp fonctionne pas mais la camera snap au bon endroit. So, it kinda works.
-    /// </summary>
-    /// <returns></returns>
-    IEnumerator ResetCam()
+    IEnumerator SmoothLook(Quaternion at)
     {
+        isSmoothLooking = true;
         float elapsedTime = 0f;
         const float LERPTIME = 0.1f;
         Quaternion initialRotation = camFollowTarget.rotation;
-        Quaternion goal = Quaternion.LookRotation(player.forward);
         while (elapsedTime < LERPTIME)
         {
-            camFollowTarget.rotation = Quaternion.Lerp(initialRotation, goal, elapsedTime / LERPTIME);
+            camFollowTarget.rotation = Quaternion.Lerp(initialRotation, at, elapsedTime / LERPTIME);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+        isSmoothLooking = false;
     }
+
     public Vector3 DirectionFromAngle(float angleInDegrees, bool angleIsGlobal)
     {
         if (!angleIsGlobal)
