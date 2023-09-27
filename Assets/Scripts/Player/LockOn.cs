@@ -55,7 +55,6 @@ public class LockOn : MonoBehaviour
         else
         {
             StartCoroutine(ResetCam());
-
         }
     }
     IEnumerator CamLockedOnTarget(Transform targetEnemy)
@@ -106,10 +105,12 @@ public class LockOn : MonoBehaviour
     IEnumerator ResetCam()
     {
         float elapsedTime = 0f;
-        float lerpTime = 0.5f;
-        while (elapsedTime < lerpTime)
+        const float LERPTIME = 0.1f;
+        Quaternion initialRotation = camFollowTarget.rotation;
+        Quaternion goal = Quaternion.LookRotation(player.forward);
+        while (elapsedTime < LERPTIME)
         {
-            camFollowTarget.rotation = Quaternion.Lerp(player.rotation, camFollowTarget.rotation, elapsedTime / lerpTime);
+            camFollowTarget.rotation = Quaternion.Lerp(initialRotation, goal, elapsedTime / LERPTIME);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
