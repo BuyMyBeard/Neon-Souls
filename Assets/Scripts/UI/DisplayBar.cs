@@ -135,7 +135,7 @@ public class DisplayBar : MonoBehaviour
         }
     }
 
-    public void Show()
+    public virtual void Show()
     {
         foreach (Transform child in transform)
         {
@@ -143,7 +143,7 @@ public class DisplayBar : MonoBehaviour
         }
     }
 
-    public void Hide()
+    public virtual void Hide()
     {
         if (lingerTimerStarted)
         {
