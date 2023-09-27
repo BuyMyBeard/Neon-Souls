@@ -119,6 +119,49 @@ public class DisplayBar : MonoBehaviour
                 StartCoroutine(DamageDisplayTimer());
         }
     }
+    public void Set(float value, float max)
+    {
+        TrueValue = value / max;
+        LingeredValue = value / max;
+        if (lingerTimerStarted)
+        {
+            StopCoroutine(lingerTimerCoroutine);
+            lingerTimerStarted = false;
+        }
+        if (isCatchingUp)
+        {
+            StopCoroutine(catchUpCoroutine);
+            isCatchingUp = false;
+        }
+    }
+
+    public void Show()
+    {
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(true);
+        }
+    }
+
+    public void Hide()
+    {
+        if (lingerTimerStarted)
+        {
+            StopCoroutine(lingerTimerCoroutine);
+            lingerTimerStarted = false;
+        }
+        if (isCatchingUp)
+        {
+            StopCoroutine(catchUpCoroutine);
+            isCatchingUp = false;
+        }
+        ShowDamageValue = false;
+
+        foreach(Transform child in transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+    }
 
     IEnumerator DamageDisplayTimer()
     {
