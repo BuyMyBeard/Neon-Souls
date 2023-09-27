@@ -23,12 +23,6 @@ public class PlayerController : MonoBehaviour
     }
     void OnMove(InputValue val) => Move = val.Get<Vector2>();
     void OnLook(InputValue val) => Look = val.Get<Vector2>();
-    void OnInteract()
-    {
-        interactorManager.Interact();
-        Animator animator = GetComponentInChildren<Animator>();
-        animator.SetTrigger("Interact");
-    }
     void OnControlsChanged()
     {
         // TODO: Change button prompts

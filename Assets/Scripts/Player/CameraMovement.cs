@@ -29,6 +29,9 @@ public class CameraMovement : MonoBehaviour
 
     CharacterController characterController;
     PlayerController playerController;
+
+    [HideInInspector]
+    public bool frozen = false;
     void Awake()
     {   
         characterController = GetComponentInChildren<CharacterController>();
@@ -36,6 +39,9 @@ public class CameraMovement : MonoBehaviour
     }
     void Update()
     {
+        if (frozen)
+            return;
+
         followTarget.position = characterController.transform.position + Vector3.up * followTargetVerticalOffset;
         float appliedSensitivity = playerController.GamepadActive ? controllerSensitivity : mouseSensitivity;
 

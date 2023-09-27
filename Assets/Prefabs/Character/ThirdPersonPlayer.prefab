@@ -412,6 +412,7 @@ MonoBehaviour:
   driftDeadZone: -0.9
   mouseSensitivity: 0.19
   controllerSensitivity: 0.7
+  followTargetVerticalOffset: 0
 --- !u!114 &1268877080257715196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,6 +472,7 @@ MonoBehaviour:
   runThreshold: 0.7
   deadZone: 0.25
   turnSpeed: 600
+  frozen: 0
 --- !u!1 &4947763422662117358
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,8 +500,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4947763422662117358}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.03137826, y: -0, z: -0, w: 0.9995076}
-  m_LocalPosition: {x: 0, y: 2.0699997, z: -5.97}
+  m_LocalRotation: {x: 0.031378288, y: -0, z: -0, w: 0.9995076}
+  m_LocalPosition: {x: 0, y: 2.0700002, z: -5.97}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

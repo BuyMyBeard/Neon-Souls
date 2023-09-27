@@ -8,13 +8,19 @@ public class Health : MonoBehaviour,IRechargeable
     [SerializeField] float maxHealth = 100;
     [SerializeField] string healthbarTag = "PlayerHealthbar";
     [SerializeField] bool debugDieOnHeal = false;
+    public bool IsDying { get; private set; }
+
     float currentHealth;
     DisplayBar healthbar;
     GameManager manager;
+
+    [HideInInspector]
+    public bool invincible = false;
     void Awake()
     {
         healthbar = GameObject.FindGameObjectWithTag(healthbarTag).GetComponent<DisplayBar>();    
         manager = FindObjectOfType<GameManager>();
+        
     }
     private void OnEnable()
     {
@@ -26,11 +32,13 @@ public class Health : MonoBehaviour,IRechargeable
     /// <param name="damage">Amount of damage applied</param>
     public void InflictDamage(int damage)
     {
+        if (invincible)
+            return;
         currentHealth -= damage;
         healthbar.Remove(damage, maxHealth, true);//TODO: change to false.
         if(currentHealth <= 0) 
         {
-            currentHealth = 0;
+            currentHealth = 0;//TODO: change to false.
             Die();
         }
     }
@@ -49,7 +57,7 @@ public class Health : MonoBehaviour,IRechargeable
             currentHealth = maxHealth;
         healthbar.Add(healthRestored, maxHealth);
         if (debugDieOnHeal)
-            Die();
+            InflictDamage(100000000);
     }
 
     /// <summary>
@@ -63,10 +71,7 @@ public class Health : MonoBehaviour,IRechargeable
     /// Rounds current health to the nearest integer. Used to avoid float imprecision caused by healing over time
     /// </summary>
     public void Round() => currentHealth = Mathf.RoundToInt(currentHealth);
-    void OnLightAttack()
-    {
-        InflictDamage(10);
-    }
+    
     public void Recharge()
     {
         ResetHealth();
