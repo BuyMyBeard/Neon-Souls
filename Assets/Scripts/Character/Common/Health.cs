@@ -8,12 +8,11 @@ public class Health : MonoBehaviour
     public DisplayBar displayHealthbar;
     [SerializeField] float maxHealth = 100;
     [SerializeField] string healthbarTag = "PlayerHealthbar";
-
+    float currentHealth;
     public float CurrentHealth { get => currentHealth; }
     public float MaxHealth { get => maxHealth; }
     void Awake()
     {
-
         displayHealthbar = GameObject.FindGameObjectWithTag(healthbarTag).GetComponent<DisplayBar>();    
     }
     private void OnEnable()
@@ -48,10 +47,8 @@ public class Health : MonoBehaviour
         currentHealth += healthRestored;
         if (currentHealth > maxHealth)
             currentHealth = maxHealth;
-        displayHealthbar.Add(healthRestored, maxHealth);
-        
+        displayHealthbar.Add(healthRestored, maxHealth);    
     }
-
     /// <summary>
     /// Returns current health back to full
     /// </summary>
