@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Potions : MonoBehaviour,IRechargeable
+public class Potions : MonoBehaviour ,IRechargeable
 {
 
     [SerializeField] Material potionMat;

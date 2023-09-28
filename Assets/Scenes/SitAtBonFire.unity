@@ -569,7 +569,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5037a543ac8154aa4f39c9b6636b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highFrameTime: 1
   snapObject: {fileID: 1804926125}
   promptMessage: Levier 1 Activation
 --- !u!65 &1092731088
@@ -712,7 +711,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5037a543ac8154aa4f39c9b6636b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highFrameTime: 1
   snapObject: {fileID: 1241272897}
   promptMessage: Levier 2 Activation
 --- !u!1 &1237911673
@@ -917,6 +915,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1027573681358124129, guid: 4d08890b67972b743ae267bccc8e166d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.0699997
+      objectReference: {fileID: 0}
+    - target: {fileID: 1027573681358124129, guid: 4d08890b67972b743ae267bccc8e166d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.13750398
+      objectReference: {fileID: 0}
     - target: {fileID: 2131773522004635800, guid: 4d08890b67972b743ae267bccc8e166d, type: 3}
       propertyPath: m_Name
       value: ThirdPersonPlayer
@@ -965,7 +971,8 @@ PrefabInstance:
       propertyPath: debugDieOnHeal
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7032983877612641622, guid: 4d08890b67972b743ae267bccc8e166d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
