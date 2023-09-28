@@ -10,7 +10,6 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Collider))]
 public abstract class Interactable : MonoBehaviour
 {
-    [SerializeField] float highFrameTime = 1;
     [SerializeField]Transform snapObject;
     CharacterController playerCharacter;
     ButtonPrompt buttonPrompt;
