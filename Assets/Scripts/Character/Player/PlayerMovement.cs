@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+[RequireComponent(typeof(LockOn))]
+[RequireComponent(typeof(PlayerController))]
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -17,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 movement;
     Vector3 direction = Vector3.forward;
     PlayerController playerController;
+    LockOn lockOn;
 
     public Vector2 MovementDirection { get; private set; } = Vector2.zero;
     float dropSpeed = 0;
@@ -25,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
         characterController = GetComponentInChildren<CharacterController>();
         camera = Camera.main;
         playerController = GetComponent<PlayerController>();
+        lockOn = GetComponent<LockOn>();
     }
 
     void HandleGravity()
@@ -42,8 +47,15 @@ public class PlayerMovement : MonoBehaviour
         HandleGravity();
         HandleMovement();
         movement = Quaternion.Euler(0, camera.transform.eulerAngles.y, 0) * movement; //handle camera rotation
+        Quaternion movementForward;
+        if (lockOn.IsLocked)      
+        {
+            Vector3 lockOnDirection = lockOn.TargetEnemy.position - characterController.transform.position;
+            lockOnDirection.y = 0;
+            direction = lockOnDirection;
+        }
+        movementForward = Quaternion.LookRotation(direction, Vector3.up);
 
-        Quaternion movementForward = Quaternion.LookRotation(direction, Vector3.up);
         characterController.transform.rotation = Quaternion.RotateTowards(characterController.transform.rotation, movementForward, turnSpeed * Time.deltaTime);
 
         characterController.Move(movement);
@@ -57,7 +69,6 @@ public class PlayerMovement : MonoBehaviour
         if (movementMagnitude >= deadZone)
         {
             direction = Quaternion.Euler(0, camera.transform.eulerAngles.y, 0) * new Vector3(movementInput.x, 0, movementInput.y);
-
             if (movementMagnitude >= runThreshold)
             {
                 movementInput = runningSpeed * movementInput.normalized;

@@ -20,6 +20,8 @@ public class LockOn : MonoBehaviour
     Transform player;
     Transform camFollowTarget;
     bool isSmoothLooking = false;
+    public bool IsLocked { get => isLocked; }
+    public Transform TargetEnemy { get => targetEnemy; }
 
     public void Awake()
     {
