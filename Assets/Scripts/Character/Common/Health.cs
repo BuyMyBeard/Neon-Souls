@@ -10,6 +10,8 @@ public class Health : MonoBehaviour
     [SerializeField] string healthbarTag = "PlayerHealthbar";
     float currentHealth;
     public float CurrentHealth { get => currentHealth; }
+
+    public bool IsDead { get => currentHealth <= 0; }
     public float MaxHealth { get => maxHealth; }
     void Awake()
     {
@@ -28,7 +30,7 @@ public class Health : MonoBehaviour
         currentHealth -= damage;
         if(displayHealthbar != null)
             displayHealthbar.Remove(damage, maxHealth, true);//TODO: change to false.
-        if(currentHealth <= 0) 
+        if(IsDead) 
         {
             currentHealth = 0;
             Die();
