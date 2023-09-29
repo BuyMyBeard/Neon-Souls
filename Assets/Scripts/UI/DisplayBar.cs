@@ -20,6 +20,7 @@ public class DisplayBar : MonoBehaviour
     float damageValueTimer = 0;
     bool lingerTimerStarted = false;
     bool isCatchingUp = false;
+    protected bool hidden = false;
     float stackedValue = 0;
     IEnumerator lingerTimerCoroutine, catchUpCoroutine;
 
@@ -111,7 +112,7 @@ public class DisplayBar : MonoBehaviour
         lingerTimerCoroutine = LingerTimer();
         if (!lingerTimerStarted)
             StartCoroutine(lingerTimerCoroutine);
-        if (showValue)
+        if (showValue && !hidden)
         {
             stackedValue += value;
             DamageValue = Mathf.RoundToInt(stackedValue).ToString();
@@ -137,14 +138,17 @@ public class DisplayBar : MonoBehaviour
 
     public virtual void Show()
     {
+        hidden = false;
         foreach (Transform child in transform)
-        {
             child.gameObject.SetActive(true);
-        }
+        
+        //setting active all children recursively also shows stacking damage value, so it's manually hidden after
+        ShowDamageValue = false;
     }
 
     public virtual void Hide()
     {
+        hidden = true;
         if (lingerTimerStarted)
         {
             StopCoroutine(lingerTimerCoroutine);
@@ -155,12 +159,9 @@ public class DisplayBar : MonoBehaviour
             StopCoroutine(catchUpCoroutine);
             isCatchingUp = false;
         }
-        ShowDamageValue = false;
 
         foreach(Transform child in transform)
-        {
             child.gameObject.SetActive(false);
-        }
     }
 
     IEnumerator DamageDisplayTimer()

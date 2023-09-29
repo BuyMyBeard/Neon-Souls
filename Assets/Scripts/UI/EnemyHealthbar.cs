@@ -12,7 +12,6 @@ public class EnemyHealthbar : DisplayBar
     Camera cam;
     Canvas canvas;
 
-
     protected override void Awake()
     {
         base.Awake();
@@ -29,6 +28,7 @@ public class EnemyHealthbar : DisplayBar
     // LateUpdate to track ennemies after they moved in Update
     private void LateUpdate()
     {
+        if (hidden) return;
         var rt = GetComponent<RectTransform>();
         RectTransform parent = (RectTransform)rt.parent;
         var vp = cam.WorldToViewportPoint(trackedEnemy.transform.position);
