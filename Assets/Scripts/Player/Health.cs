@@ -8,21 +8,21 @@ public class Health : MonoBehaviour,IRechargeable
     [SerializeField] float maxHealth = 100;
     [SerializeField] string healthbarTag = "PlayerHealthbar";
     [SerializeField] bool debugDieOnHeal = false;
-    public bool IsDying { get; private set; }
+    public bool invincible = false;
 
     float currentHealth;
     DisplayBar healthbar;
     GameManager manager;
 
-    [HideInInspector]
-    public bool invincible = false;
+    // Please replace references by IsDead when merging with main
+    public bool IsDying { get; private set; }
     void Awake()
     {
         healthbar = GameObject.FindGameObjectWithTag(healthbarTag).GetComponent<DisplayBar>();    
         manager = FindObjectOfType<GameManager>();
         
     }
-    private void OnEnable()
+    void OnEnable()
     {
         ResetHealth();
     }
@@ -35,10 +35,10 @@ public class Health : MonoBehaviour,IRechargeable
         if (invincible)
             return;
         currentHealth -= damage;
-        healthbar.Remove(damage, maxHealth, true);//TODO: change to false.
+        healthbar.Remove(damage, maxHealth, true); //TODO: change to false.
         if(currentHealth <= 0) 
         {
-            currentHealth = 0;//TODO: change to false.
+            currentHealth = 0;
             Die();
         }
     }

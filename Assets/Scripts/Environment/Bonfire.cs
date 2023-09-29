@@ -20,14 +20,12 @@ public class Bonfire : Interactable
         if (active) 
         {
             bonfireManager.SitAtBonfire(this);
+            return;
         }
-        else
-        {
-            active = true;
-            bonfireManager.ActivateBonfire(this);
-            StartCoroutine(FlickerCollider());
-            promptMessage = "Sit";
-        }
+        active = true;
+        bonfireManager.ActivateBonfire(this);
+        StartCoroutine(FlickerCollider());
+        promptMessage = "Sit";
     }
     IEnumerator FlickerCollider()
     {
