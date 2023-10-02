@@ -40,7 +40,7 @@ public class LockOn : MonoBehaviour
             enemyHealthbar.Hide();
             enemyHealth = null;
         }
-        else if (!IsLocked && enemiesInSight.Count > 0)
+        else if (enemiesInSight.Count > 0)
         {
             IsLocked = true;
             TargetEnemy = FindClosestEnemy();
