@@ -5,13 +5,17 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+    public DisplayBar displayHealthbar;
     [SerializeField] float maxHealth = 100;
     [SerializeField] string healthbarTag = "PlayerHealthbar";
     float currentHealth;
-    DisplayBar healthbar;
+    public float CurrentHealth { get => currentHealth; }
+
+    public bool IsDead { get => currentHealth <= 0; }
+    public float MaxHealth { get => maxHealth; }
     void Awake()
     {
-        healthbar = GameObject.FindGameObjectWithTag(healthbarTag).GetComponent<DisplayBar>();    
+        displayHealthbar = GameObject.FindGameObjectWithTag(healthbarTag).GetComponent<DisplayBar>();    
     }
     private void OnEnable()
     {
@@ -24,8 +28,9 @@ public class Health : MonoBehaviour
     public void InflictDamage(int damage)
     {
         currentHealth -= damage;
-        healthbar.Remove(damage, maxHealth, true);//TODO: change to false.
-        if(currentHealth <= 0) 
+        if(displayHealthbar != null)
+            displayHealthbar.Remove(damage, maxHealth, true);//TODO: change to false.
+        if(IsDead) 
         {
             currentHealth = 0;
             Die();
@@ -44,10 +49,8 @@ public class Health : MonoBehaviour
         currentHealth += healthRestored;
         if (currentHealth > maxHealth)
             currentHealth = maxHealth;
-        healthbar.Add(healthRestored, maxHealth);
-        
+        displayHealthbar.Add(healthRestored, maxHealth);    
     }
-
     /// <summary>
     /// Returns current health back to full
     /// </summary>

@@ -11,11 +11,12 @@ TagManager:
   - SoulsCount
   - EnemyHealthbar
   - PlayerHealthbar
+  - FollowTarget
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Environment
   - Water
   - UI
   - 
@@ -32,7 +33,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Lockable
   - 
   - 
   - 
