@@ -3,12 +3,20 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - TrueHealth
+  - DisplayedHealth
+  - TrueStamina
+  - DisplayedStamina
+  - SoulsCount
+  - EnemyHealthbar
+  - PlayerHealthbar
+  - FollowTarget
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Environment
   - Water
   - UI
   - 
@@ -17,15 +25,15 @@ TagManager:
   - 
   - Player
   - 
+  - PlayerSword
+  - Enemy
+  - EnemySword
   - 
   - 
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - Lockable
   - 
   - 
   - 
