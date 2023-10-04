@@ -87,7 +87,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   travelSpeed: 10
-  lifeSpan: 3
+  lifeSpan: 1
   bulletDamage: 60
 --- !u!1 &7041250773000418974
 GameObject:
@@ -151,7 +151,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 026514439bdd2d64089332851c161d78, type: 2}
+  - {fileID: 2100000, guid: c0da3d91dd1f68549b495516a10d42df, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

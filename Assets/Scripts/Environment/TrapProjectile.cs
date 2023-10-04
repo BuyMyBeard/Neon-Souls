@@ -38,9 +38,7 @@ public class TrapProjectile : MonoBehaviour,Trap
            
             if (i == null)
                 throw new MissingComponentException();
-
             i.MoveBullet(t.forward);
-            Debug.Log(liveBullet.transform.position.ToString());
         }
     }
 }
