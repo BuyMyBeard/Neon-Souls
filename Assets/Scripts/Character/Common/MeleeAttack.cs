@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Animator))]
 public abstract class MeleeAttack : MonoBehaviour
 {
 
@@ -28,11 +27,14 @@ public abstract class MeleeAttack : MonoBehaviour
     }
     protected virtual void Awake()
     {
-        animator = GetComponent<Animator>();       
+        animator = GetComponent<Animator>();
+        if (animator == null) animator = GetComponentInChildren<Animator>();
         weapon = GetComponentInChildren<MeleeWeapon>();
     }
     protected virtual void Start()
     {
+        if (animator == null)
+            throw new MissingComponentException("Animator component missing on character");
         if (weapon == null)
             throw new MissingComponentException("Sword component missing on character");
         else

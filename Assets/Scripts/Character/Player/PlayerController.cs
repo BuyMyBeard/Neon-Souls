@@ -24,6 +24,10 @@ public class PlayerController : MonoBehaviour
     void OnMove(InputValue val) => Move = val.Get<Vector2>();
     void OnLook(InputValue val) => Look = val.Get<Vector2>();
 
+    void OnLockOn()
+    {
+        GetComponentInChildren<Animator>().SetTrigger("Eat ass");
+    }
     void OnControlsChanged()
     {
         // TODO: Change button prompts
