@@ -6,6 +6,7 @@ public class TrapProjectile : MonoBehaviour
 {
     Transform[] projectileLaunchers;
     [SerializeField] int nbLaunchers;
+    [SerializeField] GameObject bullet;
     private void Awake()
     {
         projectileLaunchers = new Transform[nbLaunchers];
@@ -17,8 +18,12 @@ public class TrapProjectile : MonoBehaviour
     }
     public void PullTrigger(Collider c)
     {
-        Debug.Log(c.gameObject.name + "activated the trap");
-        foreach(Transform t in projectileLaunchers) { Debug.Log(t.position.ToString()); }
+        foreach(Transform t in projectileLaunchers) 
+        {
+            GameObject liveBullet = Instantiate(bullet, t.position, t.rotation);
+            liveBullet.GetComponent<TrapBullet>().MoveBullet(t.forward);
+            Debug.Log(liveBullet.transform.position.ToString());
+        }
     }
 
     
