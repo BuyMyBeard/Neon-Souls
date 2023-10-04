@@ -5,18 +5,12 @@ using UnityEngine;
 public class TrapBullet : MonoBehaviour
 {
     [SerializeField] float travelSpeed = 5f;
-    [SerializeField] float lifeSpan = 2f;
+    [SerializeField] float lifeSpan = 1f;
     [SerializeField] int bulletDamage = 60;
-    Collider bulletCollider;
     Rigidbody rb;
     private void Awake()
     {
-        bulletCollider = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
-    }
-    void Update()
-    {
-        
     }
     private void OnCollisionEnter(Collision collision)
     {
