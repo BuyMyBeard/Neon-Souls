@@ -933,13 +933,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 867552607}
   - {fileID: 1967261446}
   - {fileID: 1710067925}
   - {fileID: 719095299}
   - {fileID: 1096096009}
   - {fileID: 1372488126}
   - {fileID: 651577351}
+  - {fileID: 867552607}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &74061608
@@ -954,6 +954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b96312d1ab3c40a4286b97040ca7d382, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nbLaunchers: 3
 --- !u!43 &88698126
 Mesh:
   m_ObjectHideFlags: 0
@@ -65943,7 +65944,7 @@ GameObject:
   - component: {fileID: 2095944494}
   - component: {fileID: 2095944493}
   - component: {fileID: 2095944492}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DiscoFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
