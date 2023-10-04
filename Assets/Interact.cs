@@ -20,7 +20,7 @@ public class Interact : MonoBehaviour
     }
     void OnInteract()
     {
-        if (health.IsDying || buttonPrompt.currentPrompt == null)
+        if (health.IsDead || buttonPrompt.currentPrompt == null)
             return;
         //IFrame
         health.invincible = true;
