@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class TrapActivation : MonoBehaviour
 {
-    [SerializeField] bool wasTriggered = false;
+    //TO DO : doit recharger avec la mort ou un siting 
+    public bool wasTriggered = false;
     void OnTriggerEnter(Collider c)
     {
-        if (c.gameObject.layer != 3) // 3 == Environment Layer
-        {
-            gameObject.GetComponentInParent<TrapProjectile>().PullTrigger(c);
-            gameObject.GetComponent<Collider>().enabled = false;
-            gameObject.transform.position = new Vector3(transform.position.x, -.25f, transform.position.z);
-        }   
+        if(wasTriggered) return;
+
+        gameObject.GetComponent<Trap>().Trigger();
+        gameObject.GetComponent<Collider>().enabled = false;
+        wasTriggered = true;
     }
     public void ResetTrap()
     {
-        gameObject.GetComponent <Collider>().enabled = true;
-        gameObject.transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+        gameObject.GetComponent<Collider>().enabled = true;
+        wasTriggered = false;
     }
 }
