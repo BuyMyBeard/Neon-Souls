@@ -65,7 +65,6 @@ public class ButtonPrompt : MonoBehaviour
     }
     public void Interact()
     {
-        // TODO: link this to input manager 
         if (currentPrompt != null && Time.timeScale != 0)
         {
             currentPrompt.Interact();
