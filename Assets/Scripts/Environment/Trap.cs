@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Trap : MonoBehaviour
+interface Trap
 {
-    [SerializeField] Transform activationSwitch;
+    void Trigger();
+
+
 }
+
