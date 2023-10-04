@@ -6,13 +6,18 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Collider))]
 public abstract class Interactable : MonoBehaviour
 {
+    [SerializeField]Transform snapObject;
+    CharacterController playerCharacter;
     ButtonPrompt buttonPrompt;
     public string promptMessage = "Interact";
     protected virtual void Awake()
     {
-        buttonPrompt = FindObjectOfType<ButtonPrompt>();
+        buttonPrompt = FindObjectOfType<ButtonPrompt>(); 
+        GetComponent<Collider>().isTrigger = true;
+        playerCharacter = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
     }
     protected void Prompt()
     {
@@ -22,7 +27,10 @@ public abstract class Interactable : MonoBehaviour
     {
         buttonPrompt.CancelPrompt(this);
     }
-    public abstract void Interact();
+    public virtual void Interact()
+    {
+        playerCharacter.transform.SetPositionAndRotation(snapObject.position,snapObject.rotation);
+    }
     protected virtual void OnTriggerEnter(Collider other)
     {
         Prompt();
@@ -30,6 +38,13 @@ public abstract class Interactable : MonoBehaviour
     protected virtual void OnTriggerExit(Collider other)
     {
         CancelPrompt();
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(snapObject.position, new Vector3(1,0,1));
+
+        Gizmos.DrawRay(snapObject.position, snapObject.forward);
     }
 }
 public class ButtonPrompt : MonoBehaviour
@@ -39,7 +54,7 @@ public class ButtonPrompt : MonoBehaviour
     //[SerializeField] float cooldown = 0.5f;
     Transform player;
     List<Interactable> possiblePrompts = new();
-    Interactable currentPrompt;
+    public Interactable currentPrompt;
     //bool onCooldown = false;
 
     void Awake()
@@ -48,10 +63,9 @@ public class ButtonPrompt : MonoBehaviour
         // player = FindObjectOfType<PlayerMove>().transform;
         HidePrompt();
     }
-    void Update()
+    public void Interact()
     {
-        // TODO: link this to input manager 
-        // if (currentPrompt != null && PlayerInputs.InteractPress && Time.timeScale != 0)
+        if (currentPrompt != null && Time.timeScale != 0)
         {
             currentPrompt.Interact();
             CancelPrompt(currentPrompt);
