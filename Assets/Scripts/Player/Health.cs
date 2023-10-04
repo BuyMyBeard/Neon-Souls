@@ -5,22 +5,20 @@ using UnityEngine;
 
 public class Health : MonoBehaviour,IRechargeable
 {
+    public DisplayBar displayHealthbar;
     [SerializeField] float maxHealth = 100;
     [SerializeField] string healthbarTag = "PlayerHealthbar";
     [SerializeField] bool debugDieOnHeal = false;
     public bool invincible = false;
 
     float currentHealth;
-    DisplayBar healthbar;
-    GameManager manager;
+    public float CurrentHealth { get => currentHealth; }
 
-    // Please replace references by IsDead when merging with main
-    public bool IsDying { get; private set; }
+    public bool IsDead { get => currentHealth <= 0; }
+    public float MaxHealth { get => maxHealth; }
     void Awake()
     {
-        healthbar = GameObject.FindGameObjectWithTag(healthbarTag).GetComponent<DisplayBar>();    
-        manager = FindObjectOfType<GameManager>();
-        
+        displayHealthbar = GameObject.FindGameObjectWithTag(healthbarTag).GetComponent<DisplayBar>();    
     }
     void OnEnable()
     {
@@ -35,8 +33,9 @@ public class Health : MonoBehaviour,IRechargeable
         if (invincible)
             return;
         currentHealth -= damage;
-        healthbar.Remove(damage, maxHealth, true); //TODO: change to false.
-        if(currentHealth <= 0) 
+        if(displayHealthbar != null)
+            displayHealthbar.Remove(damage, maxHealth, true);//TODO: change to false.
+        if(IsDead) 
         {
             currentHealth = 0;
             Die();
@@ -59,7 +58,6 @@ public class Health : MonoBehaviour,IRechargeable
         if (debugDieOnHeal)
             InflictDamage(100000000);
     }
-
     /// <summary>
     /// Returns current health back to full
     /// </summary>
