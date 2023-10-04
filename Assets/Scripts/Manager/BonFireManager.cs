@@ -35,9 +35,6 @@ public class BonfireManager : MonoBehaviour
     public void ActivateBonfire(Bonfire bonefire) 
     {
         SetCurrentBonfire(bonefire);
-        //a remplacer par animation de feu ou effet
-        bonefire.GetComponent<Renderer>().material = activeMats;
-        
     }
     public void SitAtBonfire(Bonfire bonefire)
     {

@@ -80,16 +80,16 @@ Material:
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _Speed: 0.3
+    - _Speed: 0.45
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0, g: 0, b: 0, a: 1}
+    - _BaseColor: {r: 1, g: 0, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FresnelColor: {r: 0, g: 0, b: 0, a: 0}
-    - _Tiling: {r: 0.5, g: 1, b: 0, a: 0}
+    - _FresnelColor: {r: 1, g: 0.46053755, b: 0, a: 0}
+    - _Tiling: {r: 0.5, g: 1.5, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &5622674652915479266
 MonoBehaviour:
