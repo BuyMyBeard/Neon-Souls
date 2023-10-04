@@ -25,7 +25,7 @@ public class LockOn : MonoBehaviour
     public void Awake()
     {
         player = GetComponentInChildren<CharacterController>().transform;
-        camFollowTarget = GameObject.FindGameObjectWithTag("FollowTarget").transform;
+        camFollowTarget = GameObject.Find("FollowTarget").transform;
         enemyHealthbar = FindObjectOfType<EnemyHealthbar>();
     }
     public void Start()
