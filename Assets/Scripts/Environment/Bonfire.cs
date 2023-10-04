@@ -7,13 +7,14 @@ public class Bonfire : Interactable
     BonfireManager bonfireManager;
     public bool active = false;
     [SerializeField] Vector3 respawnOffset = Vector3.zero;
+    new Light light;
 
     public Vector3 RespawnOffset { get => respawnOffset; }
     protected override void Awake()
     {
         base.Awake();
         bonfireManager = FindObjectOfType<BonfireManager>();
-        promptMessage = "Light Fire";
+        light = GetComponent<Light>();
     }
     public override void Interact()
     {
@@ -22,10 +23,11 @@ public class Bonfire : Interactable
             bonfireManager.SitAtBonfire(this);
             return;
         }
+        light.color = new Color(0, 1, 0);
         active = true;
         bonfireManager.ActivateBonfire(this);
         StartCoroutine(FlickerCollider());
-        promptMessage = "Sit";
+        promptMessage = "Play";
     }
     IEnumerator FlickerCollider()
     {
