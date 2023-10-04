@@ -48,9 +48,9 @@ public class BonfireManager : MonoBehaviour
     private void SetCurrentBonfire(Bonfire bonfire)
     {
         currentBonfire = bonfire;
-        SetRepawn(bonfire.transform.position + bonfire.RespawnOffset);
+        SetRespawn(bonfire.transform.position + bonfire.RespawnOffset);
     }
-    private void SetRepawn(Vector3 position)
+    private void SetRespawn(Vector3 position)
     {
         RespawnPosition = position;
     }
