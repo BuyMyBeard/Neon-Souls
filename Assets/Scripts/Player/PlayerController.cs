@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
 
     void OnDodge()
     {
-        GetComponentInChildren<Animator>().SetTrigger("Dodge");
+        GetComponentInChildren<Animator>().SetTrigger("Roll");
     }
     void OnControlsChanged()
     {
