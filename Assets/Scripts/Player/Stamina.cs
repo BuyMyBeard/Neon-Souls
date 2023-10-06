@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Search;
 using UnityEngine;
 
-public class Stamina : MonoBehaviour,IRechargeable
+public class Stamina : MonoBehaviour, IRechargeable
 {
     DisplayBar playerStaminabar;
     [SerializeField] int maxStamina = 100;
