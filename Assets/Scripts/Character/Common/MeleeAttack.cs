@@ -27,8 +27,7 @@ public abstract class MeleeAttack : MonoBehaviour
     }
     protected virtual void Awake()
     {
-        animator = GetComponent<Animator>();
-        if (animator == null) animator = GetComponentInChildren<Animator>();
+        animator = GetComponentInChildren<Animator>();
         weapon = GetComponentInChildren<MeleeWeapon>();
     }
     protected virtual void Start()

@@ -13,6 +13,7 @@ public class Potions : MonoBehaviour
     Health health;
     bool isRefillingHealth = false;
     IEnumerator refillHealthCoroutine;
+    Animator animator;
     public float FillLevel
     {
         get => potionMat.GetFloat("_Height");
@@ -22,16 +23,21 @@ public class Potions : MonoBehaviour
     {
         health = GetComponent<Health>();
         ResetPotions();
+        animator = GetComponentInChildren<Animator>();
+        
     }
     public void DrinkOnePotion()
     {
         if (currentPotions > 0)
         {
+            animator.SetTrigger("Drink");
             currentPotions--;
             UpdateFillLevel();
             refillHealthCoroutine = RefillHealth();
             StartCoroutine(refillHealthCoroutine);
         }
+        else
+            animator.SetTrigger("DrinkEmpty");
     }
     public void ResetPotions()
     {
