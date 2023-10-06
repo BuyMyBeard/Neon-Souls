@@ -136,7 +136,6 @@ GameObject:
   - component: {fileID: 5681390686070186532}
   - component: {fileID: 8582181081958997822}
   - component: {fileID: 5242137782018881464}
-  - component: {fileID: 5720675519025437744}
   - component: {fileID: 931004792272011639}
   m_Layer: 0
   m_Name: Player
@@ -182,7 +181,8 @@ MonoBehaviour:
   driftDeadZone: -0.9
   mouseSensitivity: 0.19
   controllerSensitivity: 0.7
-  verticalOffset: 1
+  followTargetVerticalOffset: 0
+  frozen: 0
 --- !u!114 &5632773572351299970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,6 +242,7 @@ MonoBehaviour:
   runThreshold: 0.7
   deadZone: 0.25
   turnSpeed: 600
+  frozen: 0
 --- !u!114 &5681390686070186532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,6 +275,8 @@ MonoBehaviour:
   displayHealthbar: {fileID: 0}
   maxHealth: 100
   healthbarTag: PlayerHealthbar
+  debugDieOnHeal: 0
+  invincible: 0
 --- !u!114 &5242137782018881464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,23 +292,10 @@ MonoBehaviour:
   maxStamina: 100
   currentStamina: 0
   staminaRegenRate: 20
+  dodgeStamina: 20
+  lightAttackStamina: 25
+  heavyAttackStamina: 40
   exhaustionTime: 1.5
---- !u!114 &5720675519025437744
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1291937762287850455}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc9cd712765086248a3ca627bed530db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lightAttackStaminaCost: 15
-  heavyAttackStaminaCost: 30
-  lightAttackDamage: 25
-  heavyAttackDamage: 50
 --- !u!114 &931004792272011639
 MonoBehaviour:
   m_ObjectHideFlags: 0

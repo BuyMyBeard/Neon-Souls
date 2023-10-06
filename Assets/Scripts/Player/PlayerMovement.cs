@@ -18,7 +18,6 @@ public class PlayerMovement : MonoBehaviour
     PlayerController playerController;
     Animator animator;
     LockOn lockOn;
-    Animator animator;
 
     [HideInInspector]
     public bool frozen = false;
@@ -73,11 +72,6 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleMovement()
     {
-        animator.ResetTrigger("QuickWalk");
-        animator.ResetTrigger("Walk");
-        animator.ResetTrigger("Idle");
-        
-
         Vector2 movementInput = playerController.Move; 
         float movementMagnitude = movementInput.magnitude;
         
@@ -112,9 +106,7 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("IsMoving", false);
             movementInput = Vector2.zero;
-            animator.SetTrigger("Idle");
         }
-        animator.SetFloat("Speed", movementInput.magnitude);
 
         movementInput *= Time.deltaTime;
         movement.x = movementInput.x;

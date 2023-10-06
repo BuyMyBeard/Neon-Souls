@@ -7,11 +7,14 @@ public class Interact : MonoBehaviour
     GameManager gameManager;
     Health health;
     ButtonPrompt buttonPrompt;
+    Animator animator;
     private void Awake()
     {
         health = GetComponentInParent<Health>();
         buttonPrompt = FindObjectOfType<ButtonPrompt>();
         gameManager = FindObjectOfType<GameManager>();
+        animator = GetComponentInChildren<Animator>();
+
     }
     void OnInteract()
     {
@@ -24,7 +27,7 @@ public class Interact : MonoBehaviour
 
         //Interact animation and handling
         buttonPrompt.Interact();
-        GetComponentInChildren<Animator>().SetTrigger("Interact");
+        animator.SetTrigger("Interact");
     } 
 
     public void EndInteract()
