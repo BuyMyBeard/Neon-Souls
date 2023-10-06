@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 direction = Vector3.forward;
     PlayerController playerController;
     LockOn lockOn;
+    Animator animator;
 
     public Vector2 MovementDirection { get; private set; } = Vector2.zero;
     float dropSpeed = 0;
@@ -26,6 +27,10 @@ public class PlayerMovement : MonoBehaviour
         camera = Camera.main;
         playerController = GetComponent<PlayerController>();
         lockOn = GetComponent<LockOn>();
+
+        animator = GetComponentInChildren<Animator>();
+        if (animator == null)
+            throw new MissingComponentException("Animator missing on player");
     }
 
     void HandleGravity()
@@ -50,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
             lockOnDirection.y = 0;
             direction = lockOnDirection;
         }
+            
         movementForward = Quaternion.LookRotation(direction, Vector3.up);
 
         characterController.transform.rotation = Quaternion.RotateTowards(characterController.transform.rotation, movementForward, turnSpeed * Time.deltaTime);
@@ -64,20 +70,34 @@ public class PlayerMovement : MonoBehaviour
 
         if (movementMagnitude >= deadZone)
         {
+            animator.SetBool("IsMoving", true);
             direction = Quaternion.Euler(0, camera.transform.eulerAngles.y, 0) * new Vector3(movementInput.x, 0, movementInput.y);
             if (movementMagnitude >= runThreshold)
             {
                 movementInput = runningSpeed * movementInput.normalized;
-                // TODO: set animation state
+                animator.SetFloat("MovementSpeedMultiplier", runningSpeed / walkingSpeed);
             }
             else
             {
                 movementInput = walkingSpeed * movementInput.normalized;
-                // TODO: set animation state
+                animator.SetFloat("MovementSpeedMultiplier", 1);
+            }
+
+            if (lockOn.IsLocked)
+            {
+                Vector2 blending = movementInput.normalized;
+                animator.SetFloat("MovementX", blending.x);
+                animator.SetFloat("MovementY", blending.y);
+            }
+            else
+            {
+                animator.SetFloat("MovementX", 0);
+                animator.SetFloat("MovementY", 1);
             }
         }
         else
         {
+            animator.SetBool("IsMoving", false);
             movementInput = Vector2.zero;
         }
 

@@ -24,9 +24,9 @@ public class PlayerController : MonoBehaviour
     void OnMove(InputValue val) => Move = val.Get<Vector2>();
     void OnLook(InputValue val) => Look = val.Get<Vector2>();
 
-    void OnLockOn()
+    void OnDodge()
     {
-        GetComponentInChildren<Animator>().SetTrigger("Eat ass");
+        GetComponentInChildren<Animator>().SetTrigger("Dodge");
     }
     void OnControlsChanged()
     {
