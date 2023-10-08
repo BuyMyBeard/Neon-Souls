@@ -8,10 +8,9 @@ public class TrapActivation : MonoBehaviour
     public bool wasTriggered = false;
     Transform physicalSwitch;
     Vector3 physicalSwitchInitalPosition;
-    private void Start()
+    private void Awake()
     {
         physicalSwitch = transform.parent.GetChild(1);
-        Debug.Log(physicalSwitch.name);
         physicalSwitchInitalPosition = physicalSwitch.position;
     }
     void OnTriggerEnter(Collider c)
