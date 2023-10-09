@@ -8,6 +8,7 @@ public abstract class MeleeAttack : MonoBehaviour
 
     protected MeleeWeapon weapon;
     protected Animator animator;
+    public bool isAttacking = false;
 
     readonly List<Health> opponentsHit = new();
     /// <summary>

@@ -9,9 +9,6 @@ public class Stamina : MonoBehaviour, IRechargeable
     [SerializeField] int maxStamina = 100;
     [SerializeField] float currentStamina;
     [SerializeField] float staminaRegenRate = 100f;
-    [SerializeField] int dodgeStamina = 20;
-    [SerializeField] int lightAttackStamina = 25;
-    [SerializeField] int heavyAttackStamina = 40;
     [SerializeField] float exhaustionTime = 0.5f;
     float exhaustionTimer = 0;
     IEnumerator exhaustionTimerCoroutine, regenStaminaCoroutine;
@@ -30,18 +27,6 @@ public class Stamina : MonoBehaviour, IRechargeable
     private void Update()
     {
         exhaustionTimer += Time.deltaTime;
-    }
-    private void OnDodge()//Maybe change to receive the stamina consumption from another component.
-    {
-        Remove(dodgeStamina);
-    }
-    private void OnLightAttack()
-    {
-        Remove(lightAttackStamina);
-    }
-    private void OnHeavyAttack()
-    {
-        Remove(heavyAttackStamina);
     }
     private void ResetStamina()
     {
