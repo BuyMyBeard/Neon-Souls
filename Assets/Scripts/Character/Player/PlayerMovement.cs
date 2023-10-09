@@ -18,10 +18,6 @@ public class PlayerMovement : MonoBehaviour
     PlayerController playerController;
     Animator animator;
     LockOn lockOn;
-
-    [HideInInspector]
-    public bool frozen = false;
-    public Vector2 MovementDirection { get; private set; } = Vector2.zero;
     float dropSpeed = 0;
     void Awake()
     {
@@ -48,9 +44,6 @@ public class PlayerMovement : MonoBehaviour
     {
         movement.y = 0;
 
-        if (frozen)
-            return;
-
         HandleGravity();
         HandleMovement();
 
@@ -62,12 +55,15 @@ public class PlayerMovement : MonoBehaviour
             lockOnDirection.y = 0;
             direction = lockOnDirection;
         }
-            
-        movementForward = Quaternion.LookRotation(direction, Vector3.up);
 
-        characterController.transform.rotation = Quaternion.RotateTowards(characterController.transform.rotation, movementForward, turnSpeed * Time.deltaTime);
+        if (!animator.GetBool("RotationFrozen") && direction.magnitude > 0)
+        {
+            movementForward = Quaternion.LookRotation(direction, Vector3.up);
+            characterController.transform.rotation = Quaternion.RotateTowards(characterController.transform.rotation, movementForward, turnSpeed * Time.deltaTime);
+        }
 
-        characterController.Move(movement);
+        if (!animator.GetBool("MovementFrozen"))
+            characterController.Move(movement);
     }
 
     void HandleMovement()
@@ -75,7 +71,9 @@ public class PlayerMovement : MonoBehaviour
         Vector2 movementInput = playerController.Move; 
         float movementMagnitude = movementInput.magnitude;
         
-        if (movementMagnitude >= deadZone) 
+        if (animator.GetBool("MovementFrozen"))
+            direction = Quaternion.Euler(0, camera.transform.eulerAngles.y, 0) * new Vector3(movementInput.x, 0, movementInput.y);
+        else if (movementMagnitude >= deadZone) 
         {
             animator.SetBool("IsMoving", true);
             direction = Quaternion.Euler(0, camera.transform.eulerAngles.y, 0) * new Vector3(movementInput.x, 0, movementInput.y);
@@ -111,7 +109,5 @@ public class PlayerMovement : MonoBehaviour
         movementInput *= Time.deltaTime;
         movement.x = movementInput.x;
         movement.z = movementInput.y;
-        MovementDirection = movementInput * direction;
     }
-    
 }
