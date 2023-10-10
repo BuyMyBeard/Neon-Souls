@@ -17,7 +17,7 @@ public abstract class Interactable : MonoBehaviour
     {
         buttonPrompt = FindObjectOfType<ButtonPrompt>(); 
         GetComponent<Collider>().isTrigger = true;
-        playerCharacter = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
+        playerCharacter = FindObjectOfType<CharacterController>();
     }
     protected void Prompt()
     {
@@ -41,6 +41,7 @@ public abstract class Interactable : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
+        if (snapObject == null) return;
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(snapObject.position, new Vector3(1,0,1));
 
