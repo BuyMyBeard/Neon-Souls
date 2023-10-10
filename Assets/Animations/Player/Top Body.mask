@@ -1,0 +1,133 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Top Body
+  m_Mask: 00000000010000000100000000000000000000000100000001000000010000000100000000000000000000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: armature
+    m_Weight: 1
+  - m_Path: armature/root
+    m_Weight: 1
+  - m_Path: armature/root/elbow-target.L
+    m_Weight: 1
+  - m_Path: armature/root/elbow-target.R
+    m_Weight: 1
+  - m_Path: armature/root/ik-foot.L
+    m_Weight: 1
+  - m_Path: armature/root/ik-foot.R
+    m_Weight: 1
+  - m_Path: armature/root/ik-hand.L
+    m_Weight: 1
+  - m_Path: armature/root/ik-hand.R
+    m_Weight: 1
+  - m_Path: armature/root/knee-target.L
+    m_Weight: 1
+  - m_Path: armature/root/knee-target.R
+    m_Weight: 1
+  - m_Path: armature/root/pelvis
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/Pelvis
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/PelvisWireframe
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/thigh.L
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/thigh.L/LeftThigh
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/thigh.L/LeftThighWireframe
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/thigh.L/shin.L
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/thigh.L/shin.L/foot.L
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/thigh.L/shin.L/foot.L/LeftFoot
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/thigh.L/shin.L/foot.L/LeftFootWireframe
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/thigh.L/shin.L/LeftLowerLeg
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/thigh.L/shin.L/LeftLowerLegWireframe
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/thigh.R
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/thigh.R/RightThigh
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/thigh.R/RightThighWireframe
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/thigh.R/shin.R
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/thigh.R/shin.R/foot.R
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/thigh.R/shin.R/foot.R/RightFoot
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/thigh.R/shin.R/foot.R/RightFootWireframe
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/thigh.R/shin.R/RightLowerLeg
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/thigh.R/shin.R/RightLowerLegWireframe
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/waist
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/waist/torso
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/waist/torso/head
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/waist/torso/head/Head
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/waist/torso/head/HeadWireframe
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/waist/torso/Torso
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/waist/torso/TorsoWireframe
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/waist/torso/upper_arm.L
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/waist/torso/upper_arm.L/forearm.L
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/waist/torso/upper_arm.L/forearm.L/hand.L
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/waist/torso/upper_arm.L/forearm.L/hand.L/LeftHand
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/waist/torso/upper_arm.L/forearm.L/hand.L/LeftHandWireframe
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/waist/torso/upper_arm.L/forearm.L/hand.L/LeftHandWireframe/Potion
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/waist/torso/upper_arm.L/forearm.L/LeftForeArm
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/waist/torso/upper_arm.L/forearm.L/LeftForeArmWireframe
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/waist/torso/upper_arm.L/LeftUpperArm
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/waist/torso/upper_arm.L/LeftUpperArmWireframe
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/waist/torso/upper_arm.R
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/waist/torso/upper_arm.R/forearm.R
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/waist/torso/upper_arm.R/forearm.R/hand.R
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/waist/torso/upper_arm.R/forearm.R/hand.R/RightHand
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/waist/torso/upper_arm.R/forearm.R/hand.R/RightHandWireframe
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/waist/torso/upper_arm.R/forearm.R/hand.R/RightHandWireframe/Sword
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/waist/torso/upper_arm.R/forearm.R/RightForeArm
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/waist/torso/upper_arm.R/forearm.R/RightForeArmWireframe
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/waist/torso/upper_arm.R/RightUpperArm
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/waist/torso/upper_arm.R/RightUpperArmWireframe
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/waist/Waist
+    m_Weight: 1
+  - m_Path: armature/root/pelvis/waist/WaistWireframe
+    m_Weight: 1
