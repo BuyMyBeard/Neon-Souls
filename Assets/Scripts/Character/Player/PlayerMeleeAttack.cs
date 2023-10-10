@@ -14,20 +14,23 @@ public class PlayerMeleeAttack : MeleeAttack
     [SerializeField] int lightAttackDamage = 25;
     [SerializeField] int heavyAttackDamage = 50;
     Stamina stamina;
+    PlayerAnimationEvents animationEvents;
     PlayerAttackType attackType;
     protected override void Awake()
     {
         base.Awake();
         stamina = GetComponent<Stamina>();
+        animationEvents = GetComponentInChildren<PlayerAnimationEvents>();
     }
     void OnLightAttack()
     {
-        if (!stamina.IsExhausted)
-        {
-            stamina.Remove(lightAttackStaminaCost);
-            animator.SetTrigger("LightAttack");
-            attackType = PlayerAttackType.Light;
-        }
+        if (!animationEvents.ActionAvailable || stamina.IsExhausted) return;
+        
+        stamina.Remove(lightAttackStaminaCost);
+        animator.SetTrigger("LightAttack");
+        attackType = PlayerAttackType.Light;
+        animationEvents.DisableActions();
+        animationEvents.FreezeMovement();
     }
     void OnHeavyAttack()
     {

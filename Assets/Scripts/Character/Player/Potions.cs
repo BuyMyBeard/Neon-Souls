@@ -11,9 +11,9 @@ public class Potions : MonoBehaviour ,IRechargeable
     [SerializeField] int restoreValue = 60;
     [SerializeField] float timeToDrinkOne = .5f;
     Health health;
-    bool isRefillingHealth = false;
     IEnumerator refillHealthCoroutine;
     Animator animator;
+    PlayerAnimationEvents animationEvents;
     public float FillLevel
     {
         get => potionMat.GetFloat("_Height");
@@ -24,20 +24,16 @@ public class Potions : MonoBehaviour ,IRechargeable
         health = GetComponent<Health>();
         ResetPotions();
         animator = GetComponentInChildren<Animator>();
+        animationEvents = GetComponentInChildren<PlayerAnimationEvents>();
         
     }
     public void DrinkOnePotion()
     {
-        if (currentPotions > 0 && !isRefillingHealth)
-        {
-            animator.SetTrigger("Drink");
-            currentPotions--;
-            UpdateFillLevel();
-            refillHealthCoroutine = RefillHealth();
-            StartCoroutine(refillHealthCoroutine);
-        }
-        else
-            animator.SetTrigger("DrinkEmpty");
+        currentPotions--;
+        UpdateFillLevel();
+        refillHealthCoroutine = RefillHealth();
+        StartCoroutine(refillHealthCoroutine);
+
     }
     public void ResetPotions()
     {
@@ -47,11 +43,18 @@ public class Potions : MonoBehaviour ,IRechargeable
     void UpdateFillLevel() => FillLevel = (float) currentPotions / maxPotions;
     void OnConsumable()
     {
-        DrinkOnePotion();
+        if (!animationEvents.ActionAvailable) return;
+
+        if (currentPotions > 0)
+            animator.SetTrigger("Drink");
+        else
+            animator.SetTrigger("DrinkEmpty");
+
+        animationEvents.DisableActions();
+        animationEvents.ReduceMovement();
     }
     IEnumerator RefillHealth()
     {
-        isRefillingHealth = true;
         float t = 0;
         while (t <= timeToDrinkOne)
         {
@@ -68,7 +71,6 @@ public class Potions : MonoBehaviour ,IRechargeable
             yield return null;
         }
         health.Round();
-        isRefillingHealth = false;
     }
 
     public void Recharge()

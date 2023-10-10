@@ -23,11 +23,6 @@ public class PlayerController : MonoBehaviour
     }
     void OnMove(InputValue val) => Move = val.Get<Vector2>();
     void OnLook(InputValue val) => Look = val.Get<Vector2>();
-
-    void OnDodge()
-    {
-        GetComponentInChildren<Animator>().SetTrigger("Roll");
-    }
     void OnControlsChanged()
     {
         // TODO: Change button prompts

@@ -2,27 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Interact : MonoBehaviour
+public class Roll : MonoBehaviour
 {
-    ButtonPrompt buttonPrompt;
+    [SerializeField] int staminaCost = 20;
     Animator animator;
     PlayerAnimationEvents animationEvents;
+    Stamina stamina;
+
     private void Awake()
     {
-        buttonPrompt = FindObjectOfType<ButtonPrompt>();
         animator = GetComponentInChildren<Animator>();
         animationEvents = GetComponentInChildren<PlayerAnimationEvents>();
+        stamina = GetComponent<Stamina>();
     }
-    void OnInteract()
+    void OnDodge()
     {
-        if (!animationEvents.ActionAvailable || buttonPrompt.currentPrompt == null)
+        if (!animationEvents.ActionAvailable || stamina.IsExhausted)
             return;
 
-        buttonPrompt.Interact();
-        animator.SetTrigger("Interact");
-        animationEvents.DisableActions();
+        animator.SetTrigger("Roll");
         animationEvents.StartIFrame();
         animationEvents.FreezeMovement();
         animationEvents.FreezeRotation();
-    } 
+        animationEvents.DisableActions();
+        animationEvents.SyncRotation();
+        stamina.Remove(staminaCost);
+    }
 }

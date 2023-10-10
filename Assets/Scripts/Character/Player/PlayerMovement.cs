@@ -19,6 +19,9 @@ public class PlayerMovement : MonoBehaviour
     Animator animator;
     LockOn lockOn;
     float dropSpeed = 0;
+    public bool movementFrozen = false;
+    public bool rotationFrozen = false;
+    public bool movementReduced = false;
     void Awake()
     {
         characterController = GetComponentInChildren<CharacterController>();
@@ -56,13 +59,13 @@ public class PlayerMovement : MonoBehaviour
             direction = lockOnDirection;
         }
 
-        if (!animator.GetBool("RotationFrozen") && direction.magnitude > 0)
+        if (!rotationFrozen && direction.magnitude > 0)
         {
             movementForward = Quaternion.LookRotation(direction, Vector3.up);
             characterController.transform.rotation = Quaternion.RotateTowards(characterController.transform.rotation, movementForward, turnSpeed * Time.deltaTime);
         }
 
-        if (!animator.GetBool("MovementFrozen"))
+        if (!movementFrozen)
             characterController.Move(movement);
     }
 
@@ -71,13 +74,16 @@ public class PlayerMovement : MonoBehaviour
         Vector2 movementInput = playerController.Move; 
         float movementMagnitude = movementInput.magnitude;
         
-        if (animator.GetBool("MovementFrozen"))
+        if (movementFrozen)
+        {
             direction = Quaternion.Euler(0, camera.transform.eulerAngles.y, 0) * new Vector3(movementInput.x, 0, movementInput.y);
+            animator.SetBool("IsMoving", false);
+        }
         else if (movementMagnitude >= deadZone) 
         {
             animator.SetBool("IsMoving", true);
             direction = Quaternion.Euler(0, camera.transform.eulerAngles.y, 0) * new Vector3(movementInput.x, 0, movementInput.y);
-            if (movementMagnitude >= runThreshold)
+            if (movementMagnitude >= runThreshold && !movementReduced)
             {
                 movementInput = runningSpeed * movementInput.normalized;
                 animator.SetFloat("MovementSpeedMultiplier", runningSpeed / walkingSpeed);
@@ -109,5 +115,17 @@ public class PlayerMovement : MonoBehaviour
         movementInput *= Time.deltaTime;
         movement.x = movementInput.x;
         movement.z = movementInput.y;
+    }
+    /// <summary>
+    /// Used when an action locks rotation, to sync orientation to input
+    /// </summary>
+    public void SyncRotation()
+    {
+
+        Vector2 movementInput = playerController.Move;
+        if (movementInput.magnitude < deadZone) return;
+        direction = Quaternion.Euler(0, camera.transform.eulerAngles.y, 0) * new Vector3(movementInput.x, 0, movementInput.y);
+        Quaternion movementForward = Quaternion.LookRotation(direction, Vector3.up);
+        characterController.transform.rotation = movementForward;
     }
 }
