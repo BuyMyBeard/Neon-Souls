@@ -20,10 +20,15 @@ public class ShooterEnemy : Enemy
     // Close
     NavMeshAgent agent;
 
-
+    // Coroutine handling helpers
     bool shouldEndShootCoroutine = false;
     Coroutine shoot;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        agent = GetComponent<NavMeshAgent>();
+    }
     protected override void InRangeExit()
     {
         shouldEndShootCoroutine = true;
@@ -35,7 +40,7 @@ public class ShooterEnemy : Enemy
     }
     protected override void InRangeMain()
     {
-        Quaternion towardsPlayer = Quaternion.LookRotation(-posDifference, Vector3.up);
+        Quaternion towardsPlayer = Quaternion.LookRotation(-DistanceFromPlayer, Vector3.up);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, towardsPlayer, turnSpeed * Time.deltaTime);
 
         var armTowardsPlayer = Quaternion.LookRotation(target.position - arm.position);
@@ -50,7 +55,6 @@ public class ShooterEnemy : Enemy
     {
         yield return new WaitUntil(() => shoot == null);
         if (Mode.Id != ModeId.InRange) yield break;
-        Debug.Log("StartShoot()");
         shoot = StartCoroutine(ShootCoroutine());
     }
     IEnumerator ShootCoroutine()
@@ -59,7 +63,6 @@ public class ShooterEnemy : Enemy
         {
             if (shouldEndShootCoroutine)
             {
-                Debug.Log("shouldEndShootCoroutine");
                 shouldEndShootCoroutine = false;
                 shoot = null;
                 yield break;
@@ -68,7 +71,7 @@ public class ShooterEnemy : Enemy
             float towardsPlayer;
             float currentRotation;
             yield return new WaitUntil(() => {
-                towardsPlayer = Quaternion.LookRotation(posDifference, Vector3.up).eulerAngles.y - 180f;
+                towardsPlayer = Quaternion.LookRotation(-DistanceFromPlayer, Vector3.up).eulerAngles.y;
                 currentRotation = transform.rotation.eulerAngles.y;
                 if (towardsPlayer > 180f) towardsPlayer = 360f - towardsPlayer;
                 if (currentRotation > 180f) currentRotation = 360f - currentRotation;

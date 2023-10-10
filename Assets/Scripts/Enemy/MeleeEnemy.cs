@@ -33,7 +33,7 @@ public class MeleeEnemy : Enemy
     }
     protected override void CloseMain()
     {
-        Quaternion towardsPlayer = Quaternion.LookRotation(-posDifference, Vector3.up);
+        Quaternion towardsPlayer = Quaternion.LookRotation(-DistanceFromPlayer, Vector3.up);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, towardsPlayer, turnSpeed * Time.deltaTime);
     }
 }
