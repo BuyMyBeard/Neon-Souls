@@ -5,13 +5,13 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
-    protected enum ModeId
+    public enum ModeId
     {
         Idle,
         InRange,
         Close
     }
-    protected struct ModeDef
+    public struct ModeDef
     {
         public ModeId Id { get; init; }
         public Action Init { get; init; }
@@ -20,10 +20,9 @@ public abstract class Enemy : MonoBehaviour
     }
 
     [SerializeField] protected Transform target;
-
-    [SerializeField] float moveTowardsThreshold;
-    [SerializeField] float noticeThreshold;
-    protected Vector3 posDifference;
+    public Transform Target => target;
+    private Vector3 distanceFromPlayer;
+    public Vector3 DistanceFromPlayer => distanceFromPlayer;
 
     ModeDef[] modeDefs;
     protected ModeDef Mode { get; private set; }
@@ -38,23 +37,16 @@ public abstract class Enemy : MonoBehaviour
             new ModeDef { Id = ModeId.Close, Init = CloseInit, Main = CloseMain, Exit = CloseExit },
         };
         Mode = modeDefs[(int)ModeId.Idle];
+        Mode.Init();
     }
     void Update()
     {
-        posDifference = transform.position - target.position;
-        posDifference.y = 0;
-
-        if (posDifference.magnitude > noticeThreshold)
-            ChangeMode(ModeId.Idle);
-        else if (posDifference.magnitude > moveTowardsThreshold)
-            ChangeMode(ModeId.InRange);
-        else
-            ChangeMode(ModeId.Close);
-
+        distanceFromPlayer = transform.position - target.position;
+        distanceFromPlayer.y = 0;
         Mode.Main();
     }
 
-    void ChangeMode(ModeId modeId)
+    public void ChangeMode(ModeId modeId)
     {
         if (lockMode) return;
         if (Mode.Id == modeId) return;
