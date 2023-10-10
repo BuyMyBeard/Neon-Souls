@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SawScript : MonoBehaviour
 {
-    [SerializeField] float travelSpeed = 5f;
+    [SerializeField] float travelSpeed = 7f;
     [SerializeField] float travelDistance = 54f;
     [SerializeField] int sawDamage = 60;
     Vector3 initialPosition;
