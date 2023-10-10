@@ -20,14 +20,13 @@ public class SawTrackScript : MonoBehaviour
         if (c.gameObject.layer == 10) //Player layer
         {
             isActive = true;
-            StartCoroutine(LaunchSaws());
+            LaunchSaws();
         }
 
     }
-    IEnumerator LaunchSaws()
+    void LaunchSaws()
     {
         foreach (Transform t in saws)
-            t.gameObject.GetComponent<SawScript>().MoveSaw();// plante ici, jsuis fatigué.
-        yield return null;
+            t.gameObject.GetComponent<SawScript>().MoveSaw();
     }
 }
