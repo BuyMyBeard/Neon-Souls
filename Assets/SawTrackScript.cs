@@ -12,12 +12,15 @@ public class SawTrackScript : MonoBehaviour
     [SerializeField] float spawnXOffset = -2f;
     [SerializeField] float spawnYOffset = -2f;
     [SerializeField] GameObject saw;
+    Transform leftLauncher;
+    Transform rightLauncher;
     // Start is called before the first frame update
     void Start()
     {
         foreach(Transform t in transform)
             sawLaunchers.Add(t);
-
+        leftLauncher = transform.GetChild(0);
+        rightLauncher = transform.GetChild(5);
     }
     private void OnTriggerEnter(Collider c)
     {
@@ -27,7 +30,6 @@ public class SawTrackScript : MonoBehaviour
             StartCoroutine(LaunchSawCoroutine());
             GetComponent<Collider>().enabled = false;
         }
-
     }
     IEnumerator LaunchSawCoroutine()
     {
@@ -42,10 +44,25 @@ public class SawTrackScript : MonoBehaviour
         foreach(Transform launcherPosition in GetLaunchPosition())
         {
             Vector3 spawnPosition = launcherPosition.position;
-            spawnPosition.x = spawnPosition.x + spawnXOffset;
+            if (launcherPosition == leftLauncher)
+            {
+                spawnPosition.z -= spawnXOffset;
+                spawnPosition.x += spawnYOffset;
+            }
+            else if (launcherPosition == rightLauncher)
+            {
+                spawnPosition.z += spawnXOffset;
+                spawnPosition.x += spawnYOffset;
+            }
+            else
+            {
+                spawnPosition.x += spawnXOffset;
+                spawnPosition.y += spawnYOffset;
+            }
             GameObject newSaw = Instantiate(saw, spawnPosition, launcherPosition.rotation, launcherPosition);
+            newSaw.transform.localRotation = Quaternion.identity;
             newSaw.transform.Rotate(0f, 0f, 90);
-            newSaw.GetComponent<SawScript>().MoveSaw();
+            StartCoroutine(newSaw.GetComponent<SawScript>().MoveSaw(spawnYOffset));
         }
     }
     List<Transform> GetLaunchPosition()
@@ -58,5 +75,10 @@ public class SawTrackScript : MonoBehaviour
                 spawnPositions.Add(currentSawLauncher);
         }
         return spawnPositions;
+    }
+    public void ResetTrap()
+    {
+        isActive = false;
+        GetComponent<Collider>().enabled = true;
     }
 }
