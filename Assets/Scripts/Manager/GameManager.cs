@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 {
     BonfireManager bonfireManager;
     List<IRechargeable> rechargeables = new();
+    float timeBeforeRespawn = 5;
 
     private void Awake()
     {
@@ -17,6 +18,12 @@ public class GameManager : MonoBehaviour
     }
     public void PlayerDie()
     {
+        StartCoroutine(WaitBeforeResetting());
+    }
+
+    IEnumerator WaitBeforeResetting()
+    {
+        yield return new WaitForSeconds(timeBeforeRespawn);
         bonfireManager.Respawn();
         RechargeEverything();
     }
