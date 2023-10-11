@@ -18,7 +18,7 @@ public class BonfireManager : MonoBehaviour
     {
         gameManager = FindObjectOfType<GameManager>();
         currentBonfire = GameObject.FindGameObjectWithTag("StartingBonfire").GetComponent<Bonfire>();
-        playerCharacter = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
+        playerCharacter = FindObjectOfType<CharacterController>();
     }
     private void Start()
     {

@@ -8,18 +8,20 @@ public class Health : MonoBehaviour,IRechargeable
     public DisplayBar displayHealthbar;
     [SerializeField] float maxHealth = 100;
     [SerializeField] string healthbarTag = "PlayerHealthbar";
-    [SerializeField] bool debugDieOnHeal = false;
     public bool invincible = false;
     GameManager manager;
 
     float currentHealth;
+    Animator animator;
     public float CurrentHealth { get => currentHealth; }
 
     public bool IsDead { get => currentHealth <= 0; }
     public float MaxHealth { get => maxHealth; }
     void Awake()
     {
-        displayHealthbar = GameObject.FindGameObjectWithTag(healthbarTag).GetComponent<DisplayBar>();    
+        if (displayHealthbar == null)
+            displayHealthbar = GameObject.FindGameObjectWithTag(healthbarTag).GetComponent<DisplayBar>();    
+        animator = GetComponentInChildren<Animator>();
         manager = FindObjectOfType<GameManager>();
     }
     void OnEnable()
@@ -45,6 +47,7 @@ public class Health : MonoBehaviour,IRechargeable
     }
     private void Die()
     {
+        animator.SetTrigger("Die");
         manager.PlayerDie();
     }
     /// <summary>
@@ -57,8 +60,6 @@ public class Health : MonoBehaviour,IRechargeable
         if (currentHealth > maxHealth)
             currentHealth = maxHealth;
         displayHealthbar.Add(healthRestored, maxHealth);
-        if (debugDieOnHeal)
-            InflictDamage(100000000);
     }
     /// <summary>
     /// Returns current health back to full
