@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SawTrackScript : MonoBehaviour
+public class SawTrackScript : MonoBehaviour, IRechargeable
 {
     bool isActive = false;
     
@@ -80,5 +80,10 @@ public class SawTrackScript : MonoBehaviour
     {
         isActive = false;
         GetComponent<Collider>().enabled = true;
+    }
+
+    public void Recharge()
+    {
+        ResetTrap();
     }
 }
