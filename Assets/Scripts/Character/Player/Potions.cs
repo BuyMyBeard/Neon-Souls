@@ -30,7 +30,7 @@ public class Potions : MonoBehaviour ,IRechargeable
     public void DrinkOnePotion()
     {
         currentPotions--;
-        UpdateFillLevel();
+        StartCoroutine(UpdateFillLevelProgressively());
         refillHealthCoroutine = RefillHealth();
         StartCoroutine(refillHealthCoroutine);
 
@@ -41,6 +41,15 @@ public class Potions : MonoBehaviour ,IRechargeable
         UpdateFillLevel();
     }
     void UpdateFillLevel() => FillLevel = (float) currentPotions / maxPotions;
+    IEnumerator UpdateFillLevelProgressively()
+    {
+        for (float t = 0; t < 1; t += Time.deltaTime / timeToDrinkOne)
+        {
+            yield return null;
+            FillLevel = Mathf.Lerp(currentPotions + 1, currentPotions, t) / maxPotions;
+        }
+        UpdateFillLevel();
+    }
     void OnConsumable()
     {
         if (!animationEvents.ActionAvailable) return;

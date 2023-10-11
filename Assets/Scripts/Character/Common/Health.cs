@@ -70,6 +70,7 @@ public class Health : MonoBehaviour,IRechargeable
     /// <param name="healthRestored">Amount of health restored</param>
     public void Heal(float healthRestored)
     {
+        if (IsDead) return;
         currentHealth += healthRestored;
         if (currentHealth > maxHealth)
             currentHealth = maxHealth;
