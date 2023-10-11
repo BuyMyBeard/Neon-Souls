@@ -15,7 +15,8 @@ public class Bullet : MonoBehaviour
     [SerializeField] float yDirDiffLimit;
     [SerializeField] int damage;
     [SerializeField] LayerMask playerLayer;
-    
+    [SerializeField] LayerMask enemyLayer;
+
     ObjectPool pool;
     public Coroutine p_returnCoroutine;
     public Coroutine p_homingCoroutine;
@@ -27,7 +28,7 @@ public class Bullet : MonoBehaviour
     void Awake()
     {
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponentInParent<Health>();
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        //target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void OnEnable()

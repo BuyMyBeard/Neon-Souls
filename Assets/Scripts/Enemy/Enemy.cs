@@ -38,7 +38,7 @@ public abstract class Enemy : MonoBehaviour
         };
         Mode = modeDefs[(int)ModeId.Idle];
         Mode.Init();
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        //target = GameObject.FindGameObjectWithTag("Player").transform;
     }
     void Update()
     {
@@ -51,7 +51,7 @@ public abstract class Enemy : MonoBehaviour
     {
         if (lockMode) return;
         if (Mode.Id == modeId) return;
-        Debug.Log($"Enemy.ChangeMode(): {Enum.GetName(typeof(ModeId), Mode.Id)} -> {Enum.GetName(typeof(ModeId), modeId)}");
+        Debug.Log($"Enemy.ChangeMode(): {GetInstanceID()} {Enum.GetName(typeof(ModeId), Mode.Id)} -> {Enum.GetName(typeof(ModeId), modeId)}");
         Mode.Exit();
         Mode = modeDefs[(int)modeId];
         Mode.Init();
