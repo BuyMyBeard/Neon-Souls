@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 7548242233267119659}
   m_Layer: 0
   m_Name: ArcadeCabinet
-  m_TagString: Untagged
+  m_TagString: StartingBonfire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7244be63391e34e4386d670110824fbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snapObject: {fileID: 0}
+  snapObject: {fileID: 4957083671071473520}
   promptMessage: Activate arcade cabinet
   active: 0
   respawnOffset: {x: 0, y: 0, z: 0}
@@ -198,7 +198,6 @@ GameObject:
   - component: {fileID: 9014781081825103925}
   - component: {fileID: 2034605716145914383}
   - component: {fileID: 5915140915804452445}
-  - component: {fileID: 4962204488077456158}
   m_Layer: 0
   m_Name: Joystick
   m_TagString: Untagged
@@ -752,7 +751,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2572
+  m_VersionIndex: 2575
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -837,28 +836,6 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4889269675679192356}
-  m_Mesh: {fileID: 0}
---- !u!64 &4962204488077456158
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4889269675679192356}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!1 &5217079687443053437
 GameObject:
@@ -1099,7 +1076,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 435
+  m_VersionIndex: 438
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1151,7 +1128,6 @@ GameObject:
   - component: {fileID: 4735408483871270677}
   - component: {fileID: 3783483549887392738}
   - component: {fileID: 5854497517280289604}
-  - component: {fileID: 1066271004101083284}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -35126,7 +35102,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1037
+  m_VersionIndex: 1040
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -35210,28 +35186,6 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7101832237312918446}
-  m_Mesh: {fileID: 0}
---- !u!64 &1066271004101083284
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7101832237312918446}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!1 &8983771233147536965
 GameObject:
@@ -35941,7 +35895,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 503
+  m_VersionIndex: 506
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
