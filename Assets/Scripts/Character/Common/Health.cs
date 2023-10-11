@@ -9,6 +9,7 @@ public class Health : MonoBehaviour,IRechargeable
     [SerializeField] float maxHealth = 100;
     [SerializeField] string healthbarTag = "PlayerHealthbar";
     public bool invincible = false;
+    PlayerAnimationEvents animationEvents;
     GameManager manager;
 
     float currentHealth;
@@ -23,6 +24,7 @@ public class Health : MonoBehaviour,IRechargeable
             displayHealthbar = GameObject.FindGameObjectWithTag(healthbarTag).GetComponent<DisplayBar>();    
         animator = GetComponentInChildren<Animator>();
         manager = FindObjectOfType<GameManager>();
+        animationEvents = GetComponentInChildren<PlayerAnimationEvents>();
     }
     void OnEnable()
     {
@@ -47,9 +49,21 @@ public class Health : MonoBehaviour,IRechargeable
     }
     private void Die()
     {
-        animator.SetTrigger("Die");
-        manager.PlayerDie();
+        
+        if (gameObject.CompareTag("Player"))
+        {
+            animator.SetTrigger("Die");
+            manager.PlayerDie();
+            animationEvents.DisableActions();
+            animationEvents.FreezeMovement();
+            animationEvents.FreezeRotation();
+            animationEvents.StartIFrame();
+        }
+        else
+            throw new NotImplementedException("Enemy death has not been implemented yet");
     }
+
+
     /// <summary>
     /// Restores health
     /// </summary>
@@ -77,5 +91,13 @@ public class Health : MonoBehaviour,IRechargeable
     {
         ResetHealth();
         displayHealthbar.Add(maxHealth, maxHealth);
+        if (CompareTag("Player"))
+        {
+            animationEvents.EnableActions();
+            animationEvents.UnFreezeMovement();
+            animationEvents.UnFreezeRotation();
+            animationEvents.StopIFrame();
+            animator.Play("Idle");
+        }
     }
 }
