@@ -38,6 +38,7 @@ public abstract class Enemy : MonoBehaviour
         };
         Mode = modeDefs[(int)ModeId.Idle];
         Mode.Init();
+        target = GameObject.FindGameObjectWithTag("Player").transform;
     }
     void Update()
     {

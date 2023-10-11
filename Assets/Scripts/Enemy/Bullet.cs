@@ -27,6 +27,7 @@ public class Bullet : MonoBehaviour
     void Awake()
     {
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponentInParent<Health>();
+        target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void OnEnable()
