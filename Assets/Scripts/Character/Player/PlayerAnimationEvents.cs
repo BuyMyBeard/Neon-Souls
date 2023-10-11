@@ -28,8 +28,8 @@ public class PlayerAnimationEvents : MonoBehaviour
     public void DisableActions() => actionAvailable = false;
     public void StartIFrame() => health.invincible = true;
     public void StopIFrame() => health.invincible = false;
-    public void FreezeMovement() { characterController.enabled = false; playerMovement.movementFrozen = true; }
-    public void UnFreezeMovement() { characterController.enabled = true; playerMovement.movementFrozen = false; }
+    public void FreezeMovement() => playerMovement.movementFrozen = true;
+    public void UnFreezeMovement() => playerMovement.movementFrozen = false;
     public void FreezeCamera() => cameraMovement.enabled = false;
     public void UnFreezeCamera() => cameraMovement.enabled = true;
     public void FreezeRotation() => playerMovement.rotationFrozen = true;
