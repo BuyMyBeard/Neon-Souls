@@ -21,6 +21,7 @@ public abstract class ObjectPool : MonoBehaviour
         for (int i = 0; i < capacity; i++)
         {
             var obj = Instantiate(objToPool, transform);
+            obj.layer = objToPool.layer;
             obj.SetActive(false);
             bag.Add(obj);
         }
