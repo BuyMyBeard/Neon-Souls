@@ -28,10 +28,10 @@ public class SawScript : MonoBehaviour
     {
         yield return new WaitUntil(() => transform.position.x < initialPosition.x - travelDistance);
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.layer == 10) // 10 == Player layer
-            collision.gameObject.GetComponentInParent<Health>().InflictDamage(sawDamage);
+        if (other.gameObject.layer == 10) // 10 == Player layer
+            other.gameObject.GetComponentInParent<Health>().InflictDamage(sawDamage);
     }
     IEnumerator LerpPosition(float yOffset)
     {
