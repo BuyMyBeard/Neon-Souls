@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MatBase
+  m_Name: Saw
   m_Shader: {fileID: -6465566751694194690, guid: 711ababefd57a714abc7d3223d188daf, type: 3}
   m_Parent: {fileID: 2100000, guid: 4f348b7f8790aa846b5f551988e8b433, type: 2}
   m_ModifiedSerializedProperties: 0
@@ -24,9 +24,12 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Ints: []
-    m_Floats: []
+    m_Floats:
+    - _Metallic: 0.75
+    - _Smoothness: 0.25
     m_Colors:
-    - _Tiling: {r: 6.54, g: -1.06, b: 0, a: 0}
+    - _Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _Tiling: {r: 2, g: 0.25, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &5173174195364753190
 MonoBehaviour:

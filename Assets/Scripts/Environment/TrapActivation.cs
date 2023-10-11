@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrapActivation : MonoBehaviour
+public class TrapActivation : MonoBehaviour,IRechargeable
 {
     //TO DO : doit recharger avec la mort ou un siting 
     public bool wasTriggered = false;
@@ -40,5 +40,10 @@ public class TrapActivation : MonoBehaviour
             yield return null;
         }
         physicalSwitch.position = endPosition;
+    }
+
+    public void Recharge()
+    {
+        ResetTrap();
     }
 }
