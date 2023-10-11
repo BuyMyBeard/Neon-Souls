@@ -34,13 +34,23 @@ public class PlayerMeleeAttack : MeleeAttack
     }
     void OnHeavyAttack()
     {
+        if (!animationEvents.ActionAvailable || stamina.IsExhausted) return;
 
+        stamina.Remove(heavyAttackStaminaCost);
+        animator.SetTrigger("HeavyAttack");
+        attackType = PlayerAttackType.Heavy;
+        animationEvents.DisableActions();
+        animationEvents.FreezeMovement();
     }
     protected override void DamageOpponent(Health opponentHealth)
     {
         if (attackType == PlayerAttackType.Light)
         {
             opponentHealth.InflictDamage(lightAttackDamage);
+        }
+        else if (attackType == PlayerAttackType.Heavy)
+        {
+            opponentHealth.InflictDamage(heavyAttackDamage);
         }
     }
 
