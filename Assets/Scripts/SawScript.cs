@@ -16,7 +16,6 @@ public class SawScript : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         initialPosition = transform.position;
     }
-
     public IEnumerator MoveSaw(float yOffset)
     {
         yield return StartCoroutine(LerpPosition(yOffset));

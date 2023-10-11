@@ -53,7 +53,7 @@ public class LockOn : MonoBehaviour
                 enemyHealthbar.Show();
             }
 
-            // Debug.DrawLine(camFollowTarget.position, TargetEnemy.position,Color.blue,1);
+            Debug.DrawLine(camFollowTarget.position, TargetEnemy.position,Color.blue,1);
             StartCoroutine(SmoothLook(Quaternion.LookRotation(new Vector3(TargetEnemy.position.x, TargetEnemy.position.y - yAxisLockOffset, TargetEnemy.position.z) - camFollowTarget.position)));
             StartCoroutine(CamLockedOnTarget(TargetEnemy));
         }
@@ -112,7 +112,7 @@ public class LockOn : MonoBehaviour
             if (EnemyInCamAngle(directionToEnemy) && EnemyInRangeAndSight(directionToEnemy, distanceToTarget))
             {
                 enemiesInSight.Add(enemy);
-                //Debug.DrawRay(Camera.main.transform.position, directionToEnemy * distanceToTarget, Color.magenta, 1);
+                Debug.DrawRay(Camera.main.transform.position, directionToEnemy * distanceToTarget, Color.magenta, 1);
             }
         }
     }
@@ -146,16 +146,16 @@ public class LockOn : MonoBehaviour
         return enemiesInSight.Aggregate((e1, e2) => (e1.transform.position - camFollowTarget.transform.position).magnitude < 
                (e2.transform.position - camFollowTarget.transform.position).magnitude ? e1 : e2);
     }
-    //void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawWireSphere(camFollowTarget.position, viewRadius);
-    //    Quaternion leftRayRotation = Quaternion.AngleAxis(-viewAngle / 2, Vector3.up);
-    //    Quaternion rightRayRotation = Quaternion.AngleAxis(viewAngle / 2, Vector3.up);
-    //    Vector3 leftRayDirection = leftRayRotation * camFollowTarget.forward;
-    //    Vector3 rightRayDirection = rightRayRotation * camFollowTarget.forward;
-    //    Gizmos.color = Color.green;
-    //    Gizmos.DrawRay(Camera.main.transform.position, leftRayDirection * viewRadius);
-    //    Gizmos.DrawRay(Camera.main.transform.position, rightRayDirection * viewRadius);
-    //}
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(camFollowTarget.position, viewRadius);
+        Quaternion leftRayRotation = Quaternion.AngleAxis(-viewAngle / 2, Vector3.up);
+        Quaternion rightRayRotation = Quaternion.AngleAxis(viewAngle / 2, Vector3.up);
+        Vector3 leftRayDirection = leftRayRotation * camFollowTarget.forward;
+        Vector3 rightRayDirection = rightRayRotation * camFollowTarget.forward;
+        Gizmos.color = Color.green;
+        Gizmos.DrawRay(Camera.main.transform.position, leftRayDirection * viewRadius);
+        Gizmos.DrawRay(Camera.main.transform.position, rightRayDirection * viewRadius);
+    }
 }

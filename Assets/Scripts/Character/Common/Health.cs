@@ -49,7 +49,7 @@ public class Health : MonoBehaviour,IRechargeable
     }
     private void Die()
     {
-        
+
         if (gameObject.CompareTag("Player"))
         {
             animator.SetTrigger("Die");
@@ -60,7 +60,7 @@ public class Health : MonoBehaviour,IRechargeable
             animationEvents.StartIFrame();
         }
         else
-            throw new NotImplementedException("Enemy death has not been implemented yet");
+            Debug.Log("EnemyDead");
     }
 
 
