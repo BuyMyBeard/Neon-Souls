@@ -61,7 +61,7 @@ public class SawTrackScript : MonoBehaviour, IRechargeable
             }
             GameObject newSaw = Instantiate(saw, spawnPosition, launcherPosition.rotation, launcherPosition);
             newSaw.transform.localRotation = Quaternion.identity;
-            newSaw.transform.Rotate(0f, 0f, 90);
+            //newSaw.transform.Rotate(0f, 90, 0);
             StartCoroutine(newSaw.GetComponent<SawScript>().MoveSaw(spawnYOffset));
         }
     }

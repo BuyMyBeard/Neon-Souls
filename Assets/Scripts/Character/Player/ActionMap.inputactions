@@ -24,7 +24,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Block",
+                    "name": "Parry",
                     "type": "Button",
                     "id": "af709def-8b8e-4466-8893-7379129aecb1",
                     "expectedControlType": "Button",
@@ -51,12 +51,12 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Dodge",
+                    "name": "DodgeButton",
                     "type": "Button",
                     "id": "36afbe97-d755-4950-9c10-9d2d1902794d",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Tap(duration=0.5)",
                     "initialStateCheck": false
                 },
                 {
@@ -84,6 +84,15 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RunButton",
+                    "type": "Button",
+                    "id": "84e39dc3-4dc9-44de-bf03-0d026690f39a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold",
                     "initialStateCheck": false
                 }
             ],
@@ -293,7 +302,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Block",
+                    "action": "Parry",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -304,7 +313,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Block",
+                    "action": "Parry",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -342,37 +351,15 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "Shift+LeftClick",
-                    "id": "86631d6c-0d46-43ef-b9e7-2fa3891fcf1f",
-                    "path": "ButtonWithOneModifier",
+                    "name": "",
+                    "id": "567f19a3-03f1-46d0-9460-812da16f0704",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "HeavyAttack",
-                    "isComposite": true,
+                    "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "Modifier",
-                    "id": "e8723600-8b9e-49a2-a2b9-0b6110c294ab",
-                    "path": "<Keyboard>/shift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "HeavyAttack",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "Button",
-                    "id": "b408b035-ff80-42cf-b6e5-f0bb6138d239",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "HeavyAttack",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 },
                 {
                     "name": "",
@@ -381,7 +368,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Dodge",
+                    "action": "DodgeButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -392,7 +379,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Dodge",
+                    "action": "DodgeButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -470,6 +457,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "LockOn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9ad3cdc1-63d7-4590-857f-eb94b57d3131",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RunButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "51a48c87-50df-423d-899d-ab776c4dfe58",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RunButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
