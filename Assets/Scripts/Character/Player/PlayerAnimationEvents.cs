@@ -40,4 +40,6 @@ public class PlayerAnimationEvents : MonoBehaviour
     public void ReduceMovement() => playerMovement.movementReduced = true;
     public void RestoreMovement() => playerMovement.movementReduced = false;
     public void SyncRotation() => playerMovement.SyncRotation();
+    public void ShowPotion() => potions.ShowPotion();
+    public void HidePotion() => potions.HidePotion();
 }

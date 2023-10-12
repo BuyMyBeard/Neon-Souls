@@ -93,6 +93,7 @@ public class Health : MonoBehaviour,IRechargeable
         displayHealthbar.Add(maxHealth, maxHealth);
         if (CompareTag("Player"))
         {
+            animationEvents.HidePotion();
             animationEvents.EnableActions();
             animationEvents.UnFreezeMovement();
             animationEvents.UnFreezeRotation();
