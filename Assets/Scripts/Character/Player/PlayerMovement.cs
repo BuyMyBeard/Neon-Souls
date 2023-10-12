@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     CharacterController characterController;
     [SerializeField] float walkingSpeed;
     [SerializeField] float runningSpeed;
+    [SerializeField] float sprintSpeed;
     [Range(0, 1)]
     [SerializeField] float runThreshold = .7f;
     [Range(0, 1)]
@@ -22,6 +23,17 @@ public class PlayerMovement : MonoBehaviour
     public bool movementFrozen = false;
     public bool rotationFrozen = false;
     public bool movementReduced = false;
+    public float Gravity
+    {
+        get
+        {
+            if (characterController.isGrounded)
+                dropSpeed = -1f;
+
+            dropSpeed += Physics.gravity.y * Time.deltaTime;
+            return dropSpeed * Time.deltaTime;
+        }
+    }
     void Awake()
     {
         characterController = GetComponentInChildren<CharacterController>();
@@ -35,19 +47,9 @@ public class PlayerMovement : MonoBehaviour
             throw new MissingComponentException("Animator missing on player");
     }
 
-    void HandleGravity()
-    {
-        if (characterController.isGrounded)
-            dropSpeed = -1f;
-
-        dropSpeed += Physics.gravity.y * Time.deltaTime;
-        movement.y += dropSpeed * Time.deltaTime;
-    }
     void Update()
     {
-        movement.y = 0;
-
-        HandleGravity();
+        movement.y = Gravity;
         HandleMovement();
 
         movement = Quaternion.Euler(0, camera.transform.eulerAngles.y, 0) * movement; //handle camera rotation
@@ -121,7 +123,6 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     public void SyncRotation()
     {
-
         Vector2 movementInput = playerController.Move;
         if (movementInput.magnitude < deadZone) return;
         direction = Quaternion.Euler(0, camera.transform.eulerAngles.y, 0) * new Vector3(movementInput.x, 0, movementInput.y);
