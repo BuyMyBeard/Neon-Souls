@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 239097307445888987}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13750403, y: -0, z: -0, w: 0.9905012}
-  m_LocalPosition: {x: 0, y: 2.07, z: -3}
+  m_LocalRotation: {x: 0.13750398, y: -0, z: -0, w: 0.9905012}
+  m_LocalPosition: {x: 0, y: 2.0699997, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -240,11 +240,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cc7dd6b8007bdd4d9db2481e6436bd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkingSpeed: 3
-  runningSpeed: 6
+  walkingSpeed: 1.5
+  runningSpeed: 3
+  sprintSpeed: 6
   runThreshold: 0.7
   deadZone: 0.25
   turnSpeed: 600
+  acceleration: 5
+  deceleration: 25
+  sprintStaminaCost: 20
   movementFrozen: 0
   rotationFrozen: 0
   movementReduced: 0
@@ -261,6 +265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   potionMat: {fileID: 2100000, guid: 21d5ff8b15d9d45449cb46f8bc4be029, type: 2}
+  potionObject: {fileID: 6145286124227111783}
   maxPotions: 5
   currentPotions: 0
   restoreValue: 60
@@ -295,7 +300,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxStamina: 100
   currentStamina: 0
-  staminaRegenRate: 20
+  staminaRegenRate: 30
   exhaustionTime: 1.5
 --- !u!114 &931004792272011639
 MonoBehaviour:
@@ -350,6 +355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ee03e7535209b84cab4672b4235ef0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buffer: 0.2
   staminaCost: 20
 --- !u!114 &1389185903735294112
 MonoBehaviour:
@@ -888,6 +894,11 @@ MonoBehaviour:
   onTrigger:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &6145286124227111783 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -5037428146299079246, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
+  m_PrefabInstance: {fileID: 8025138429370588885}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7178294909268747140 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}

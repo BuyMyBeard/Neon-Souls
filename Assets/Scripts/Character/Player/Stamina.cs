@@ -36,7 +36,7 @@ public class Stamina : MonoBehaviour, IRechargeable
     /// Remove a defined amount of stamina
     /// </summary>
     /// <param name="value">Amount to remove</param>
-    public void Remove(float value)
+    public void Remove(float value, bool syncLingeredValue = false)
     {
         if (!IsExhausted)
         {
@@ -44,7 +44,7 @@ public class Stamina : MonoBehaviour, IRechargeable
             currentStamina -= value;
             if (currentStamina < 0)
                 currentStamina = 0;
-            playerStaminabar.Remove(value, maxStamina, true);
+            playerStaminabar.Remove(value, maxStamina, true, syncLingeredValue);
             if (isRegenerating)
                 StopCoroutine(regenStaminaCoroutine);
             if (!exhaustionTimerStarted)

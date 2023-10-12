@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Roll : MonoBehaviour
 {
+    [SerializeField] float buffer = 0.2f;
     [SerializeField] int staminaCost = 20;
     Animator animator;
     PlayerAnimationEvents animationEvents;
     Stamina stamina;
+    IEnumerator bufferCoroutine;
 
     private void Awake()
     {
@@ -16,6 +18,19 @@ public class Roll : MonoBehaviour
         stamina = GetComponent<Stamina>();
     }
     void OnDodge()
+    {
+        if (!animationEvents.ActionAvailable || stamina.IsExhausted)
+        {
+            if (bufferCoroutine != null)
+                StopCoroutine(bufferCoroutine);
+            bufferCoroutine = BufferDodge();
+            StartCoroutine(bufferCoroutine);
+        }
+        else
+            Dodge();
+    }
+
+    void Dodge()
     {
         if (!animationEvents.ActionAvailable || stamina.IsExhausted)
             return;
@@ -27,5 +42,14 @@ public class Roll : MonoBehaviour
         animationEvents.DisableActions();
         animationEvents.SyncRotation();
         stamina.Remove(staminaCost);
+    }
+
+    IEnumerator BufferDodge()
+    {
+        for (float t = 0; t < buffer; t += Time.deltaTime)
+        {
+            yield return null;
+            Dodge();
+        }
     }
 }
