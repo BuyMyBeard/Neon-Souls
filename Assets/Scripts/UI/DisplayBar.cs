@@ -104,14 +104,31 @@ public class DisplayBar : MonoBehaviour
     /// <param name="value">Value removed</param>
     /// <param name="max">Value the display bar would take if it was full</param>
     /// <param name="showValue">If true, stacked value is displayed near the display bar</param>
-    public void Remove(float value, float max, bool showValue)
+    public void Remove(float value, float max, bool showValue, bool syncLingeredValue = false)
     {
         TrueValue -= value / max;
         displayBarTimer = 0;
         damageValueTimer = 0;
-        lingerTimerCoroutine = LingerTimer();
-        if (!lingerTimerStarted)
-            StartCoroutine(lingerTimerCoroutine);
+        if (syncLingeredValue)
+        {
+            if (lingerTimerStarted)
+            {
+                StopCoroutine(lingerTimerCoroutine);
+                lingerTimerStarted = false;
+            }
+            if (isCatchingUp)
+            {
+                StopCoroutine(catchUpCoroutine);
+                isCatchingUp = false;
+            }
+            LingeredValue = TrueValue;
+        }
+        else
+        {
+            lingerTimerCoroutine = LingerTimer();
+            if (!lingerTimerStarted)
+                StartCoroutine(lingerTimerCoroutine);
+        }
         if (showValue && !hidden)
         {
             stackedValue += value;
