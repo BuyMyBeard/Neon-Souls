@@ -6,6 +6,7 @@ public class Potions : MonoBehaviour ,IRechargeable
 {
 
     [SerializeField] Material potionMat;
+    [SerializeField] GameObject potionObject;
     [SerializeField] int maxPotions = 3;
     [SerializeField] int currentPotions;
     [SerializeField] int restoreValue = 60;
@@ -26,6 +27,10 @@ public class Potions : MonoBehaviour ,IRechargeable
         animator = GetComponentInChildren<Animator>();
         animationEvents = GetComponentInChildren<PlayerAnimationEvents>();
         
+    }
+    private void Start()
+    {
+        HidePotion();
     }
     public void DrinkOnePotion()
     {
@@ -85,5 +90,13 @@ public class Potions : MonoBehaviour ,IRechargeable
     public void Recharge()
     {
         ResetPotions();
+    }
+    public void ShowPotion()
+    {
+        potionObject.SetActive(true);
+    }
+    public void HidePotion()
+    {
+        potionObject.SetActive(false);
     }
 }
