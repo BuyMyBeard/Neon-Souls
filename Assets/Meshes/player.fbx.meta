@@ -3,7 +3,12 @@ guid: 08c5a1a401dc43a4db63e28e6d8d2f0d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wireframe
+    second: {fileID: 2100000, guid: fc5eaaa4aa0b33c4c96f279f639d12b6, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -186,6 +191,13 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.10662823
+        functionName: ShowPotion
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.50124073
         functionName: DrinkPotion
         data: 
@@ -202,6 +214,13 @@ ModelImporter:
         messageOptions: 0
       - time: 0.87096775
         functionName: RestoreMovement
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.94524497
+        functionName: HidePotion
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -236,6 +255,13 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.100864545
+        functionName: ShowPotion
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.8833747
         functionName: EnableActions
         data: 
@@ -245,6 +271,13 @@ ModelImporter:
         messageOptions: 0
       - time: 0.8833747
         functionName: RestoreMovement
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.94524497
+        functionName: HidePotion
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -452,11 +485,11 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
