@@ -2477,7 +2477,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sawsPerSalvo: 4
   spawnRate: 2
-  saw: {fileID: 7180249566978601804, guid: 4333c986ddd89e04aaa92b2cab9deaa1, type: 3}
+  spawnXOffset: -2
+  spawnYOffset: -2
+  saw: {fileID: 318186306102807135, guid: 1b647453349cff3469f1ec77350a422d, type: 3}
 --- !u!65 &7430959017658327904
 BoxCollider:
   m_ObjectHideFlags: 0

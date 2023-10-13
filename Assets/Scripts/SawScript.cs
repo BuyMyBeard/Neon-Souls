@@ -5,16 +5,23 @@ using UnityEngine;
 public class SawScript : MonoBehaviour
 {
     [SerializeField] float travelSpeed = 7f;
-    [SerializeField] float travelDistance = 54f;
+    [SerializeField] float travelDistance = 52f;
     [SerializeField] int sawDamage = 60;
+    [SerializeField] float spinSpeed = 360;
     Vector3 initialPosition;
     Rigidbody rb;
+    Transform model;
 
     // Start is called before the first frame update
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         initialPosition = transform.position;
+        model = transform.GetChild(0);
+    }
+    void Update()
+    {
+        model.Rotate(0, 0, -spinSpeed * Time.deltaTime, Space.Self);
     }
     public IEnumerator MoveSaw(float yOffset)
     {
@@ -38,7 +45,7 @@ public class SawScript : MonoBehaviour
         float timeElapsed = 0;
         float lerpDuration = 0.25f;
         Vector3 startPosition = transform.localPosition;
-        Vector3 endPosition = new Vector3(startPosition.x, startPosition.y - yOffset, startPosition.z);
+        Vector3 endPosition = new(startPosition.x, startPosition.y - yOffset, startPosition.z);
         while (timeElapsed < lerpDuration)
         {
             transform.localPosition = Vector3.Lerp(startPosition, endPosition, timeElapsed / lerpDuration);
