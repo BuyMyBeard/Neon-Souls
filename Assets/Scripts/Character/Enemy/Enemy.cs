@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour,IXpGiver
 {
+    [SerializeField] int xpPrice = 5;
     public enum ModeId
     {
         Idle,
@@ -27,7 +28,7 @@ public abstract class Enemy : MonoBehaviour
     ModeDef[] modeDefs;
     protected ModeDef Mode { get; private set; }
     protected bool lockMode = false;
-
+    XpManager xpManager;
     protected virtual void Awake()
     {
         modeDefs = new ModeDef[3]
@@ -38,7 +39,7 @@ public abstract class Enemy : MonoBehaviour
         };
         Mode = modeDefs[(int)ModeId.Idle];
         Mode.Init();
-        //target = GameObject.FindGameObjectWithTag("Player").transform;
+        xpManager = FindObjectOfType<XpManager>();
     }
     void Update()
     {
@@ -66,4 +67,9 @@ public abstract class Enemy : MonoBehaviour
     protected virtual void IdleExit() { }
     protected virtual void InRangeExit() { }
     protected virtual void CloseExit() { }
+
+    public void GiveXp()
+    {
+        xpManager.DistributeXp(xpPrice);
+    }
 }

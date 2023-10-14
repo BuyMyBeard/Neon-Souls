@@ -59,8 +59,13 @@ public class Health : MonoBehaviour,IRechargeable
             animationEvents.FreezeRotation();
             animationEvents.StartIFrame();
         }
-        else
-            Debug.Log("EnemyDead");
+        else if(gameObject.CompareTag("Enemy"))
+        {
+            GetComponent<Enemy>().GiveXp();
+            /*
+             And other anim for ennemie
+             */
+        }
     }
 
 
