@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: e87dd8d34e2361345b2be0714c0af6ef, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.35686275}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 583adc26baa5cde429ca7afc8846193b, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.35686275}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 444f925e44760f7418eaf9068ca46f01, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -255,8 +255,8 @@ RectTransform:
   m_LocalScale: {x: 0.44448626, y: 0.44448626, z: 0.44448626}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8840542496744110351}
   - {fileID: 6797884356734691142}
+  - {fileID: 8840542496744110351}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -328,6 +328,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageValue: {fileID: 6031265517505454704}
+  lingerTime: 0.5
+  damageValueLingerTime: 2
+  catchUpSpeed: 2
 --- !u!1 &5332405302551379279
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,7 +389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 73691652cfe3548428b9320c2c274735, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.35686275}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -432,10 +435,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7501579694288327064}
-  - {fileID: 7501993282973249865}
-  - {fileID: 439441000232118615}
   - {fileID: 6856281776080409532}
+  - {fileID: 439441000232118615}
+  - {fileID: 7501993282973249865}
+  - {fileID: 7501579694288327064}
   m_Father: {fileID: 3516055474413513379}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -521,7 +524,7 @@ RectTransform:
   m_GameObject: {fileID: 9052279058188549299}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -5}
-  m_LocalScale: {x: 0.9065281, y: 0.9038142, z: 0.9038142}
+  m_LocalScale: {x: 0.90652823, y: 0.9038143, z: 0.9038143}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3516055474413513379}
