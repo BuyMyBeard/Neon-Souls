@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class CameraMovement : MonoBehaviour
 {
     [SerializeField] Transform followTarget;
+    [SerializeField] float catchUpSpeed = 1;
     [Header("Pitch clamping")]
     [Range(-90, 90)]
     [SerializeField] float camMinClamp = -90;
@@ -14,9 +15,12 @@ public class CameraMovement : MonoBehaviour
     [Tooltip("Speed at which the camera drifts behind the player when moving and not touching the camera")]
     [SerializeField] float driftSpeed = 10;
 
-    [Range(-1, 0)]
-    [Tooltip("Dot product between player and camera which doesn't make camera drift. Used when running towards camera")]
-    [SerializeField] float driftDeadZone = -.9f;
+    [Tooltip("Time before drift fully kicks in")]
+    [SerializeField] float easeInTime = 1;
+
+    [Range(0, 5)]
+    [Tooltip("Time before camera drift starts kicking in")]
+    [SerializeField] float driftTimer = 1;
 
     [Header("Sensitivity")]
     [Range(.01f, 5)]
@@ -32,6 +36,7 @@ public class CameraMovement : MonoBehaviour
 
     [HideInInspector]
     public bool frozen = false;
+    float driftTime = 0;
     void Awake()
     {   
         characterController = GetComponentInChildren<CharacterController>();
@@ -42,7 +47,7 @@ public class CameraMovement : MonoBehaviour
         if (frozen)
             return;
 
-        followTarget.position = characterController.transform.position + Vector3.up * followTargetVerticalOffset;
+        followTarget.position = Vector3.Lerp(followTarget.position, characterController.transform.position + Vector3.up * followTargetVerticalOffset, Time.deltaTime * catchUpSpeed);
         float appliedSensitivity = playerController.GamepadActive ? controllerSensitivity : mouseSensitivity;
 
         // Quaternion * Quaternion is the same as applying rotation from second to first
@@ -66,24 +71,29 @@ public class CameraMovement : MonoBehaviour
 
     private void ApplyCameraDrift()
     {
+
         // Moves Camera behind the player when no look input is given
         Vector3 movementDirection = characterController.velocity;
         movementDirection.y = 0;
         if (movementDirection.magnitude > 0 && playerController.Look.magnitude == 0)
         {
+            driftTime += Time.deltaTime;
+            if (driftTime < driftTimer) return;
 
             Vector2 camDirection = new Vector2(followTarget.transform.forward.x, followTarget.transform.forward.z);
             Vector2 playerDirection = new Vector2(characterController.velocity.x, characterController.velocity.z).normalized;
 
             float dot = Vector2.Dot(playerDirection, camDirection);
 
-            /// if player walks towards camera, camera doesn't try to drift behind player
-            if (dot > driftDeadZone)
-            {
-                float dotFactor = 1 - Mathf.Abs(dot);
-                Quaternion to = Quaternion.LookRotation(movementDirection, Vector3.up);
-                followTarget.transform.rotation = Quaternion.Lerp(followTarget.transform.rotation, to, Time.deltaTime * dotFactor * driftSpeed);
-            }
+            float dotFactor = (1 - Mathf.Abs(dot)) * Mathf.Clamp01((driftTime - driftTimer) / easeInTime);
+            Quaternion to = Quaternion.LookRotation(movementDirection, Vector3.up);
+            followTarget.transform.rotation = Quaternion.Lerp(followTarget.transform.rotation, to, Time.deltaTime * dotFactor * driftSpeed);
         }
+        else
+            driftTime = 0;
+    }
+    public void SyncFollowTarget()
+    {
+        followTarget.position = characterController.transform.position + Vector3.up * followTargetVerticalOffset;
     }
 }

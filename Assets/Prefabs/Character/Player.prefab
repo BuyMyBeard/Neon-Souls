@@ -178,10 +178,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followTarget: {fileID: 4316101263382069836}
+  catchUpSpeed: 3
   camMinClamp: -40
   camMaxClamp: 50
-  driftSpeed: 1.25
-  driftDeadZone: -0.9
+  driftSpeed: 0.74
+  easeInTime: 1
+  driftTimer: 1
   mouseSensitivity: 0.19
   controllerSensitivity: 0.7
   followTargetVerticalOffset: 0.5
@@ -314,7 +316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13ebd660f07e8d549b4594c6de460d25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewRadius: 90
+  viewRadius: 15
   viewAngle: 60
   lockableMask:
     serializedVersion: 2
@@ -437,8 +439,8 @@ MonoBehaviour:
   m_ScreenY: 0.7
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
-  m_SoftZoneWidth: 1
-  m_SoftZoneHeight: 0.5
+  m_SoftZoneWidth: 0
+  m_SoftZoneHeight: 0
   m_BiasX: 0
   m_BiasY: 0.152
   m_CenterOnActivate: 1
