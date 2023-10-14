@@ -100,6 +100,7 @@ public class Health : MonoBehaviour,IRechargeable
             animationEvents.UnFreezeRotation();
             animationEvents.StopIFrame();
             animator.Play("Idle");
+            GetComponent<CameraMovement>().SyncFollowTarget();
         }
     }
 }

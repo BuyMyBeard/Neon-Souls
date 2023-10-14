@@ -31,11 +31,14 @@ public class EnemyHealthbar : DisplayBar
         if (hidden) return;
         var rt = GetComponent<RectTransform>();
         RectTransform parent = (RectTransform)rt.parent;
-        var vp = cam.WorldToViewportPoint(trackedEnemy.transform.position);
+        var vp = cam.WorldToViewportPoint(trackedEnemy.transform.position + offset);
+        var vp2 = cam.WorldToViewportPoint(trackedEnemy.transform.position);
         var sp = canvas.worldCamera.ViewportToScreenPoint(vp);
+        var sp2 = canvas.worldCamera.ViewportToScreenPoint(vp2);
         RectTransformUtility.ScreenPointToWorldPointInRectangle(parent, sp, canvas.worldCamera, out Vector3 worldPoint);
-        rt.position = worldPoint + offset;
-        indicator.position = worldPoint;
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(parent, sp2, canvas.worldCamera, out Vector3 worldPoint2);
+        rt.position = worldPoint;
+        indicator.position = worldPoint2;
     }
 
     public override void Hide()
