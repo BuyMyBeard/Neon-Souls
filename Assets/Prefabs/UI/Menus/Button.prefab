@@ -172,7 +172,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.3, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1120773434703912111
@@ -290,7 +290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c59379b3ad337b40ae7dbf4dab50f81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thickness: 0.075
-  primaryColor: {r: 0.45047027, g: 0, b: 1.7207953, a: 0}
-  secondaryColor: {r: 1.1896309, g: 0, b: 2.6390157, a: 1}
-  scaleFactor: 1.15
+  thickness: 0.1
+  color: {r: 4.781662, g: 0, b: 6.328678, a: 0}
+  scaleFactor: 1.25
+  clickedBoost: 1.3
