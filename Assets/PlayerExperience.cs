@@ -21,7 +21,7 @@ public class PlayerExperience : MonoBehaviour, IXpReceiver
     }
 
     public void GainXp(int xp)
-    {
+    { 
         xpAmount += xp;
         xpText.text = xpAmount.ToString();
     }
