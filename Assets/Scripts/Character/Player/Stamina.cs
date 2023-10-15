@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Search;
 using UnityEngine;
 
-public class Stamina : MonoBehaviour, IRechargeable
+public class Stamina : MonoBehaviour, IRechargeable,IStat
 {
     DisplayBar playerStaminabar;
     [SerializeField] int maxStamina = 100;
@@ -14,7 +14,12 @@ public class Stamina : MonoBehaviour, IRechargeable
     IEnumerator exhaustionTimerCoroutine, regenStaminaCoroutine;
     bool exhaustionTimerStarted = false;
     bool isRegenerating = false;
+
+    float ameliorateur;
+
+
     public bool IsExhausted { get => currentStamina <= 0; }
+    public float Ameliorateur { get => ameliorateur; set { ameliorateur = value; } }
 
     private void Awake()
     {
