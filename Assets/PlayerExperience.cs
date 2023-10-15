@@ -20,6 +20,8 @@ public class PlayerExperience : MonoBehaviour, IXpReceiver
         private set { xpAmount = value; }
     }
 
+    GameObject IXpReceiver.gameObject { get => this.gameObject;}
+
     public void GainXp(int xp)
     { 
         xpAmount += xp;

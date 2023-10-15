@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : MonoBehaviour,IRechargeable
+public class Health : MonoBehaviour,IRechargeable,IStat
 {
     public DisplayBar displayHealthbar;
     [SerializeField] float maxHealth = 100;
@@ -13,11 +13,15 @@ public class Health : MonoBehaviour,IRechargeable
     GameManager manager;
 
     float currentHealth;
+    float ameliorateur;
+
     Animator animator;
     public float CurrentHealth { get => currentHealth; }
 
     public bool IsDead { get => currentHealth <= 0; }
     public float MaxHealth { get => maxHealth; }
+    public float Ameliorateur { get => ameliorateur; set { ameliorateur = value; } }
+
     void Awake()
     {
         if (displayHealthbar == null)
