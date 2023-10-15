@@ -9,10 +9,10 @@ public class MaterialButton : MonoBehaviour
     [Range(0, 1)]
     [SerializeField] float thickness = 0.075f;
     [ColorUsage(false, true)]
-    [SerializeField] Color primaryColor;
-    [ColorUsage(false, true)]
-    [SerializeField] Color secondaryColor;
+    [SerializeField] Color color;
     [SerializeField] float scaleFactor = 1.15f;
+    [Range(1, 2)]
+    [SerializeField] float clickedBoost = 1.3f;
     Vector3 baseScale;
     private void Awake()
     {
@@ -21,8 +21,8 @@ public class MaterialButton : MonoBehaviour
         RectTransform rt = GetComponent<RectTransform>();
         buttonMat.SetFloat("_AspectRatio", rt.sizeDelta.x / rt.sizeDelta.y);
         buttonMat.SetFloat("_Thickness", thickness);
-        buttonMat.SetColor("_Color", primaryColor);
-        buttonMat.SetColor("_SecondColor", secondaryColor);
+        buttonMat.SetColor("_Color", color);
+        buttonMat.SetFloat("_ClickedBoost", clickedBoost);
         Debug.Log(rt.sizeDelta.x);
         Debug.Log(rt.sizeDelta.y);
         baseScale = transform.localScale;
