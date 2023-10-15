@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class AddingButton : MonoBehaviour
 {
+    
     bool yes;
     public void addStats()
     {

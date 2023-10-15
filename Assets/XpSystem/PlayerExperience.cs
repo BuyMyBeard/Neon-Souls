@@ -9,8 +9,10 @@ public class PlayerExperience : MonoBehaviour, IXpReceiver
     [SerializeField] string soulsTextTag = "SoulsCount";
     int xpAmount = 0;
     TextMeshProUGUI xpText;
+    XpManager xpManager;
     private void Awake()
     {
+        xpManager = FindObjectOfType<XpManager>();
         xpText = GameObject.FindGameObjectWithTag(soulsTextTag).GetComponent<TextMeshProUGUI>();
         xpText.text = xpAmount.ToString();
     }
@@ -19,12 +21,15 @@ public class PlayerExperience : MonoBehaviour, IXpReceiver
         get { return xpAmount; }
         private set { xpAmount = value; }
     }
-
-    GameObject IXpReceiver.gameObject { get => this.gameObject;}
-
-    public void GainXp(int xp)
+    public void GainXp(int amount)
     { 
-        xpAmount += xp;
+        xpAmount += amount;
+        xpText.text = xpAmount.ToString();
+    }
+
+    public void removeXp(int amount)
+    {
+        xpAmount -= amount;
         xpText.text = xpAmount.ToString();
     }
 }

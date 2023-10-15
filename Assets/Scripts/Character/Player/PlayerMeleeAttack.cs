@@ -7,7 +7,7 @@ enum PlayerAttackType { Light, Heavy }
 
 [RequireComponent(typeof(Stamina))]
 [RequireComponent(typeof(PlayerInput))]
-public class PlayerMeleeAttack : MeleeAttack
+public class PlayerMeleeAttack : MeleeAttack,IStat
 {
     [SerializeField] int lightAttackStaminaCost = 15;
     [SerializeField] int heavyAttackStaminaCost = 30;
@@ -16,6 +16,11 @@ public class PlayerMeleeAttack : MeleeAttack
     Stamina stamina;
     PlayerAnimationEvents animationEvents;
     PlayerAttackType attackType;
+
+    public float Value => lightAttackDamage;
+
+    public float Ameliorateur { get; set; }
+
     protected override void Awake()
     {
         base.Awake();

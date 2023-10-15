@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IStat
+public interface IXpGiver
 {
-    float Ameliorateur { get; set; }
+    public void GiveXp();
 }
