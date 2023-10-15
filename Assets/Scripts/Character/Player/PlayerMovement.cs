@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float acceleration = 5;
     [Range(0,50)]
     [SerializeField] float deceleration = 15;
-    [Tooltip("Stamina/s")] 
+    [Tooltip("Stamina/s")]
     [SerializeField] float sprintStaminaCost = 15;
     float currentSpeed = 0;
     new Camera camera;
