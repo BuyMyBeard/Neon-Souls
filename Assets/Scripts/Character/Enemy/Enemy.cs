@@ -52,7 +52,7 @@ public abstract class Enemy : MonoBehaviour,IXpGiver
     {
         if (lockMode) return;
         if (Mode.Id == modeId) return;
-        Debug.Log($"Enemy.ChangeMode(): {GetInstanceID()} {Enum.GetName(typeof(ModeId), Mode.Id)} -> {Enum.GetName(typeof(ModeId), modeId)}");
+        //Debug.Log($"Enemy.ChangeMode(): {GetInstanceID()} {Enum.GetName(typeof(ModeId), Mode.Id)} -> {Enum.GetName(typeof(ModeId), modeId)}");
         Mode.Exit();
         Mode = modeDefs[(int)modeId];
         Mode.Init();
@@ -70,6 +70,6 @@ public abstract class Enemy : MonoBehaviour,IXpGiver
 
     public void GiveXp()
     {
-        xpManager.DistributeXp(xpPrice);
+        xpManager.DistribuerXp(xpPrice);
     }
 }

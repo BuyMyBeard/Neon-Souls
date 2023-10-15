@@ -23,8 +23,8 @@ public class MaterialButton : MonoBehaviour
         buttonMat.SetFloat("_Thickness", thickness);
         buttonMat.SetColor("_Color", color);
         buttonMat.SetFloat("_ClickedBoost", clickedBoost);
-        Debug.Log(rt.sizeDelta.x);
-        Debug.Log(rt.sizeDelta.y);
+        /*Debug.Log(rt.sizeDelta.x);
+        Debug.Log(rt.sizeDelta.y);*/
         baseScale = transform.localScale;
     }
     public void OnButtonNormal()

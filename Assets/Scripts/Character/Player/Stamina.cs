@@ -21,6 +21,8 @@ public class Stamina : MonoBehaviour, IRechargeable,IStat
     public bool IsExhausted { get => currentStamina <= 0; }
     public float Ameliorateur { get => ameliorateur; set { ameliorateur = value; } }
 
+    public float Value => currentStamina;
+
     private void Awake()
     {
         playerStaminabar = GameObject.FindGameObjectWithTag("DisplayedStamina").GetComponent<DisplayBar>();

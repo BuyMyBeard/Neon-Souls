@@ -17,10 +17,10 @@ public class Health : MonoBehaviour,IRechargeable,IStat
 
     Animator animator;
     public float CurrentHealth { get => currentHealth; }
-
     public bool IsDead { get => currentHealth <= 0; }
     public float MaxHealth { get => maxHealth; }
     public float Ameliorateur { get => ameliorateur; set { ameliorateur = value; } }
+    public float Value => currentHealth;
 
     void Awake()
     {
