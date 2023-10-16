@@ -1,48 +1,82 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] GameObject firstSelected;
-    public GameObject firstSelectedOverride;
+    [SerializeField] GameObject optionsMenu;
+    [SerializeField] bool pausable = false;
+    GameObject firstSelectedOverride;
     EventSystem eventSystem;
     InputSystemUIInputModule inputModule;
-    Canvas menuDisplay;
+
+    public bool IsInSubMenu { get => firstSelectedOverride != null; }
     private void Awake()
     {
         eventSystem = EventSystem.current;
         inputModule = eventSystem.GetComponent<InputSystemUIInputModule>();
-        menuDisplay = GetComponentInChildren<Canvas>();
     }
     private void OnEnable()
     {
+        optionsMenu.SetActive(false);
+        inputModule.actionsAsset.Enable();
         inputModule.move.ToInputAction().performed += MovePerformed;
-        inputModule.leftClick.ToInputAction().performed += ClickPerformed;
+        inputModule.leftClick.ToInputAction().performed += MousePerformed;
+        inputModule.point.ToInputAction().performed += MousePerformed;
+        inputModule.scrollWheel.ToInputAction().performed += MousePerformed;
+        inputModule.cancel.ToInputAction().performed += BackInput;
+        inputModule.actionsAsset.FindActionMap("UI").FindAction("Pause").started += PauseInput;
     }
+
+
     private void OnDisable()
     {
+        inputModule.actionsAsset.Disable();
         inputModule.move.ToInputAction().performed -= MovePerformed;
-        inputModule.leftClick.ToInputAction().performed -= ClickPerformed;
+        inputModule.leftClick.ToInputAction().performed -= MousePerformed;
+        inputModule.point.ToInputAction().performed -= MousePerformed;
+        inputModule.scrollWheel.ToInputAction().performed -= MousePerformed;
+        inputModule.cancel.ToInputAction().performed -= BackInput;
+        inputModule.actionsAsset.FindActionMap("UI").FindAction("Pause").started -= PauseInput;
     }
-    private void ClickPerformed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void PauseInput(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        StartCoroutine(Click_performed());
+        
+        if (pausable && !IsInSubMenu)
+        {
+            if (Time.timeScale == 0) Resume();
+            else Pause();
+        }
+    }
+
+    private void BackInput(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        StartCoroutine(Back());
+    }
+    public IEnumerator Back()
+    {
+        yield return null;
+        ResetOverride();
+        optionsMenu.SetActive(false);
+    }
+
+    private void MousePerformed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        StartCoroutine(ResetSelected());
     }
     private void MovePerformed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        StartCoroutine(Move_performed());
+        StartCoroutine(MovePerformed());
     }
-    private IEnumerator Click_performed()
+    private IEnumerator ResetSelected()
     {
         yield return null;
         eventSystem.SetSelectedGameObject(null);
     }
-    private IEnumerator Move_performed()
+    private IEnumerator MovePerformed()
     {
         yield return null;
         if (eventSystem.currentSelectedGameObject == null)
@@ -73,12 +107,14 @@ public class MenuManager : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
-    public void OpenOptions()
+    public void OverrideFirstSelected(GameObject gameObject)
     {
-
+        firstSelectedOverride = gameObject;
+        eventSystem.SetSelectedGameObject(gameObject);
     }
-    public void CloseOptions()
+    public void ResetOverride()
     {
-
+        firstSelectedOverride = null;
+        eventSystem.SetSelectedGameObject(firstSelected);
     }
 }
