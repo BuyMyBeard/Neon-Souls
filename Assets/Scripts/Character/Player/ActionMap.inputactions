@@ -94,6 +94,15 @@
                     "processors": "",
                     "interactions": "Hold",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "PlayerPause",
+                    "type": "Button",
+                    "id": "ac559163-bb7f-4b24-b718-1a9cf8e8264d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -481,6 +490,28 @@
                     "action": "RunButton",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "404248fc-ba40-42ad-a87e-1845fc31f292",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PlayerPause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4b6edf9d-59f9-4512-82a0-c4c3691cf81c",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PlayerPause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -579,7 +610,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Pause",
+                    "name": "UIPause",
                     "type": "Button",
                     "id": "ddd6800e-e3aa-4dc4-849f-638003453dca",
                     "expectedControlType": "Button",
@@ -1018,28 +1049,6 @@
                 },
                 {
                     "name": "",
-                    "id": "64659d56-ab03-41f9-a5d2-66c9e0d5ab62",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Pause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "32dced86-20d5-4485-b8e0-f3ef2df77535",
-                    "path": "<Gamepad>/start",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Pause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "8ba5f503-7176-4426-bd10-495f20650802",
                     "path": "<Keyboard>/delete",
                     "interactions": "",
@@ -1057,6 +1066,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "RestoreDefaults",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "64659d56-ab03-41f9-a5d2-66c9e0d5ab62",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UIPause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "32dced86-20d5-4485-b8e0-f3ef2df77535",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UIPause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

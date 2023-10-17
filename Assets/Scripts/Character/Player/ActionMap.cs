@@ -116,6 +116,15 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PlayerPause"",
+                    ""type"": ""Button"",
+                    ""id"": ""ac559163-bb7f-4b24-b718-1a9cf8e8264d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -503,6 +512,28 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""action"": ""RunButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""404248fc-ba40-42ad-a87e-1845fc31f292"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlayerPause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4b6edf9d-59f9-4512-82a0-c4c3691cf81c"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlayerPause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -601,7 +632,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Pause"",
+                    ""name"": ""UIPause"",
                     ""type"": ""Button"",
                     ""id"": ""ddd6800e-e3aa-4dc4-849f-638003453dca"",
                     ""expectedControlType"": ""Button"",
@@ -1040,28 +1071,6 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""64659d56-ab03-41f9-a5d2-66c9e0d5ab62"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""32dced86-20d5-4485-b8e0-f3ef2df77535"",
-                    ""path"": ""<Gamepad>/start"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""8ba5f503-7176-4426-bd10-495f20650802"",
                     ""path"": ""<Keyboard>/delete"",
                     ""interactions"": """",
@@ -1079,6 +1088,28 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""RestoreDefaults"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""64659d56-ab03-41f9-a5d2-66c9e0d5ab62"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UIPause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""32dced86-20d5-4485-b8e0-f3ef2df77535"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UIPause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1127,6 +1158,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         m_PlayerControls_Consumable = m_PlayerControls.FindAction("Consumable", throwIfNotFound: true);
         m_PlayerControls_LockOn = m_PlayerControls.FindAction("LockOn", throwIfNotFound: true);
         m_PlayerControls_RunButton = m_PlayerControls.FindAction("RunButton", throwIfNotFound: true);
+        m_PlayerControls_PlayerPause = m_PlayerControls.FindAction("PlayerPause", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1139,7 +1171,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
-        m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
+        m_UI_UIPause = m_UI.FindAction("UIPause", throwIfNotFound: true);
         m_UI_RestoreDefaults = m_UI.FindAction("RestoreDefaults", throwIfNotFound: true);
     }
 
@@ -1212,6 +1244,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerControls_Consumable;
     private readonly InputAction m_PlayerControls_LockOn;
     private readonly InputAction m_PlayerControls_RunButton;
+    private readonly InputAction m_PlayerControls_PlayerPause;
     public struct PlayerControlsActions
     {
         private @ActionMap m_Wrapper;
@@ -1226,6 +1259,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         public InputAction @Consumable => m_Wrapper.m_PlayerControls_Consumable;
         public InputAction @LockOn => m_Wrapper.m_PlayerControls_LockOn;
         public InputAction @RunButton => m_Wrapper.m_PlayerControls_RunButton;
+        public InputAction @PlayerPause => m_Wrapper.m_PlayerControls_PlayerPause;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1265,6 +1299,9 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @RunButton.started += instance.OnRunButton;
             @RunButton.performed += instance.OnRunButton;
             @RunButton.canceled += instance.OnRunButton;
+            @PlayerPause.started += instance.OnPlayerPause;
+            @PlayerPause.performed += instance.OnPlayerPause;
+            @PlayerPause.canceled += instance.OnPlayerPause;
         }
 
         private void UnregisterCallbacks(IPlayerControlsActions instance)
@@ -1299,6 +1336,9 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @RunButton.started -= instance.OnRunButton;
             @RunButton.performed -= instance.OnRunButton;
             @RunButton.canceled -= instance.OnRunButton;
+            @PlayerPause.started -= instance.OnPlayerPause;
+            @PlayerPause.performed -= instance.OnPlayerPause;
+            @PlayerPause.canceled -= instance.OnPlayerPause;
         }
 
         public void RemoveCallbacks(IPlayerControlsActions instance)
@@ -1330,7 +1370,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_RightClick;
     private readonly InputAction m_UI_TrackedDevicePosition;
     private readonly InputAction m_UI_TrackedDeviceOrientation;
-    private readonly InputAction m_UI_Pause;
+    private readonly InputAction m_UI_UIPause;
     private readonly InputAction m_UI_RestoreDefaults;
     public struct UIActions
     {
@@ -1346,7 +1386,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         public InputAction @RightClick => m_Wrapper.m_UI_RightClick;
         public InputAction @TrackedDevicePosition => m_Wrapper.m_UI_TrackedDevicePosition;
         public InputAction @TrackedDeviceOrientation => m_Wrapper.m_UI_TrackedDeviceOrientation;
-        public InputAction @Pause => m_Wrapper.m_UI_Pause;
+        public InputAction @UIPause => m_Wrapper.m_UI_UIPause;
         public InputAction @RestoreDefaults => m_Wrapper.m_UI_RestoreDefaults;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
@@ -1387,9 +1427,9 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @TrackedDeviceOrientation.started += instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.performed += instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.canceled += instance.OnTrackedDeviceOrientation;
-            @Pause.started += instance.OnPause;
-            @Pause.performed += instance.OnPause;
-            @Pause.canceled += instance.OnPause;
+            @UIPause.started += instance.OnUIPause;
+            @UIPause.performed += instance.OnUIPause;
+            @UIPause.canceled += instance.OnUIPause;
             @RestoreDefaults.started += instance.OnRestoreDefaults;
             @RestoreDefaults.performed += instance.OnRestoreDefaults;
             @RestoreDefaults.canceled += instance.OnRestoreDefaults;
@@ -1427,9 +1467,9 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @TrackedDeviceOrientation.started -= instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.performed -= instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.canceled -= instance.OnTrackedDeviceOrientation;
-            @Pause.started -= instance.OnPause;
-            @Pause.performed -= instance.OnPause;
-            @Pause.canceled -= instance.OnPause;
+            @UIPause.started -= instance.OnUIPause;
+            @UIPause.performed -= instance.OnUIPause;
+            @UIPause.canceled -= instance.OnUIPause;
             @RestoreDefaults.started -= instance.OnRestoreDefaults;
             @RestoreDefaults.performed -= instance.OnRestoreDefaults;
             @RestoreDefaults.canceled -= instance.OnRestoreDefaults;
@@ -1480,6 +1520,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         void OnConsumable(InputAction.CallbackContext context);
         void OnLockOn(InputAction.CallbackContext context);
         void OnRunButton(InputAction.CallbackContext context);
+        void OnPlayerPause(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
@@ -1493,7 +1534,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
-        void OnPause(InputAction.CallbackContext context);
+        void OnUIPause(InputAction.CallbackContext context);
         void OnRestoreDefaults(InputAction.CallbackContext context);
     }
 }
