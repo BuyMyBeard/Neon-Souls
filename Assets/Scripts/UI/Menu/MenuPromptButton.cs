@@ -13,17 +13,17 @@ public class MenuPromptButton : MaterialButton
         base.Awake();
         image = GetComponent<Image>();
     }
-    new public void OnButtonNormal()
+    public override void OnButtonNormal()
     {
         image.color = new Color(0, 0, 0, 0);
         transform.localScale = baseScale;
     }
-    new public void OnButtonHighlighted()
+    public override void OnButtonHighlighted()
     {
         transform.localScale = baseScale * scaleFactor;
         image.color = Color.white;
     }
-    new public void OnButtonPressed()
+    public override void OnButtonPressed()
     {
         transform.localScale = baseScale * clickedScaleFactor;
     }

@@ -17,7 +17,7 @@ public class MaterialButton : MonoBehaviour
     [SerializeField] protected float clickedBoost = 1.3f;
     protected Vector3 baseScale;
     protected TextMeshProUGUI text;
-    virtual protected void Awake()
+    protected virtual void Awake()
     {
         buttonMat = new Material(Shader.Find("Shader Graphs/ButtonShader"));
         GetComponent<Image>().material = buttonMat;
@@ -29,30 +29,30 @@ public class MaterialButton : MonoBehaviour
         baseScale = transform.localScale;
         text = GetComponentInChildren<TextMeshProUGUI>();
     }
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         OnButtonNormal();
     }
-    public void OnButtonNormal()
+    public virtual void OnButtonNormal()
     {
         buttonMat.SetFloat("_Highlighted", 0);
         buttonMat.SetFloat("_Clicked", 0);
         transform.localScale = baseScale;
         text.color = color;
     }
-    public void OnButtonHighlighted()
+    public virtual void OnButtonHighlighted()
     {
         buttonMat.SetFloat("_Highlighted", 1);
         buttonMat.SetFloat("_Clicked", 0);
         transform.localScale = baseScale * scaleFactor;
         text.color = highlightedTextColor;
     }
-    public void OnButtonPressed()
+    public virtual void OnButtonPressed()
     {
         buttonMat.SetFloat("_Highlighted", 1);
         buttonMat.SetFloat("_Clicked", 1);
     }
-    public void OnButtonSelected()
+    public virtual void OnButtonSelected()
     {
         OnButtonHighlighted();
     }

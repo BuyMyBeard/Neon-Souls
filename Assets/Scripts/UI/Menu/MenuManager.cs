@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,6 +15,8 @@ public class MenuManager : MonoBehaviour
     EventSystem eventSystem;
     InputSystemUIInputModule inputModule;
     Canvas menuDisplay;
+    PlayerController playerController;
+    public bool Paused { get; private set; } = false;
     public SubMenus CurrentSubMenu { get; private set; } = SubMenus.None;
 
     public bool IsInSubMenu { get => CurrentSubMenu != SubMenus.None; }
@@ -22,10 +25,7 @@ public class MenuManager : MonoBehaviour
         eventSystem = EventSystem.current;
         inputModule = eventSystem.GetComponent<InputSystemUIInputModule>();
         menuDisplay = GetComponentInChildren<Canvas>();
-    }
-    private void Start()
-    {
-        if (SceneManager.GetActiveScene().buildIndex != 0) Resume();
+         if (SceneManager.GetActiveScene().buildIndex != 0) playerController = FindObjectOfType<PlayerController>();
     }
     private void OnEnable()
     {
@@ -36,7 +36,6 @@ public class MenuManager : MonoBehaviour
         inputModule.point.ToInputAction().performed += MousePerformed;
         inputModule.scrollWheel.ToInputAction().performed += MousePerformed;
         inputModule.cancel.ToInputAction().performed += BackInput;
-        inputModule.actionsAsset.FindActionMap("UI").FindAction("Pause").started += PauseInput;
         inputModule.actionsAsset.FindActionMap("UI").FindAction("RestoreDefaults").started += RestoreDefaultsInput;
     }
 
@@ -48,23 +47,12 @@ public class MenuManager : MonoBehaviour
         inputModule.point.ToInputAction().performed -= MousePerformed;
         inputModule.scrollWheel.ToInputAction().performed -= MousePerformed;
         inputModule.cancel.ToInputAction().performed -= BackInput;
-        inputModule.actionsAsset.FindActionMap("UI").FindAction("Pause").started -= PauseInput;
         inputModule.actionsAsset.FindActionMap("UI").FindAction("RestoreDefaults").started -= RestoreDefaultsInput;
     }
     private void RestoreDefaultsInput(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         if (CurrentSubMenu == SubMenus.Options)
             GetComponentInChildren<Settings>().ResetValues();
-    }
-
-    private void PauseInput(UnityEngine.InputSystem.InputAction.CallbackContext obj)
-    {
-        if (SceneManager.GetActiveScene().buildIndex == 0) return;
-        if (pausable && !IsInSubMenu)
-        {
-            if (Time.timeScale == 0) Resume();
-            else Pause();
-        }
     }
 
     private void BackInput(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -76,7 +64,7 @@ public class MenuManager : MonoBehaviour
         if (CurrentSubMenu != SubMenus.None)
             StartCoroutine(Back());
     }
-    public IEnumerator Back()
+    IEnumerator Back()
     {
         yield return null;
         ResetOverride();
@@ -114,13 +102,22 @@ public class MenuManager : MonoBehaviour
     }
     public void Pause()
     {
+        Paused = true;
         Time.timeScale = 0;
         menuDisplay.gameObject.SetActive(true);
+        playerController.SwitchToUI();
     }
     public void Resume()
     {
+        if (IsInSubMenu)
+        {
+            GoBack();
+            return;
+        }
+        Paused = false;
         Time.timeScale = 1;
         menuDisplay.gameObject.SetActive(false);
+        playerController.SwitchToPlayerControls();
     }
     public void Quit()
     {
