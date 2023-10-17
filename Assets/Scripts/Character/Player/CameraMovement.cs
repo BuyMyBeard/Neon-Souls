@@ -22,12 +22,6 @@ public class CameraMovement : MonoBehaviour
     [Tooltip("Time before camera drift starts kicking in")]
     [SerializeField] float driftTimer = 1;
 
-    [Header("Sensitivity")]
-    [Range(.01f, 5)]
-    public float mouseSensitivity = .1f;
-    [Range(.01f, 5)]
-    public float controllerSensitivity = 1f;
-
     [Range(0, 2)]
     [SerializeField] float followTargetVerticalOffset = 0;
 
@@ -48,12 +42,27 @@ public class CameraMovement : MonoBehaviour
             return;
 
         followTarget.position = Vector3.Lerp(followTarget.position, characterController.transform.position + Vector3.up * followTargetVerticalOffset, Time.deltaTime * catchUpSpeed);
-        float appliedSensitivity = playerController.GamepadActive ? controllerSensitivity : mouseSensitivity;
+        float appliedXSens = playerController.GamepadActive ? Preferences.ControllerSensitivityX : Preferences.MouseSensitivity;
+        float appliedYSens = playerController.GamepadActive ? Preferences.ControllerSensivityY : Preferences.MouseSensitivity;
+        int invertX;
+        int invertY;
+
+        if (playerController.GamepadActive)
+        {
+            invertX = Preferences.ControllerInvertX ? -1 : 1;
+            invertY = Preferences.ControllerInvertY ? -1 : 1;
+        }
+        else
+        {
+
+            invertX = Preferences.MouseInvert ? -1 : 1;
+            invertY = invertX;
+        }
 
         // Quaternion * Quaternion is the same as applying rotation from second to first
-        Quaternion cameraRotation = followTarget.transform.rotation *= Quaternion.AngleAxis(playerController.Look.x * appliedSensitivity, Vector3.up);
+        Quaternion cameraRotation = followTarget.transform.rotation *= Quaternion.AngleAxis(playerController.Look.x * appliedXSens * invertX, Vector3.up);
 
-        cameraRotation *= Quaternion.AngleAxis(-playerController.Look.y * appliedSensitivity, Vector3.right);
+        cameraRotation *= Quaternion.AngleAxis(-playerController.Look.y * appliedYSens * invertY, Vector3.right);
 
         Vector3 cameraAngles = cameraRotation.eulerAngles;
 

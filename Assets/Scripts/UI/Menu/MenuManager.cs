@@ -13,14 +13,19 @@ public class MenuManager : MonoBehaviour
     Selectable firstSelectedOverride;
     EventSystem eventSystem;
     InputSystemUIInputModule inputModule;
+    Canvas menuDisplay;
     public SubMenus CurrentSubMenu { get; private set; } = SubMenus.None;
-
 
     public bool IsInSubMenu { get => CurrentSubMenu != SubMenus.None; }
     private void Awake()
     {
         eventSystem = EventSystem.current;
         inputModule = eventSystem.GetComponent<InputSystemUIInputModule>();
+        menuDisplay = GetComponentInChildren<Canvas>();
+    }
+    private void Start()
+    {
+        if (SceneManager.GetActiveScene().buildIndex != 0) Resume();
     }
     private void OnEnable()
     {
@@ -32,8 +37,8 @@ public class MenuManager : MonoBehaviour
         inputModule.scrollWheel.ToInputAction().performed += MousePerformed;
         inputModule.cancel.ToInputAction().performed += BackInput;
         inputModule.actionsAsset.FindActionMap("UI").FindAction("Pause").started += PauseInput;
+        inputModule.actionsAsset.FindActionMap("UI").FindAction("RestoreDefaults").started += RestoreDefaultsInput;
     }
-
 
     private void OnDisable()
     {
@@ -44,10 +49,17 @@ public class MenuManager : MonoBehaviour
         inputModule.scrollWheel.ToInputAction().performed -= MousePerformed;
         inputModule.cancel.ToInputAction().performed -= BackInput;
         inputModule.actionsAsset.FindActionMap("UI").FindAction("Pause").started -= PauseInput;
+        inputModule.actionsAsset.FindActionMap("UI").FindAction("RestoreDefaults").started -= RestoreDefaultsInput;
     }
+    private void RestoreDefaultsInput(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        if (CurrentSubMenu == SubMenus.Options)
+            GetComponentInChildren<Settings>().ResetValues();
+    }
+
     private void PauseInput(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        
+        if (SceneManager.GetActiveScene().buildIndex == 0) return;
         if (pausable && !IsInSubMenu)
         {
             if (Time.timeScale == 0) Resume();
@@ -103,10 +115,12 @@ public class MenuManager : MonoBehaviour
     public void Pause()
     {
         Time.timeScale = 0;
+        menuDisplay.gameObject.SetActive(true);
     }
     public void Resume()
     {
         Time.timeScale = 1;
+        menuDisplay.gameObject.SetActive(false);
     }
     public void Quit()
     {
