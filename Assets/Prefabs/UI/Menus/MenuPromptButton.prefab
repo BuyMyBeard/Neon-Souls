@@ -235,6 +235,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2193200552444117825, guid: 0c438b249933efb4086ae6f3cfa8c9b6, type: 3}
+      propertyPath: m_UpdateMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6123189450613180305, guid: 0c438b249933efb4086ae6f3cfa8c9b6, type: 3}
       propertyPath: m_Name
       value: MenuPromptButton
