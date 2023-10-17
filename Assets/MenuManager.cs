@@ -3,17 +3,20 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
+public enum SubMenus { None, Options, Credits }
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] GameObject firstSelected;
+    [SerializeField] Selectable firstSelected;
     [SerializeField] GameObject optionsMenu;
     [SerializeField] bool pausable = false;
-    GameObject firstSelectedOverride;
+    Selectable firstSelectedOverride;
     EventSystem eventSystem;
     InputSystemUIInputModule inputModule;
+    public SubMenus CurrentSubMenu { get; private set; } = SubMenus.None;
 
-    public bool IsInSubMenu { get => firstSelectedOverride != null; }
+
+    public bool IsInSubMenu { get => CurrentSubMenu != SubMenus.None; }
     private void Awake()
     {
         eventSystem = EventSystem.current;
@@ -54,13 +57,19 @@ public class MenuManager : MonoBehaviour
 
     private void BackInput(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        StartCoroutine(Back());
+        GoBack();
+    }
+    public void GoBack()
+    {
+        if (CurrentSubMenu != SubMenus.None)
+            StartCoroutine(Back());
     }
     public IEnumerator Back()
     {
         yield return null;
         ResetOverride();
         optionsMenu.SetActive(false);
+        CurrentSubMenu = SubMenus.None;
     }
 
     private void MousePerformed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -82,9 +91,9 @@ public class MenuManager : MonoBehaviour
         if (eventSystem.currentSelectedGameObject == null)
         {
             if (firstSelectedOverride == null)
-                eventSystem.SetSelectedGameObject(firstSelected);
+                eventSystem.SetSelectedGameObject(firstSelected.gameObject);
             else
-                eventSystem.SetSelectedGameObject(firstSelectedOverride);
+                eventSystem.SetSelectedGameObject(firstSelectedOverride.gameObject);
         }
     }
     public void Play()
@@ -107,14 +116,19 @@ public class MenuManager : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
-    public void OverrideFirstSelected(GameObject gameObject)
+    public void OverrideFirstSelected(Selectable gameObject)
     {
         firstSelectedOverride = gameObject;
-        eventSystem.SetSelectedGameObject(gameObject);
+        if (eventSystem.alreadySelecting) return;
+        eventSystem.SetSelectedGameObject(gameObject.gameObject);
     }
     public void ResetOverride()
     {
         firstSelectedOverride = null;
-        eventSystem.SetSelectedGameObject(firstSelected);
+        if (eventSystem.alreadySelecting) return;
+        eventSystem.SetSelectedGameObject(firstSelected.gameObject);
     }
+
+    public void SetSubMenu(SubMenus subMenu) => CurrentSubMenu = subMenu;
+    public void SetSubMenuToOptions() => SetSubMenu(SubMenus.Options);
 }

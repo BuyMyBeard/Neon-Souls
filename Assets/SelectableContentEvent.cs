@@ -2,19 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class SelectableContentEvent : MonoBehaviour, ISelectHandler
 {
-    public float overflow;
-    public RectTransform contentRT;
+    [HideInInspector] public SelectableContentScroller scs;
+    const float TopMargin = 1.2f;
+    const float BottomMargin = 1.2f;
     public void OnSelect(BaseEventData eventData)
     {
-        RectTransform rt = GetComponent<RectTransform>();
-        float bottom = overflow - rt.offsetMin.y;
-        float top = contentRT.rect.height - overflow - rt.offsetMax.y;
-        if (bottom < contentRT.anchoredPosition.y)
-            contentRT.anchoredPosition = new Vector2(contentRT.anchoredPosition.x, bottom);
-        else if (top > contentRT.anchoredPosition.y)
-            contentRT.anchoredPosition = new Vector2(contentRT.anchoredPosition.x, top);
+        GetComponentInParent<MenuManager>().OverrideFirstSelected(GetComponent<Selectable>());
+        RectTransform rt = transform.GetComponent<RectTransform>();
+        Vector3[] selectedCorners = new Vector3[4];
+        rt.GetWorldCorners(selectedCorners);
+
+        float selectedBottom = selectedCorners[0].y;
+        float selectedTop = selectedCorners[1].y;
+
+        float deltaBottom = scs.ViewportBottom - selectedBottom + BottomMargin;
+        float deltaTop = scs.ViewportTop - selectedTop - TopMargin;
+        if (deltaBottom > 0)
+        {
+            scs.ScrollRect.verticalNormalizedPosition -= deltaBottom / scs.ContentHeight * 3;
+        }
+        else if (deltaTop < 0)
+        {
+            scs.ScrollRect.verticalNormalizedPosition -= deltaTop / scs.ContentHeight * 3;
+        }
+
     }
 }
