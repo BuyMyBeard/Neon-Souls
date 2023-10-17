@@ -608,6 +608,15 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RestoreDefaults"",
+                    ""type"": ""Button"",
+                    ""id"": ""69949b96-67ce-4061-a9f5-7a688679ad63"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1050,6 +1059,28 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8ba5f503-7176-4426-bd10-495f20650802"",
+                    ""path"": ""<Keyboard>/delete"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RestoreDefaults"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3d024386-f3be-47e6-946b-e30f450c5791"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RestoreDefaults"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1109,6 +1140,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
         m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
+        m_UI_RestoreDefaults = m_UI.FindAction("RestoreDefaults", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1299,6 +1331,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_TrackedDevicePosition;
     private readonly InputAction m_UI_TrackedDeviceOrientation;
     private readonly InputAction m_UI_Pause;
+    private readonly InputAction m_UI_RestoreDefaults;
     public struct UIActions
     {
         private @ActionMap m_Wrapper;
@@ -1314,6 +1347,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         public InputAction @TrackedDevicePosition => m_Wrapper.m_UI_TrackedDevicePosition;
         public InputAction @TrackedDeviceOrientation => m_Wrapper.m_UI_TrackedDeviceOrientation;
         public InputAction @Pause => m_Wrapper.m_UI_Pause;
+        public InputAction @RestoreDefaults => m_Wrapper.m_UI_RestoreDefaults;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1356,6 +1390,9 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @RestoreDefaults.started += instance.OnRestoreDefaults;
+            @RestoreDefaults.performed += instance.OnRestoreDefaults;
+            @RestoreDefaults.canceled += instance.OnRestoreDefaults;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -1393,6 +1430,9 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @RestoreDefaults.started -= instance.OnRestoreDefaults;
+            @RestoreDefaults.performed -= instance.OnRestoreDefaults;
+            @RestoreDefaults.canceled -= instance.OnRestoreDefaults;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -1454,5 +1494,6 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnRestoreDefaults(InputAction.CallbackContext context);
     }
 }

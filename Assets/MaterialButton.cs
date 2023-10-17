@@ -6,18 +6,18 @@ using UnityEngine.UI;
 
 public class MaterialButton : MonoBehaviour
 {
-    Material buttonMat;
+    protected Material buttonMat;
     [Range(0, 1)]
-    [SerializeField] float thickness = 0.075f;
+    [SerializeField] protected float thickness = 0.075f;
     [ColorUsage(true, true)]
-    [SerializeField] Color color;
-    [SerializeField] Color highlightedTextColor = Color.white;
-    [SerializeField] float scaleFactor = 1.15f;
+    [SerializeField] protected Color color;
+    [SerializeField] protected Color highlightedTextColor = Color.white;
+    [SerializeField] protected float scaleFactor = 1.15f;
     [Range(1, 2)]
-    [SerializeField] float clickedBoost = 1.3f;
-    Vector3 baseScale;
-    TextMeshProUGUI text;
-    private void Awake()
+    [SerializeField] protected float clickedBoost = 1.3f;
+    protected Vector3 baseScale;
+    protected TextMeshProUGUI text;
+    virtual protected void Awake()
     {
         buttonMat = new Material(Shader.Find("Shader Graphs/ButtonShader"));
         GetComponent<Image>().material = buttonMat;
@@ -26,8 +26,6 @@ public class MaterialButton : MonoBehaviour
         buttonMat.SetFloat("_Thickness", thickness);
         buttonMat.SetColor("_Color", color);
         buttonMat.SetFloat("_ClickedBoost", clickedBoost);
-        Debug.Log(rt.sizeDelta.x);
-        Debug.Log(rt.sizeDelta.y);
         baseScale = transform.localScale;
         text = GetComponentInChildren<TextMeshProUGUI>();
     }
