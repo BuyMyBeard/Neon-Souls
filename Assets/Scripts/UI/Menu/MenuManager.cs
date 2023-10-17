@@ -125,6 +125,7 @@ public class MenuManager : MonoBehaviour
     }
     public void MainMenu()
     {
+        FindObjectOfType<PlayerInput>().gameObject.SetActive(false);
         SceneManager.LoadScene(0);
     }
     public void OverrideFirstSelected(Selectable gameObject)
