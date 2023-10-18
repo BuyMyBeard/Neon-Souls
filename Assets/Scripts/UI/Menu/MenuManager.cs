@@ -20,12 +20,13 @@ public class MenuManager : MonoBehaviour
     public SubMenus CurrentSubMenu { get; private set; } = SubMenus.None;
 
     public bool IsInSubMenu { get => CurrentSubMenu != SubMenus.None; }
+    public bool IsInMainMenu { get => SceneManager.GetActiveScene().buildIndex == 0; }
     private void Awake()
     {
         eventSystem = EventSystem.current;
         inputModule = eventSystem.GetComponent<InputSystemUIInputModule>();
         menuDisplay = GetComponentInChildren<Canvas>();
-         if (SceneManager.GetActiveScene().buildIndex != 0) playerController = FindObjectOfType<PlayerController>();
+         if (!IsInMainMenu) playerController = FindObjectOfType<PlayerController>();
     }
     private void OnEnable()
     {
@@ -61,15 +62,21 @@ public class MenuManager : MonoBehaviour
     }
     public void GoBack()
     {
-        if (CurrentSubMenu != SubMenus.None)
             StartCoroutine(Back());
     }
     IEnumerator Back()
     {
         yield return null;
-        ResetOverride();
-        optionsMenu.SetActive(false);
-        CurrentSubMenu = SubMenus.None;
+        if (!IsInSubMenu && !IsInMainMenu)
+        {
+            Resume();
+        }
+        else
+        {
+            ResetOverride();
+            optionsMenu.SetActive(false);
+            CurrentSubMenu = SubMenus.None;
+        }
     }
 
     private void MousePerformed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
