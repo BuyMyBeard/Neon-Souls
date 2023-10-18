@@ -9,9 +9,16 @@ public class Settings : MonoBehaviour
     [SerializeField] Slider masterVolume, sfxVolume, musicVolume, controllerSensX, controllerSensY, mouseSens;
     [SerializeField] Toggle controllerInvertX, controllerInvertY, mouseInvert;
     [SerializeField] AudioMixer audioMixer;
+    [SerializeField] Slider songPosition;
+    [SerializeField] MusicManager musicManager;
+    [SerializeField] Toggle enableLoop;
     private void Awake()
     {
         InitiateValues();
+    }
+    private void Update()
+    {
+        songPosition.value = musicManager.audioSource.timeSamples;
     }
     public void ChangeMasterVolume(float volume)
     {
@@ -27,6 +34,22 @@ public class Settings : MonoBehaviour
     {
         Preferences.MusicVolume = volume;
         UpdateMusic();
+    }
+    public void ChangeSongPosition(float pos)
+    {
+        musicManager.audioSource.timeSamples = Mathf.FloorToInt(pos);
+    }
+    public void SetStartLoop()
+    {
+        musicManager.loopStartSample = musicManager.audioSource.timeSamples;
+    }
+    public void SetEndLoop()
+    {
+        musicManager.loopEndSample = musicManager.audioSource.timeSamples;
+    }
+    public void SetLoopEnabled(bool enabled)
+    {
+        musicManager.isLoopEnabled = enabled;
     }
     public void ChangeControllerSensX(float sens) => Preferences.ControllerSensitivityX = sens;
     public void ChangeControllerSensY(float sens) => Preferences.ControllerSensivityY = sens;
@@ -49,6 +72,8 @@ public class Settings : MonoBehaviour
         UpdateMaster();
         UpdateSFX();
         UpdateMusic();
+        //songPosition.maxValue = musicManager.audioSource.clip.samples;
+        //enableLoop.isOn = musicManager.isLoopEnabled;
     }
     public void ResetValues()
     {
