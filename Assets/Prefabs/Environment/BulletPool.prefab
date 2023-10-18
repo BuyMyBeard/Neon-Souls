@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8023061886880811016}
   m_Layer: 0
   m_Name: BulletPool
-  m_TagString: Untagged
+  m_TagString: BulletPool
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,5 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   capacity: 50
-  objToPool: {fileID: 0}
+  objToPool: {fileID: 1931027463076538790, guid: 38c95ccb1e7bb0945bc26f4162930293, type: 3}
   cooldown: 5

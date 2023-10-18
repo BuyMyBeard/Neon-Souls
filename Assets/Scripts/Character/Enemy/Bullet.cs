@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     Vector3 movement;
     Health playerHealth;
 
-    public Transform target;
+    public Transform target = null;
     [SerializeField] float speed;
     [SerializeField] float rotationSpeed;
     [SerializeField] float homingTime;
@@ -27,18 +27,21 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        if (transform == target) target = null;
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponentInParent<Health>();
-        //target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void OnEnable()
     {
         pool = GetComponentInParent<ObjectPool>();
         movement = Vector3.forward;
-        transform.rotation = Quaternion.LookRotation(target.position - transform.position);
-        originalYdir = transform.rotation.eulerAngles.y;
-        if (originalYdir > 180f) originalYdir = 360f - originalYdir;
-        p_homingCoroutine = StartCoroutine(HomingCoroutine());
+        if (target != null)
+        {
+            transform.rotation = Quaternion.LookRotation(target.position - transform.position);
+            originalYdir = transform.rotation.eulerAngles.y;
+            if (originalYdir > 180f) originalYdir = 360f - originalYdir;
+            p_homingCoroutine = StartCoroutine(HomingCoroutine());
+        }
     }
     void OnDisable()
     {
