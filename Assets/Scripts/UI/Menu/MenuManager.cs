@@ -62,7 +62,7 @@ public class MenuManager : MonoBehaviour
     }
     public void GoBack()
     {
-            StartCoroutine(Back());
+        StartCoroutine(Back());
     }
     IEnumerator Back()
     {
