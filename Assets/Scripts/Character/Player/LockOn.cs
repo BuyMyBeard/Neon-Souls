@@ -6,7 +6,6 @@ using UnityEngine;
 public class LockOn : MonoBehaviour
 {
     [SerializeField, Range(0, 360)] float viewRadius = 90;
-    [SerializeField, Range(0, 360)] float viewAngle = 60;
     [SerializeField] LayerMask lockableMask;
     [SerializeField] LayerMask environmentMask;
     [SerializeField] float detectionRefresh = 0.2f;
@@ -19,19 +18,49 @@ public class LockOn : MonoBehaviour
     Transform player;
     Transform camFollowTarget;
     bool isSmoothLooking = false;
+    PlayerController playerController;
+    Camera mainCam;
+    Coroutine CamLockOnTargetCoroutine;
     public bool IsLocked { get; private set; } = false;
     public Transform TargetEnemy { get; private set; } = null;
 
     public void Awake()
     {
         player = GetComponentInChildren<CharacterController>().transform;
+        playerController = GetComponent<PlayerController>();
         camFollowTarget = GameObject.Find("FollowTarget").transform;
         enemyHealthbar = FindObjectOfType<EnemyHealthbar>();
+        mainCam = Camera.main;
     }
     public void Start()
     {
         StartCoroutine(FindEnemiesCoroutine());
+        StartCoroutine(SwitchTargetCoroutine());
     }
+    IEnumerator SwitchTargetCoroutine()
+    { 
+        while (true)
+        {
+            float mouseThreshold = 80f;
+            if (playerController.KeyboardAndMouseActive) 
+            {
+                yield return new WaitUntil(() => IsLocked && Mathf.Abs(playerController.Look.x) > mouseThreshold || playerController.GamepadActive);
+            }
+            else
+            {
+                yield return new WaitUntil(() => IsLocked && Mathf.Abs(playerController.Look.x) > 0.5f || playerController.KeyboardAndMouseActive);
+            }
+            bool enemyAvailable;
+            if (playerController.Look.x > 0)
+                enemyAvailable = SwitchLockedEnemy(false);
+            else
+                enemyAvailable = SwitchLockedEnemy(true);
+            if (!enemyAvailable)
+                continue;
+            yield return new WaitForSeconds(0.3f);
+        }
+    }
+
     void OnLockOn()
     {
         if (IsLocked)
@@ -55,7 +84,7 @@ public class LockOn : MonoBehaviour
 
             //Debug.DrawLine(camFollowTarget.position, TargetEnemy.position,Color.blue,1);
             StartCoroutine(SmoothLook(Quaternion.LookRotation(new Vector3(TargetEnemy.position.x, TargetEnemy.position.y - yAxisLockOffset, TargetEnemy.position.z) - camFollowTarget.position)));
-            StartCoroutine(CamLockedOnTarget(TargetEnemy));
+            CamLockOnTargetCoroutine = StartCoroutine(CamLockedOnTarget(TargetEnemy));
         }
         else
             StartCoroutine(SmoothLook(Quaternion.LookRotation(player.forward)));
@@ -109,15 +138,17 @@ public class LockOn : MonoBehaviour
             Vector3 directionToEnemy = (enemy.position - Camera.main.transform.position).normalized;
             float distanceToTarget = Vector3.Distance(Camera.main.transform.position, enemy.position);
             
-            if (EnemyInCamAngle(directionToEnemy) && EnemyInRangeAndSight(directionToEnemy, distanceToTarget))
+            Vector3 enemyPos = mainCam.WorldToViewportPoint(enemy.position);
+            
+            if (EnemyInCamAngle(enemyPos) && EnemyInRangeAndSight(directionToEnemy, distanceToTarget))
             {
                 enemiesInSight.Add(enemy);
                 //Debug.DrawRay(Camera.main.transform.position, directionToEnemy * distanceToTarget, Color.magenta, 1);
             }
         }
     }
-
-    bool EnemyInCamAngle(Vector3 directionToEnemy) => Vector3.Angle(Camera.main.transform.forward, directionToEnemy) < viewAngle / 2;
+    // Use Camera.WorldToViewportPoint() for enemyPos
+    bool EnemyInCamAngle(Vector3 enemyPos) => enemyPos.x > 0 && enemyPos.x < 1;
     bool EnemyInRangeAndSight(Vector3 directionToEnemy, float distanceToTarget) => !Physics.Raycast(Camera.main.transform.position, directionToEnemy, distanceToTarget, environmentMask);
     IEnumerator FindEnemiesCoroutine()
     {
@@ -146,6 +177,43 @@ public class LockOn : MonoBehaviour
         return enemiesInSight.Aggregate((e1, e2) => (e1.transform.position - camFollowTarget.transform.position).magnitude < 
                (e2.transform.position - camFollowTarget.transform.position).magnitude ? e1 : e2);
     }
+
+    bool SwitchLockedEnemy(bool left)
+    {
+        if(enemiesInSight.Count > 0 && TargetEnemy != null)
+        {
+            List<Transform> enemies = enemiesInSight;
+            List<Transform> enemies1 = enemies.OrderBy((e) => mainCam.WorldToViewportPoint(e.position).x).ToList();
+            
+            int targetIndex = enemies1.FindIndex((e) => mainCam.WorldToViewportPoint(TargetEnemy.position).x == mainCam.WorldToViewportPoint(e.position).x);
+            if (left)
+                targetIndex--;
+            else
+                targetIndex++;
+
+            if (targetIndex >= 0 && targetIndex < enemies1.Count)
+                TargetEnemy = enemies1[targetIndex];
+            else
+                return false;
+
+            enemyHealth = TargetEnemy.gameObject.GetComponentInParent<Health>();
+            if (enemyHealth != null)
+            {
+                enemyHealthbar.trackedEnemy = enemyHealth;
+                enemyHealth.displayHealthbar = enemyHealthbar;
+                enemyHealthbar.Set(enemyHealth.CurrentHealth, enemyHealth.MaxHealth);
+                enemyHealthbar.Show();
+            }
+
+            //Debug.DrawLine(camFollowTarget.position, TargetEnemy.position,Color.blue,1);
+            StartCoroutine(SmoothLook(Quaternion.LookRotation(new Vector3(TargetEnemy.position.x, TargetEnemy.position.y - yAxisLockOffset, TargetEnemy.position.z) - camFollowTarget.position)));
+            StopCoroutine(CamLockOnTargetCoroutine);
+            CamLockOnTargetCoroutine = StartCoroutine(CamLockedOnTarget(TargetEnemy));
+            return true;
+        }   
+        return false;
+    }
+
     //void OnDrawGizmos()
     //{
     //    Gizmos.color = Color.red;
