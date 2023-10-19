@@ -1,15 +1,13 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Dependencies.Sqlite;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Pool;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class ShooterEnemy : Enemy
 {
     // InRange
+    [SerializeField] string poolTag = "BulletPool";
     [SerializeField] ObjectPool pool;
     [SerializeField] Transform arm;
     [SerializeField] Transform gunSight;
@@ -28,6 +26,9 @@ public class ShooterEnemy : Enemy
     {
         base.Awake();
         agent = GetComponent<NavMeshAgent>();
+
+        var existingPool = GameObject.FindGameObjectWithTag(poolTag);
+        pool = existingPool != null ? existingPool.GetComponent<ObjectPool>() : Instantiate(pool);
     }
     protected override void InRangeExit()
     {
