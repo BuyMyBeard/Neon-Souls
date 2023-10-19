@@ -18,9 +18,14 @@ public class PlayerController : MonoBehaviour
     InputAction run, dodge, parry;
 
     PlayerInput playerInput;
+    MenuManager menuManager;
+
+    public void SwitchToPlayerControls() => playerInput.SwitchCurrentActionMap("PlayerControls");
+    public void SwitchToUI() => playerInput.SwitchCurrentActionMap("UI");
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
+        menuManager = FindObjectOfType<MenuManager>();
         run = playerInput.currentActionMap.FindAction("RunButton");
         dodge = playerInput.currentActionMap.FindAction("DodgeButton");
         parry = playerInput.currentActionMap.FindAction("Parry");
@@ -32,8 +37,8 @@ public class PlayerController : MonoBehaviour
         run.canceled += Run_canceled;
         parry.started += Parry_started;
         parry.canceled += Parry_canceled;
+        menuManager.Resume();
     }
-
     private void Parry_canceled(InputAction.CallbackContext obj)
     {
         IsBlocking = false;
@@ -58,7 +63,17 @@ public class PlayerController : MonoBehaviour
     {
         SendMessage("OnDodge");
     }
+    void OnPlayerPause()
+    {
+        if (menuManager.Paused) menuManager.Resume();
+        else menuManager.Pause();
+    }
 
+    void OnUIPause()
+    {
+        if (menuManager.Paused) menuManager.Resume();
+        else menuManager.Pause();
+    }
     void OnDodge()
     {
         Debug.Log("dodged");

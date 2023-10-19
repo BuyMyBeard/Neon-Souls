@@ -49,7 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  pool: {fileID: 0}
+  poolTag: BulletPool
+  pool: {fileID: 8023061886880811016, guid: 95add22e22201944bb8bc6c68eb728bd, type: 3}
   arm: {fileID: 8287384211727680948}
   gunSight: {fileID: 2377777418961455643}
   shootCooldown: 1
@@ -90,7 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveTowardsThreshold: 3.5
-  noticeThreshold: 10
+  noticeThreshold: 20
 --- !u!114 &2833835177034621864
 MonoBehaviour:
   m_ObjectHideFlags: 0
