@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1191207585}
-  m_IndirectSpecularColor: {r: 0.4817528, g: 0.30355152, b: 0.5639355, a: 1}
+  m_IndirectSpecularColor: {r: 0.48175228, g: 0.30355093, b: 0.56393427, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -547,7 +547,7 @@ Transform:
   m_GameObject: {fileID: 69770871}
   serializedVersion: 2
   m_LocalRotation: {x: 0.13750403, y: 0, z: 0, w: 0.9905012}
-  m_LocalPosition: {x: 16.93, y: 2.07, z: -114.88}
+  m_LocalPosition: {x: -21.24, y: 2.07, z: -114.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5324,6 +5324,29 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!114 &590528557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590528552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a7fa9ada22b74f4e82dcb232a59731d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colors:
+  - {r: 1, g: 0.018451817, b: 0, a: 0}
+  - {r: 0, g: 1, b: 0.054832935, a: 0}
+  - {r: 0, g: 0.34316444, b: 1, a: 0}
+  - {r: 0.8788289, g: 1, b: 0, a: 0}
+  - {r: 1, g: 0, b: 0.8506589, a: 0}
+  - {r: 0, g: 1, b: 0.7287984, a: 0}
+  spectrumBandsToSkip: 0
+  spectrumBandsToTake: 5
+  avgHeight: 0
+  threshold: 300
 --- !u!43 &592444586
 Mesh:
   m_ObjectHideFlags: 0
@@ -7859,7 +7882,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5255728828956238318, guid: 0ccd5db62eaa0554394ba120838ab584, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.93
+      value: -21.24
       objectReference: {fileID: 0}
     - target: {fileID: 5255728828956238318, guid: 0ccd5db62eaa0554394ba120838ab584, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7920,6 +7943,14 @@ PrefabInstance:
     - target: {fileID: 7537199785170157240, guid: 0ccd5db62eaa0554394ba120838ab584, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.13750403
+      objectReference: {fileID: 0}
+    - target: {fileID: 7537199785170157240, guid: 0ccd5db62eaa0554394ba120838ab584, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7537199785170157240, guid: 0ccd5db62eaa0554394ba120838ab584, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8582181081958997822, guid: 0ccd5db62eaa0554394ba120838ab584, type: 3}
       propertyPath: displayHealthbar
@@ -12140,6 +12171,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 45680372}
+    - target: {fileID: 5269870586245476321, guid: 7848b0b99ce6a4b42a5e561288a79cbb, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5296964971357667943, guid: 7848b0b99ce6a4b42a5e561288a79cbb, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -12504,6 +12539,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1340069840}
+    - target: {fileID: 8226520861369743894, guid: 7848b0b99ce6a4b42a5e561288a79cbb, type: 3}
+      propertyPath: m_Intensity
+      value: 30000
+      objectReference: {fileID: 0}
     - target: {fileID: 8228992898170177148, guid: 7848b0b99ce6a4b42a5e561288a79cbb, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -12683,6 +12722,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5380247512562366394, guid: 7848b0b99ce6a4b42a5e561288a79cbb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 590528554}
+    - targetCorrespondingSourceObject: {fileID: 5380247512562366394, guid: 7848b0b99ce6a4b42a5e561288a79cbb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 590528557}
     - targetCorrespondingSourceObject: {fileID: 8024643680522401712, guid: 7848b0b99ce6a4b42a5e561288a79cbb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 982721254}
