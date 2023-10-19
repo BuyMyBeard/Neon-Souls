@@ -9,11 +9,17 @@ public class XpManager : MonoBehaviour
     
     List<IStat> upgratableStats = new();
     PlayerExperience playerXp;
+    Dictionary<Type, float> DictioChangesStat = new();
 
     private void Start()
     {
         playerXp = FindObjectOfType<PlayerExperience>();
         upgratableStats.AddRange(playerXp.GetComponents<IStat>());
+
+        foreach(IStat stat in upgratableStats)
+        {
+            DictioChangesStat.Add(stat.GetType(), 1);
+        }
     }
     public void DistribuerXp(int xpAmount)
     {
@@ -25,6 +31,17 @@ public class XpManager : MonoBehaviour
         {
             if (stat.GetType() == typeStatVisé)
                 stat.Ameliorateur += upgradeValue;
+        }
+    }
+    public void AddChanges(Type type, float ameliorateur)
+    {
+        DictioChangesStat[type] += ameliorateur;
+    }
+    public void ValidateChanges()
+    {
+        foreach ((Type type, float value) in DictioChangesStat)
+        {
+            UseXp(type, value);
         }
     }
 }
