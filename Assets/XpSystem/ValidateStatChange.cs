@@ -9,10 +9,8 @@ public class ValidateStatChange : MonoBehaviour
     {
         xpManager = FindObjectOfType<XpManager>();
     }
-
     public void ValidateUsesOfXp()
     {
         Debug.Log("Validate XpUsage");
     }
-
 }

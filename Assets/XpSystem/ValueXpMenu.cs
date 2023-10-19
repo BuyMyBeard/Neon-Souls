@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(TextMeshProUGUI))]
-public class AffichageXp : MonoBehaviour
+public class ValueXpMenu : MonoBehaviour
 {
     enum TypeStat
     {
@@ -18,14 +18,15 @@ public class AffichageXp : MonoBehaviour
         Magie*/
     }
 
+    [SerializeField] float ameliorateur = 0.10f;
     [SerializeField] TypeStat statType;
 
     public Type statVisé { get; private set; }
-    public float ameliorateur { get; private set; }
 
-
-
+    public float Ameliorateur => ameliorateur;
+    
     TextMeshProUGUI TextUi;
+
     private void Awake()
     {
         TextUi = GetComponent<TextMeshProUGUI>();
