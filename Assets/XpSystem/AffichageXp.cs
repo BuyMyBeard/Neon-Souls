@@ -21,6 +21,9 @@ public class AffichageXp : MonoBehaviour
     [SerializeField] TypeStat statType;
 
     public Type statVisé { get; private set; }
+    public float ameliorateur { get; private set; }
+
+
 
     TextMeshProUGUI TextUi;
     private void Awake()

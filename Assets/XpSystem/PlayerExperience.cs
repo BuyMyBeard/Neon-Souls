@@ -9,10 +9,8 @@ public class PlayerExperience : MonoBehaviour, IXpReceiver
     [SerializeField] string soulsTextTag = "SoulsCount";
     int xpAmount = 0;
     TextMeshProUGUI xpText;
-    XpManager xpManager;
     private void Awake()
     {
-        xpManager = FindObjectOfType<XpManager>();
         xpText = GameObject.FindGameObjectWithTag(soulsTextTag).GetComponent<TextMeshProUGUI>();
         xpText.text = xpAmount.ToString();
     }
