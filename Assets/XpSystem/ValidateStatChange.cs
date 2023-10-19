@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class ValidateStatChange : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    XpManager xpManager;
+    private void Awake()
     {
-        
+        xpManager = FindObjectOfType<XpManager>();
     }
-    // Update is called once per frame
-    void Update()
+
+    public void ValidateUsesOfXp()
     {
-        
+        Debug.Log("Validate XpUsage");
     }
+
 }
