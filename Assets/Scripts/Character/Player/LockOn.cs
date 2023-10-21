@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+public enum Directions { Left, Right }
+
 public class LockOn : MonoBehaviour
 {
     [SerializeField, Range(0, 360)] float viewRadius = 90;
@@ -10,8 +12,9 @@ public class LockOn : MonoBehaviour
     [SerializeField] LayerMask environmentMask;
     [SerializeField] float detectionRefresh = 0.2f;
     [SerializeField] float yAxisLockOffset = 1.5f;
-    [SerializeField, Range(1,2)] float maxLockOnDistance;
-    [SerializeField, Range(0, 5)] float healthbarLingerTimeOnEnemyDeath = 1.5f; 
+    [SerializeField, Range(1, 2)] float maxLockOnDistance;
+    [SerializeField, Range(0, 5)] float healthbarLingerTimeOnEnemyDeath = 1.5f;
+    [SerializeField] float mouseThreshold = 80;
     readonly List<Transform> enemiesInSight = new();
     EnemyHealthbar enemyHealthbar;
     Health enemyHealth = null;
@@ -38,11 +41,10 @@ public class LockOn : MonoBehaviour
         StartCoroutine(SwitchTargetCoroutine());
     }
     IEnumerator SwitchTargetCoroutine()
-    { 
+    {
         while (true)
         {
-            float mouseThreshold = 80f;
-            if (playerController.KeyboardAndMouseActive) 
+            if (playerController.KeyboardAndMouseActive)
             {
                 yield return new WaitUntil(() => IsLocked && Mathf.Abs(playerController.Look.x) > mouseThreshold || playerController.GamepadActive);
             }
@@ -52,9 +54,9 @@ public class LockOn : MonoBehaviour
             }
             bool enemyAvailable;
             if (playerController.Look.x > 0)
-                enemyAvailable = SwitchLockedEnemy(false);
+                enemyAvailable = SwitchLockedEnemy(Directions.Left);
             else
-                enemyAvailable = SwitchLockedEnemy(true);
+                enemyAvailable = SwitchLockedEnemy(Directions.Right);
             if (!enemyAvailable)
                 continue;
             yield return new WaitForSeconds(0.3f);
@@ -73,18 +75,7 @@ public class LockOn : MonoBehaviour
         {
             IsLocked = true;
             TargetEnemy = FindClosestEnemy();
-            enemyHealth = TargetEnemy.gameObject.GetComponentInParent<Health>();
-            if (enemyHealth != null)
-            {
-                enemyHealthbar.trackedEnemy = enemyHealth;
-                enemyHealth.displayHealthbar = enemyHealthbar;
-                enemyHealthbar.Set(enemyHealth.CurrentHealth, enemyHealth.MaxHealth);
-                enemyHealthbar.Show();
-            }
-
-            //Debug.DrawLine(camFollowTarget.position, TargetEnemy.position,Color.blue,1);
-            StartCoroutine(SmoothLook(Quaternion.LookRotation(new Vector3(TargetEnemy.position.x, TargetEnemy.position.y - yAxisLockOffset, TargetEnemy.position.z) - camFollowTarget.position)));
-            CamLockOnTargetCoroutine = StartCoroutine(CamLockedOnTarget(TargetEnemy));
+            LookAtTarget(false);
         }
         else
             StartCoroutine(SmoothLook(Quaternion.LookRotation(player.forward)));
@@ -108,7 +99,7 @@ public class LockOn : MonoBehaviour
             }
             camFollowTarget.LookAt(new Vector3(targetEnemy.position.x, targetEnemy.position.y - yAxisLockOffset, targetEnemy.position.z));
 
-            if(Vector3.Distance(camFollowTarget.position, targetEnemy.position) > viewRadius * maxLockOnDistance)
+            if (Vector3.Distance(camFollowTarget.position, targetEnemy.position) > viewRadius * maxLockOnDistance)
             {
                 IsLocked = false;
                 enemyHealthbar.Hide();
@@ -137,9 +128,9 @@ public class LockOn : MonoBehaviour
 
             Vector3 directionToEnemy = (enemy.position - Camera.main.transform.position).normalized;
             float distanceToTarget = Vector3.Distance(Camera.main.transform.position, enemy.position);
-            
+
             Vector3 enemyPos = mainCam.WorldToViewportPoint(enemy.position);
-            
+
             if (EnemyInCamAngle(enemyPos) && EnemyInRangeAndSight(directionToEnemy, distanceToTarget))
             {
                 enemiesInSight.Add(enemy);
@@ -172,45 +163,47 @@ public class LockOn : MonoBehaviour
         }
         isSmoothLooking = false;
     }
-    Transform FindClosestEnemy() 
+    Transform FindClosestEnemy()
     {
-        return enemiesInSight.Aggregate((e1, e2) => (e1.transform.position - camFollowTarget.transform.position).magnitude < 
+        return enemiesInSight.Aggregate((e1, e2) => (e1.transform.position - camFollowTarget.transform.position).magnitude <
                (e2.transform.position - camFollowTarget.transform.position).magnitude ? e1 : e2);
     }
-
-    bool SwitchLockedEnemy(bool left)
+    void LookAtTarget(bool isSwitchingTarget)
     {
-        if(enemiesInSight.Count > 0 && TargetEnemy != null)
+        enemyHealth = TargetEnemy.gameObject.GetComponentInParent<Health>();
+        if (enemyHealth != null)
         {
-            List<Transform> enemies = enemiesInSight;
-            List<Transform> enemies1 = enemies.OrderBy((e) => mainCam.WorldToViewportPoint(e.position).x).ToList();
-            
-            int targetIndex = enemies1.FindIndex((e) => mainCam.WorldToViewportPoint(TargetEnemy.position).x == mainCam.WorldToViewportPoint(e.position).x);
-            if (left)
+            enemyHealthbar.trackedEnemy = enemyHealth;
+            enemyHealth.displayHealthbar = enemyHealthbar;
+            enemyHealthbar.Set(enemyHealth.CurrentHealth, enemyHealth.MaxHealth);
+            enemyHealthbar.Show();
+        }
+
+        //Debug.DrawLine(camFollowTarget.position, TargetEnemy.position,Color.blue,1);
+        StartCoroutine(SmoothLook(Quaternion.LookRotation(new Vector3(TargetEnemy.position.x, TargetEnemy.position.y - yAxisLockOffset, TargetEnemy.position.z) - camFollowTarget.position)));
+        if(isSwitchingTarget)
+            StopCoroutine(CamLockOnTargetCoroutine);
+        CamLockOnTargetCoroutine = StartCoroutine(CamLockedOnTarget(TargetEnemy));
+    }
+    bool SwitchLockedEnemy(Directions dir)
+    {
+        if (enemiesInSight.Count > 0 && TargetEnemy != null)
+        {
+            List<Transform> enemies = enemiesInSight.OrderBy((e) => mainCam.WorldToViewportPoint(e.position).x).ToList();
+
+            int targetIndex = enemies.FindIndex((e) => mainCam.WorldToViewportPoint(TargetEnemy.position).x == mainCam.WorldToViewportPoint(e.position).x);
+            if (dir == Directions.Right)
                 targetIndex--;
-            else
+            else if (dir == Directions.Left)
                 targetIndex++;
 
-            if (targetIndex >= 0 && targetIndex < enemies1.Count)
-                TargetEnemy = enemies1[targetIndex];
+            if (targetIndex >= 0 && targetIndex < enemies.Count)
+                TargetEnemy = enemies[targetIndex];
             else
                 return false;
-
-            enemyHealth = TargetEnemy.gameObject.GetComponentInParent<Health>();
-            if (enemyHealth != null)
-            {
-                enemyHealthbar.trackedEnemy = enemyHealth;
-                enemyHealth.displayHealthbar = enemyHealthbar;
-                enemyHealthbar.Set(enemyHealth.CurrentHealth, enemyHealth.MaxHealth);
-                enemyHealthbar.Show();
-            }
-
-            //Debug.DrawLine(camFollowTarget.position, TargetEnemy.position,Color.blue,1);
-            StartCoroutine(SmoothLook(Quaternion.LookRotation(new Vector3(TargetEnemy.position.x, TargetEnemy.position.y - yAxisLockOffset, TargetEnemy.position.z) - camFollowTarget.position)));
-            StopCoroutine(CamLockOnTargetCoroutine);
-            CamLockOnTargetCoroutine = StartCoroutine(CamLockedOnTarget(TargetEnemy));
+            LookAtTarget(true);
             return true;
-        }   
+        }
         return false;
     }
 
