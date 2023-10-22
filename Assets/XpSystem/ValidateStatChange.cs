@@ -11,6 +11,7 @@ public class ValidateStatChange : MonoBehaviour
     }
     public void ValidateUsesOfXp()
     {
+        xpManager.ValidateChanges();
         Debug.Log("Validate XpUsage");
     }
 }
