@@ -18,18 +18,19 @@ public class ValueXpMenu : MonoBehaviour
         Magie*/
     }
 
-    [SerializeField] float ameliorateur = 0.10f;
     [SerializeField] TypeStat statType;
 
-    public Type statVisé { get; private set; }
+    PlayerExperience playerExperience;
+    public IStat statVisé { get; private set; }
 
-    public float Ameliorateur => ameliorateur;
+    public float Ameliorateur { get; private set; }
     
     TextMeshProUGUI TextUi;
 
     private void Awake()
     {
         TextUi = GetComponent<TextMeshProUGUI>();
+        playerExperience = FindObjectOfType<PlayerExperience>();
     }
 
     private void Start()
@@ -37,13 +38,13 @@ public class ValueXpMenu : MonoBehaviour
         switch (statType)
         {
             case TypeStat.Health:
-                statVisé = typeof(Health);
+                statVisé = playerExperience.GetComponent<Health>();
                 break;
             case TypeStat.Stamina:
-                statVisé = typeof(Stamina);
+                statVisé = playerExperience.GetComponent<Stamina>();
                 break;
             case TypeStat.Attaque:
-                statVisé = typeof(PlayerMeleeAttack);
+                statVisé = playerExperience.GetComponent<PlayerMeleeAttack>();
                 break;
             /*case TypeStat.Magie:
                 statVisé = typeof(Magic);
@@ -51,13 +52,8 @@ public class ValueXpMenu : MonoBehaviour
             default:
                 throw new Exception("Type de stat introuvable : AffichageXp");
         }
-        var StatsPlayer = FindObjectOfType<PlayerExperience>().GetComponents<IStat>();
-        foreach (IStat stat in StatsPlayer)
-        {
-            if(stat.GetType() == statVisé)
-            {
-                TextUi.text = stat.Value.ToString();
-            }
-        }
+        
+        TextUi.text = statVisé.Value.ToString();
+        Ameliorateur = statVisé.Ameliorateur;
     }
 }

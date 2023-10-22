@@ -6,42 +6,72 @@ using UnityEngine;
 
 public class XpManager : MonoBehaviour
 {
-    
+
     List<IStat> upgratableStats = new();
     PlayerExperience playerXp;
-    Dictionary<Type, float> DictioChangesStat = new();
+    Dictionary<IStat, int> DictioChangesStat = new();
+    [SerializeField] int CostForUpgrade = 10;
+
+    float localXpAmout;
 
     private void Start()
     {
         playerXp = FindObjectOfType<PlayerExperience>();
         upgratableStats.AddRange(playerXp.GetComponents<IStat>());
 
-        foreach(IStat stat in upgratableStats)
+        
+        foreach (IStat stat in upgratableStats)
         {
-            DictioChangesStat.Add(stat.GetType(), 1);
+            DictioChangesStat.Add(stat, 0);
         }
+
+        StartCoroutine(LateStart());
     }
+    //just to make sure its after the start 
+    IEnumerator LateStart()
+    {
+        yield return new WaitForSeconds(0.1f);
+        localXpAmout = playerXp.XpAmount;
+    }
+    //ChangePlayer and stat
     public void DistribuerXp(int xpAmount)
     {
         playerXp.GainXp(xpAmount);
     }
-    public void UseXp(Type typeStatVisé,float upgradeValue)
+    public void UseXp(IStat statVisé, int nbUpgrade)
     {
-        foreach (IStat stat in upgratableStats)
+        statVisé.UpgradeStat(nbUpgrade);
+        playerXp.removeXp(CostForUpgrade * nbUpgrade);
+    }
+    //LocalChange to verify integrity
+    public bool AddNbChanges(IStat stat)
+    {
+        if (localXpAmout - CostForUpgrade >= 0)
         {
-            if (stat.GetType() == typeStatVisé)
-                stat.Ameliorateur += upgradeValue;
+            localXpAmout -= CostForUpgrade;
+            DictioChangesStat[stat] += 1;
+            return true;
         }
+        return false;
     }
-    public void AddChanges(Type type, float ameliorateur)
+    public bool substractNbChanges(IStat stat)
     {
-        DictioChangesStat[type] += ameliorateur;
+        if (localXpAmout + CostForUpgrade <= playerXp.XpAmount && stat.Value >= DictioChangesStat[stat] * stat.Ameliorateur)
+        {
+            localXpAmout += CostForUpgrade;
+            DictioChangesStat[stat] -= 1;
+            return true;
+        }
+        return false;
     }
+    //Aplies changes to stat
     public void ValidateChanges()
     {
-        foreach ((Type type, float value) in DictioChangesStat)
+        foreach ((IStat stat, int value) in DictioChangesStat)
         {
-            UseXp(type, value);
+            UseXp(stat, value);
+            DictioChangesStat[stat] = 0;
         }
+        localXpAmout = playerXp.XpAmount;
     }
 }
