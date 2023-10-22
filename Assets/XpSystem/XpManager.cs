@@ -72,6 +72,6 @@ public class XpManager : MonoBehaviour
             UseXp(stat, value);
             DictioChangesStat[stat] = 0;
         }
-        localXpAmout = playerXp.XpAmount;
+        localXpAmout = playerXp.XpAmount; 
     }
 }
