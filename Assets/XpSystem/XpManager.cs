@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
 public class XpManager : MonoBehaviour
 {
 
@@ -67,9 +66,9 @@ public class XpManager : MonoBehaviour
     //Aplies changes to stat
     public void ValidateChanges()
     {
-        foreach ((IStat stat, int value) in DictioChangesStat)
+        foreach (IStat stat in upgratableStats)
         {
-            UseXp(stat, value);
+            UseXp(stat, DictioChangesStat[stat]);
             DictioChangesStat[stat] = 0;
         }
         localXpAmout = playerXp.XpAmount; 
