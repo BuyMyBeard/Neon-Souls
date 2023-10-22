@@ -8,19 +8,20 @@ public class Health : MonoBehaviour,IRechargeable,IStat
     public DisplayBar displayHealthbar;
     [SerializeField] float maxHealth = 100;
     [SerializeField] string healthbarTag = "PlayerHealthbar";
+    [SerializeField]int ameliorateur = 10;
     public bool invincible = false;
     PlayerAnimationEvents animationEvents;
     GameManager manager;
 
     float currentHealth;
-    float ameliorateur;
 
     Animator animator;
     public float CurrentHealth { get => currentHealth; }
     public bool IsDead { get => currentHealth <= 0; }
     public float MaxHealth { get => maxHealth; }
-    public float Ameliorateur { get => ameliorateur; set { ameliorateur = value; } }
-    public float Value => currentHealth;
+    public int Ameliorateur { get => ameliorateur;}
+    public float Value => MaxHealth;
+
 
     void Awake()
     {
@@ -111,5 +112,10 @@ public class Health : MonoBehaviour,IRechargeable,IStat
             animator.Play("Idle");
             GetComponent<CameraMovement>().SyncFollowTarget();
         }
+    }
+
+    public void UpgradeStat(int nbAmelioration)
+    {
+        maxHealth += nbAmelioration * Ameliorateur;
     }
 }

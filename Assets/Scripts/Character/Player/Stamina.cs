@@ -13,13 +13,12 @@ public class Stamina : MonoBehaviour, IRechargeable,IStat
     bool exhaustionTimerStarted = false;
     bool isRegenerating = false;
 
-    float ameliorateur;
-
+    int ameliorateur;
 
     public bool IsExhausted { get => currentStamina <= 0; }
-    public float Ameliorateur { get => ameliorateur; set { ameliorateur = value; } }
+    public int Ameliorateur => ameliorateur;
 
-    public float Value => currentStamina;
+    public float Value => maxStamina;
 
     private void Awake()
     {
@@ -85,5 +84,10 @@ public class Stamina : MonoBehaviour, IRechargeable,IStat
     {
         ResetStamina();
         playerStaminabar.Add(maxStamina, maxStamina);
+    }
+
+    public void UpgradeStat(int nbAmelioration)
+    {
+        maxStamina += ameliorateur * nbAmelioration;
     }
 }

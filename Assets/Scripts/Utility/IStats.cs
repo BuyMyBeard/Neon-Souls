@@ -5,6 +5,7 @@ using UnityEngine;
 public interface IStat
 { 
     GameObject gameObject { get; }
-    public float Value{get;}
-    float Ameliorateur { get; set; }
+    public float Value {get;}
+    int Ameliorateur { get;}
+    public void UpgradeStat(int nbAmelioration);
 }

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class PlayerExperience : MonoBehaviour, IXpReceiver
 {
     [SerializeField] string soulsTextTag = "SoulsCount";
-    int xpAmount = 0;
+    [SerializeField]int xpAmount = 0;
     TextMeshProUGUI xpText;
     private void Awake()
     {
