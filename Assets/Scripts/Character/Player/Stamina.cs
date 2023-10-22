@@ -8,16 +8,15 @@ public class Stamina : MonoBehaviour, IRechargeable,IStat
     [SerializeField] float currentStamina;
     [SerializeField] float staminaRegenRate = 100f;
     [SerializeField] float exhaustionTime = 0.5f;
+    [SerializeField]int ameliorateur;
     float exhaustionTimer = 0;
     IEnumerator exhaustionTimerCoroutine, regenStaminaCoroutine;
     bool exhaustionTimerStarted = false;
     bool isRegenerating = false;
 
-    int ameliorateur;
 
     public bool IsExhausted { get => currentStamina <= 0; }
     public int Ameliorateur => ameliorateur;
-
     public float Value => maxStamina;
 
     private void Awake()

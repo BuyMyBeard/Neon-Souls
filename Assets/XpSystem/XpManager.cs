@@ -56,7 +56,7 @@ public class XpManager : MonoBehaviour
     }
     public bool substractNbChanges(IStat stat)
     {
-        if (localXpAmout + CostForUpgrade <= playerXp.XpAmount && stat.Value >= DictioChangesStat[stat] * stat.Ameliorateur)
+        if (localXpAmout + CostForUpgrade <= playerXp.XpAmount && DictioChangesStat[stat] > 0)
         {
             localXpAmout += CostForUpgrade;
             DictioChangesStat[stat] -= 1;
