@@ -24,12 +24,12 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Parry",
+                    "name": "ParryButton",
                     "type": "Button",
                     "id": "af709def-8b8e-4466-8893-7379129aecb1",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Tap(duration=0.5)",
                     "initialStateCheck": false
                 },
                 {
@@ -102,6 +102,15 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "BlockButton",
+                    "type": "Button",
+                    "id": "e64eb688-56c6-4aac-b833-b65449f0b29c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold",
                     "initialStateCheck": false
                 }
             ],
@@ -311,7 +320,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Parry",
+                    "action": "ParryButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -322,7 +331,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Parry",
+                    "action": "ParryButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -510,6 +519,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "PlayerPause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2b6b6b24-77db-44ef-8525-91acf2e60ac2",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BlockButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f14878c7-5bb9-48fe-b1e0-5565e3254478",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BlockButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
