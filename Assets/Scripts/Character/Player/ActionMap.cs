@@ -125,15 +125,6 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Switch"",
-                    ""type"": ""Button"",
-                    ""id"": ""21ef8154-c537-41d9-92f0-28a44d1228ea"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -541,17 +532,6 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""PlayerPause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""33afc4ab-bde2-4a50-86f0-47390ec33c24"",
-                    ""path"": ""<Keyboard>/p"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Switch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1179,7 +1159,6 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         m_PlayerControls_LockOn = m_PlayerControls.FindAction("LockOn", throwIfNotFound: true);
         m_PlayerControls_RunButton = m_PlayerControls.FindAction("RunButton", throwIfNotFound: true);
         m_PlayerControls_PlayerPause = m_PlayerControls.FindAction("PlayerPause", throwIfNotFound: true);
-        m_PlayerControls_Switch = m_PlayerControls.FindAction("Switch", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1266,7 +1245,6 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerControls_LockOn;
     private readonly InputAction m_PlayerControls_RunButton;
     private readonly InputAction m_PlayerControls_PlayerPause;
-    private readonly InputAction m_PlayerControls_Switch;
     public struct PlayerControlsActions
     {
         private @ActionMap m_Wrapper;
@@ -1282,7 +1260,6 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         public InputAction @LockOn => m_Wrapper.m_PlayerControls_LockOn;
         public InputAction @RunButton => m_Wrapper.m_PlayerControls_RunButton;
         public InputAction @PlayerPause => m_Wrapper.m_PlayerControls_PlayerPause;
-        public InputAction @Switch => m_Wrapper.m_PlayerControls_Switch;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1325,9 +1302,6 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @PlayerPause.started += instance.OnPlayerPause;
             @PlayerPause.performed += instance.OnPlayerPause;
             @PlayerPause.canceled += instance.OnPlayerPause;
-            @Switch.started += instance.OnSwitch;
-            @Switch.performed += instance.OnSwitch;
-            @Switch.canceled += instance.OnSwitch;
         }
 
         private void UnregisterCallbacks(IPlayerControlsActions instance)
@@ -1365,9 +1339,6 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @PlayerPause.started -= instance.OnPlayerPause;
             @PlayerPause.performed -= instance.OnPlayerPause;
             @PlayerPause.canceled -= instance.OnPlayerPause;
-            @Switch.started -= instance.OnSwitch;
-            @Switch.performed -= instance.OnSwitch;
-            @Switch.canceled -= instance.OnSwitch;
         }
 
         public void RemoveCallbacks(IPlayerControlsActions instance)
@@ -1550,7 +1521,6 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         void OnLockOn(InputAction.CallbackContext context);
         void OnRunButton(InputAction.CallbackContext context);
         void OnPlayerPause(InputAction.CallbackContext context);
-        void OnSwitch(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
