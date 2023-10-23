@@ -38,7 +38,7 @@ public class SawScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 10) // 10 == Player layer
-            other.gameObject.GetComponentInParent<Health>().InflictDamage(sawDamage);
+            other.gameObject.GetComponentInParent<PlayerHealth>().InflictUnblockableDamage(sawDamage);
     }
     IEnumerator LerpPosition(float yOffset)
     {
