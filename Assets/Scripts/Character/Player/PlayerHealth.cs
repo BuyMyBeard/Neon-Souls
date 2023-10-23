@@ -29,6 +29,7 @@ public class PlayerHealth : Health
         }
         else
         {
+            // Staggered
             InflictDamage(damage);
         }
     }
