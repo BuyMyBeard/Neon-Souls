@@ -57,11 +57,12 @@ public class MenuManager : MonoBehaviour
 
     private void BackInput(InputAction.CallbackContext obj)
     {
-        GoBack();
+        if (Paused)
+            GoBack();
     }
     public void GoBack()
     {
-            StartCoroutine(Back());
+        StartCoroutine(Back());
     }
     IEnumerator Back()
     {
