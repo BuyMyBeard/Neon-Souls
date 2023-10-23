@@ -38,9 +38,7 @@ public class PlayerHealth : Health
         {
             Transform playerTransform = GetComponentInChildren<Animator>().transform;
             Vector3 directionToAttacker = attackerPosition.position - playerTransform.position;
-            if (Vector3.Dot(playerTransform.forward.normalized, directionToAttacker.normalized) > 0)
-                return true;
-            return false;
+            return Vector3.Dot(playerTransform.forward.normalized, directionToAttacker.normalized) > 0;
         }
         return false;
     }
