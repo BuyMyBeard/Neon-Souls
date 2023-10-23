@@ -8,15 +8,18 @@ public class Stamina : MonoBehaviour, IRechargeable
     [SerializeField] float currentStamina;
     [SerializeField] float staminaRegenRate = 100f;
     [SerializeField] float exhaustionTime = 0.5f;
+    [SerializeField] float blockingRegenMultiplier = .5f;
     float exhaustionTimer = 0;
     IEnumerator exhaustionTimerCoroutine, regenStaminaCoroutine;
     bool exhaustionTimerStarted = false;
     bool isRegenerating = false;
+    Block block;
     public bool IsExhausted { get => currentStamina <= 0; }
 
     private void Awake()
     {
         playerStaminabar = GameObject.FindGameObjectWithTag("DisplayedStamina").GetComponent<DisplayBar>();
+        block = GetComponent<Block>();
     }
     private void OnEnable()
     {
@@ -66,7 +69,7 @@ public class Stamina : MonoBehaviour, IRechargeable
         while(currentStamina < maxStamina)
         {
             yield return null;
-            float staminaToRegen = (staminaRegenRate * Time.deltaTime);
+            float staminaToRegen = ((block.IsBlocking ? blockingRegenMultiplier : 1) * staminaRegenRate * Time.deltaTime);
             currentStamina += staminaToRegen;
             playerStaminabar.Add(staminaToRegen, maxStamina);
         }
