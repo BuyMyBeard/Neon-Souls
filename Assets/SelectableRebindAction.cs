@@ -7,8 +7,9 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
-public class SelectableRebindAction : Selectable
+public class SelectableRebindAction : Selectable, ISubmitHandler, IPointerClickHandler
 {
     /// <summary>
     /// Reference to the action that is to be rebound.
@@ -251,11 +252,12 @@ public class SelectableRebindAction : Selectable
     private void PerformInteractiveRebind(InputAction action, int bindingIndex, bool allCompositeParts = false)
     {
         m_RebindOperation?.Cancel(); // Will null out m_RebindOperation.
-
+        action.Disable();
         void CleanUp()
         {
             m_RebindOperation?.Dispose();
             m_RebindOperation = null;
+            action.Enable();
         }
 
         // Configure the rebind.
@@ -444,6 +446,16 @@ public class SelectableRebindAction : Selectable
             var action = m_Action?.action;
             m_ActionLabel.text = action != null ? action.name : string.Empty;
         }
+    }
+
+    public void OnSubmit(BaseEventData eventData)
+    {
+        StartInteractiveRebind();
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        StartInteractiveRebind();
     }
 
     [Serializable]
