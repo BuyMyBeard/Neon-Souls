@@ -17,6 +17,7 @@ public class Block : MonoBehaviour
     Animator animator;
     PlayerAnimationEvents animationEvents;
     Stamina stamina;
+    Stagger stagger;
 
     public bool IsBlocking { get; private set; } = false;
     public bool IsParrying { get; private set; } = false;
@@ -27,11 +28,12 @@ public class Block : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         animationEvents = GetComponentInChildren<PlayerAnimationEvents>();
         stamina = GetComponent<Stamina>();
+        stagger = GetComponent<Stagger>();
     }
 
     public void Update()
     {
-        if (animationEvents.ActionAvailable && playerController.BlockInput && !stamina.IsExhausted)
+        if ((animationEvents.ActionAvailable || stagger.IsStaggered && animator.GetBool("IsBlocking")) && playerController.BlockInput && !stamina.IsExhausted)
         {
             animator.SetBool("IsBlocking", true);
             animationEvents.ReduceMovement();

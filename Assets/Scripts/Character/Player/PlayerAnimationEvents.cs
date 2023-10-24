@@ -7,22 +7,22 @@ using UnityEngine;
 public class PlayerAnimationEvents : MonoBehaviour
 {
     Health health;
-    CharacterController characterController;
     PlayerMovement playerMovement;
     CameraMovement cameraMovement;
     MeleeAttack attack;
     Potions potions;
+    Stagger stagger;
 
     bool actionAvailable = true;
     public bool ActionAvailable { get => actionAvailable; }
     private void Awake()
     {
         health = GetComponentInParent<Health>();
-        characterController = GetComponentInParent<CharacterController>();
         playerMovement = GetComponentInParent<PlayerMovement>();
         cameraMovement = GetComponentInParent<CameraMovement>();
         attack = GetComponentInParent<MeleeAttack>();
         potions = GetComponentInParent<Potions>();
+        stagger = GetComponentInParent<Stagger>();
     }
     public void EnableActions() => actionAvailable = true;
     public void DisableActions() => actionAvailable = false;
@@ -42,4 +42,17 @@ public class PlayerAnimationEvents : MonoBehaviour
     public void SyncRotation() => playerMovement.SyncRotation();
     public void ShowPotion() => potions.ShowPotion();
     public void HidePotion() => potions.HidePotion();
+    public void EndStagger() => stagger.IsStaggered = false;
+    public void ResetAll()
+    {
+        EnableActions();
+        StopIFrame();
+        UnFreezeMovement();
+        UnFreezeCamera();
+        UnFreezeRotation();
+        DisableWeaponCollider();
+        HidePotion();
+        RestoreMovement();
+        EndStagger();
+    }
 }
