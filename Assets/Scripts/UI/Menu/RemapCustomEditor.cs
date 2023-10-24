@@ -13,6 +13,10 @@ public class RemapCustomEditor : UnityEditor.Editor
 {
     protected void OnEnable()
     {
+        selectOnUpProperty = serializedObject.FindProperty("selectOnUp");
+        selectOnDownProperty = serializedObject.FindProperty("selectOnDown");
+        selectOnLeftProperty = serializedObject.FindProperty("selectOnLeft");
+        selectOnRightProperty = serializedObject.FindProperty("selectOnRight");
         m_ActionProperty = serializedObject.FindProperty("m_Action");
         m_BindingIdProperty = serializedObject.FindProperty("m_BindingId");
         m_ActionLabelProperty = serializedObject.FindProperty("m_ActionLabel");
@@ -31,7 +35,18 @@ public class RemapCustomEditor : UnityEditor.Editor
     {
         EditorGUI.BeginChangeCheck();
 
+        // Nav section
+        EditorGUILayout.LabelField(navLabel, Styles.boldLabel);
+        using (new EditorGUI.IndentLevelScope())
+        {
+            EditorGUILayout.PropertyField(selectOnUpProperty);
+            EditorGUILayout.PropertyField(selectOnDownProperty);
+            EditorGUILayout.PropertyField(selectOnLeftProperty);
+            EditorGUILayout.PropertyField(selectOnRightProperty);
+        }
+
         // Binding section.
+        EditorGUILayout.Space();
         EditorGUILayout.LabelField(m_BindingLabel, Styles.boldLabel);
         using (new EditorGUI.IndentLevelScope())
         {
@@ -146,7 +161,10 @@ public class RemapCustomEditor : UnityEditor.Editor
                 m_SelectedBindingOption = i;
         }
     }
-
+    private SerializedProperty selectOnUpProperty;
+    private SerializedProperty selectOnDownProperty;
+    private SerializedProperty selectOnLeftProperty;
+    private SerializedProperty selectOnRightProperty;
     private SerializedProperty m_ActionProperty;
     private SerializedProperty m_BindingIdProperty;
     private SerializedProperty m_ActionLabelProperty;
@@ -162,6 +180,7 @@ public class RemapCustomEditor : UnityEditor.Editor
     private GUIContent m_DisplayOptionsLabel = new GUIContent("Display Options");
     private GUIContent m_UILabel = new GUIContent("UI");
     private GUIContent m_EventsLabel = new GUIContent("Events");
+    private GUIContent navLabel = new GUIContent("Navigation");
     private GUIContent[] m_BindingOptions;
     private string[] m_BindingOptionValues;
     private int m_SelectedBindingOption;

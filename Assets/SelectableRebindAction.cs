@@ -311,9 +311,20 @@ public class SelectableRebindAction : Selectable
 
         m_RebindOperation.Start();
     }
-
-    protected void OnEnable()
+    protected override void Start()
     {
+        Navigation customNav = new Navigation();
+        customNav.mode = Navigation.Mode.Explicit;
+        customNav.selectOnUp = selectOnUp;
+        customNav.selectOnDown = selectOnDown;
+        customNav.selectOnLeft = selectOnLeft;
+        customNav.selectOnRight = selectOnRight;
+        navigation = customNav;
+        // targetGraphic = GetComponent<Image>();
+    }
+    protected override void OnEnable()
+    {
+        base.OnEnable();
         if (s_RebindActionUIs == null)
             s_RebindActionUIs = new List<SelectableRebindAction>();
         s_RebindActionUIs.Add(this);
@@ -321,8 +332,9 @@ public class SelectableRebindAction : Selectable
             InputSystem.onActionChange += OnActionChange;
     }
 
-    protected void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         m_RebindOperation?.Dispose();
         m_RebindOperation = null;
 
@@ -407,6 +419,11 @@ public class SelectableRebindAction : Selectable
     private InputActionRebindingExtensions.RebindingOperation m_RebindOperation;
 
     private static List<SelectableRebindAction> s_RebindActionUIs;
+
+    [SerializeField] Selectable selectOnUp;
+    [SerializeField] Selectable selectOnDown;
+    [SerializeField] Selectable selectOnLeft;
+    [SerializeField] Selectable selectOnRight;
 
     // We want the label for the action name to update in edit mode, too, so
     // we kick that off from here.
