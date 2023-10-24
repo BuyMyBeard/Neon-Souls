@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterControllerRootMotion : StateMachineBehaviour
+public class KnockbackBehaviour : StateMachineBehaviour
 {
     CharacterController characterController;
     PlayerMovement playerMovement;
@@ -13,6 +13,6 @@ public class CharacterControllerRootMotion : StateMachineBehaviour
     }
     override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        characterController.Move(animator.deltaPosition + Vector3.up * playerMovement.Gravity);
+        characterController.Move(animator.deltaPosition * animator.GetFloat("Knockback") + Vector3.up * playerMovement.Gravity);
     }
 }

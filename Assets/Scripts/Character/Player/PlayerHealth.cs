@@ -22,19 +22,19 @@ public class PlayerHealth : Health
         {
             stamina.Remove(staminaBlockCost);
             block.ResetParryWindow();
-            stagger.BlockHit();
+            stagger.BlockHit(0.5f);
         }
         else if (block.IsBlocking && !stamina.IsExhausted && IsAttackerInFront(attackerPosition)) 
         {
             int damageReduced = (int) (damage * block.DamageReduction);
             stamina.Remove(staminaBlockCost);
             InflictDamage(damageReduced);
-            stagger.BlockHit();
+            stagger.BlockHit(1);
         }
         else
         {
             InflictDamage(damage);
-            stagger.BecomeStaggered(attackerPosition);
+            stagger.BecomeStaggered(attackerPosition, 1);
         }
     }
     bool IsAttackerInFront(Transform attackerPosition)
