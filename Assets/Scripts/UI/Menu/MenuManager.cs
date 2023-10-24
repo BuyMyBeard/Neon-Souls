@@ -53,7 +53,9 @@ public class MenuManager : MonoBehaviour
     private void RestoreDefaultsInput(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         if (CurrentSubMenu == SubMenus.Options)
+        {
             GetComponentInChildren<Settings>().ResetValues();
+        }
     }
 
     private void BackInput(UnityEngine.InputSystem.InputAction.CallbackContext obj)
