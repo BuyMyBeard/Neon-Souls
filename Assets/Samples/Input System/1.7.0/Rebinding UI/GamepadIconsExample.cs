@@ -37,6 +37,8 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                 icon = ps4.GetSprite(controlPath);
             else if (InputSystem.IsFirstLayoutBasedOnSecond(deviceLayoutName, "Gamepad"))
                 icon = xbox.GetSprite(controlPath);
+            else if (InputSystem.IsFirstLayoutBasedOnSecond(deviceLayoutName, "Keyboard"))
+            { }
 
             var textComponent = component.bindingText;
 
