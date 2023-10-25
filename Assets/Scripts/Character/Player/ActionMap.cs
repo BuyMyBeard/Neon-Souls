@@ -125,6 +125,15 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CastSpell"",
+                    ""type"": ""Button"",
+                    ""id"": ""837e332f-865c-4f79-9863-928a61fdd26d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -340,7 +349,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""c8f2f6c3-1fdb-422e-90b6-a19d43f29b49"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -497,7 +506,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""RunButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -508,7 +517,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""RunButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -519,7 +528,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""PlayerPause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -530,8 +539,30 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""PlayerPause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""68111fd5-6f1c-4acf-9a28-04f15ee3bc5a"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""CastSpell"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9dde9a26-a39b-4c85-a2a8-32a4ed5451e9"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""CastSpell"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1159,6 +1190,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         m_PlayerControls_LockOn = m_PlayerControls.FindAction("LockOn", throwIfNotFound: true);
         m_PlayerControls_RunButton = m_PlayerControls.FindAction("RunButton", throwIfNotFound: true);
         m_PlayerControls_PlayerPause = m_PlayerControls.FindAction("PlayerPause", throwIfNotFound: true);
+        m_PlayerControls_CastSpell = m_PlayerControls.FindAction("CastSpell", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1245,6 +1277,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerControls_LockOn;
     private readonly InputAction m_PlayerControls_RunButton;
     private readonly InputAction m_PlayerControls_PlayerPause;
+    private readonly InputAction m_PlayerControls_CastSpell;
     public struct PlayerControlsActions
     {
         private @ActionMap m_Wrapper;
@@ -1260,6 +1293,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         public InputAction @LockOn => m_Wrapper.m_PlayerControls_LockOn;
         public InputAction @RunButton => m_Wrapper.m_PlayerControls_RunButton;
         public InputAction @PlayerPause => m_Wrapper.m_PlayerControls_PlayerPause;
+        public InputAction @CastSpell => m_Wrapper.m_PlayerControls_CastSpell;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1302,6 +1336,9 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @PlayerPause.started += instance.OnPlayerPause;
             @PlayerPause.performed += instance.OnPlayerPause;
             @PlayerPause.canceled += instance.OnPlayerPause;
+            @CastSpell.started += instance.OnCastSpell;
+            @CastSpell.performed += instance.OnCastSpell;
+            @CastSpell.canceled += instance.OnCastSpell;
         }
 
         private void UnregisterCallbacks(IPlayerControlsActions instance)
@@ -1339,6 +1376,9 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @PlayerPause.started -= instance.OnPlayerPause;
             @PlayerPause.performed -= instance.OnPlayerPause;
             @PlayerPause.canceled -= instance.OnPlayerPause;
+            @CastSpell.started -= instance.OnCastSpell;
+            @CastSpell.performed -= instance.OnCastSpell;
+            @CastSpell.canceled -= instance.OnCastSpell;
         }
 
         public void RemoveCallbacks(IPlayerControlsActions instance)
@@ -1521,6 +1561,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         void OnLockOn(InputAction.CallbackContext context);
         void OnRunButton(InputAction.CallbackContext context);
         void OnPlayerPause(InputAction.CallbackContext context);
+        void OnCastSpell(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
