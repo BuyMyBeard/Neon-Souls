@@ -17,7 +17,6 @@ public class MenuManager : MonoBehaviour
     PlayerController playerController;
     public bool Paused { get; private set; } = false;
     public SubMenus CurrentSubMenu { get; private set; } = SubMenus.None;
-
     public bool IsInSubMenu { get => CurrentSubMenu != SubMenus.None; }
     public bool IsInMainMenu { get => SceneManager.GetActiveScene().buildIndex == 0; }
     private void Awake()

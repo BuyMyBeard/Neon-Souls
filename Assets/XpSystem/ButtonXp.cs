@@ -13,11 +13,17 @@ public class ButtonXp : MonoBehaviour
     ValueXpMenu typeStat;
     TextMeshProUGUI textAfficher;
     float valeurText;
+    float defaultValue;
     private void Awake()
     {
         xpManager = FindObjectOfType<XpManager>();
         typeStat = GetComponentInParent<ValueXpMenu>();
         textAfficher = GetComponentInParent<TextMeshProUGUI>();
+    }
+    private IEnumerator Start()
+    {
+        yield return null;
+        defaultValue = float.Parse(textAfficher.text.ToString(), System.Globalization.NumberStyles.Float);
     }
     public void Uses() 
     {
@@ -34,6 +40,7 @@ public class ButtonXp : MonoBehaviour
         {
             valeurText += typeStat.Ameliorateur;
             textAfficher.text = (valeurText).ToString();
+            textAfficher.GetComponentInParent<TextMeshProUGUI>().color = Color.green;
         }
         //handle refusal of upgrade
     }
@@ -43,6 +50,10 @@ public class ButtonXp : MonoBehaviour
         {
             valeurText -= typeStat.Ameliorateur;
             textAfficher.text = (valeurText).ToString();
+            if(valeurText == defaultValue)
+            {
+                textAfficher.GetComponentInParent<TextMeshProUGUI>().color = Color.white;
+            }
         }
         //handle refusal of downgrade
     }
