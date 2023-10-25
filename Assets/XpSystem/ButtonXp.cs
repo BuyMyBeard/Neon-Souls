@@ -40,7 +40,7 @@ public class ButtonXp : MonoBehaviour
         {
             valeurText += typeStat.Ameliorateur;
             textAfficher.text = (valeurText).ToString();
-            textAfficher.GetComponentInParent<TextMeshProUGUI>().color = Color.green;
+            ChangeColor(Color.green);
         }
         //handle refusal of upgrade
     }
@@ -52,9 +52,13 @@ public class ButtonXp : MonoBehaviour
             textAfficher.text = (valeurText).ToString();
             if(valeurText == defaultValue)
             {
-                textAfficher.GetComponentInParent<TextMeshProUGUI>().color = Color.white;
+                ChangeColor(Color.white);
             }
         }
         //handle refusal of downgrade
+    }
+    public void ChangeColor(Color color)
+    {
+        textAfficher.GetComponentInParent<TextMeshProUGUI>().color = color;
     }
 }
