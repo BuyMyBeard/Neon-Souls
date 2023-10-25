@@ -23,11 +23,11 @@ public class SelectableContentEvent : MonoBehaviour, ISelectHandler
         float deltaTop = scs.ViewportTop - selectedTop - TopMargin;
         if (deltaBottom > 0)
         {
-            scs.ScrollRect.verticalNormalizedPosition -= deltaBottom / scs.ContentHeight * 3;
+            scs.ScrollRect.verticalNormalizedPosition = Mathf.Clamp01(scs.ScrollRect.verticalNormalizedPosition - deltaBottom / scs.ContentHeight * 3);
         }
         else if (deltaTop < 0)
         {
-            scs.ScrollRect.verticalNormalizedPosition -= deltaTop / scs.ContentHeight * 3;
+            scs.ScrollRect.verticalNormalizedPosition = Mathf.Clamp01(scs.ScrollRect.verticalNormalizedPosition - deltaTop / scs.ContentHeight * 3);
         }
 
     }
