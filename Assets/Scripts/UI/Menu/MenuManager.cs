@@ -115,6 +115,8 @@ public class MenuManager : MonoBehaviour
         Time.timeScale = 0;
         menuDisplay.gameObject.SetActive(true);
         playerController.SwitchToUI();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
     public void Resume()
     {
@@ -127,6 +129,8 @@ public class MenuManager : MonoBehaviour
         Time.timeScale = 1;
         menuDisplay.gameObject.SetActive(false);
         playerController.SwitchToPlayerControls();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
     public void Quit()
     {
