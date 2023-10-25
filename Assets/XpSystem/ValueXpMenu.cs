@@ -14,8 +14,8 @@ public class ValueXpMenu : MonoBehaviour
     {
         Health,
         Stamina,
-        Attaque/*,
-        Magie*/
+        Attaque,
+        Magie
     }
 
     [SerializeField] TypeStat statType;

@@ -27,10 +27,10 @@ public class BonfireManager : MonoBehaviour
             throw new MissingComponentException("Character Controller component missing on character or Player tag is not set");
 
         // active first bonfire
-        currentBonfire.Interact();
+        currentBonfire.active = true;
 
         //set spawnpoint at the first bonfire
-        currentBonfire.Interact();
+        SetCurrentBonfire(currentBonfire);
     }
     public void ActivateBonfire(Bonfire bonefire) 
     {

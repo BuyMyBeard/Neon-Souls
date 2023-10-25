@@ -72,7 +72,7 @@ public class XpManager : MonoBehaviour
             DictioChangesStat[stat] = 0;
             if (typeof(IRechargeable).IsAssignableFrom(stat.GetType()))
             {
-                var i = (IRechargeable)stat;
+               var i = (IRechargeable)stat;
                i.Recharge();
             }
         }
