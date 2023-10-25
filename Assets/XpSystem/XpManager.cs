@@ -70,6 +70,11 @@ public class XpManager : MonoBehaviour
         {
             UseXp(stat, DictioChangesStat[stat]);
             DictioChangesStat[stat] = 0;
+            if (typeof(IRechargeable).IsAssignableFrom(stat.GetType()))
+            {
+                var i = (IRechargeable)stat;
+               i.Recharge();
+            }
         }
         localXpAmout = playerXp.XpAmount; 
     }
