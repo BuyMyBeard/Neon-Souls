@@ -23,7 +23,8 @@ public class Health : MonoBehaviour,IRechargeable,IStat
     public float Value => MaxHealth;
 
 
-    void Awake()
+    
+    protected void Awake()
     {
         if (displayHealthbar == null)
             displayHealthbar = GameObject.FindGameObjectWithTag(healthbarTag).GetComponent<DisplayBar>();    
@@ -35,6 +36,9 @@ public class Health : MonoBehaviour,IRechargeable,IStat
     {
         ResetHealth();
     }
+
+
+    //TODO: Refactor this to make it not public
     /// <summary>
     /// Apply damage to health
     /// </summary>
@@ -52,7 +56,7 @@ public class Health : MonoBehaviour,IRechargeable,IStat
             Die();
         }
     }
-    private void Die()
+    protected void Die()
     {
 
         if (gameObject.CompareTag("Player"))

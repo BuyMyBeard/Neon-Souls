@@ -24,7 +24,27 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: "\nClip 'armature|Stagger-Back' has import animation
+      warnings that might lower retargeting quality:\nNote: Activate translation
+      DOF on avatar to improve retargeting quality.\n\t'hand.L' has scale animation
+      that will be discarded.\n\nClip 'armature|Stagger-Front' has import animation
+      warnings that might lower retargeting quality:\nNote: Activate translation
+      DOF on avatar to improve retargeting quality.\n\t'hand.L' has scale animation
+      that will be discarded.\n\nClip 'armature|Stagger-Left' has import animation
+      warnings that might lower retargeting quality:\nNote: Activate translation
+      DOF on avatar to improve retargeting quality.\n\t'hand.L' has scale animation
+      that will be discarded.\n\nClip 'armature|Stagger-Right' has import animation
+      warnings that might lower retargeting quality:\nNote: Activate translation
+      DOF on avatar to improve retargeting quality.\n\t'hand.L' has scale animation
+      that will be discarded.\n\nClip 'armature|StartBlocking' has import animation
+      warnings that might lower retargeting quality:\nNote: Activate translation
+      DOF on avatar to improve retargeting quality.\n\t'forearm.L' has scale animation
+      that will be discarded.\n\t'hand.L' has scale animation that will be discarded.\n\t'forearm.R'
+      has scale animation that will be discarded.\n\nClip 'armature|StopBlocking'
+      has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'forearm.L'
+      has scale animation that will be discarded.\n\t'hand.L' has scale animation
+      that will be discarded.\n\t'forearm.R' has scale animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -104,35 +124,6 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: RightHandWireframe|QuickWalk
-      takeName: RightHandWireframe|QuickWalk
-      internalID: 7691613398735360117
-      firstFrame: 0
-      lastFrame: 24
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -675,6 +666,64 @@ ModelImporter:
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: StartBlocking
+      takeName: armature|StartBlocking
+      internalID: -2664276372046607286
+      firstFrame: 0
+      lastFrame: 8
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: StopBlocking
+      takeName: armature|StopBlocking
+      internalID: 2512299517036377318
+      firstFrame: 0
+      lastFrame: 8
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -962,23 +1011,23 @@ ModelImporter:
     - name: hand.L
       parentName: forearm.L
       position: {x: 0.000000070407985, y: 0.000000010896474, z: -0.34002694}
-      rotation: {x: 0.09790768, y: 0.099698946, z: -0.6772961, w: 0.72231865}
-      scale: {x: 1.0000503, y: 0.9999668, z: 0.999983}
+      rotation: {x: 0.09790763, y: 0.09969899, z: -0.6772961, w: 0.72231865}
+      scale: {x: 1.0000368, y: 0.9999943, z: 0.999969}
     - name: LeftHand
       parentName: hand.L
-      position: {x: 0.056959603, y: -0.29821518, z: 0.11378997}
-      rotation: {x: -0.667805, y: -0.01676396, z: -0.15102488, w: 0.72866106}
+      position: {x: 0.056959577, y: -0.29821542, z: 0.11378991}
+      rotation: {x: -0.667805, y: -0.016763965, z: -0.15102488, w: 0.72866106}
       scale: {x: -1.0208442, y: -1.0100427, z: -1.0065948}
     - name: LeftHandWireframe
       parentName: hand.L
-      position: {x: 0.056959603, y: -0.29821518, z: 0.11378997}
-      rotation: {x: -0.667805, y: -0.01676396, z: -0.15102488, w: 0.72866106}
+      position: {x: 0.056959577, y: -0.29821542, z: 0.11378991}
+      rotation: {x: -0.667805, y: -0.016763965, z: -0.15102488, w: 0.72866106}
       scale: {x: -1.0208442, y: -1.0100427, z: -1.0065948}
     - name: Potion
       parentName: LeftHandWireframe
-      position: {x: 0.17557271, y: -0.16784073, z: -0.21323138}
-      rotation: {x: 0.2848012, y: 0.52013075, z: -0.53664845, w: 0.6003006}
-      scale: {x: 1, y: 1.0000001, z: 1}
+      position: {x: 0.17557272, y: -0.16784084, z: -0.2132316}
+      rotation: {x: 0.28480116, y: 0.5201307, z: -0.5366486, w: 0.60030055}
+      scale: {x: 1, y: 1, z: 1}
     - name: upper_arm.R
       parentName: torso
       position: {x: 0.21549106, y: -0.019714762, z: -0.28570363}
@@ -1031,94 +1080,94 @@ ModelImporter:
       scale: {x: 0.043415196, y: 1.3798327, z: 0.0434152}
     - name: thigh.L
       parentName: pelvis
-      position: {x: -0.10813171, y: -0.009155924, z: -0.015828358}
-      rotation: {x: 0.99757165, y: 0.017560566, z: -0.066409916, w: 0.011495255}
-      scale: {x: 0.999982, y: 0.9999958, z: 0.99999994}
+      position: {x: -0.08810375, y: -0.009155924, z: -0.015828358}
+      rotation: {x: 0.9972124, y: 0.0016038866, z: -0.019225413, w: 0.072078645}
+      scale: {x: 1.0000077, y: 1.0000434, z: 1.0000002}
     - name: LeftThigh
       parentName: thigh.L
-      position: {x: 0.12062535, y: 0.005724026, z: 0.111691765}
-      rotation: {x: -0.47367275, y: -0.4699491, z: 0.5282265, w: 0.5251275}
-      scale: {x: -1.0033842, y: -0.9981264, z: -0.99997836}
+      position: {x: 0.09920491, y: 0.0027178002, z: 0.112197846}
+      rotation: {x: -0.48236766, y: -0.47914958, z: 0.51990885, w: 0.5171381}
+      scale: {x: -1.0033841, y: -0.9981264, z: -0.9999785}
     - name: LeftThighWireframe
       parentName: thigh.L
-      position: {x: 0.12062535, y: 0.005724026, z: 0.111691765}
-      rotation: {x: -0.47367275, y: -0.4699491, z: 0.5282265, w: 0.5251275}
-      scale: {x: -1.0033842, y: -0.9981264, z: -0.99997836}
+      position: {x: 0.09920491, y: 0.0027178002, z: 0.112197846}
+      rotation: {x: -0.48236766, y: -0.47914958, z: 0.51990885, w: 0.5171381}
+      scale: {x: -1.0033841, y: -0.9981264, z: -0.9999785}
     - name: shin.L
       parentName: thigh.L
-      position: {x: 4.4528858e-10, y: -0.000000004452886, z: -0.39505273}
-      rotation: {x: 0.09718724, y: 0.05974705, z: -0.015092894, w: 0.9933565}
-      scale: {x: 0.99999994, y: 0.9999997, z: 1.0000006}
+      position: {x: -0.000000009480391, y: -0.0000000034837284, z: -0.39372882}
+      rotation: {x: 0.20054545, y: -0.005294614, z: -0.011704594, w: 0.9796002}
+      scale: {x: 1.0000004, y: 0.9999983, z: 1.0000017}
     - name: LeftLowerLeg
       parentName: shin.L
-      position: {x: 0.087860055, y: 0.08164164, z: 0.5060576}
-      rotation: {x: -0.52221996, y: -0.4485134, z: 0.5524396, w: 0.47003463}
-      scale: {x: -1.0010014, y: -0.9995502, z: -0.99991065}
+      position: {x: 0.087860055, y: 0.08164163, z: 0.49330124}
+      rotation: {x: -0.5222199, y: -0.44851327, z: 0.5524397, w: 0.47003475}
+      scale: {x: -1.0010012, y: -0.9995502, z: -0.9999106}
     - name: LeftLowerLegWireframe
       parentName: shin.L
-      position: {x: 0.087860055, y: 0.08164164, z: 0.5060576}
-      rotation: {x: -0.52221996, y: -0.4485134, z: 0.5524396, w: 0.47003463}
-      scale: {x: -1.0010014, y: -0.9995502, z: -0.99991065}
+      position: {x: 0.087860055, y: 0.08164163, z: 0.49330124}
+      rotation: {x: -0.5222199, y: -0.44851327, z: 0.5524397, w: 0.47003475}
+      scale: {x: -1.0010012, y: -0.9995502, z: -0.9999106}
     - name: foot.L
       parentName: shin.L
-      position: {x: 0.0000000014275429, y: -0.000000006495975, z: -0.52581215}
-      rotation: {x: -0.7334941, y: 0.016982969, z: 0.039378416, w: 0.6783417}
-      scale: {x: 0.99999976, y: 0.99999976, z: 1.0000004}
+      position: {x: 0.000000007019844, y: 0.0000000014144461, z: -0.53856874}
+      rotation: {x: -0.7607916, y: 0.04206698, z: 0.036445357, w: 0.6466052}
+      scale: {x: 1.0000013, y: 0.9999995, z: 0.9999991}
     - name: LeftFoot
       parentName: foot.L
-      position: {x: -0.020328661, y: -1.0399575, z: 0.016249225}
-      rotation: {x: -0.05671066, y: -0.708299, z: 0.01158109, w: 0.7035356}
-      scale: {x: -1.001225, y: -1.0009845, z: -0.99984056}
+      position: {x: -0.020328658, y: -1.0399575, z: 0.01625357}
+      rotation: {x: -0.05671066, y: -0.708299, z: 0.011581096, w: 0.7035356}
+      scale: {x: -1.001225, y: -1.0009844, z: -0.9998407}
     - name: LeftFootWireframe
       parentName: foot.L
-      position: {x: -0.020328661, y: -1.0399575, z: 0.016249225}
-      rotation: {x: -0.05671066, y: -0.708299, z: 0.01158109, w: 0.7035356}
-      scale: {x: -1.001225, y: -1.0009845, z: -0.99984056}
+      position: {x: -0.020328658, y: -1.0399575, z: 0.01625357}
+      rotation: {x: -0.05671066, y: -0.708299, z: 0.011581096, w: 0.7035356}
+      scale: {x: -1.001225, y: -1.0009844, z: -0.9998407}
     - name: thigh.R
       parentName: pelvis
-      position: {x: 0.10813171, y: -0.0091559235, z: -0.015828358}
-      rotation: {x: 0.9983825, y: -0.016342223, z: 0.04687498, w: 0.027712949}
-      scale: {x: 1.0000787, y: 1.0000281, z: 1.0000004}
+      position: {x: 0.08134417, y: -0.0091559235, z: -0.015828358}
+      rotation: {x: 0.9995701, y: 0.0018215041, z: -0.004319566, w: 0.028942691}
+      scale: {x: 1.0000002, y: 1.0000085, z: 1.0000002}
     - name: RightThigh
       parentName: thigh.R
-      position: {x: -0.12429699, y: -0.015814202, z: 0.11218816}
-      rotation: {x: 0.5479506, y: -0.51687443, z: -0.47713673, w: 0.45269358}
-      scale: {x: 1.0013813, y: 0.99939054, z: 0.9998688}
+      position: {x: -0.08051233, y: -0.005068343, z: 0.12235438}
+      rotation: {x: 0.5246519, y: -0.4996122, z: -0.49703023, w: 0.47758663}
+      scale: {x: 1.0013814, y: 0.99939096, z: 0.9998684}
     - name: RightThighWireframe
       parentName: thigh.R
-      position: {x: -0.12361169, y: -0.015652241, z: 0.108222894}
-      rotation: {x: 0.5479506, y: -0.51687443, z: -0.47713673, w: 0.45269358}
-      scale: {x: 1.0013813, y: 0.99939054, z: 0.9998688}
+      position: {x: -0.080168016, y: -0.0049513276, z: 0.11834351}
+      rotation: {x: 0.5246519, y: -0.4996122, z: -0.49703023, w: 0.47758663}
+      scale: {x: 1.0013814, y: 0.99939096, z: 0.9998684}
     - name: shin.R
       parentName: thigh.R
-      position: {x: -0.0000000101106705, y: 0.000000007543712, z: -0.3948772}
-      rotation: {x: 0.10950707, y: -0.06692463, z: 0.012858957, w: 0.99164706}
-      scale: {x: 1.0000013, y: 0.99999684, z: 1.0000018}
+      position: {x: -0.0000000020201696, y: 0.000000003221794, z: -0.39319044}
+      rotation: {x: 0.11310284, y: 0.00014307637, z: 0.008751726, w: 0.99354476}
+      scale: {x: 0.9999998, y: 1.0000001, z: 0.9999997}
     - name: RightLowerLeg
       parentName: shin.R
-      position: {x: -0.070408165, y: 0.09213657, z: 0.50584674}
-      rotation: {x: 0.46161747, y: -0.5508085, z: -0.45603734, w: 0.52492785}
-      scale: {x: 1.0005463, y: 1.0000149, z: 0.99974424}
+      position: {x: -0.07040815, y: 0.092136584, z: 0.5060348}
+      rotation: {x: 0.46161738, y: -0.5508083, z: -0.45603746, w: 0.52492803}
+      scale: {x: 1.0005463, y: 1.0000149, z: 0.9997443}
     - name: RightLowerLegWireframe
       parentName: shin.R
-      position: {x: -0.070408165, y: 0.09213657, z: 0.50584674}
-      rotation: {x: 0.46161747, y: -0.5508085, z: -0.45603734, w: 0.52492785}
-      scale: {x: 1.0005463, y: 1.0000149, z: 0.99974424}
+      position: {x: -0.07040815, y: 0.092136584, z: 0.5060348}
+      rotation: {x: 0.46161738, y: -0.5508083, z: -0.45603746, w: 0.52492803}
+      scale: {x: 1.0005463, y: 1.0000149, z: 0.9997443}
     - name: foot.R
       parentName: shin.R
-      position: {x: -0.0000000026717315, y: -0.0000000046100466, z: -0.526568}
-      rotation: {x: -0.7310719, y: 0.0019968604, z: -0.021072447, w: 0.6819721}
-      scale: {x: 0.99999833, y: 0.9999999, z: 1.0000017}
+      position: {x: -0.0000000091546095, y: -0.000000005448237, z: -0.5263799}
+      rotation: {x: -0.73113745, y: -0.02074316, z: -0.016886132, w: 0.68170565}
+      scale: {x: 0.9999998, y: 0.9999999, z: 1.0000001}
     - name: RightFoot
       parentName: foot.R
-      position: {x: 0.0443079, y: -1.0422661, z: 0.036941368}
+      position: {x: 0.044307914, y: -1.0422662, z: 0.036939383}
       rotation: {x: -0.6999889, y: 0.0065618134, z: 0.7110295, w: -0.06640498}
-      scale: {x: 1.0012395, y: 1.0010028, z: 0.99983877}
+      scale: {x: 1.0012395, y: 1.0010027, z: 0.9998387}
     - name: RightFootWireframe
       parentName: foot.R
-      position: {x: 0.0443079, y: -1.0422661, z: 0.036941368}
+      position: {x: 0.044307914, y: -1.0422662, z: 0.036939383}
       rotation: {x: -0.6999889, y: 0.006561781, z: 0.7110295, w: -0.06640497}
-      scale: {x: 1.0012395, y: 1.0010028, z: 0.99983877}
+      scale: {x: 1.0012395, y: 1.0010027, z: 0.9998387}
     - name: ik-hand.R
       parentName: root
       position: {x: 1.0722712, y: 0.05580553, z: -1.5930284}
@@ -1146,7 +1195,7 @@ ModelImporter:
       scale: {x: 0.9999999, y: 1, z: 1.0000001}
     - name: knee-target.R
       parentName: root
-      position: {x: 0.11020748, y: 0.27174926, z: -0.5819214}
+      position: {x: 0.083289355, y: 0.27174926, z: -0.5819214}
       rotation: {x: 0.74090314, y: 0.016512875, z: -0.027469791, w: 0.6708467}
       scale: {x: 0.9999999, y: 1, z: 1.0000001}
     - name: ik-foot.L
@@ -1156,9 +1205,9 @@ ModelImporter:
       scale: {x: 0.99999994, y: 1, z: 1.0000001}
     - name: knee-target.L
       parentName: root
-      position: {x: -0.09099127, y: 0.26677743, z: -0.5813616}
-      rotation: {x: 0.7409034, y: -0.016512934, z: 0.027469903, w: 0.67084646}
-      scale: {x: 0.99999994, y: 0.99999994, z: 1}
+      position: {x: -0.06932632, y: 0.27674016, z: -0.5847707}
+      rotation: {x: 0.7409034, y: -0.01651293, z: 0.027469845, w: 0.67084646}
+      scale: {x: 0.9999999, y: 0.99999994, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
