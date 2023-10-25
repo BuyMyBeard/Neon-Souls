@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
 
 public class SelectableContentEvent : MonoBehaviour, ISelectHandler
@@ -12,6 +14,7 @@ public class SelectableContentEvent : MonoBehaviour, ISelectHandler
     public void OnSelect(BaseEventData eventData)
     {
         GetComponentInParent<MenuManager>().OverrideFirstSelected(GetComponent<Selectable>());
+        if (eventData.currentInputModule.IsPointerOverGameObject(Pointer.current.deviceId)) return;
         RectTransform rt = transform.GetComponent<RectTransform>();
         Vector3[] selectedCorners = new Vector3[4];
         rt.GetWorldCorners(selectedCorners);
@@ -29,6 +32,5 @@ public class SelectableContentEvent : MonoBehaviour, ISelectHandler
         {
             scs.ScrollRect.verticalNormalizedPosition = Mathf.Clamp01(scs.ScrollRect.verticalNormalizedPosition - deltaTop / scs.ContentHeight * 3);
         }
-
     }
 }

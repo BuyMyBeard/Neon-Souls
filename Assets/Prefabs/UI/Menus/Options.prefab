@@ -816,7 +816,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 3133288843011144193}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.36648965
+  m_Size: 0.3664897
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1373,9 +1373,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4301171059496276855, guid: 37c2e52653635ee44b8e08c711efabdb, type: 3}
       propertyPath: m_text
-      value: 'Back
-
-'
+      value: Retour
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301171059496276855, guid: 37c2e52653635ee44b8e08c711efabdb, type: 3}
+      propertyPath: m_fontSize
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301171059496276855, guid: 37c2e52653635ee44b8e08c711efabdb, type: 3}
+      propertyPath: m_margin.x
+      value: -4.0081787
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301171059496276855, guid: 37c2e52653635ee44b8e08c711efabdb, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7350955981872308966, guid: 37c2e52653635ee44b8e08c711efabdb, type: 3}
       propertyPath: m_Sprite
@@ -1701,6 +1711,22 @@ PrefabInstance:
     - target: {fileID: 2851989180376321178, guid: 37c2e52653635ee44b8e08c711efabdb, type: 3}
       propertyPath: m_Name
       value: RestoreDefaults
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301171059496276855, guid: 37c2e52653635ee44b8e08c711efabdb, type: 3}
+      propertyPath: m_text
+      value: "Restaurer les param\xE8tres par d\xE9faut"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301171059496276855, guid: 37c2e52653635ee44b8e08c711efabdb, type: 3}
+      propertyPath: m_fontSize
+      value: 19.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301171059496276855, guid: 37c2e52653635ee44b8e08c711efabdb, type: 3}
+      propertyPath: m_margin.x
+      value: -4.0081787
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301171059496276855, guid: 37c2e52653635ee44b8e08c711efabdb, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 19.32
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3075,7 +3101,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7640624265392199030, guid: 6cb51656a6af0954798700ffa445241a, type: 3}
       propertyPath: m_text
-      value: Echap
+      value: RMB
       objectReference: {fileID: 0}
     - target: {fileID: 8661491509676968873, guid: 6cb51656a6af0954798700ffa445241a, type: 3}
       propertyPath: m_Name
@@ -3299,7 +3325,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7640624265392199030, guid: 6cb51656a6af0954798700ffa445241a, type: 3}
       propertyPath: m_text
-      value: E
+      value: LB
       objectReference: {fileID: 0}
     - target: {fileID: 8661491509676968873, guid: 6cb51656a6af0954798700ffa445241a, type: 3}
       propertyPath: m_Name
@@ -4238,7 +4264,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7640624265392199030, guid: 6cb51656a6af0954798700ffa445241a, type: 3}
       propertyPath: m_text
-      value: RMB
+      value: Shift
       objectReference: {fileID: 0}
     - target: {fileID: 8661491509676968873, guid: 6cb51656a6af0954798700ffa445241a, type: 3}
       propertyPath: m_Name
@@ -4985,7 +5011,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7640624265392199030, guid: 6cb51656a6af0954798700ffa445241a, type: 3}
       propertyPath: m_text
-      value: R
+      value: RB
       objectReference: {fileID: 0}
     - target: {fileID: 8661491509676968873, guid: 6cb51656a6af0954798700ffa445241a, type: 3}
       propertyPath: m_Name
