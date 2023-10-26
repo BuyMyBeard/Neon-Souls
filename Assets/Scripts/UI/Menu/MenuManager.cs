@@ -16,6 +16,7 @@ public class MenuManager : MonoBehaviour
     InputSystemUIInputModule inputModule;
     Canvas menuDisplay;
     PlayerController playerController;
+    public SelectableRebindAction currentlyRebinding;
     public bool Paused { get; private set; } = false;
     public SubMenus CurrentSubMenu { get; private set; } = SubMenus.None;
 
@@ -120,6 +121,11 @@ public class MenuManager : MonoBehaviour
     }
     public void Resume()
     {
+        if (currentlyRebinding != null)
+        {
+            currentlyRebinding.Cancel();
+            return;
+        }
         if (IsInSubMenu)
         {
             GoBack();
