@@ -9,7 +9,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class SelectableRebindAction : Selectable, ISubmitHandler, IPointerClickHandler
+public class SelectableRebindAction : Selectable, ISubmitHandler, IPointerClickHandler, IResetableRemap
 {
     /// <summary>
     /// Reference to the action that is to be rebound.
@@ -253,11 +253,14 @@ public class SelectableRebindAction : Selectable, ISubmitHandler, IPointerClickH
     {
         m_RebindOperation?.Cancel(); // Will null out m_RebindOperation.
         action.Disable();
+        MenuManager menuManager = GetComponentInParent<MenuManager>();
+        menuManager.currentlyRebinding = this;
         void CleanUp()
         {
             m_RebindOperation?.Dispose();
             m_RebindOperation = null;
-            action.Enable();
+            // action.Enable();
+            menuManager.currentlyRebinding = null;
         }
 
         // Configure the rebind.
@@ -308,10 +311,15 @@ public class SelectableRebindAction : Selectable, ISubmitHandler, IPointerClickH
         if (m_RebindOverlay == null && m_RebindText == null && m_RebindStartEvent == null && m_BindingText != null)
             m_BindingText.text = "<Waiting...>";
 
+
         // Give listeners a chance to act on the rebind starting.
         m_RebindStartEvent?.Invoke(this, m_RebindOperation);
 
         m_RebindOperation.Start();
+    }
+    public void Cancel()
+    {
+        m_RebindOperation?.Cancel();
     }
     protected override void Start()
     {

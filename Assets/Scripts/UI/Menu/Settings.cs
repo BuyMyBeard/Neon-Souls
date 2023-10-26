@@ -54,10 +54,7 @@ public class Settings : MonoBehaviour
     {
         Preferences.ResetPlayerPrefs();
         InitiateValues();
-        foreach (var rebind in GetComponentsInChildren<SelectableRebindAction>())
-        {
-            rebind.ResetToDefault();
-        }
+        foreach (var rebind in GetComponentsInChildren<IResetableRemap>()) rebind.ResetToDefault();
     }
 
     void UpdateMaster() => audioMixer.SetFloat("Master", Mathf.Log10(Preferences.MasterVolume) * 20);

@@ -255,7 +255,6 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         private void PerformInteractiveRebind(InputAction action, int bindingIndex, bool allCompositeParts = false)
         {
             m_RebindOperation?.Cancel(); // Will null out m_RebindOperation.
-
             void CleanUp()
             {
                 m_RebindOperation?.Dispose();
@@ -314,6 +313,11 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             m_RebindStartEvent?.Invoke(this, m_RebindOperation);
 
             m_RebindOperation.Start();
+        }
+
+        public void Cancel()
+        {
+            m_RebindOperation?.Cancel();
         }
 
         protected void OnEnable()

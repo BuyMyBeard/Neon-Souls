@@ -231,6 +231,7 @@ MonoBehaviour:
   firstSelected: {fileID: 2588879721486077561}
   optionsMenu: {fileID: 7928058849282092230}
   pausable: 0
+  currentlyRebinding: {fileID: 0}
 --- !u!114 &5099368022007816962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -909,10 +910,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3026832358881507249, guid: 8bd9e572118e9fa48983337136b1d786, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.00002861023
-      objectReference: {fileID: 0}
     - target: {fileID: 3133288843011144193, guid: 8bd9e572118e9fa48983337136b1d786, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1198,8 +1195,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8601023390359907703, guid: 8bd9e572118e9fa48983337136b1d786, type: 3}
-      propertyPath: m_Value
-      value: 1
+      propertyPath: m_Size
+      value: 0.36648968
       objectReference: {fileID: 0}
     - target: {fileID: 8609889783335535930, guid: 8bd9e572118e9fa48983337136b1d786, type: 3}
       propertyPath: m_AnchorMax.y
