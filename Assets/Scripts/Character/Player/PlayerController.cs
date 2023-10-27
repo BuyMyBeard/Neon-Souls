@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using UnityEngine.Windows;
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public bool IsSprinting { get; private set; } = false;
     public bool IsBlocking { get; private set; } = false;
 
+    private bool pausedThisFrame = false;
     public string CurrentControlScheme { get => playerInput.currentControlScheme; }
     public bool KeyboardAndMouseActive { get => CurrentControlScheme == "Keyboard&Mouse"; }
     public bool GamepadActive { get => CurrentControlScheme == "Gamepad"; }
@@ -30,14 +32,21 @@ public class PlayerController : MonoBehaviour
         dodge = playerInput.currentActionMap.FindAction("DodgeButton");
         parry = playerInput.currentActionMap.FindAction("Parry");
     }
-    private void Start()
+    private void OnEnable()
     {
         dodge.performed += Dodge_performed;
         run.performed += Run_performed;
         run.canceled += Run_canceled;
         parry.started += Parry_started;
         parry.canceled += Parry_canceled;
-        menuManager.Resume();
+    }
+    private void OnDisable()
+    {
+        dodge.performed -= Dodge_performed;
+        run.performed -= Run_performed;
+        run.canceled -= Run_canceled;
+        parry.started -= Parry_started;
+        parry.canceled -= Parry_canceled;
     }
     private void Parry_canceled(InputAction.CallbackContext obj)
     {
@@ -65,14 +74,25 @@ public class PlayerController : MonoBehaviour
     }
     void OnPlayerPause()
     {
+        if (!pausedThisFrame)
+            StartCoroutine(Pause());
+    }
+
+
+    IEnumerator Pause()
+    {
+        pausedThisFrame = true;
+        yield return null;
         if (menuManager.Paused) menuManager.Resume();
         else menuManager.Pause();
+        yield return null;
+        pausedThisFrame = false;
     }
 
     void OnUIPause()
     {
-        if (menuManager.Paused) menuManager.Resume();
-        else menuManager.Pause();
+        if (!pausedThisFrame)
+            StartCoroutine(Pause());
     }
     void OnDodge()
     {

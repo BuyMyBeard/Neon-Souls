@@ -985,7 +985,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/delete"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""RestoreDefaults"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -996,19 +996,8 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""RestoreDefaults"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""64659d56-ab03-41f9-a5d2-66c9e0d5ab62"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""UIPause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1018,7 +1007,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""UIPause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
