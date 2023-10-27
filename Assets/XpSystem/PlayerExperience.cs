@@ -14,11 +14,8 @@ public class PlayerExperience : MonoBehaviour, IXpReceiver
         xpText = GameObject.FindGameObjectWithTag(soulsTextTag).GetComponent<TextMeshProUGUI>();
         xpText.text = xpAmount.ToString();
     }
-    public int XpAmount
-    {
-        get { return xpAmount; }
-        private set { xpAmount = value; }
-    }
+    public int XpAmount => xpAmount; 
+    
     public void GainXp(int amount)
     { 
         xpAmount += amount;

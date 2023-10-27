@@ -61,4 +61,8 @@ public class ButtonXp : MonoBehaviour
     {
         textAfficher.GetComponentInParent<TextMeshProUGUI>().color = color;
     }
+    public void ResetDefault()
+    {
+        defaultValue = float.Parse(textAfficher.text.ToString(), System.Globalization.NumberStyles.Float);
+    }
 }

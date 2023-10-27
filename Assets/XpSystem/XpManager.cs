@@ -9,7 +9,10 @@ public class XpManager : MonoBehaviour
     List<IStat> upgratableStats = new();
     PlayerExperience playerXp;
     Dictionary<IStat, int> DictioChangesStat = new();
+    XpAmountText xpAmountText;
+    
     [SerializeField] int CostForUpgrade = 10;
+
 
     float localXpAmout;
 
@@ -17,7 +20,7 @@ public class XpManager : MonoBehaviour
     {
         playerXp = FindObjectOfType<PlayerExperience>();
         upgratableStats.AddRange(playerXp.GetComponents<IStat>());
-
+        xpAmountText = FindObjectOfType<XpAmountText>();
         
         foreach (IStat stat in upgratableStats)
         {
@@ -31,16 +34,22 @@ public class XpManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         localXpAmout = playerXp.XpAmount;
+        xpAmountText.RefreshRender(localXpAmout.ToString()); 
     }
     //ChangePlayer and stat
     public void DistribuerXp(int xpAmount)
     {
         playerXp.GainXp(xpAmount);
+        localXpAmout = playerXp.XpAmount;
+        xpAmountText.RefreshRender(localXpAmout.ToString());
     }
     public void UseXp(IStat statVisé, int nbUpgrade)
     {
         statVisé.UpgradeStat(nbUpgrade);
         playerXp.removeXp(CostForUpgrade * nbUpgrade);
+
+        localXpAmout = playerXp.XpAmount;
+        xpAmountText.RefreshRender(localXpAmout.ToString());
     }
     //LocalChange to verify integrity
     public bool AddNbChanges(IStat stat)
@@ -49,6 +58,7 @@ public class XpManager : MonoBehaviour
         {
             localXpAmout -= CostForUpgrade;
             DictioChangesStat[stat] += 1;
+            xpAmountText.RefreshRender(localXpAmout.ToString());
             return true;
         }
         return false;
@@ -59,6 +69,7 @@ public class XpManager : MonoBehaviour
         {
             localXpAmout += CostForUpgrade;
             DictioChangesStat[stat] -= 1;
+            xpAmountText.RefreshRender(localXpAmout.ToString());
             return true;
         }
         return false;
@@ -76,6 +87,5 @@ public class XpManager : MonoBehaviour
                i.Recharge();
             }
         }
-        localXpAmout = playerXp.XpAmount; 
     }
 }

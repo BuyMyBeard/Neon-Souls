@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class XpMenuManager : MonoBehaviour
-{a
+{
     Canvas menuDisplay;
     PlayerController playerController;
     ButtonXp[] buttons;
