@@ -267,10 +267,8 @@ public class SelectableRebindAction : Selectable, ISubmitHandler, IPointerClickH
 
         // Configure the rebind.
         m_RebindOperation = action.PerformInteractiveRebinding(bindingIndex)
-            .WithCancelingThrough("Gamepad/start")
-            .WithCancelingThrough("Keyboard/escape")
-            .WithControlsExcluding("Gamepad/leftStick/*")
-            .WithControlsExcluding("Gamepad/rightStick/*")
+            .WithCancelingThrough("<Keyboard>/escape")
+            .WithControlsExcluding("<Gamepad>/start")
             .OnCancel(
                 operation =>
                 {

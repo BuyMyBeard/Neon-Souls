@@ -14,6 +14,8 @@ public class CopyRebind : MonoBehaviour, IResetableRemap
     private string m_BindingId;
     [SerializeField]
     private InputBinding.DisplayStringOptions m_DisplayStringOptions;
+    bool isCopyingValue = false;
+
 
     /// <summary>
     /// Reference to the action that is to be rebound.
@@ -54,10 +56,9 @@ public class CopyRebind : MonoBehaviour, IResetableRemap
             return;
         SelectableRebindAction.isCopyingBinding = true;
         InputActionRebindingExtensions.ApplyBindingOverride(actionReference, bindingIndex, $"/{deviceLayoutName}/{controlPath}");
-        StartCoroutine(SetFalseCopyState());
+        StartCoroutine(TurnOfIsCopying());
     }
-
-    IEnumerator SetFalseCopyState()
+    IEnumerator TurnOfIsCopying()
     {
         yield return null;
         SelectableRebindAction.isCopyingBinding = false;

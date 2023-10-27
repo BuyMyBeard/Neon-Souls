@@ -550,7 +550,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3748807409981509000, guid: 88dc20ef7ae4aac43baf212095a9c733, type: 3}
       propertyPath: m_text
-      value: LB
+      value: E
       objectReference: {fileID: 0}
     - target: {fileID: 3876709410529916290, guid: 88dc20ef7ae4aac43baf212095a9c733, type: 3}
       propertyPath: m_AnchorMax.y
@@ -569,6 +569,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4008375954685573381, guid: 88dc20ef7ae4aac43baf212095a9c733, type: 3}
+      propertyPath: menuDisplay
+      value: 
+      objectReference: {fileID: 7454206857542275124}
+    - target: {fileID: 4008375954685573381, guid: 88dc20ef7ae4aac43baf212095a9c733, type: 3}
       propertyPath: firstSelected
       value: 
       objectReference: {fileID: 0}
@@ -579,6 +583,10 @@ PrefabInstance:
     - target: {fileID: 4087372888269571722, guid: 88dc20ef7ae4aac43baf212095a9c733, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131264662452569404, guid: 88dc20ef7ae4aac43baf212095a9c733, type: 3}
+      propertyPath: m_Name
+      value: PauseCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 4201351228347246124, guid: 88dc20ef7ae4aac43baf212095a9c733, type: 3}
       propertyPath: m_Navigation.m_SelectOnUp
@@ -806,7 +814,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6726521688647628079, guid: 88dc20ef7ae4aac43baf212095a9c733, type: 3}
       propertyPath: m_text
-      value: RB
+      value: R
       objectReference: {fileID: 0}
     - target: {fileID: 6809095407099507601, guid: 88dc20ef7ae4aac43baf212095a9c733, type: 3}
       propertyPath: m_AnchorMax.y
@@ -955,6 +963,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &7454206857542275124 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4131264662452569404, guid: 88dc20ef7ae4aac43baf212095a9c733, type: 3}
+  m_PrefabInstance: {fileID: 6784561748843861256}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7604053399692815373 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4008375954685573381, guid: 88dc20ef7ae4aac43baf212095a9c733, type: 3}
