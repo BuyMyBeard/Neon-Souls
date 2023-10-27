@@ -65,7 +65,8 @@ public class MenuManager : MonoBehaviour
     }
     public void GoBack()
     {
-            StartCoroutine(Back());
+        if (currentlyRebinding != null) return;
+        StartCoroutine(Back());
     }
     IEnumerator Back()
     {
@@ -121,11 +122,6 @@ public class MenuManager : MonoBehaviour
     }
     public void Resume()
     {
-        if (currentlyRebinding != null)
-        {
-            currentlyRebinding.Cancel();
-            return;
-        }
         if (IsInSubMenu)
         {
             GoBack();

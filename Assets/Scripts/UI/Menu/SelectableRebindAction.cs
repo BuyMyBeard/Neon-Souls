@@ -253,25 +253,31 @@ public class SelectableRebindAction : Selectable, ISubmitHandler, IPointerClickH
     {
         m_RebindOperation?.Cancel(); // Will null out m_RebindOperation.
         action.Disable();
+        isCopyingBinding = false;
         MenuManager menuManager = GetComponentInParent<MenuManager>();
         menuManager.currentlyRebinding = this;
-        void CleanUp()
+        IEnumerator CleanUp()
         {
             m_RebindOperation?.Dispose();
             m_RebindOperation = null;
             // action.Enable();
+            yield return null;
             menuManager.currentlyRebinding = null;
         }
 
         // Configure the rebind.
         m_RebindOperation = action.PerformInteractiveRebinding(bindingIndex)
+            .WithCancelingThrough("Gamepad/start")
+            .WithCancelingThrough("Keyboard/escape")
+            .WithControlsExcluding("Gamepad/leftStick/*")
+            .WithControlsExcluding("Gamepad/rightStick/*")
             .OnCancel(
                 operation =>
                 {
                     m_RebindStopEvent?.Invoke(this, operation);
                     m_RebindOverlay?.SetActive(false);
                     UpdateBindingDisplay();
-                    CleanUp();
+                    StartCoroutine(CleanUp());
                 })
             .OnComplete(
                 operation =>
@@ -279,7 +285,7 @@ public class SelectableRebindAction : Selectable, ISubmitHandler, IPointerClickH
                     m_RebindOverlay?.SetActive(false);
                     m_RebindStopEvent?.Invoke(this, operation);
                     UpdateBindingDisplay();
-                    CleanUp();
+                    StartCoroutine(CleanUp());
 
                     // If there's more composite parts we should bind, initiate a rebind
                     // for the next part.
@@ -362,7 +368,7 @@ public class SelectableRebindAction : Selectable, ISubmitHandler, IPointerClickH
     // will update our UI to reflect the current keyboard layout.
     private static void OnActionChange(object obj, InputActionChange change)
     {
-        if (change != InputActionChange.BoundControlsChanged)
+        if (change != InputActionChange.BoundControlsChanged || isCopyingBinding)
             return;
 
         var action = obj as InputAction;
@@ -429,6 +435,8 @@ public class SelectableRebindAction : Selectable, ISubmitHandler, IPointerClickH
     private InputActionRebindingExtensions.RebindingOperation m_RebindOperation;
 
     private static List<SelectableRebindAction> s_RebindActionUIs;
+
+    public static bool isCopyingBinding = false;
 
     [SerializeField] Selectable selectOnUp;
     [SerializeField] Selectable selectOnDown;
