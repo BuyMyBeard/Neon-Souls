@@ -50,11 +50,17 @@ public class CopyRebind : MonoBehaviour, IResetableRemap
     }
     public void Copy(SelectableRebindAction component, string bindingDisplayString, string deviceLayoutName, string controlPath)
     {
+        if (!ResolveActionAndBinding(out var action, out var bindingIndex))
+            return;
+        SelectableRebindAction.isCopyingBinding = true;
+        InputActionRebindingExtensions.ApplyBindingOverride(actionReference, bindingIndex, $"/{deviceLayoutName}/{controlPath}");
+        StartCoroutine(SetFalseCopyState());
+    }
 
-        //if (!ResolveActionAndBinding(out var action, out var bindingIndex))
-        //    return;
-
-        //InputActionRebindingExtensions.ApplyBindingOverride(actionReference, bindingIndex, controlPath);
+    IEnumerator SetFalseCopyState()
+    {
+        yield return null;
+        SelectableRebindAction.isCopyingBinding = false;
     }
     public void ResetToDefault()
     {
