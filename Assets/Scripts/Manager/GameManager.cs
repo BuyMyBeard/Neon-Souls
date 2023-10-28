@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -10,7 +8,9 @@ public class GameManager : MonoBehaviour
     BonfireManager bonfireManager;
     List<IRechargeable> rechargeables = new();
     readonly List<IRechargeable> tempRechargeables = new();
-    float timeBeforeRespawn = 5;
+    [SerializeField] float timeBeforeRespawn = 5;
+    [SerializeField] float timeBeforeDeathScreen = 2;
+    DeathScreen deathScreen;
     public static GameManager Instance { get; private set; }
 
     private void Awake()
@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
         Instance = this;
         bonfireManager = GetComponent<BonfireManager>();
         rechargeables = FindObjectsOfType<MonoBehaviour>().OfType<IRechargeable>().ToList();
+        deathScreen = FindObjectOfType<DeathScreen>();
     }
     public void PlayerDie()
     {
@@ -26,7 +27,10 @@ public class GameManager : MonoBehaviour
 
     IEnumerator WaitBeforeResetting()
     {
-        yield return new WaitForSeconds(timeBeforeRespawn);
+        yield return new WaitForSeconds(timeBeforeDeathScreen);
+        deathScreen.StartFadeIn();
+        yield return new WaitForSeconds(timeBeforeRespawn - timeBeforeDeathScreen);
+        deathScreen.SetVisible(false);
         bonfireManager.Respawn();
         RechargeEverything();
     }

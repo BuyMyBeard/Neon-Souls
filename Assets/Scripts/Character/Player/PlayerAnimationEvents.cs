@@ -7,7 +7,6 @@ using UnityEngine;
 public class PlayerAnimationEvents : MonoBehaviour
 {
     Health health;
-    CharacterController characterController;
     PlayerMovement playerMovement;
     CameraMovement cameraMovement;
     MeleeAttack attack;
@@ -18,7 +17,6 @@ public class PlayerAnimationEvents : MonoBehaviour
     private void Awake()
     {
         health = GetComponentInParent<Health>();
-        characterController = GetComponentInParent<CharacterController>();
         playerMovement = GetComponentInParent<PlayerMovement>();
         cameraMovement = GetComponentInParent<CameraMovement>();
         attack = GetComponentInParent<MeleeAttack>();

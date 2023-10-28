@@ -7,16 +7,16 @@ using UnityEngine;
 public class FallApart : MonoBehaviour
 {
     [SerializeField] float density = 10.0f;
-    MeshCollider[] parts;
+    Collider[] parts;
     Animator animator;
     [SerializeField] Transform explosionSource;
     [SerializeField] float explosionStrength = 10f;
     [SerializeField] float explosionRadius = 10f;
     [SerializeField] float upwardsModifier = 2f;
-    [SerializeField] Collider sword;
+    [SerializeField] int partsLayer = 0;
     private void Awake()
     {
-        parts = GetComponentsInChildren<MeshCollider>();
+        parts = GetComponentsInChildren<Collider>();
         animator = GetComponent<Animator>();
     }
 
@@ -26,36 +26,49 @@ public class FallApart : MonoBehaviour
         animator.enabled = false;
         GameObject ragdoll = new GameObject("Ragdoll");
         ragdoll.AddComponent<DestroyOnRecharge>();
-        foreach (MeshCollider part in parts)
+        foreach (Collider part in parts)
         {
             DetachAndSetUp(part, ragdoll);
         }
-        DetachAndSetUp(sword, ragdoll);
         Destroy(gameObject);
     }
-    public void DetachAndSetUp(Collider part, GameObject ragdoll)
+    void DetachAndSetUp(Collider part, GameObject ragdoll)
     {
         Transform parent = part.transform.parent;
         Transform wireframe = null;
-        foreach (Transform child in parent)
+        if (parent != null)
         {
-            if (child.name.Contains("Wireframe"))
+            foreach (Transform child in parent)
             {
-                wireframe = child;
-                break;
+                if (child.name.Contains("Wireframe"))
+                {
+                    wireframe = child;
+                    break;
+                }
             }
         }
         part.transform.parent = null;
         if (wireframe != null)
             wireframe.parent = part.transform;
-        var rb = part.AddComponent<Rigidbody>();
-        part.gameObject.layer = 0;
+        Rigidbody rb = part.GetComponent<Rigidbody>();
+        if (rb == null)
+        {
+            rb = part.AddComponent<Rigidbody>();
+            rb.useGravity = true;
+        }
+        part.gameObject.layer = partsLayer;
+        part.enabled = true;
+        part.isTrigger = false;
         // Approximation of mass with bounding volume
         // rb.mass = density * part.bounds.size.x * part.bounds.size.y * part.bounds.size.z;
         rb.SetDensity(density);
-        part.isTrigger = false;
+        rb.isKinematic = false;
+        rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+        var mw = part.GetComponent<MeleeWeapon>();
+        if (mw != null) Destroy(mw); 
         part.transform.parent = ragdoll.transform;
         rb.AddExplosionForce(explosionStrength, explosionSource != null ? explosionSource.position : transform.position, explosionRadius, upwardsModifier);
+        
     }
 }
 

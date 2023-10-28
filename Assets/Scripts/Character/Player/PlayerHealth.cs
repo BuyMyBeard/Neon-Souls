@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealth : Health
+public class PlayerHealth : Health, IRechargeable
 {
     Stamina stamina;
     Block block;
-    
     private new void Awake()
     {
         base.Awake();
@@ -41,5 +40,20 @@ public class PlayerHealth : Health
             return Vector3.Dot(playerTransform.forward.normalized, directionToAttacker.normalized) > 0;
         }
         return false;
+    }
+    public virtual void Recharge()
+    {
+        ResetHealth();
+        displayHealthbar.Add(maxHealth, maxHealth);
+        if (CompareTag("Player"))
+        {
+            animationEvents.HidePotion();
+            animationEvents.EnableActions();
+            animationEvents.UnFreezeMovement();
+            animationEvents.UnFreezeRotation();
+            animationEvents.StopIFrame();
+            animator.Play("Idle");
+            GetComponent<CameraMovement>().SyncFollowTarget();
+        }
     }
 }
