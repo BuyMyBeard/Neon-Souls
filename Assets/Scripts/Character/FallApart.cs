@@ -68,7 +68,6 @@ public class FallApart : MonoBehaviour
         if (mw != null) Destroy(mw); 
         part.transform.parent = ragdoll.transform;
         rb.AddExplosionForce(explosionStrength, explosionSource != null ? explosionSource.position : transform.position, explosionRadius, upwardsModifier);
-        
     }
 }
 
