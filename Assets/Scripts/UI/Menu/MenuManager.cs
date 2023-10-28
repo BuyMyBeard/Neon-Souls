@@ -53,7 +53,7 @@ public class MenuManager : MonoBehaviour
         inputModule.cancel.ToInputAction().performed -= BackInput;
         inputModule.actionsAsset.FindActionMap("UI").FindAction("RestoreDefaults").started -= RestoreDefaultsInput;
     }
-    private void RestoreDefaultsInput(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void RestoreDefaultsInput(InputAction.CallbackContext obj)
     {
         if (CurrentSubMenu == SubMenus.Options)
         {
@@ -61,9 +61,10 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    private void BackInput(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void BackInput(InputAction.CallbackContext obj)
     {
-        GoBack();
+        if (Paused)
+            GoBack();
     }
     public void GoBack()
     {
@@ -85,11 +86,11 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    private void MousePerformed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void MousePerformed(InputAction.CallbackContext obj)
     {
         StartCoroutine(ResetSelected());
     }
-    private void MovePerformed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void MovePerformed(InputAction.CallbackContext obj)
     {
         StartCoroutine(MovePerformed());
     }
