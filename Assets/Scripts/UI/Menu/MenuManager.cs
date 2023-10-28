@@ -10,12 +10,13 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] Selectable firstSelected;
     [SerializeField] GameObject optionsMenu;
+    [SerializeField] GameObject menuDisplay;
     Selectable firstSelectedOverride;
     EventSystem eventSystem;
     InputSystemUIInputModule inputModule;
-    Canvas menuDisplay;
     PlayerController playerController;
-    public bool Paused { get; private set; } = false;
+    [HideInInspector] public SelectableRebindAction currentlyRebinding;
+    public bool Paused { get; private set; } = true;
     public SubMenus CurrentSubMenu { get; private set; } = SubMenus.None;
 
     public bool IsInSubMenu { get => CurrentSubMenu != SubMenus.None; }
@@ -24,8 +25,11 @@ public class MenuManager : MonoBehaviour
     {
         eventSystem = EventSystem.current;
         inputModule = eventSystem.GetComponent<InputSystemUIInputModule>();
-        menuDisplay = GetComponentInChildren<Canvas>();
-         if (!IsInMainMenu) playerController = FindObjectOfType<PlayerController>();
+        if (!IsInMainMenu) playerController = FindObjectOfType<PlayerController>();
+    }
+    private void Start()
+    {
+        if (!IsInMainMenu) menuDisplay.SetActive(false);
     }
     private void OnEnable()
     {
@@ -52,7 +56,9 @@ public class MenuManager : MonoBehaviour
     private void RestoreDefaultsInput(InputAction.CallbackContext obj)
     {
         if (CurrentSubMenu == SubMenus.Options)
+        {
             GetComponentInChildren<Settings>().ResetValues();
+        }
     }
 
     private void BackInput(InputAction.CallbackContext obj)
@@ -62,6 +68,7 @@ public class MenuManager : MonoBehaviour
     }
     public void GoBack()
     {
+        if (!Paused || currentlyRebinding != null) return;
         StartCoroutine(Back());
     }
     IEnumerator Back()
@@ -105,26 +112,29 @@ public class MenuManager : MonoBehaviour
     }
     public void Play()
     {
+        Paused = false;
+        Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         SceneManager.LoadScene(1);
     }
     public void Pause()
     {
         Paused = true;
         Time.timeScale = 0;
-        menuDisplay.gameObject.SetActive(true);
+        menuDisplay.SetActive(true);
         playerController.SwitchToUI();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
     public void Resume()
     {
-        if (IsInSubMenu)
-        {
-            GoBack();
-            return;
-        }
         Paused = false;
         Time.timeScale = 1;
-        menuDisplay.gameObject.SetActive(false);
+        menuDisplay.SetActive(false);
         playerController.SwitchToPlayerControls();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
     public void Quit()
     {
@@ -132,6 +142,7 @@ public class MenuManager : MonoBehaviour
     }
     public void MainMenu()
     {
+        Paused = true;
         FindObjectOfType<PlayerInput>().gameObject.SetActive(false);
         SceneManager.LoadScene(0);
     }
