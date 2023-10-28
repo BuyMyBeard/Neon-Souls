@@ -47,7 +47,6 @@ public class PlayerHealth : Health
             Vector3 directionToAttacker = attackerPosition.position - playerTransform.position;
             Vector2 flatPlayerForward = new Vector2(playerTransform.forward.x, playerTransform.forward.z).normalized;
             Vector2 flatDirectionToAttacker = new Vector2(directionToAttacker.x, directionToAttacker.z).normalized;
-            Debug.Log(Vector2.Dot(flatPlayerForward, flatDirectionToAttacker));
             return Vector2.Dot(flatPlayerForward, flatDirectionToAttacker) > block.DotBlockAngle;
         }
         return false;
