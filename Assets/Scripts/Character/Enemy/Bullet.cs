@@ -6,9 +6,9 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     Vector3 movement;
-    Health playerHealth;
+    PlayerHealth playerHealth;
 
-    public Transform target = null;
+    public Transform target;
     [SerializeField] float speed;
     [SerializeField] float rotationSpeed;
     [SerializeField] float homingTime;
@@ -16,6 +16,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] int damage;
     [SerializeField] LayerMask playerLayer;
     [SerializeField] LayerMask enemyLayer;
+    [SerializeField] int staminaBlockCost = 15;
 
     ObjectPool pool;
     public Coroutine p_returnCoroutine;
@@ -27,21 +28,18 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        if (transform == target) target = null;
-        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponentInParent<Health>();
+        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponentInParent<PlayerHealth>();
+        //target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void OnEnable()
     {
         pool = GetComponentInParent<ObjectPool>();
         movement = Vector3.forward;
-        if (target != null)
-        {
-            transform.rotation = Quaternion.LookRotation(target.position - transform.position);
-            originalYdir = transform.rotation.eulerAngles.y;
-            if (originalYdir > 180f) originalYdir = 360f - originalYdir;
-            p_homingCoroutine = StartCoroutine(HomingCoroutine());
-        }
+        transform.rotation = Quaternion.LookRotation(target.position - transform.position);
+        originalYdir = transform.rotation.eulerAngles.y;
+        if (originalYdir > 180f) originalYdir = 360f - originalYdir;
+        p_homingCoroutine = StartCoroutine(HomingCoroutine());
     }
     void OnDisable()
     {
@@ -76,7 +74,7 @@ public class Bullet : MonoBehaviour
     {
         if (((1 << other.gameObject.layer) & playerLayer) != 0)
         {
-            playerHealth.InflictDamage(damage);
+            playerHealth.InflictBlockableDamage(damage, staminaBlockCost, transform);
             Despawn();
         }
     }
