@@ -24,12 +24,12 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Parry",
+                    "name": "ParryButton",
                     "type": "Button",
                     "id": "af709def-8b8e-4466-8893-7379129aecb1",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Tap(duration=0.5)",
                     "initialStateCheck": false
                 },
                 {
@@ -111,6 +111,15 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "BlockButton",
+                    "type": "Button",
+                    "id": "60ba848c-5020-4cbe-82a1-e3e85340f350",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold",
                     "initialStateCheck": false
                 }
             ],
@@ -210,7 +219,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Parry",
+                    "action": "ParryButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -221,7 +230,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Parry",
+                    "action": "ParryButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -420,6 +429,28 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "CastSpell",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "27422059-f197-4119-8b19-d794616b1097",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "BlockButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f7e9eef3-0a13-420f-b734-2da5529e28e4",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "BlockButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -14,8 +14,6 @@ public class CopyRebind : MonoBehaviour, IResetableRemap
     private string m_BindingId;
     [SerializeField]
     private InputBinding.DisplayStringOptions m_DisplayStringOptions;
-    bool isCopyingValue = false;
-
 
     /// <summary>
     /// Reference to the action that is to be rebound.

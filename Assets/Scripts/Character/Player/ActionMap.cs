@@ -46,12 +46,12 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Parry"",
+                    ""name"": ""ParryButton"",
                     ""type"": ""Button"",
                     ""id"": ""af709def-8b8e-4466-8893-7379129aecb1"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Tap(duration=0.5)"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -133,6 +133,15 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BlockButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""60ba848c-5020-4cbe-82a1-e3e85340f350"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -232,7 +241,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Parry"",
+                    ""action"": ""ParryButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -243,7 +252,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Parry"",
+                    ""action"": ""ParryButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -442,6 +451,28 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""CastSpell"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""27422059-f197-4119-8b19-d794616b1097"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""BlockButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f7e9eef3-0a13-420f-b734-2da5529e28e4"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""BlockButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1049,7 +1080,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         m_PlayerControls = asset.FindActionMap("PlayerControls", throwIfNotFound: true);
         m_PlayerControls_Look = m_PlayerControls.FindAction("Look", throwIfNotFound: true);
         m_PlayerControls_Move = m_PlayerControls.FindAction("Move", throwIfNotFound: true);
-        m_PlayerControls_Parry = m_PlayerControls.FindAction("Parry", throwIfNotFound: true);
+        m_PlayerControls_ParryButton = m_PlayerControls.FindAction("ParryButton", throwIfNotFound: true);
         m_PlayerControls_LightAttack = m_PlayerControls.FindAction("LightAttack", throwIfNotFound: true);
         m_PlayerControls_HeavyAttack = m_PlayerControls.FindAction("HeavyAttack", throwIfNotFound: true);
         m_PlayerControls_DodgeButton = m_PlayerControls.FindAction("DodgeButton", throwIfNotFound: true);
@@ -1059,6 +1090,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         m_PlayerControls_RunButton = m_PlayerControls.FindAction("RunButton", throwIfNotFound: true);
         m_PlayerControls_PlayerPause = m_PlayerControls.FindAction("PlayerPause", throwIfNotFound: true);
         m_PlayerControls_CastSpell = m_PlayerControls.FindAction("CastSpell", throwIfNotFound: true);
+        m_PlayerControls_BlockButton = m_PlayerControls.FindAction("BlockButton", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1136,7 +1168,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
     private List<IPlayerControlsActions> m_PlayerControlsActionsCallbackInterfaces = new List<IPlayerControlsActions>();
     private readonly InputAction m_PlayerControls_Look;
     private readonly InputAction m_PlayerControls_Move;
-    private readonly InputAction m_PlayerControls_Parry;
+    private readonly InputAction m_PlayerControls_ParryButton;
     private readonly InputAction m_PlayerControls_LightAttack;
     private readonly InputAction m_PlayerControls_HeavyAttack;
     private readonly InputAction m_PlayerControls_DodgeButton;
@@ -1146,13 +1178,14 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerControls_RunButton;
     private readonly InputAction m_PlayerControls_PlayerPause;
     private readonly InputAction m_PlayerControls_CastSpell;
+    private readonly InputAction m_PlayerControls_BlockButton;
     public struct PlayerControlsActions
     {
         private @ActionMap m_Wrapper;
         public PlayerControlsActions(@ActionMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @Look => m_Wrapper.m_PlayerControls_Look;
         public InputAction @Move => m_Wrapper.m_PlayerControls_Move;
-        public InputAction @Parry => m_Wrapper.m_PlayerControls_Parry;
+        public InputAction @ParryButton => m_Wrapper.m_PlayerControls_ParryButton;
         public InputAction @LightAttack => m_Wrapper.m_PlayerControls_LightAttack;
         public InputAction @HeavyAttack => m_Wrapper.m_PlayerControls_HeavyAttack;
         public InputAction @DodgeButton => m_Wrapper.m_PlayerControls_DodgeButton;
@@ -1162,6 +1195,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         public InputAction @RunButton => m_Wrapper.m_PlayerControls_RunButton;
         public InputAction @PlayerPause => m_Wrapper.m_PlayerControls_PlayerPause;
         public InputAction @CastSpell => m_Wrapper.m_PlayerControls_CastSpell;
+        public InputAction @BlockButton => m_Wrapper.m_PlayerControls_BlockButton;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1177,9 +1211,9 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
-            @Parry.started += instance.OnParry;
-            @Parry.performed += instance.OnParry;
-            @Parry.canceled += instance.OnParry;
+            @ParryButton.started += instance.OnParryButton;
+            @ParryButton.performed += instance.OnParryButton;
+            @ParryButton.canceled += instance.OnParryButton;
             @LightAttack.started += instance.OnLightAttack;
             @LightAttack.performed += instance.OnLightAttack;
             @LightAttack.canceled += instance.OnLightAttack;
@@ -1207,6 +1241,9 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @CastSpell.started += instance.OnCastSpell;
             @CastSpell.performed += instance.OnCastSpell;
             @CastSpell.canceled += instance.OnCastSpell;
+            @BlockButton.started += instance.OnBlockButton;
+            @BlockButton.performed += instance.OnBlockButton;
+            @BlockButton.canceled += instance.OnBlockButton;
         }
 
         private void UnregisterCallbacks(IPlayerControlsActions instance)
@@ -1217,9 +1254,9 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
-            @Parry.started -= instance.OnParry;
-            @Parry.performed -= instance.OnParry;
-            @Parry.canceled -= instance.OnParry;
+            @ParryButton.started -= instance.OnParryButton;
+            @ParryButton.performed -= instance.OnParryButton;
+            @ParryButton.canceled -= instance.OnParryButton;
             @LightAttack.started -= instance.OnLightAttack;
             @LightAttack.performed -= instance.OnLightAttack;
             @LightAttack.canceled -= instance.OnLightAttack;
@@ -1247,6 +1284,9 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @CastSpell.started -= instance.OnCastSpell;
             @CastSpell.performed -= instance.OnCastSpell;
             @CastSpell.canceled -= instance.OnCastSpell;
+            @BlockButton.started -= instance.OnBlockButton;
+            @BlockButton.performed -= instance.OnBlockButton;
+            @BlockButton.canceled -= instance.OnBlockButton;
         }
 
         public void RemoveCallbacks(IPlayerControlsActions instance)
@@ -1420,7 +1460,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
     {
         void OnLook(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
-        void OnParry(InputAction.CallbackContext context);
+        void OnParryButton(InputAction.CallbackContext context);
         void OnLightAttack(InputAction.CallbackContext context);
         void OnHeavyAttack(InputAction.CallbackContext context);
         void OnDodgeButton(InputAction.CallbackContext context);
@@ -1430,6 +1470,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         void OnRunButton(InputAction.CallbackContext context);
         void OnPlayerPause(InputAction.CallbackContext context);
         void OnCastSpell(InputAction.CallbackContext context);
+        void OnBlockButton(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
