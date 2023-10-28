@@ -45,7 +45,10 @@ public class PlayerHealth : Health
         {
             Transform playerTransform = GetComponentInChildren<Animator>().transform;
             Vector3 directionToAttacker = attackerPosition.position - playerTransform.position;
-            return Vector3.Dot(playerTransform.forward.normalized, directionToAttacker.normalized) > block.DotBlockAngle;
+            Vector2 flatPlayerForward = new Vector2(playerTransform.forward.x, playerTransform.forward.z).normalized;
+            Vector2 flatDirectionToAttacker = new Vector2(directionToAttacker.x, directionToAttacker.z).normalized;
+            Debug.Log(Vector2.Dot(flatPlayerForward, flatDirectionToAttacker));
+            return Vector2.Dot(flatPlayerForward, flatDirectionToAttacker) > block.DotBlockAngle;
         }
         return false;
     }
