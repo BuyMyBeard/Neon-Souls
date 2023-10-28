@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
         runAction.performed += Run_performed;
         runAction.canceled += Run_canceled;
         parryAction.started += Parry_started;
-        parryAction.canceled += Parry_canceled;
+        blockAction.canceled += Block_canceled;
     }
     private void OnDisable()
     {
@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
         runAction.performed -= Run_performed;
         runAction.canceled -= Run_canceled;
         parryAction.started -= Parry_started;
-        parryAction.canceled -= Parry_canceled;
+        blockAction.canceled -= Block_canceled;
     }
     private void Block_canceled(InputAction.CallbackContext obj)
     {
