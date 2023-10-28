@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 239097307445888987}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13750398, y: -0, z: -0, w: 0.9905012}
-  m_LocalPosition: {x: 0, y: 2.0699997, z: -3}
+  m_LocalRotation: {x: 0.13750403, y: -0, z: -0, w: 0.9905012}
+  m_LocalPosition: {x: 0, y: 2.07, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -245,7 +245,7 @@ MonoBehaviour:
   runningSpeed: 3
   sprintSpeed: 6
   runThreshold: 0.7
-  deadZone: 0.25
+  deadZone: 0.5
   turnSpeed: 600
   acceleration: 5
   deceleration: 25
@@ -301,7 +301,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewRadius: 15
-  viewAngle: 60
   lockableMask:
     serializedVersion: 2
     m_Bits: 1048576
@@ -312,6 +311,7 @@ MonoBehaviour:
   yAxisLockOffset: 1.5
   maxLockOnDistance: 1.305
   healthbarLingerTimeOnEnemyDeath: 1.5
+  mouseThreshold: 80
 --- !u!114 &8138852493157334010
 MonoBehaviour:
   m_ObjectHideFlags: 0
