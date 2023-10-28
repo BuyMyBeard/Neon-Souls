@@ -74,4 +74,10 @@ public class Block : MonoBehaviour
         isParryResetCoroutineRunning = false;
         IsParrying = false;
     }
+
+    public void StopBlocking()
+    {
+        IsBlocking = false;
+        animator.SetBool("IsBlocking", false);
+    }
 }

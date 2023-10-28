@@ -18,6 +18,7 @@ public class PlayerHealth : Health
     public void InflictUnblockableDamage(int damage) => InflictDamage(damage);
     public void InflictBlockableDamage(int damage, int staminaBlockCost, Transform attackerPosition)
     {
+        if (invincible) return;
         if (block.IsParrying && !stamina.IsExhausted && IsAttackerInFront(attackerPosition))
         {
             stamina.Remove(staminaBlockCost);
@@ -33,6 +34,7 @@ public class PlayerHealth : Health
         }
         else
         {
+            block.StopBlocking();
             InflictDamage(damage);
             stagger.BecomeStaggered(attackerPosition, 1);
         }
