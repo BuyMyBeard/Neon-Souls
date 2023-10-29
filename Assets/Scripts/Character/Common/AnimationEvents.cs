@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class AnimationEvents : MonoBehaviour
@@ -15,8 +13,8 @@ public abstract class AnimationEvents : MonoBehaviour
         attack = GetComponentInParent<MeleeAttack>();
         stagger = GetComponentInParent<Stagger>();
     }
-    public void EnableActions() => ActionAvailable = true;
-    public void DisableActions() => ActionAvailable = false;
+    public virtual void EnableActions() => ActionAvailable = true;
+    public virtual void DisableActions() => ActionAvailable = false;
     public void StartIFrame() => health.invincible = true;
     public void StopIFrame() => health.invincible = false;
     public abstract void FreezeRotation();

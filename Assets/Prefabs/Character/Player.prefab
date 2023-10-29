@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 239097307445888987}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13750398, y: -0, z: -0, w: 0.9905012}
-  m_LocalPosition: {x: 0, y: 2.0699997, z: -3}
+  m_LocalRotation: {x: 0.13750403, y: -0, z: -0, w: 0.9905012}
+  m_LocalPosition: {x: 0, y: 2.07, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -143,6 +143,8 @@ GameObject:
   - component: {fileID: 7062208496829682287}
   - component: {fileID: 8646511285956966484}
   - component: {fileID: 1956206164484021501}
+  - component: {fileID: 7116799338485392863}
+  - component: {fileID: 2265787126803834102}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -290,6 +292,8 @@ MonoBehaviour:
   staminaRegenRate: 30
   exhaustionTime: 1.5
   blockingRegenMultiplier: 0.5
+  staminaRequiredToRun: 20
+  timeBeforeRegenKicksIn: 0.5
 --- !u!114 &931004792272011639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,11 +330,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f85258babceeef49a0d0318f1accfc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponCollidersStructs:
+  - key: 0
+    val: {fileID: 8150143046497804207}
   isAttacking: 0
-  lightAttackStaminaCost: 15
-  heavyAttackStaminaCost: 30
-  lightAttackDamage: 25
-  heavyAttackDamage: 50
 --- !u!114 &6150863968811862542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,6 +416,70 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17e7b8dbe3a31d8409eaa3ef4896bd1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7116799338485392863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291937762287850455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f14554d7fe662b41b6ae58082f4003a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireballPrefab: {fileID: 979003676010152883, guid: bb854d38953020547b266b3beac5e8e1, type: 3}
+  attachPoint: {fileID: 3103828615505694158}
+  throwSpeed: 10
+  lobeFactor: 0.102
+  staminaCost: 40
+  manaCost: 25
+  damageScalingBonus: 0
+--- !u!114 &2265787126803834102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291937762287850455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4172631f1ebac294a95d3e6575ec318e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxMana: 100
+  currentMana: 0
+--- !u!1 &3519504191883572113
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3103828615505694158}
+  m_Layer: 10
+  m_Name: SpellAttachPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3103828615505694158
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3519504191883572113}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.0131, y: -0.0854, z: -0.1072}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2975355541193032208}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4019678906650283313
 GameObject:
   m_ObjectHideFlags: 0
@@ -1055,7 +1122,10 @@ PrefabInstance:
     - {fileID: 1117462811291373463, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
     - {fileID: 1809556055961527330, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
     - {fileID: 4820804021679202359, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 5050104151731952837, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3103828615505694158}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
       insertIndex: -1
@@ -1343,6 +1413,11 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 5291115563335669376, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
+--- !u!4 &2975355541193032208 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5050104151731952837, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
+  m_PrefabInstance: {fileID: 8025138429370588885}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3143861692378702548 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4971474177078377473, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
@@ -1417,6 +1492,7 @@ MonoBehaviour:
   onTrigger:
     m_PersistentCalls:
       m_Calls: []
+  damage: 0
 --- !u!136 &4484690215047543269
 CapsuleCollider:
   m_ObjectHideFlags: 0

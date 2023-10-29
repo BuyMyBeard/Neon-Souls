@@ -14,6 +14,8 @@ TagManager:
   - FollowTarget
   - StartingBonfire
   - BulletPool
+  - TrueMana
+  - DisplayedMana
   layers:
   - Default
   - TransparentFX
@@ -44,7 +46,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - PlayerProjectile
   - 
   - 
   m_SortingLayers:

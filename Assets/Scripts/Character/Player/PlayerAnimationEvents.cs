@@ -1,14 +1,10 @@
-using JetBrains.Annotations;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class PlayerAnimationEvents : AnimationEvents
 {
     PlayerMovement playerMovement;
     CameraMovement cameraMovement;
     Potions potions;
+    Spells spells;
+    Stamina stamina;
 
     protected override void Awake()
     {
@@ -16,8 +12,15 @@ public class PlayerAnimationEvents : AnimationEvents
         playerMovement = GetComponentInParent<PlayerMovement>();
         cameraMovement = GetComponentInParent<CameraMovement>();
         potions = GetComponentInParent<Potions>();
+        spells = GetComponentInParent<Spells>();
+        stamina = GetComponentInParent<Stamina>();
     }
-
+    
+    public override void EnableActions()
+    {
+        base.EnableActions();
+        stamina.StartRegen();
+    }
     public void FreezeMovement() => playerMovement.movementFrozen = true;
     public void UnFreezeMovement() => playerMovement.movementFrozen = false;
     public void FreezeCamera() => cameraMovement.enabled = false;
@@ -30,6 +33,9 @@ public class PlayerAnimationEvents : AnimationEvents
     public void SyncRotation() => playerMovement.SyncRotation();
     public void ShowPotion() => potions.ShowPotion();
     public void HidePotion() => potions.HidePotion();
+    public void FocusSpell() => spells.FocusFireball();
+    public void ThrowSpell() => spells.ThrowFireball();
+    public void StopStaminaRegen() => stamina.StopRegen();
     public override void ResetAll()
     {
         base.ResetAll();
@@ -38,4 +44,5 @@ public class PlayerAnimationEvents : AnimationEvents
         HidePotion();
         RestoreMovement();
     }
+
 }
