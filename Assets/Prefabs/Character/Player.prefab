@@ -141,6 +141,7 @@ GameObject:
   - component: {fileID: 1389185903735294112}
   - component: {fileID: 3151910380780960717}
   - component: {fileID: 7062208496829682287}
+  - component: {fileID: 428430709332768837}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -245,7 +246,7 @@ MonoBehaviour:
   runningSpeed: 3
   sprintSpeed: 6
   runThreshold: 0.7
-  deadZone: 0.25
+  deadZone: 0.5
   turnSpeed: 600
   acceleration: 5
   deceleration: 25
@@ -301,7 +302,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewRadius: 15
-  viewAngle: 60
   lockableMask:
     serializedVersion: 2
     m_Bits: 1048576
@@ -312,6 +312,7 @@ MonoBehaviour:
   yAxisLockOffset: 1.5
   maxLockOnDistance: 1.305
   healthbarLingerTimeOnEnemyDeath: 1.5
+  mouseThreshold: 80
 --- !u!114 &8138852493157334010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -370,6 +371,7 @@ MonoBehaviour:
   parryTime: 0.5
   parryResetTime: 1
   DamageReduction: 0.2
+  blockAngle: 45
 --- !u!114 &7062208496829682287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -386,6 +388,18 @@ MonoBehaviour:
   maxHealth: 100
   healthbarTag: PlayerHealthbar
   invincible: 0
+--- !u!114 &428430709332768837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291937762287850455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17e7b8dbe3a31d8409eaa3ef4896bd1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4019678906650283313
 GameObject:
   m_ObjectHideFlags: 0

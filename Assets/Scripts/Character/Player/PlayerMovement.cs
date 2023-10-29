@@ -93,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 movementInput = playerController.Move; 
         float movementMagnitude = movementInput.magnitude;
-        bool IsSprinting = playerController.IsSprinting && !stamina.IsExhausted && !movementReduced && animationEvents.ActionAvailable;
+        bool IsSprinting = playerController.IsSprinting && movementMagnitude >= runThreshold && !stamina.IsExhausted && !movementReduced && animationEvents.ActionAvailable;
         animator.SetBool("IsSprinting", IsSprinting);
         if (movementFrozen)
         {
