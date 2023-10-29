@@ -90,16 +90,16 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: 0.44110274
-        functionName: EnableWeaponCollider
+        functionName: InitWeaponCollider
         data: 
-        objectReferenceParameter: {instanceID: 0}
+        objectReferenceParameter: {fileID: 11400000, guid: fd825b9731eb6234a9a6668bdd6dc87a, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.51253295
+      - time: 0.5104008
         functionName: DisableWeaponCollider
         data: 
-        objectReferenceParameter: {instanceID: 0}
+        objectReferenceParameter: {fileID: 11400000, guid: fd825b9731eb6234a9a6668bdd6dc87a, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -902,16 +902,16 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: 0.53144944
-        functionName: EnableWeaponCollider
+        functionName: InitWeaponCollider
         data: 
-        objectReferenceParameter: {instanceID: 0}
+        objectReferenceParameter: {fileID: 11400000, guid: 4dce4042d5634e845b8feea6712de0de, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.5877739
         functionName: DisableWeaponCollider
         data: 
-        objectReferenceParameter: {instanceID: 0}
+        objectReferenceParameter: {fileID: 11400000, guid: 4dce4042d5634e845b8feea6712de0de, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0

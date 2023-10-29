@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,31 +6,56 @@ using UnityEngine.InputSystem;
 
 public abstract class MeleeAttack : MonoBehaviour
 {
-
+    [Serializable]
+    public struct WeaponEnumCollider
+    {
+        public AttackWeapon key;
+        public MeleeWeapon val;
+    }
     protected MeleeWeapon weapon;
+    [SerializeField] protected WeaponEnumCollider[] weaponCollidersStructs;
+    protected Dictionary<AttackWeapon, MeleeWeapon> weaponColliders = new();
     protected Animator animator;
     public bool isAttacking = false;
 
-    readonly List<Health> opponentsHit = new();
-    /// <summary>
-    /// Enables the children weapon collider
-    /// </summary>
-    public void EnableWeaponCollider()
+    private void OnValidate()
     {
-        weapon.ColliderEnabled = true;
+        weaponColliders.Clear();
+        foreach (var e in weaponCollidersStructs)
+        {
+            weaponColliders.Add(e.key, e.val);
+        }
+    }
+    ///// <summary>
+    ///// Enables the children weapon collider
+    ///// </summary>
+    //public void EnableWeaponCollider()
+    //{
+    //    weapon.ColliderEnabled = true;
+    //}
+    public virtual void InitWeaponCollider(AttackDef attackDef)
+    {
+        MeleeWeapon mw = weaponColliders[attackDef.weapon];
+        mw.ColliderEnabled = true;
+        mw.damage = attackDef.baseDamage;
     }
     /// <summary>
     /// Disables the children weapon collider
     /// </summary>
-    public void DisableWeaponCollider()
+    public void DisableWeaponCollider(AttackDef attackDef)
     {
-        weapon.ColliderEnabled = false;
-        opponentsHit.Clear();
+        weaponColliders[attackDef.weapon].ColliderEnabled = false;
+    }
+    public void DisableAllWeaponColliders()
+    {
+        foreach (var meleeWeapon in weaponColliders.Values)
+        {
+            meleeWeapon.ColliderEnabled = false;
+        }
     }
     protected virtual void Awake()
     {
         animator = GetComponentInChildren<Animator>();
-        weapon = GetComponentInChildren<MeleeWeapon>();
     }
     protected virtual void Start()
     {
@@ -39,30 +65,7 @@ public abstract class MeleeAttack : MonoBehaviour
             throw new MissingComponentException("Sword component missing on character");
         else
         {
-            weapon.onTrigger.AddListener(OnAttackHit);
-            DisableWeaponCollider();
+            DisableAllWeaponColliders();
         }
     }
-    /// <summary>
-    /// Gets called every time the melee weapon hits a collider
-    /// </summary>
-    /// <param name="other">Other collider hit by the melee weapon</param>
-    /// <exception cref="MissingComponentException">Exception thrown if hit recipient doesn't have a Health component</exception>
-    void OnAttackHit(Collider other)
-    {
-        Health opponentHealth = other.GetComponentInParent<Health>();
-        if (opponentHealth == null)
-            throw new MissingComponentException("Character has missing Health component");
-        // To avoid hitting the same enemy multiple times with the same attack
-        else if (!opponentsHit.Contains(opponentHealth))
-        {
-            opponentsHit.Add(opponentHealth);
-            DamageOpponent(opponentHealth);
-        }
-    }
-    /// <summary>
-    /// Called when hit is successful. Add logic to inflict damage to enemy depending on attack type
-    /// </summary>
-    /// <param name="opponentHealth">Health component of enemy hit by weapon. Call opponentHealth.InflictDamage() to inflict damage to him</param>
-    protected abstract void DamageOpponent(Health opponentHealth);
 }
