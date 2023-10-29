@@ -15,7 +15,6 @@ public class Bullet : MonoBehaviour
     [SerializeField] float yDirDiffLimit;
     [SerializeField] int damage;
     [SerializeField] LayerMask playerLayer;
-    [SerializeField] LayerMask enemyLayer;
     [SerializeField] int staminaBlockCost = 15;
 
     ObjectPool pool;

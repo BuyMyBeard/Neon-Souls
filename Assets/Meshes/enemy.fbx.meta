@@ -214,7 +214,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.3
+        functionName: EnableWeaponCollider
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 4dce4042d5634e845b8feea6712de0de, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
