@@ -84,8 +84,6 @@ public class ButtonsIcons : MonoBehaviour
 
         public Sprite GetSprite(string controlPath)
         {
-                        Debug.Log(controlPath);
-
             // From the input system, we get the path of the control on device. So we can just
             // map from that to the sprites we have for gamepads.
             switch (controlPath)
@@ -109,6 +107,8 @@ public class ButtonsIcons : MonoBehaviour
                 case "rightStick": return rightStick;
                 case "leftStickPress": return leftStickPress;
                 case "rightStickPress": return rightStickPress;
+                default:
+                    break;
             }
             return null;
         }
@@ -200,7 +200,6 @@ public class ButtonsIcons : MonoBehaviour
         {
             controlPath = controlPath.ToLower();
 
-            Debug.Log(controlPath);
             switch (controlPath)
             {
                 case "q": return q;
@@ -287,6 +286,8 @@ public class ButtonsIcons : MonoBehaviour
                 case "enter": return enter;
                 case "capslock": return capsLock;
                 case "tab": return tab;
+                default:
+                    break;
             }
             return null;
         }

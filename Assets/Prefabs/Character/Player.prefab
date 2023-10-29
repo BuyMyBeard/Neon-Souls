@@ -246,7 +246,7 @@ MonoBehaviour:
   runningSpeed: 3
   sprintSpeed: 6
   runThreshold: 0.7
-  deadZone: 0.25
+  deadZone: 0.5
   turnSpeed: 600
   acceleration: 5
   deceleration: 25
@@ -371,6 +371,7 @@ MonoBehaviour:
   parryTime: 0.5
   parryResetTime: 1
   DamageReduction: 0.2
+  blockAngle: 45
 --- !u!114 &7062208496829682287
 MonoBehaviour:
   m_ObjectHideFlags: 0
