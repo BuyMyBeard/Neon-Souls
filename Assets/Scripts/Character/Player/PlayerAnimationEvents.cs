@@ -11,6 +11,7 @@ public class PlayerAnimationEvents : MonoBehaviour
     CameraMovement cameraMovement;
     MeleeAttack attack;
     Potions potions;
+    Stagger stagger;
 
     bool actionAvailable = true;
     public bool ActionAvailable { get => actionAvailable; }
@@ -21,6 +22,7 @@ public class PlayerAnimationEvents : MonoBehaviour
         cameraMovement = GetComponentInParent<CameraMovement>();
         attack = GetComponentInParent<MeleeAttack>();
         potions = GetComponentInParent<Potions>();
+        stagger = GetComponentInParent<Stagger>();
     }
     public void EnableActions() => actionAvailable = true;
     public void DisableActions() => actionAvailable = false;
@@ -40,4 +42,17 @@ public class PlayerAnimationEvents : MonoBehaviour
     public void SyncRotation() => playerMovement.SyncRotation();
     public void ShowPotion() => potions.ShowPotion();
     public void HidePotion() => potions.HidePotion();
+    public void EndStagger() => stagger.IsStaggered = false;
+    public void ResetAll()
+    {
+        EnableActions();
+        StopIFrame();
+        UnFreezeMovement();
+        UnFreezeCamera();
+        UnFreezeRotation();
+        DisableWeaponCollider();
+        HidePotion();
+        RestoreMovement();
+        EndStagger();
+    }
 }
