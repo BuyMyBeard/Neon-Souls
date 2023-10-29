@@ -5,6 +5,7 @@ public abstract class AnimationEvents : MonoBehaviour
     protected Health health;
     protected Stagger stagger;
     protected MeleeAttack attack;
+    protected FallApart fallApart;
 
     public bool ActionAvailable { get; protected set; } = true;
     protected virtual void Awake()
@@ -12,6 +13,7 @@ public abstract class AnimationEvents : MonoBehaviour
         health = GetComponentInParent<Health>();
         attack = GetComponentInParent<MeleeAttack>();
         stagger = GetComponentInParent<Stagger>();
+        fallApart = GetComponentInParent<FallApart>();
     }
     public virtual void EnableActions() => ActionAvailable = true;
     public virtual void DisableActions() => ActionAvailable = false;
@@ -34,4 +36,5 @@ public abstract class AnimationEvents : MonoBehaviour
         DisableAllWeaponColliders();
         EndStagger();
     }
+    public virtual void FallApart() => fallApart.Activate();
 }
