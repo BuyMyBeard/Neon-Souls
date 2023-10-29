@@ -25,6 +25,7 @@ public class PlayerMeleeAttack : MeleeAttack
         if (!animationEvents.ActionAvailable || stamina.IsExhausted) return;
         
         animator.SetTrigger("LightAttack");
+        animationEvents.StopStaminaRegen();
         animationEvents.DisableActions();
         animationEvents.FreezeMovement();
     }
@@ -33,6 +34,7 @@ public class PlayerMeleeAttack : MeleeAttack
         if (!animationEvents.ActionAvailable || stamina.IsExhausted) return;
 
         animator.SetTrigger("HeavyAttack");
+        animationEvents.StopStaminaRegen();
         animationEvents.DisableActions();
         animationEvents.FreezeMovement();
     }
