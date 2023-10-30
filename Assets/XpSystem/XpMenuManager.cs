@@ -11,15 +11,21 @@ using UnityEngine.UI;
 
 public class XpMenuManager : MonoBehaviour
 {
+    [SerializeField] Selectable firstSelected;
     Canvas menuDisplay;
     PlayerController playerController;
     ButtonXp[] buttons;
+    XpManager xpManager;
+    MenuManager menuManager;
+    public bool Active { get => menuDisplay.gameObject.activeSelf; private set => menuDisplay.gameObject.SetActive(value); }
 
     private void Awake()
     {
         menuDisplay = GetComponentInChildren<Canvas>();
         buttons = FindObjectsOfType<ButtonXp>();
         playerController = FindObjectOfType<PlayerController>();
+        xpManager = GetComponent<XpManager>();
+        menuManager = FindObjectOfType<MenuManager>();
     }
     void Start()
     {
@@ -28,20 +34,23 @@ public class XpMenuManager : MonoBehaviour
     [ContextMenu("Hide")]
     public void Hide()
     {
+        menuManager.ResetOverride();
         playerController.SwitchToPlayerControls();
-        menuDisplay.enabled = false;
         foreach (ButtonXp button in buttons)
         {
             button.ChangeColor(Color.white);
             button.ResetDefault();
         }
         Time.timeScale = 1f;
+        Active = false;
     }
     [ContextMenu("Show")]
     public void Show()
     {
+        menuManager.OverrideFirstSelected(firstSelected);
         playerController.SwitchToUI();
-        menuDisplay.enabled = true;
+        Active = true;
+        xpManager.RefreshXPAmountRender();
         Time.timeScale = 0f;
     }
 }
