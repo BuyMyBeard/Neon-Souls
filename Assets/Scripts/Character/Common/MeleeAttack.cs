@@ -16,6 +16,8 @@ public abstract class MeleeAttack : MonoBehaviour
     protected Dictionary<AttackWeapon, MeleeWeapon> weaponColliders = new();
     protected Animator animator;
     public bool isAttacking = false;
+    
+    public int damageBonus = 0;
 
     private void OnValidate()
     {
@@ -36,7 +38,7 @@ public abstract class MeleeAttack : MonoBehaviour
     {
         MeleeWeapon mw = weaponColliders[attackDef.weapon];
         mw.ColliderEnabled = true;
-        mw.damage = attackDef.baseDamage;
+        mw.damage = attackDef.baseDamage + damageBonus;
     }
     /// <summary>
     /// Disables the children weapon collider

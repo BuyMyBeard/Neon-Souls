@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class Health : MonoBehaviour
     public bool invincible = false;
     GameManager manager;
     protected Animator animator;
+    [HideInInspector]
+    public UnityEvent OnHit;
     public float CurrentHealth { get; protected set; }
     public bool IsDead { get => CurrentHealth <= 0; }
     public float MaxHealth { get => maxHealth; }
@@ -38,6 +41,7 @@ public class Health : MonoBehaviour
     {
         if (invincible)
             return;
+        OnHit.Invoke();
         CurrentHealth -= damage;
         if (displayHealthbar != null)
             displayHealthbar.Remove(damage, maxHealth, true);//TODO: change to false.
@@ -51,6 +55,10 @@ public class Health : MonoBehaviour
     {
         // One day enemies might be able to block or have stamina idk
         // for now it's just
+        InflictDamage(damage);
+    }
+    public virtual void InflictUnblockableDamage(int damage)
+    {
         InflictDamage(damage);
     }
 
