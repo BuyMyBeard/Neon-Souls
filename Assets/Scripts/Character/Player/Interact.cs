@@ -18,11 +18,12 @@ public class Interact : MonoBehaviour
         if (!animationEvents.ActionAvailable || buttonPrompt.currentPrompt == null)
             return;
 
-        buttonPrompt.Interact();
+        buttonPrompt.HidePrompt();
         animator.SetTrigger("Interact");
         animationEvents.DisableActions();
         animationEvents.StartIFrame();
         animationEvents.FreezeMovement();
         animationEvents.FreezeRotation();
-    } 
+    }
+    public void DoInteraction() => buttonPrompt.Interact();
 }

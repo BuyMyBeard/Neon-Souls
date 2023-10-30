@@ -6,6 +6,7 @@ public class PlayerAnimationEvents : AnimationEvents
     Spells spells;
     Stamina stamina;
     PlayerDeath playerDeath;
+    Interact interact;
 
     protected override void Awake()
     {
@@ -16,6 +17,7 @@ public class PlayerAnimationEvents : AnimationEvents
         spells = GetComponentInParent<Spells>();
         stamina = GetComponentInParent<Stamina>();
         playerDeath = GetComponentInParent<PlayerDeath>();
+        interact = GetComponentInParent<Interact>();
     }
     
     public override void EnableActions()
@@ -47,5 +49,6 @@ public class PlayerAnimationEvents : AnimationEvents
         RestoreMovement();
     }
     public override void FallApart() => playerDeath.Decompose();
+    public void DoInteraction() => interact.DoInteraction();
 
 }

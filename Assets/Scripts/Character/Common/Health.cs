@@ -59,6 +59,7 @@ public class Health : MonoBehaviour,IStat
     {
         if (gameObject.CompareTag("Player"))
         {
+            animator.ResetTrigger("Reset");
             animator.SetTrigger("Die");
             manager.PlayerDie();
             animationEvents.DisableActions();

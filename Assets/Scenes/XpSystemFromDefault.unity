@@ -955,6 +955,17 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!114 &709551833 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8303552265065983246, guid: 2a31e8af24114924e98572ec7512ccce, type: 3}
+  m_PrefabInstance: {fileID: 1432215536058006642}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &767586929 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3292290206645787794, guid: 2a31e8af24114924e98572ec7512ccce, type: 3}
@@ -2853,10 +2864,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2161107595523020686, guid: 2a31e8af24114924e98572ec7512ccce, type: 3}
-      propertyPath: m_text
-      value: "D\xE9gats de magie :\n\n"
-      objectReference: {fileID: 0}
     - target: {fileID: 3830274183096007684, guid: 2a31e8af24114924e98572ec7512ccce, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2953,13 +2960,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8225985127061256958, guid: 2a31e8af24114924e98572ec7512ccce, type: 3}
-      propertyPath: m_text
-      value: 'Point de mana :
-
-
-'
-      objectReference: {fileID: 0}
     - target: {fileID: 8416007409073549778, guid: 2a31e8af24114924e98572ec7512ccce, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2976,6 +2976,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8488608976919795588, guid: 2a31e8af24114924e98572ec7512ccce, type: 3}
+      propertyPath: firstSelected
+      value: 
+      objectReference: {fileID: 709551833}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
