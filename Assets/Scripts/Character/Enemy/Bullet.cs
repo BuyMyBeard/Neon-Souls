@@ -71,10 +71,10 @@ public class Bullet : MonoBehaviour
         p_homingCoroutine = null;
     }
 
-    void OnCollisionEnter(Collision other)
+    void OnTriggerEnter(Collider other)
     {
         if (hasAlreadyHit) return;
-        Health health = other.collider.GetComponentInParent<Health>();
+        Health health = other.GetComponentInParent<Health>();
         if (health != null)
             health.InflictBlockableDamage(damage, staminaBlockCost, transform);
         Despawn();
