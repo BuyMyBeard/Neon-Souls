@@ -15,7 +15,7 @@ public class PlayerHealth : Health, IRechargeable
         block = GetComponent<Block>();
     }
     public void InflictUnblockableDamage(int damage) => InflictDamage(damage);
-    public void InflictBlockableDamage(int damage, int staminaBlockCost, Transform attackerPosition)
+    public override void InflictBlockableDamage(int damage, int staminaBlockCost, Transform attackerPosition)
     {
         if (invincible) return;
         if (block.IsParrying && !stamina.IsExhausted && IsAttackerInFront(attackerPosition))
