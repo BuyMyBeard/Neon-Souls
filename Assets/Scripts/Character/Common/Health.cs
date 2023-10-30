@@ -3,19 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : MonoBehaviour,IRechargeable,IStat
+public class Health : MonoBehaviour,IStat
 {
     public DisplayBar displayHealthbar;
     [SerializeField] protected float maxHealth = 100;
     [SerializeField] string healthbarTag = "PlayerHealthbar";
-    [SerializeField]int ameliorateur = 10;
+    [SerializeField]int upgradeHp = 10;
+
     public bool invincible = false;
     GameManager manager;
     protected Animator animator;
     public float CurrentHealth { get; protected set; }
     public bool IsDead { get => CurrentHealth <= 0; }
     public float MaxHealth { get => maxHealth; }
-    public int Ameliorateur { get => ameliorateur;}
+    public int Upgrade { get => upgradeHp;}
     public float Value => MaxHealth;
 
 
@@ -97,27 +98,9 @@ public class Health : MonoBehaviour,IRechargeable,IStat
     /// <summary>
     /// Rounds current health to the nearest integer. Used to avoid float imprecision caused by healing over time
     /// </summary>
-    public void Round() => currentHealth = Mathf.RoundToInt(currentHealth);
-    
-    public void Recharge()
-    {
-        ResetHealth();
-        displayHealthbar.Add(maxHealth, maxHealth);
-        if (CompareTag("Player"))
-        {
-            animationEvents.HidePotion();
-            animationEvents.EnableActions();
-            animationEvents.UnFreezeMovement();
-            animationEvents.UnFreezeRotation();
-            animationEvents.StopIFrame();
-            animator.Play("Idle");
-            GetComponent<CameraMovement>().SyncFollowTarget();
-        }
-    }
-
     public void UpgradeStat(int nbAmelioration)
     {
-        maxHealth += nbAmelioration * Ameliorateur;
+        maxHealth += nbAmelioration * Upgrade;
     }
     public void Round() => CurrentHealth = Mathf.RoundToInt(CurrentHealth);
 }
