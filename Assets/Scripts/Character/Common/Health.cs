@@ -15,8 +15,6 @@ public class Health : MonoBehaviour
     public bool IsDead { get => CurrentHealth <= 0; }
     public float MaxHealth { get => maxHealth; }
     protected PlayerAnimationEvents animationEvents;
-    static int currentId = 0;
-    public int Id { get; private set; }
     protected void Awake()
     {
         if (displayHealthbar == null)
@@ -24,7 +22,6 @@ public class Health : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         manager = FindObjectOfType<GameManager>();
         animationEvents = GetComponentInChildren<PlayerAnimationEvents>();
-        Id = currentId++;
     }
     void OnEnable()
     {
