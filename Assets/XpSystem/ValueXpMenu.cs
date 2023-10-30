@@ -15,7 +15,8 @@ public class ValueXpMenu : MonoBehaviour
         Health,
         Stamina,
         Attaque,
-        Magie
+        Magie,
+        AttaqueMagie
     }
 
     [SerializeField] TypeStat statType;
@@ -47,6 +48,9 @@ public class ValueXpMenu : MonoBehaviour
                 statVisé = playerExperience.GetComponent<PlayerMeleeAttack>();
                 break;
             /*case TypeStat.Magie:
+                statVisé = typeof(Magic);
+                break;
+            case TypeStat.AttaqueMagie:
                 statVisé = typeof(Magic);
                 break;*/
             default:

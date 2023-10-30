@@ -7,6 +7,8 @@ using UnityEngine.InputSystem.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
+
 public class XpMenuManager : MonoBehaviour
 {
     Canvas menuDisplay;
@@ -23,6 +25,7 @@ public class XpMenuManager : MonoBehaviour
     {
         Hide();
     }
+    [ContextMenu("Hide")]
     public void Hide()
     {
         playerController.SwitchToPlayerControls();
@@ -30,9 +33,11 @@ public class XpMenuManager : MonoBehaviour
         foreach (ButtonXp button in buttons)
         {
             button.ChangeColor(Color.white);
+            button.ResetDefault();
         }
         Time.timeScale = 1f;
     }
+    [ContextMenu("Show")]
     public void Show()
     {
         playerController.SwitchToUI();

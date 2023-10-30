@@ -23,7 +23,7 @@ public class ButtonXp : MonoBehaviour
     private IEnumerator Start()
     {
         yield return null;
-        defaultValue = float.Parse(textAfficher.text.ToString(), System.Globalization.NumberStyles.Float);
+        ResetDefault();
     }
     public void Uses() 
     {
@@ -33,7 +33,6 @@ public class ButtonXp : MonoBehaviour
         else
             Minus();
     }
-
     void Plus()
     {
         if (xpManager.AddNbChanges(typeStat.statVisé))
