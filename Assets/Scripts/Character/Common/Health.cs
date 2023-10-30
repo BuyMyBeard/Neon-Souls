@@ -18,7 +18,7 @@ public class Health : MonoBehaviour
     protected void Awake()
     {
         if (displayHealthbar == null)
-            displayHealthbar = GameObject.FindGameObjectWithTag(healthbarTag).GetComponent<DisplayBar>();    
+            displayHealthbar = GameObject.FindGameObjectWithTag(healthbarTag).GetComponent<DisplayBar>();
         animator = GetComponentInChildren<Animator>();
         manager = FindObjectOfType<GameManager>();
         animationEvents = GetComponentInChildren<PlayerAnimationEvents>();
@@ -39,14 +39,21 @@ public class Health : MonoBehaviour
         if (invincible)
             return;
         CurrentHealth -= damage;
-        if(displayHealthbar != null)
+        if (displayHealthbar != null)
             displayHealthbar.Remove(damage, maxHealth, true);//TODO: change to false.
-        if(IsDead) 
+        if (IsDead)
         {
             CurrentHealth = 0;
             Die();
         }
     }
+    public virtual void InflictBlockableDamage(int damage, int staminaBlockCost, Transform attackerPosition)
+    {
+        // One day enemies might be able to block or have stamina idk
+        // for now it's just
+        InflictDamage(damage);
+    }
+
     [ContextMenu("Die")]
     protected virtual void Die()
     {

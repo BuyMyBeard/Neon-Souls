@@ -57,6 +57,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   staminaBlockCost: 15
+  hasAlreadyHit: 0
 --- !u!54 &3000240897971003809
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -99,7 +100,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2

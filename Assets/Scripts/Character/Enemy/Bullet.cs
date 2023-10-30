@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour
 
     float originalYdir;
     float newYdir;
-    bool hasAlreadyHit = false;
+    [SerializeField] bool hasAlreadyHit = false;
 
     // Start is called before the first frame update
     void Awake()
@@ -71,11 +71,12 @@ public class Bullet : MonoBehaviour
         p_homingCoroutine = null;
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision other)
     {
         if (hasAlreadyHit) return;
-
-        playerHealth.InflictBlockableDamage(damage, staminaBlockCost, transform);
+        Health health = other.collider.GetComponentInParent<Health>();
+        if (health != null)
+            health.InflictBlockableDamage(damage, staminaBlockCost, transform);
         Despawn();
         hasAlreadyHit = true;
     }
