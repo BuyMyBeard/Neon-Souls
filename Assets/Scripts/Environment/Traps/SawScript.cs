@@ -11,7 +11,7 @@ public class SawScript : MonoBehaviour
     Vector3 initialPosition;
     Rigidbody rb;
     Transform model;
-    Dictionary<int,float> healthList = new Dictionary<int, float>();
+    Dictionary<Health,float> healthList = new();
     [SerializeField]
     float sawDamageCooldown = 1f;
 
@@ -25,13 +25,13 @@ public class SawScript : MonoBehaviour
     void Update()
     {
         model.Rotate(0, 0, -spinSpeed * Time.deltaTime, Space.Self);
-        List<int> healths = new List<int>();
-        foreach(KeyValuePair<int, float> entry in healthList)
+        List<Health> outdatedList = new List<Health>();
+        foreach(KeyValuePair<Health, float> entry in healthList)
         {
-            if(entry.Value + sawDamageCooldown > Time.time)
-                healths.Add(entry.Key);
+            if(entry.Value + sawDamageCooldown < Time.time)
+                outdatedList.Add(entry.Key);
         }
-        foreach(int health in healths)
+        foreach(Health health in outdatedList)
             healthList.Remove(health);
 
     }
@@ -49,11 +49,10 @@ public class SawScript : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-
         Health health = other.gameObject.GetComponentInParent<Health>();
-        if(!healthList.ContainsKey(health.Id))
+        if(!health.invincible && !healthList.ContainsKey(health))
         {
-            healthList.Add(health.Id, Time.time);
+            healthList.Add(health, Time.time);
             health.InflictDamage(sawDamage);
         }
     }
