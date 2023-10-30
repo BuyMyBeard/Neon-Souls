@@ -36,6 +36,7 @@ public class Roll : MonoBehaviour
             return;
 
         animator.SetTrigger("Roll");
+        animationEvents.StopStaminaRegen();
         animationEvents.StartIFrame();
         animationEvents.FreezeMovement();
         animationEvents.FreezeRotation();

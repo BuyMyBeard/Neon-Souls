@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Mathematics;
 
 [RequireComponent(typeof(Stamina))]
 [RequireComponent(typeof(PlayerController))]
@@ -12,26 +13,31 @@ public class Block : MonoBehaviour
     float parryResetTime = 1f;
     [SerializeField]
     public float DamageReduction = 0.20f;
+    [SerializeField]
+    [Range(0f, 90f)]
+    float blockAngle = 90f;
     bool isParryResetCoroutineRunning = false;
     PlayerController playerController;
     Animator animator;
     PlayerAnimationEvents animationEvents;
     Stamina stamina;
+    Stagger stagger;
 
     public bool IsBlocking { get; private set; } = false;
     public bool IsParrying { get; private set; } = false;
-
+    public float DotBlockAngle { get => math.remap(0, 90, 1, 0, blockAngle); }
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
         animator = GetComponentInChildren<Animator>();
         animationEvents = GetComponentInChildren<PlayerAnimationEvents>();
         stamina = GetComponent<Stamina>();
+        stagger = GetComponent<Stagger>();
     }
 
     public void Update()
     {
-        if (animationEvents.ActionAvailable && playerController.BlockInput && !stamina.IsExhausted)
+        if ((animationEvents.ActionAvailable || stagger.IsStaggered && animator.GetBool("IsBlocking")) && playerController.BlockInput && !stamina.IsExhausted)
         {
             animator.SetBool("IsBlocking", true);
             animationEvents.ReduceMovement();
@@ -55,9 +61,7 @@ public class Block : MonoBehaviour
     IEnumerator ParryTimeCoroutine()
     {
         IsParrying = true;
-        Debug.Log("parry start");
         yield return new WaitForSeconds(parryTime);
-        Debug.Log("parry ended");
         IsParrying = false;
     }
     IEnumerator ParryResetCoroutine()
@@ -71,5 +75,11 @@ public class Block : MonoBehaviour
         StopAllCoroutines();
         isParryResetCoroutineRunning = false;
         IsParrying = false;
+    }
+
+    public void StopBlocking()
+    {
+        IsBlocking = false;
+        animator.SetBool("IsBlocking", false);
     }
 }
