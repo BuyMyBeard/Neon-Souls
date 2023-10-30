@@ -47,17 +47,17 @@ public class ValueXpMenu : MonoBehaviour
             case TypeStat.Attaque:
                 statVisé = playerExperience.GetComponent<PlayerMeleeAttack>();
                 break;
-            /*case TypeStat.Magie:
-                statVisé = typeof(Magic);
+            case TypeStat.Magie:
+                statVisé = playerExperience.GetComponent<Mana>();
                 break;
             case TypeStat.AttaqueMagie:
-                statVisé = typeof(Magic);
-                break;*/
+                statVisé = playerExperience.GetComponent<Spells>();
+                break;
             default:
                 throw new Exception("Type de stat introuvable : AffichageXp");
         }
         
         TextUi.text = statVisé.Value.ToString();
-        Ameliorateur = statVisé.Ameliorateur;
+        Ameliorateur = statVisé.Upgrade;
     }
 }

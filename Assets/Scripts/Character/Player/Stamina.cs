@@ -7,18 +7,18 @@ public class Stamina : MonoBehaviour, IRechargeable,IStat
     [SerializeField] int maxStamina = 100;
     [SerializeField] float currentStamina;
     [SerializeField] float staminaRegenRate = 100f;
-    [SerializeField] float exhaustionTime = 0.5f;
-    [SerializeField]int ameliorateur;
     [SerializeField] float blockingRegenMultiplier = .5f;
     [SerializeField] int staminaRequiredToRun = 20;
     [SerializeField] float timeBeforeRegenKicksIn = 0.5f;
+    [SerializeField]int upgradeStam;
+
     Block block;
     PlayerAnimationEvents animationEvents;
     PlayerMovement playerMovement;
     public bool CanRun { get; private set; } = true;
     bool canRegen = true;
     public bool IsExhausted { get => currentStamina <= 0; }
-    public int Ameliorateur => ameliorateur;
+    public int Upgrade => upgradeStam;
     public float Value => maxStamina;
 
     public void StopRegen() => canRegen = false;
@@ -86,6 +86,6 @@ public class Stamina : MonoBehaviour, IRechargeable,IStat
 
     public void UpgradeStat(int nbAmelioration)
     {
-        maxStamina += ameliorateur * nbAmelioration;
+        maxStamina += upgradeStam * nbAmelioration;
     }
 }
