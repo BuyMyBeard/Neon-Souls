@@ -51,7 +51,6 @@ public abstract class Enemy : MonoBehaviour
     {
         if (lockMode) return;
         if (Mode.Id == modeId) return;
-        Debug.Log($"Enemy.ChangeMode(): {GetInstanceID()} {Enum.GetName(typeof(ModeId), Mode.Id)} -> {Enum.GetName(typeof(ModeId), modeId)}");
         Mode.Exit();
         Mode = modeDefs[(int)modeId];
         Mode.Init();

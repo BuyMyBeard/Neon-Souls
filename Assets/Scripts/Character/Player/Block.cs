@@ -12,7 +12,7 @@ public class Block : MonoBehaviour
     [SerializeField]
     float parryResetTime = 1f;
     [SerializeField]
-    public float DamageReduction = 0.20f;
+    public float DamageModifier = 0.20f;
     [SerializeField]
     [Range(0f, 90f)]
     float blockAngle = 90f;
