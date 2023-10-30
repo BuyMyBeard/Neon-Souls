@@ -12,7 +12,6 @@ public abstract class MeleeAttack : MonoBehaviour
         public AttackWeapon key;
         public MeleeWeapon val;
     }
-    protected MeleeWeapon weapon;
     [SerializeField] protected WeaponEnumCollider[] weaponCollidersStructs;
     protected Dictionary<AttackWeapon, MeleeWeapon> weaponColliders = new();
     protected Animator animator;
@@ -61,11 +60,8 @@ public abstract class MeleeAttack : MonoBehaviour
     {
         if (animator == null)
             throw new MissingComponentException("Animator component missing on character");
-        if (weapon == null)
-            throw new MissingComponentException("Sword component missing on character");
-        else
-        {
-            DisableAllWeaponColliders();
-        }
+
+        DisableAllWeaponColliders();
+
     }
 }
