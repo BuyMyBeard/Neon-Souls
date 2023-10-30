@@ -3,21 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : MonoBehaviour,IRechargeable
+public class Health : MonoBehaviour
 {
     public DisplayBar displayHealthbar;
-    [SerializeField] float maxHealth = 100;
+    [SerializeField] protected float maxHealth = 100;
     [SerializeField] string healthbarTag = "PlayerHealthbar";
     public bool invincible = false;
-    PlayerAnimationEvents animationEvents;
     GameManager manager;
-
-    float currentHealth;
-    Animator animator;
-    public float CurrentHealth { get => currentHealth; }
-
-    public bool IsDead { get => currentHealth <= 0; }
+    protected Animator animator;
+    public float CurrentHealth { get; protected set; }
+    public bool IsDead { get => CurrentHealth <= 0; }
     public float MaxHealth { get => maxHealth; }
+    protected PlayerAnimationEvents animationEvents;
     protected void Awake()
     {
         if (displayHealthbar == null)
@@ -41,18 +38,18 @@ public class Health : MonoBehaviour,IRechargeable
     {
         if (invincible)
             return;
-        currentHealth -= damage;
+        CurrentHealth -= damage;
         if(displayHealthbar != null)
             displayHealthbar.Remove(damage, maxHealth, true);//TODO: change to false.
         if(IsDead) 
         {
-            currentHealth = 0;
+            CurrentHealth = 0;
             Die();
         }
     }
-    protected void Die()
+    [ContextMenu("Die")]
+    protected virtual void Die()
     {
-
         if (gameObject.CompareTag("Player"))
         {
             animator.SetTrigger("Die");
@@ -74,36 +71,20 @@ public class Health : MonoBehaviour,IRechargeable
     public void Heal(float healthRestored)
     {
         if (IsDead) return;
-        currentHealth += healthRestored;
-        if (currentHealth > maxHealth)
-            currentHealth = maxHealth;
+        CurrentHealth += healthRestored;
+        if (CurrentHealth > maxHealth)
+            CurrentHealth = maxHealth;
         displayHealthbar.Add(healthRestored, maxHealth);
     }
     /// <summary>
     /// Returns current health back to full
     /// </summary>
-    private void ResetHealth()
+    protected void ResetHealth()
     {
-        currentHealth = maxHealth;
+        CurrentHealth = maxHealth;
     }
     /// <summary>
     /// Rounds current health to the nearest integer. Used to avoid float imprecision caused by healing over time
     /// </summary>
-    public void Round() => currentHealth = Mathf.RoundToInt(currentHealth);
-    
-    public void Recharge()
-    {
-        ResetHealth();
-        displayHealthbar.Add(maxHealth, maxHealth);
-        if (CompareTag("Player"))
-        {
-            animationEvents.HidePotion();
-            animationEvents.EnableActions();
-            animationEvents.UnFreezeMovement();
-            animationEvents.UnFreezeRotation();
-            animationEvents.StopIFrame();
-            animator.Play("Idle");
-            GetComponent<CameraMovement>().SyncFollowTarget();
-        }
-    }
+    public void Round() => CurrentHealth = Mathf.RoundToInt(CurrentHealth);
 }
