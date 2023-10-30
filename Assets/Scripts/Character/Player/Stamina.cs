@@ -10,19 +10,31 @@ public class Stamina : MonoBehaviour, IRechargeable,IStat
     [SerializeField] float exhaustionTime = 0.5f;
     [SerializeField]int ameliorateur;
     [SerializeField] float blockingRegenMultiplier = .5f;
-    float exhaustionTimer = 0;
-    IEnumerator exhaustionTimerCoroutine, regenStaminaCoroutine;
-    bool exhaustionTimerStarted = false;
-    bool isRegenerating = false;
+    [SerializeField] int staminaRequiredToRun = 20;
+    [SerializeField] float timeBeforeRegenKicksIn = 0.5f;
     Block block;
+    PlayerAnimationEvents animationEvents;
+    PlayerMovement playerMovement;
+    public bool CanRun { get; private set; } = true;
+    bool canRegen = true;
     public bool IsExhausted { get => currentStamina <= 0; }
     public int Ameliorateur => ameliorateur;
     public float Value => maxStamina;
+
+    public void StopRegen() => canRegen = false;
+    public void StartRegen() => StartCoroutine(RegenCooldown());
+    IEnumerator RegenCooldown()
+    {
+        yield return new WaitForSeconds(timeBeforeRegenKicksIn);
+        if (animationEvents.ActionAvailable) canRegen = true;
+    }
 
     private void Awake()
     {
         playerStaminabar = GameObject.FindGameObjectWithTag("DisplayedStamina").GetComponent<DisplayBar>();
         block = GetComponent<Block>();
+        animationEvents = GetComponentInChildren<PlayerAnimationEvents>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
     private void OnEnable()
     {
@@ -30,7 +42,16 @@ public class Stamina : MonoBehaviour, IRechargeable,IStat
     }
     private void Update()
     {
-        exhaustionTimer += Time.deltaTime;
+        if (IsExhausted && CanRun)
+            StartCoroutine(ExhaustionCooldown());
+        if (canRegen && currentStamina < maxStamina && !playerMovement.IsSprinting)
+        {
+            float staminaToRegen = ((block.IsBlocking ? blockingRegenMultiplier : 1) * staminaRegenRate * Time.deltaTime);
+            currentStamina += staminaToRegen;
+            playerStaminabar.Add(staminaToRegen, maxStamina);
+            if (currentStamina > maxStamina)
+                ResetStamina();
+        }
     }
     private void ResetStamina()
     {
@@ -44,40 +65,17 @@ public class Stamina : MonoBehaviour, IRechargeable,IStat
     {
         if (!IsExhausted)
         {
-            exhaustionTimer = 0;
             currentStamina -= value;
             if (currentStamina < 0)
                 currentStamina = 0;
             playerStaminabar.Remove(value, maxStamina, true, syncLingeredValue);
-            if (isRegenerating)
-                StopCoroutine(regenStaminaCoroutine);
-            if (!exhaustionTimerStarted)
-            {
-                exhaustionTimerCoroutine = ExhaustionTimer();
-                StartCoroutine(exhaustionTimerCoroutine);
-            }
         }
     }
-    private IEnumerator ExhaustionTimer()
+    private IEnumerator ExhaustionCooldown()
     {
-        exhaustionTimerStarted = true;
-        yield return new WaitUntil(() => exhaustionTimer > exhaustionTime);
-        exhaustionTimerStarted = false;
-        regenStaminaCoroutine = RegenStamina();
-        StartCoroutine(regenStaminaCoroutine);
-    }
-    private IEnumerator RegenStamina()
-    {
-        isRegenerating = true;
-        while(currentStamina < maxStamina)
-        {
-            yield return null;
-            float staminaToRegen = ((block.IsBlocking ? blockingRegenMultiplier : 1) * staminaRegenRate * Time.deltaTime);
-            currentStamina += staminaToRegen;
-            playerStaminabar.Add(staminaToRegen, maxStamina);
-        }
-        ResetStamina();
-        isRegenerating = false;
+        CanRun = false;
+        yield return new WaitUntil(() => currentStamina >= staminaRequiredToRun);
+        CanRun = true;
     }
 
     public void Recharge()
