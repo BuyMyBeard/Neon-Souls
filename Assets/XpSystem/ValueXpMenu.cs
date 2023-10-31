@@ -56,8 +56,12 @@ public class ValueXpMenu : MonoBehaviour
             default:
                 throw new Exception("Type de stat introuvable : AffichageXp");
         }
-        
-        TextUi.text = statVisé.Value.ToString();
+
+        Reset();
         Ameliorateur = statVisé.Upgrade;
+    }
+    public void Reset()
+    {
+        TextUi.text = statVisé.Value.ToString();
     }
 }

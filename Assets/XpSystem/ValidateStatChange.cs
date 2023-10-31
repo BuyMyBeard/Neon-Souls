@@ -16,6 +16,7 @@ public class ValidateStatChange : MonoBehaviour
     {
         xpManager.ValidateChanges();
         xpMenu.Hide();
+        //xpMenu.ResetAffichage();
         Debug.Log("Validate XpUsage");
     }
 }
