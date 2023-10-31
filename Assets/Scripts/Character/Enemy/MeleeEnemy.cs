@@ -16,7 +16,10 @@ public class MeleeEnemy : Enemy
         base.Awake();
         agent = GetComponent<NavMeshAgent>();
     }
-
+    protected override void IdleInit()
+    {
+        agent.ResetPath();
+    }
     protected override void InRangeInit()
     {
         agent.enabled = true;
@@ -28,8 +31,7 @@ public class MeleeEnemy : Enemy
     }
     protected override void InRangeExit()
     {
-        agent.enabled = false;
-        agent.updateRotation = false;
+        agent.ResetPath();
     }
     protected override void CloseMain()
     {
