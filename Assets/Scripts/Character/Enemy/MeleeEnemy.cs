@@ -24,7 +24,7 @@ public class MeleeEnemy : Enemy
     }
     protected override void InRangeMain()
     {
-        agent.SetDestination(target.position);
+        agent.SetDestination(Target.position);
     }
     protected override void InRangeExit()
     {

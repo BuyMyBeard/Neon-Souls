@@ -28,6 +28,7 @@ public class FallApart : MonoBehaviour
         ragdoll.AddComponent<DestroyOnRecharge>();
         foreach (Collider part in parts)
         {
+            if (part.gameObject.layer == 20) continue;
             DetachAndSetUp(part, ragdoll);
         }
         Destroy(gameObject);
