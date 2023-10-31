@@ -44,7 +44,7 @@ public class ShooterEnemy : Enemy
         Quaternion towardsPlayer = Quaternion.LookRotation(-DistanceFromPlayer, Vector3.up);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, towardsPlayer, turnSpeed * Time.deltaTime);
 
-        var armTowardsPlayer = Quaternion.LookRotation(target.position - arm.position);
+        var armTowardsPlayer = Quaternion.LookRotation(Target.position - arm.position);
         arm.rotation = Quaternion.RotateTowards(arm.rotation, armTowardsPlayer, turnSpeed * Time.deltaTime);
     }
 
@@ -87,7 +87,7 @@ public class ShooterEnemy : Enemy
     void Shoot()
     {
         var bullet = pool.SpawnObject(gunSight, out Coroutine p_returnCoroutine).GetComponent<Bullet>();
-        bullet.target = target;
+        bullet.target = Target;
         bullet.p_returnCoroutine = p_returnCoroutine;
     }
 }

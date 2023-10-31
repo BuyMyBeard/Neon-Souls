@@ -8,7 +8,7 @@ public class Health : MonoBehaviour
 {
     public DisplayBar displayHealthbar;
     [SerializeField] protected float maxHealth = 100;
-    [SerializeField] string healthbarTag = "PlayerHealthbar";
+    protected string healthbarTag = "EnemyHealthbar";
     public bool invincible = false;
     GameManager manager;
     protected Animator animator;
@@ -20,8 +20,7 @@ public class Health : MonoBehaviour
     protected PlayerAnimationEvents animationEvents;
     protected void Awake()
     {
-        if (displayHealthbar == null)
-            displayHealthbar = GameObject.FindGameObjectWithTag(healthbarTag).GetComponent<DisplayBar>();
+        displayHealthbar = GameObject.FindGameObjectWithTag(healthbarTag).GetComponent<DisplayBar>();
         animator = GetComponentInChildren<Animator>();
         manager = FindObjectOfType<GameManager>();
         animationEvents = GetComponentInChildren<PlayerAnimationEvents>();
