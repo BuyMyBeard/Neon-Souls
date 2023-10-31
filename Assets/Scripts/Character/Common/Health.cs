@@ -20,6 +20,7 @@ public abstract class Health : MonoBehaviour
     public float MaxHealth { get => maxHealth; }
     protected PlayerAnimationEvents animationEvents;
     protected LockOn lockOn;
+    public Coroutine showHealthbarCoroutine = null;
     protected void Awake()
     {
         if (displayHealthbar == null)
@@ -39,6 +40,7 @@ public abstract class Health : MonoBehaviour
     {
         displayHealthbar.Show();
         yield return new WaitForSeconds(time);
+        showHealthbarCoroutine = null;
         displayHealthbar.Hide();
     }
 
@@ -56,7 +58,11 @@ public abstract class Health : MonoBehaviour
         if (displayHealthbar != null)
         {
             if (displayHealthbar is EnemyHealthbar)
-                StartCoroutine(ShowHealthbarTemporarily(timeShowingHealthbar));
+            {
+                if (showHealthbarCoroutine != null)
+                    StopCoroutine(showHealthbarCoroutine);
+                showHealthbarCoroutine = StartCoroutine(ShowHealthbarTemporarily(timeShowingHealthbar));
+            }
             displayHealthbar.Remove(damage, maxHealth, true);//TODO: change to false.
         }
         if (IsDead)

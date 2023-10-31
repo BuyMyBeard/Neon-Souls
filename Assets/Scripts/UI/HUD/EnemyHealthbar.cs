@@ -38,7 +38,7 @@ public class EnemyHealthbar : DisplayBar
     // LateUpdate to track ennemies after they moved in Update
     private void LateUpdate()
     {
-        if (hidden) return;
+        if (Hidden) return;
         var rt = GetComponent<RectTransform>();
         RectTransform parent = (RectTransform)rt.parent;
         var vp = cam.WorldToViewportPoint(TrackedEnemy.position + offset);
@@ -53,6 +53,8 @@ public class EnemyHealthbar : DisplayBar
 
     public override void Hide()
     {
+        if (enemyHealth.showHealthbarCoroutine != null)
+            return;
         base.Hide();
         indicator.gameObject.SetActive(false);
     }
