@@ -6,7 +6,17 @@ using UnityEngine.UI;
 
 public class EnemyHealthbar : DisplayBar
 {
-    public Transform trackedEnemy;
+    private Transform trackedEnemy;
+    public Transform TrackedEnemy
+    {
+        get => trackedEnemy;
+        set
+        {
+            trackedEnemy = value;
+            enemyHealth = value.GetComponent<Health>();
+        }
+    }
+    Health enemyHealth;
     [SerializeField] Vector3 offset;
     [SerializeField] RectTransform indicator;
     Camera cam;
@@ -31,8 +41,8 @@ public class EnemyHealthbar : DisplayBar
         if (hidden) return;
         var rt = GetComponent<RectTransform>();
         RectTransform parent = (RectTransform)rt.parent;
-        var vp = cam.WorldToViewportPoint(trackedEnemy.position + offset);
-        var vp2 = cam.WorldToViewportPoint(trackedEnemy.position);
+        var vp = cam.WorldToViewportPoint(TrackedEnemy.position + offset);
+        var vp2 = cam.WorldToViewportPoint(TrackedEnemy.position);
         var sp = canvas.worldCamera.ViewportToScreenPoint(vp);
         var sp2 = canvas.worldCamera.ViewportToScreenPoint(vp2);
         RectTransformUtility.ScreenPointToWorldPointInRectangle(parent, sp, canvas.worldCamera, out Vector3 worldPoint);
@@ -48,6 +58,7 @@ public class EnemyHealthbar : DisplayBar
     }
     public override void Show()
     {
+        Set(enemyHealth.CurrentHealth, enemyHealth.MaxHealth);
         base.Show();
         indicator.gameObject.SetActive(true);
     }

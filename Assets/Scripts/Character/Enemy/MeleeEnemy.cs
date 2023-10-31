@@ -13,8 +13,8 @@ public class MeleeEnemy : Enemy
 
     protected override void Awake()
     {
-        base.Awake();
         agent = GetComponent<NavMeshAgent>();
+        base.Awake();
     }
     protected override void IdleInit()
     {

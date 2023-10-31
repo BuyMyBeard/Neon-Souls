@@ -8,6 +8,7 @@ public class Health : MonoBehaviour
 {
     public DisplayBar displayHealthbar;
     [SerializeField] protected float maxHealth = 100;
+    [SerializeField] protected float timeShowingHealthbar = 3;
     protected string healthbarTag = "EnemyHealthbar";
     public bool invincible = false;
     GameManager manager;
@@ -20,7 +21,9 @@ public class Health : MonoBehaviour
     protected PlayerAnimationEvents animationEvents;
     protected void Awake()
     {
-        displayHealthbar = GameObject.FindGameObjectWithTag(healthbarTag).GetComponent<DisplayBar>();
+        if (displayHealthbar == null)
+            displayHealthbar = GameObject.FindGameObjectWithTag(healthbarTag).GetComponent<DisplayBar>();
+
         animator = GetComponentInChildren<Animator>();
         manager = FindObjectOfType<GameManager>();
         animationEvents = GetComponentInChildren<PlayerAnimationEvents>();
@@ -30,6 +33,12 @@ public class Health : MonoBehaviour
         ResetHealth();
     }
 
+    IEnumerator ShowHealthbarTemporarily(float time)
+    {
+        displayHealthbar.Show();
+        yield return new WaitForSeconds(time);
+        displayHealthbar.Hide();
+    }
 
     //TODO: Refactor this to make it not public
     /// <summary>
@@ -43,7 +52,11 @@ public class Health : MonoBehaviour
         OnHit.Invoke();
         CurrentHealth -= damage;
         if (displayHealthbar != null)
+        {
+            if (displayHealthbar is EnemyHealthbar)
+                StartCoroutine(ShowHealthbarTemporarily(timeShowingHealthbar));
             displayHealthbar.Remove(damage, maxHealth, true);//TODO: change to false.
+        }
         if (IsDead)
         {
             CurrentHealth = 0;

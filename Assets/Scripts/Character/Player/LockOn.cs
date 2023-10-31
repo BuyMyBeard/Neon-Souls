@@ -16,7 +16,7 @@ public class LockOn : MonoBehaviour
     [SerializeField, Range(0, 5)] float healthbarLingerTimeOnEnemyDeath = 1.5f;
     [SerializeField] float mouseThreshold = 80;
     readonly List<Transform> enemiesInSight = new();
-    EnemyHealthbar enemyHealthbar;
+    EnemyHealthbar enemyHealthbar = null;
     Health enemyHealth = null;
     Transform player;
     Transform camFollowTarget;
@@ -32,7 +32,6 @@ public class LockOn : MonoBehaviour
         player = GetComponentInChildren<CharacterController>().transform;
         playerController = GetComponent<PlayerController>();
         camFollowTarget = GameObject.Find("FollowTarget").transform;
-        enemyHealthbar = FindObjectOfType<EnemyHealthbar>();
         mainCam = Camera.main;
     }
     public void Start()
@@ -69,6 +68,7 @@ public class LockOn : MonoBehaviour
         {
             IsLocked = false;
             enemyHealthbar.Hide();
+            enemyHealthbar = null;
             enemyHealth = null;
         }
         else if (enemiesInSight.Count > 0)
@@ -171,11 +171,9 @@ public class LockOn : MonoBehaviour
     void LookAtTarget(bool isSwitchingTarget)
     {
         enemyHealth = TargetEnemy.gameObject.GetComponentInParent<Health>();
+        enemyHealthbar = enemyHealth.displayHealthbar as EnemyHealthbar;
         if (enemyHealth != null)
         {
-            enemyHealthbar.trackedEnemy = TargetEnemy;
-            enemyHealth.displayHealthbar = enemyHealthbar;
-            enemyHealthbar.Set(enemyHealth.CurrentHealth, enemyHealth.MaxHealth);
             enemyHealthbar.Show();
         }
 
@@ -189,6 +187,7 @@ public class LockOn : MonoBehaviour
     {
         if (enemiesInSight.Count > 0 && TargetEnemy != null)
         {
+            enemyHealthbar.Hide();
             List<Transform> enemies = enemiesInSight.OrderBy((e) => mainCam.WorldToViewportPoint(e.position).x).ToList();
 
             int targetIndex = enemies.FindIndex((e) => mainCam.WorldToViewportPoint(TargetEnemy.position).x == mainCam.WorldToViewportPoint(e.position).x);
