@@ -22,9 +22,9 @@ public class Fireball : MonoBehaviour
     {
         transform.rotation = Quaternion.identity;
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collider)
     {
-        Health opponentHealth = collision.gameObject.GetComponentInParent<Health>();
+        Health opponentHealth = collider.GetComponentInParent<Health>();
         if (opponentHealth != null)
             opponentHealth.InflictDamage(baseDamage + damageScalingBonus);
 
