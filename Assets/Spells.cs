@@ -22,7 +22,7 @@ public class Spells : MonoBehaviour,IStat
     LockOn lockOn;
     Stamina stamina;
     Mana mana;
-    int damageScalingBonus;
+    int damageScalingBonus = 0;
 
     public float Value => damageScalingBonus;
 
@@ -75,6 +75,6 @@ public class Spells : MonoBehaviour,IStat
 
     public void UpgradeStat(int nbAmelioration)
     {
-        damageScalingBonus = upgradeDmg * nbAmelioration;
+        damageScalingBonus += upgradeDmg * nbAmelioration;
     }
 }

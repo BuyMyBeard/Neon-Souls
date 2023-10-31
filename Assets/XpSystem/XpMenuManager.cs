@@ -37,7 +37,6 @@ public class XpMenuManager : MonoBehaviour
     {
         foreach (ButtonXp button in buttons)
         {
-            button.ResetDefault();
             button.ChangeColor(Color.white);
         }
         menuManager.ResetOverride();
@@ -59,6 +58,7 @@ public class XpMenuManager : MonoBehaviour
     {
         foreach (ButtonXp button in buttons)
         {
+            button.ResetDefault();
             button.ResetShownedValue();
         }
         xpManager.Reset();

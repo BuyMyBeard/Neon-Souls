@@ -10,10 +10,10 @@ public class PlayerMeleeAttack : MeleeAttack ,IStat
 {
     Stamina stamina;
     PlayerAnimationEvents animationEvents;
-    [SerializeField] int ameliorateur = 0;
-
-    public float Value => ameliorateur;
-    public int Upgrade => ameliorateur;
+    [SerializeField] int dmgUpgrade = 0;
+    int modifAttack = 0;
+    public float Value => modifAttack;
+    public int Upgrade => dmgUpgrade;
     protected override void Awake()
     {
         base.Awake();
@@ -45,7 +45,6 @@ public class PlayerMeleeAttack : MeleeAttack ,IStat
     }
     public void UpgradeStat(int nbAmelioration)
     {
-       /* lightAttackDamage += ameliorateur * nbAmelioration;
-        heavyAttackDamage += ameliorateur * nbAmelioration;*/
+        modifAttack += nbAmelioration * dmgUpgrade;
     }
 }
