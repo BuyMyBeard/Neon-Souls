@@ -2,7 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(Animator))]
 public abstract class Enemy : MonoBehaviour
 {
     public enum ModeId
@@ -25,6 +28,8 @@ public abstract class Enemy : MonoBehaviour
     ModeDef[] modeDefs;
     protected ModeDef Mode { get; private set; }
     protected bool lockMode = false;
+    protected NavMeshAgent agent;
+    protected Animator animator;
 
     protected virtual void Awake()
     {
@@ -35,10 +40,15 @@ public abstract class Enemy : MonoBehaviour
             new ModeDef { Id = ModeId.Close, Init = CloseInit, Main = CloseMain, Exit = CloseExit },
         };
         Mode = modeDefs[(int)ModeId.Idle];
-        Mode.Init();
         Target = GameObject.FindGameObjectWithTag("PlayerTarget").transform;
+        agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
     }
-    void Update()
+    protected virtual void OnEnable()
+    {
+        Mode.Init();
+    }
+    protected virtual void Update()
     {
         distanceFromPlayer = transform.position - Target.position;
         distanceFromPlayer.y = 0;
