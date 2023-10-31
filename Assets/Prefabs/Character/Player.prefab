@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 239097307445888987}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13750403, y: -0, z: -0, w: 0.9905012}
-  m_LocalPosition: {x: 0, y: 2.07, z: -3}
+  m_LocalRotation: {x: 0.13750401, y: -0, z: -0, w: 0.9905012}
+  m_LocalPosition: {x: 0, y: 2.0699997, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -334,6 +334,8 @@ MonoBehaviour:
   - key: 0
     val: {fileID: 8150143046497804207}
   isAttacking: 0
+  baseDamage: 1
+  damageBonus: 0
 --- !u!114 &6150863968811862542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -374,7 +376,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parryTime: 0.5
   parryResetTime: 1
-  DamageReduction: 0.2
+  DamageModifier: 0.2
   blockAngle: 45
 --- !u!114 &7062208496829682287
 MonoBehaviour:
@@ -391,6 +393,10 @@ MonoBehaviour:
   displayHealthbar: {fileID: 0}
   maxHealth: 100
   invincible: 0
+  OnHit:
+    m_PersistentCalls:
+      m_Calls: []
+  isAutoParryOn: 0
 --- !u!114 &8646511285956966484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -633,7 +639,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 36.22
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
       propertyPath: m_LocalRotation.w
