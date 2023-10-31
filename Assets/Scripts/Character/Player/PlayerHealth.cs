@@ -16,7 +16,6 @@ public class PlayerHealth : Health, IRechargeable
         stagger = GetComponent<Stagger>();
         block = GetComponent<Block>();
     }
-    public override void InflictUnblockableDamage(int damage) => InflictDamage(damage);
     public override void InflictBlockableDamage(int damage, int staminaBlockCost, Transform attackerPosition)
     {
         if (invincible) return;

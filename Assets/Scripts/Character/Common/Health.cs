@@ -77,10 +77,6 @@ public abstract class Health : MonoBehaviour
         // for now it's just
         InflictDamage(damage);
     }
-    public virtual void InflictUnblockableDamage(int damage)
-    {
-        InflictDamage(damage);
-    }
 
     [ContextMenu("Die")]
     protected virtual void Die()
