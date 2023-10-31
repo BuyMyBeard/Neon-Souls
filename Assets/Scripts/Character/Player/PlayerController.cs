@@ -95,7 +95,11 @@ public class PlayerController : MonoBehaviour
 
     void OnUIPause()
     {
-        if (xpMenuManager.Active) xpMenuManager.Hide();
+        if (xpMenuManager.Active)
+        {
+            xpMenuManager.Hide();
+            xpMenuManager.ResetAffichage();
+        }
         else if (!pausedThisFrame)
             StartCoroutine(Pause());
     }

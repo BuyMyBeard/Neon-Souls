@@ -22,30 +22,27 @@ public class XpManager : MonoBehaviour
         xpAmountText = FindObjectOfType<XpAmountText>();    
     }
 
-    public void RefreshXPAmountRender() => xpAmountText.RefreshRender(localXpAmount.ToString());
     private IEnumerator Start()
     {
         foreach (IStat stat in upgratableStats)
         {
-            DictioChangesStat.Add(stat, 0);
+            DictioChangesStat[stat] = 0;
         }
         yield return null;
         localXpAmount = playerXp.XpAmount;
     }
     //ChangePlayer and stat
+    public void RefreshXPAmountRender() => xpAmountText.RefreshRender(localXpAmount.ToString());
     public void DistribuerXp(int xpAmount)
     {
         playerXp.GainXp(xpAmount);
         localXpAmount = playerXp.XpAmount;
-        xpAmountText.RefreshRender(localXpAmount.ToString());
+        RefreshXPAmountRender();
     }
     public void UseXp(IStat statVisé, int nbUpgrade)
     {
         statVisé.UpgradeStat(nbUpgrade);
         playerXp.removeXp(CostForUpgrade * nbUpgrade);
-
-        localXpAmount = playerXp.XpAmount;
-        xpAmountText.RefreshRender(localXpAmount.ToString());
     }
     //LocalChange to verify integrity
     public bool AddNbChanges(IStat stat)
@@ -54,7 +51,7 @@ public class XpManager : MonoBehaviour
         {
             localXpAmount -= CostForUpgrade;
             DictioChangesStat[stat] += 1;
-            xpAmountText.RefreshRender(localXpAmount.ToString());
+            RefreshXPAmountRender();
             return true;
         }
         return false;
@@ -65,7 +62,7 @@ public class XpManager : MonoBehaviour
         {
             localXpAmount += CostForUpgrade;
             DictioChangesStat[stat] -= 1;
-            xpAmountText.RefreshRender(localXpAmount.ToString());
+            RefreshXPAmountRender();
             return true;
         }
         return false;
@@ -76,12 +73,20 @@ public class XpManager : MonoBehaviour
         foreach (IStat stat in upgratableStats)
         {
             UseXp(stat, DictioChangesStat[stat]);
-            DictioChangesStat[stat] = 0;
             if (typeof(IRechargeable).IsAssignableFrom(stat.GetType()))
             {
                var i = (IRechargeable)stat;
                i.Recharge();
             }
         }
+        Reset();
+    }
+    public void Reset()
+    {
+        foreach (IStat stat in upgratableStats)
+            DictioChangesStat[stat] = 0;
+
+        localXpAmount = playerXp.XpAmount;
+        RefreshXPAmountRender();
     }
 }

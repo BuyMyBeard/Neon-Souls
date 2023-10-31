@@ -30,17 +30,18 @@ public class XpMenuManager : MonoBehaviour
     void Start()
     {
         Hide();
+        ResetAffichage();
     }
     [ContextMenu("Hide")]
     public void Hide()
     {
-        menuManager.ResetOverride();
-        playerController.SwitchToPlayerControls();
         foreach (ButtonXp button in buttons)
         {
-            button.ChangeColor(Color.white);
             button.ResetDefault();
+            button.ChangeColor(Color.white);
         }
+        menuManager.ResetOverride();
+        playerController.SwitchToPlayerControls();
         Time.timeScale = 1f;
         Active = false;
     }
@@ -52,5 +53,14 @@ public class XpMenuManager : MonoBehaviour
         Active = true;
         xpManager.RefreshXPAmountRender();
         Time.timeScale = 0f;
+    }
+    [ContextMenu("Reset")]
+    public void ResetAffichage()
+    {
+        foreach (ButtonXp button in buttons)
+        {
+            button.ResetShownedValue();
+        }
+        xpManager.Reset();
     }
 }

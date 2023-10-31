@@ -69,7 +69,10 @@ public class MenuManager : MonoBehaviour
     private void BackInput(InputAction.CallbackContext obj)
     {
         if (!IsInMainMenu && xpMenu.Active)
+        {
             xpMenu.Hide();
+            xpMenu.ResetAffichage();
+        }
         else if (Paused)
             GoBack();
     }

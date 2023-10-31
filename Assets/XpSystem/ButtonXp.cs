@@ -12,7 +12,7 @@ public class ButtonXp : MonoBehaviour
     XpManager xpManager;
     ValueXpMenu typeStat;
     TextMeshProUGUI textAfficher;
-    float valeurText;
+    float shownedValue;
     float defaultValue;
     private void Awake()
     {
@@ -20,14 +20,19 @@ public class ButtonXp : MonoBehaviour
         typeStat = GetComponentInParent<ValueXpMenu>();
         textAfficher = GetComponentInParent<TextMeshProUGUI>();
     }
-    private IEnumerator Start()
+    private void Start()
     {
-        yield return null;
+        StartCoroutine(LateStart());
+    }
+    IEnumerator LateStart()
+    {
+        yield return new WaitForSeconds(0.1f);
         ResetDefault();
+        ResetShownedValue();
     }
     public void Uses() 
     {
-        valeurText = float.Parse(textAfficher.text.ToString(), System.Globalization.NumberStyles.Float);
+        shownedValue = float.Parse(textAfficher.text.ToString(), System.Globalization.NumberStyles.Float);
         if (type == PlusOrMinus.Plus)
             Plus();
         else
@@ -37,8 +42,8 @@ public class ButtonXp : MonoBehaviour
     {
         if (xpManager.AddNbChanges(typeStat.statVisé))
         {
-            valeurText += typeStat.Ameliorateur;
-            textAfficher.text = (valeurText).ToString();
+            shownedValue += typeStat.Ameliorateur;
+            textAfficher.text = (shownedValue).ToString();
             ChangeColor(Color.green);
         }
         //handle refusal of upgrade
@@ -47,9 +52,9 @@ public class ButtonXp : MonoBehaviour
     {
         if (xpManager.substractNbChanges(typeStat.statVisé))
         {
-            valeurText -= typeStat.Ameliorateur;
-            textAfficher.text = (valeurText).ToString();
-            if(valeurText == defaultValue)
+            shownedValue -= typeStat.Ameliorateur;
+            textAfficher.text = (shownedValue).ToString();
+            if(shownedValue == defaultValue)
             {
                 ChangeColor(Color.white);
             }
@@ -58,10 +63,15 @@ public class ButtonXp : MonoBehaviour
     }
     public void ChangeColor(Color color)
     {
-        textAfficher.GetComponentInParent<TextMeshProUGUI>().color = color;
+        textAfficher.color = color;
     }
     public void ResetDefault()
     {
         defaultValue = float.Parse(textAfficher.text.ToString(), System.Globalization.NumberStyles.Float);
+    }
+    public void ResetShownedValue()
+    {
+        shownedValue = defaultValue;
+        typeStat.Reset();
     }
 }
