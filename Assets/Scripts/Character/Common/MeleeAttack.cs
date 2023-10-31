@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public abstract class MeleeAttack : MonoBehaviour
+public class MeleeAttack : MonoBehaviour
 {
     [Serializable]
     public struct WeaponEnumCollider
@@ -16,7 +16,7 @@ public abstract class MeleeAttack : MonoBehaviour
     protected Dictionary<AttackWeapon, MeleeWeapon> weaponColliders = new();
     protected Animator animator;
     public bool isAttacking = false;
-    
+    public int baseDamage;
     public int damageBonus = 0;
 
     private void OnValidate()
@@ -27,18 +27,15 @@ public abstract class MeleeAttack : MonoBehaviour
             weaponColliders.Add(e.key, e.val);
         }
     }
-    ///// <summary>
-    ///// Enables the children weapon collider
-    ///// </summary>
-    //public void EnableWeaponCollider()
-    //{
-    //    weapon.ColliderEnabled = true;
-    //}
+    /// <summary>
+    /// Enables the weapon's collider and initializes the damage
+    /// </summary>
+    /// <param name="attackDef"></param>
     public virtual void InitWeaponCollider(AttackDef attackDef)
     {
         MeleeWeapon mw = weaponColliders[attackDef.weapon];
         mw.ColliderEnabled = true;
-        mw.damage = attackDef.baseDamage + damageBonus;
+        mw.damage = Mathf.FloorToInt(baseDamage * attackDef.baseDamageMultiplier) + damageBonus;
     }
     /// <summary>
     /// Disables the children weapon collider
@@ -64,6 +61,5 @@ public abstract class MeleeAttack : MonoBehaviour
             throw new MissingComponentException("Animator component missing on character");
 
         DisableAllWeaponColliders();
-
     }
 }
