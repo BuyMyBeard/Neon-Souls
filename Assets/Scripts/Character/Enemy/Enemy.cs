@@ -18,9 +18,7 @@ public abstract class Enemy : MonoBehaviour
         public Action Main { get; init; }
         public Action Exit { get; init; }
     }
-
-    [SerializeField] protected Transform target;
-    public Transform Target => target;
+    public Transform Target { get; protected set; }
     private Vector3 distanceFromPlayer;
     public Vector3 DistanceFromPlayer => distanceFromPlayer;
 
@@ -38,11 +36,11 @@ public abstract class Enemy : MonoBehaviour
         };
         Mode = modeDefs[(int)ModeId.Idle];
         Mode.Init();
-        //target = GameObject.FindGameObjectWithTag("Player").transform;
+        Target = GameObject.FindGameObjectWithTag("PlayerTarget").transform;
     }
     void Update()
     {
-        distanceFromPlayer = transform.position - target.position;
+        distanceFromPlayer = transform.position - Target.position;
         distanceFromPlayer.y = 0;
         Mode.Main();
     }
@@ -55,7 +53,6 @@ public abstract class Enemy : MonoBehaviour
         Mode = modeDefs[(int)modeId];
         Mode.Init();
     }
-
     protected virtual void IdleInit() { }
     protected virtual void InRangeInit() { }
     protected virtual void CloseInit() { }

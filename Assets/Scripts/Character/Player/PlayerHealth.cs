@@ -10,6 +10,7 @@ public class PlayerHealth : Health, IRechargeable
     public bool isAutoParryOn = false;
     private new void Awake()
     {
+        healthbarTag = "PlayerHealthbar";
         base.Awake();
         stamina = GetComponent<Stamina>();
         stagger = GetComponent<Stagger>();
