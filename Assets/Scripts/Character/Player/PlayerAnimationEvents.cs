@@ -23,8 +23,8 @@ public class PlayerAnimationEvents : AnimationEvents
         base.EnableActions();
         stamina.StartRegen();
     }
-    public void FreezeMovement() => playerMovement.movementFrozen = true;
-    public void UnFreezeMovement() => playerMovement.movementFrozen = false;
+    public override void FreezeMovement() => playerMovement.movementFrozen = true;
+    public override void UnFreezeMovement() => playerMovement.movementFrozen = false;
     public void FreezeCamera() => cameraMovement.enabled = false;
     public void UnFreezeCamera() => cameraMovement.enabled = true;
     public override void FreezeRotation() => playerMovement.rotationFrozen = true;

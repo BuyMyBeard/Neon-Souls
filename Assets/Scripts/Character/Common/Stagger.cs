@@ -4,7 +4,7 @@ using UnityEngine;
 public class Stagger : MonoBehaviour
 {
     Animator animator;
-    PlayerAnimationEvents animationEvents;
+    AnimationEvents animationEvents;
     Health health;
     bool isStaggered = false;
     public bool IsStaggered
