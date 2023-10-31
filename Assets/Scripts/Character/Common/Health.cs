@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : MonoBehaviour
+public abstract class Health : MonoBehaviour
 {
     public DisplayBar displayHealthbar;
     [SerializeField] protected float maxHealth = 100;
@@ -15,12 +15,14 @@ public class Health : MonoBehaviour
     public bool IsDead { get => CurrentHealth <= 0; }
     public float MaxHealth { get => maxHealth; }
     protected PlayerAnimationEvents animationEvents;
+    protected LockOn lockOn;
     protected void Awake()
     {
         displayHealthbar = GameObject.FindGameObjectWithTag(healthbarTag).GetComponent<DisplayBar>();
         animator = GetComponentInChildren<Animator>();
         manager = FindObjectOfType<GameManager>();
         animationEvents = GetComponentInChildren<PlayerAnimationEvents>();
+        lockOn = FindObjectOfType<LockOn>();      
     }
     void OnEnable()
     {
@@ -38,7 +40,7 @@ public class Health : MonoBehaviour
         if (invincible)
             return;
         CurrentHealth -= damage;
-        if (displayHealthbar != null)
+        if (displayHealthbar != null && healthbarTag != "PlayerHealthbar" && lockOn.EnemyHealth == this)
             displayHealthbar.Remove(damage, maxHealth, true);//TODO: change to false.
         if (IsDead)
         {
@@ -68,7 +70,6 @@ public class Health : MonoBehaviour
         else
             Debug.Log("EnemyDead");
     }
-
 
     /// <summary>
     /// Restores health

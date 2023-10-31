@@ -12,6 +12,6 @@ public abstract class Spawner : MonoBehaviour, IRechargeable
     private void OnDrawGizmos()
     {
         Gizmos.color = gizmosColor;
-        Gizmos.DrawMesh(gizmosMesh ,transform.position, transform.rotation, transform.localScale);
+        Gizmos.DrawMesh(gizmosMesh ,transform.position + Vector3.up, transform.rotation, transform.localScale);
     }
 }

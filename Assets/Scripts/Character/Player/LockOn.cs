@@ -17,7 +17,7 @@ public class LockOn : MonoBehaviour
     [SerializeField] float mouseThreshold = 80;
     readonly List<Transform> enemiesInSight = new();
     EnemyHealthbar enemyHealthbar;
-    Health enemyHealth = null;
+
     Transform player;
     Transform camFollowTarget;
     bool isSmoothLooking = false;
@@ -26,6 +26,7 @@ public class LockOn : MonoBehaviour
     Coroutine CamLockOnTargetCoroutine;
     public bool IsLocked { get; private set; } = false;
     public Transform TargetEnemy { get; private set; } = null;
+    public Health EnemyHealth { get; private set; } = null;
 
     public void Awake()
     {
@@ -69,7 +70,7 @@ public class LockOn : MonoBehaviour
         {
             IsLocked = false;
             enemyHealthbar.Hide();
-            enemyHealth = null;
+            EnemyHealth = null;
         }
         else if (enemiesInSight.Count > 0)
         {
@@ -84,7 +85,7 @@ public class LockOn : MonoBehaviour
     {
         while (IsLocked)
         {
-            if (enemyHealth != null && enemyHealth.IsDead)
+            if (EnemyHealth != null && EnemyHealth.IsDead)
             {
                 IsLocked = false;
                 yield return new WaitForSeconds(healthbarLingerTimeOnEnemyDeath);
@@ -170,12 +171,12 @@ public class LockOn : MonoBehaviour
     }
     void LookAtTarget(bool isSwitchingTarget)
     {
-        enemyHealth = TargetEnemy.gameObject.GetComponentInParent<Health>();
-        if (enemyHealth != null)
+        EnemyHealth = TargetEnemy.gameObject.GetComponentInParent<Health>();
+        if (EnemyHealth != null)
         {
             enemyHealthbar.trackedEnemy = TargetEnemy;
-            enemyHealth.displayHealthbar = enemyHealthbar;
-            enemyHealthbar.Set(enemyHealth.CurrentHealth, enemyHealth.MaxHealth);
+            EnemyHealth.displayHealthbar = enemyHealthbar;
+            enemyHealthbar.Set(EnemyHealth.CurrentHealth, EnemyHealth.MaxHealth);
             enemyHealthbar.Show();
         }
 
