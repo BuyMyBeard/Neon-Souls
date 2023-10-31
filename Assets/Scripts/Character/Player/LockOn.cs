@@ -173,7 +173,7 @@ public class LockOn : MonoBehaviour
         enemyHealth = TargetEnemy.gameObject.GetComponentInParent<Health>();
         if (enemyHealth != null)
         {
-            enemyHealthbar.trackedEnemy = enemyHealth;
+            enemyHealthbar.trackedEnemy = TargetEnemy;
             enemyHealth.displayHealthbar = enemyHealthbar;
             enemyHealthbar.Set(enemyHealth.CurrentHealth, enemyHealth.MaxHealth);
             enemyHealthbar.Show();
