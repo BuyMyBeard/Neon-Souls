@@ -392,7 +392,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayHealthbar: {fileID: 0}
   maxHealth: 100
-  healthbarTag: PlayerHealthbar
   invincible: 0
   OnHit:
     m_PersistentCalls:
@@ -1522,10 +1521,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.4500021
-  m_Height: 1.347435
+  m_Radius: 2.7
+  m_Height: 1.29
   m_Direction: 1
-  m_Center: {x: -0.000008161174, y: -0.22371744, z: -0.00000034830336}
+  m_Center: {x: -0.000008161174, y: -0.33, z: -0.00000034830336}
 --- !u!1 &3845905489050742677 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2738080496605957824, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
@@ -1685,7 +1684,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 2
-  m_Radius: 0.5
+  m_Radius: 0.25
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08

@@ -37,4 +37,6 @@ public abstract class AnimationEvents : MonoBehaviour
         EndStagger();
     }
     public virtual void FallApart() => fallApart.Activate();
+    public virtual void FreezeMovement() { }
+    public virtual void UnFreezeMovement() { }
 }
