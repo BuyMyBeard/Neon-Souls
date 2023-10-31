@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Health : MonoBehaviour
+public abstract class Health : MonoBehaviour
 {
     public DisplayBar displayHealthbar;
     [SerializeField] protected float maxHealth = 100;
@@ -19,6 +19,7 @@ public class Health : MonoBehaviour
     public bool IsDead { get => CurrentHealth <= 0; }
     public float MaxHealth { get => maxHealth; }
     protected PlayerAnimationEvents animationEvents;
+    protected LockOn lockOn;
     protected void Awake()
     {
         if (displayHealthbar == null)
@@ -27,6 +28,7 @@ public class Health : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         manager = FindObjectOfType<GameManager>();
         animationEvents = GetComponentInChildren<PlayerAnimationEvents>();
+        lockOn = FindObjectOfType<LockOn>();      
     }
     void OnEnable()
     {
@@ -89,7 +91,6 @@ public class Health : MonoBehaviour
         else
             Debug.Log("EnemyDead");
     }
-
 
     /// <summary>
     /// Restores health
