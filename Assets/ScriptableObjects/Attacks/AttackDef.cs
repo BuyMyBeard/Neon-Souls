@@ -13,8 +13,7 @@ public enum AttackWeapon
 public class AttackDef : ScriptableObject
 {
     public AttackWeapon weapon;
-    [Range(0, 200)]
-    public int baseDamage;
+    public float baseDamageMultiplier;
     [Range(0, 100)]
     public int staminaCost;
 }

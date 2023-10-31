@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7690e68baad4a14b941c23118d6e5d5, type: 3}
-  m_Name: PlayerHeavyAttack
+  m_Script: {fileID: 11500000, guid: 34cecd490d61f85418d4015fe0f24b68, type: 3}
+  m_Name: AttackUp
   m_EditorClassIdentifier: 
-  weapon: 0
-  baseDamageMultiplier: 2.5
-  staminaCost: 30
+  sprite: {fileID: 0}
+  attributeToIncrease: 0
+  amountToIncrease: 10

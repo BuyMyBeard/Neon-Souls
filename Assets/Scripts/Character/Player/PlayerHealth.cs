@@ -7,6 +7,7 @@ public class PlayerHealth : Health, IRechargeable
     Stamina stamina;
     Stagger stagger;
     Block block;
+    public bool isAutoParryOn = false;
     private new void Awake()
     {
         healthbarTag = "PlayerHealthbar";
@@ -15,11 +16,11 @@ public class PlayerHealth : Health, IRechargeable
         stagger = GetComponent<Stagger>();
         block = GetComponent<Block>();
     }
-    public void InflictUnblockableDamage(int damage) => InflictDamage(damage);
+    public override void InflictUnblockableDamage(int damage) => InflictDamage(damage);
     public override void InflictBlockableDamage(int damage, int staminaBlockCost, Transform attackerPosition)
     {
         if (invincible) return;
-        if (block.IsParrying && !stamina.IsExhausted && IsAttackerInFront(attackerPosition))
+        if ((block.IsParrying || block.IsBlocking && isAutoParryOn) && !stamina.IsExhausted && IsAttackerInFront(attackerPosition))
         {
             stamina.Remove(staminaBlockCost);
             block.ResetParryWindow();
@@ -27,9 +28,9 @@ public class PlayerHealth : Health, IRechargeable
         }
         else if (block.IsBlocking && !stamina.IsExhausted && IsAttackerInFront(attackerPosition)) 
         {
-            int damageReduced = (int) (damage * block.DamageReduction);
+            int damageModifier = (int) (damage * block.DamageModifier);
             stamina.Remove(staminaBlockCost);
-            InflictDamage(damageReduced);
+            InflictDamage(damageModifier);
             stagger.BlockHit(1);
         }
         else
