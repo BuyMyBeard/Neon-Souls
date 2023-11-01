@@ -43,6 +43,8 @@ public class XpMenuManager : MonoBehaviour
         playerController.SwitchToPlayerControls();
         Time.timeScale = 1f;
         Active = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
     [ContextMenu("Show")]
     public void Show()
@@ -52,6 +54,8 @@ public class XpMenuManager : MonoBehaviour
         Active = true;
         xpManager.RefreshXPAmountRender();
         Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
     [ContextMenu("Reset")]
     public void ResetAffichage()
