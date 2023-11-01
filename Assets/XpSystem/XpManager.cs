@@ -6,7 +6,7 @@ using UnityEngine;
 public class XpManager : MonoBehaviour
 {
 
-    List<IStat> upgratableStats = new();
+    List<IStat> upgradableStats = new();
     PlayerExperience playerXp;
     Dictionary<IStat, int> DictioChangesStat = new();
     XpAmountText xpAmountText;
@@ -18,13 +18,13 @@ public class XpManager : MonoBehaviour
     private void Awake()
     {
         playerXp = FindObjectOfType<PlayerExperience>();
-        upgratableStats.AddRange(playerXp.GetComponents<IStat>());
+        upgradableStats.AddRange(playerXp.GetComponents<IStat>());
         xpAmountText = FindObjectOfType<XpAmountText>();    
     }
 
     private IEnumerator Start()
     {
-        foreach (IStat stat in upgratableStats)
+        foreach (IStat stat in upgradableStats)
         {
             DictioChangesStat[stat] = 0;
         }
@@ -33,16 +33,16 @@ public class XpManager : MonoBehaviour
     }
     //ChangePlayer and stat
     public void RefreshXPAmountRender() => xpAmountText.RefreshRender(localXpAmount.ToString());
-    public void DistribuerXp(int xpAmount)
+    public void DistributeXp(int xpAmount)
     {
         playerXp.GainXp(xpAmount);
         localXpAmount = playerXp.XpAmount;
         RefreshXPAmountRender();
     }
-    public void UseXp(IStat statVisé, int nbUpgrade)
+    public void UseXp(IStat targetedStat, int upgradeCount)
     {
-        statVisé.UpgradeStat(nbUpgrade);
-        playerXp.removeXp(CostForUpgrade * nbUpgrade);
+        targetedStat.UpgradeStat(upgradeCount);
+        playerXp.removeXp(CostForUpgrade * upgradeCount);
     }
     //LocalChange to verify integrity
     public bool AddNbChanges(IStat stat)
@@ -70,7 +70,7 @@ public class XpManager : MonoBehaviour
     //Aplies changes to stat
     public void ValidateChanges()
     {
-        foreach (IStat stat in upgratableStats)
+        foreach (IStat stat in upgradableStats)
         {
             UseXp(stat, DictioChangesStat[stat]);
             if (typeof(IRechargeable).IsAssignableFrom(stat.GetType()))
@@ -83,7 +83,7 @@ public class XpManager : MonoBehaviour
     }
     public void Reset()
     {
-        foreach (IStat stat in upgratableStats)
+        foreach (IStat stat in upgradableStats)
             DictioChangesStat[stat] = 0;
 
         localXpAmount = playerXp.XpAmount;

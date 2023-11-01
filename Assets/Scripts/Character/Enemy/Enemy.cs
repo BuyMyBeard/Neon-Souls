@@ -70,6 +70,6 @@ public abstract class Enemy : MonoBehaviour,IXpGiver
 
     public void GiveXp()
     {
-        xpManager.DistribuerXp(xpPrice);
+        xpManager.DistributeXp(xpPrice);
     }
 }
