@@ -32,11 +32,11 @@ public abstract class MeleeAttack : MonoBehaviour
     //{
     //    weapon.ColliderEnabled = true;
     //}
-    public virtual void InitWeaponCollider(AttackDef attackDef)
+    public virtual void InitWeaponCollider(AttackDef attackDef, int modifAtk = 0)
     {
         MeleeWeapon mw = weaponColliders[attackDef.weapon];
         mw.ColliderEnabled = true;
-        mw.damage = attackDef.baseDamage;
+        mw.damage = attackDef.baseDamage + modifAtk;
     }
     /// <summary>
     /// Disables the children weapon collider
@@ -62,6 +62,5 @@ public abstract class MeleeAttack : MonoBehaviour
             throw new MissingComponentException("Animator component missing on character");
 
         DisableAllWeaponColliders();
-
     }
 }
