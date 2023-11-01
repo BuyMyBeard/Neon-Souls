@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2831716941745045415}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.172113, y: 1.7356037, z: 42.715797}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 698fc852cc3ee0c42bfe04a6e9a2c650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DroppedXpAmount: 0
+  playerXp: {fileID: 0}
 --- !u!135 &3219060644858311182
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -129,7 +131,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b78706037cc0ccb428d70d5eb37804e3, type: 2}
+  - {fileID: 2100000, guid: 77e6a9779e7e088478e3d92a2cffdb7f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -166,4 +168,4 @@ MonoBehaviour:
   spinSpeed: 1
   amplitude: 0.25
   frequency: 1
-  verticalShift: 0
+  verticalShift: 1
