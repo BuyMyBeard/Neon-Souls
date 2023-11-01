@@ -11,7 +11,7 @@ public class DroppedXp : MonoBehaviour, IRechargeable
     {
         playerXp = FindObjectOfType<PlayerExperience>();
         DroppedXpAmount = playerXp.XpAmount;
-        playerXp.removeXp(playerXp.XpAmount);
+        playerXp.RemoveXp(playerXp.XpAmount);
         collider = GetComponent<Collider>();
         GameManager.Instance.AddTemporaryRechargeable(this);
         collider.enabled = false;
