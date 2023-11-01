@@ -15,17 +15,22 @@ public class MenuManager : MonoBehaviour
     EventSystem eventSystem;
     InputSystemUIInputModule inputModule;
     PlayerController playerController;
+    XpMenuManager xpMenu;
     [HideInInspector] public SelectableRebindAction currentlyRebinding;
+    public bool isInLevelingMenu = false;
     public bool Paused { get; private set; } = true;
     public SubMenus CurrentSubMenu { get; private set; } = SubMenus.None;
-
     public bool IsInSubMenu { get => CurrentSubMenu != SubMenus.None; }
     public bool IsInMainMenu { get => SceneManager.GetActiveScene().buildIndex == 0; }
     private void Awake()
     {
         eventSystem = EventSystem.current;
         inputModule = eventSystem.GetComponent<InputSystemUIInputModule>();
-        if (!IsInMainMenu) playerController = FindObjectOfType<PlayerController>();
+        if (!IsInMainMenu)
+        {
+            playerController = FindObjectOfType<PlayerController>();
+            xpMenu = FindObjectOfType<XpMenuManager>();
+        }     
     }
     private void Start()
     {
@@ -63,7 +68,12 @@ public class MenuManager : MonoBehaviour
 
     private void BackInput(InputAction.CallbackContext obj)
     {
-        if (Paused)
+        if (!IsInMainMenu && xpMenu.Active)
+        {
+            xpMenu.Hide();
+            xpMenu.ResetAffichage();
+        }
+        else if (Paused)
             GoBack();
     }
     public void GoBack()

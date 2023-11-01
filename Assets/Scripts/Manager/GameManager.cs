@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(WaitBeforeResetting());
     }
-
+     
     IEnumerator WaitBeforeResetting()
     {
         yield return new WaitForSeconds(timeBeforeDeathScreen);

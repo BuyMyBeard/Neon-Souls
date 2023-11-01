@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
 
     PlayerInput playerInput;
     MenuManager menuManager;
+    XpMenuManager xpMenuManager;
 
     public void SwitchToPlayerControls() => playerInput.SwitchCurrentActionMap("PlayerControls");
     public void SwitchToUI() => playerInput.SwitchCurrentActionMap("UI");
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
     {
         playerInput = GetComponent<PlayerInput>();
         menuManager = FindObjectOfType<MenuManager>();
+        xpMenuManager = FindObjectOfType<XpMenuManager>();
         runAction = playerInput.currentActionMap.FindAction("RunButton");
         dodgeAction = playerInput.currentActionMap.FindAction("DodgeButton");
         parryAction = playerInput.currentActionMap.FindAction("ParryButton");
@@ -93,7 +95,12 @@ public class PlayerController : MonoBehaviour
 
     void OnUIPause()
     {
-        if (!pausedThisFrame)
+        if (xpMenuManager.Active)
+        {
+            xpMenuManager.Hide();
+            xpMenuManager.ResetAffichage();
+        }
+        else if (!pausedThisFrame)
             StartCoroutine(Pause());
     }
     void OnDodge()
