@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 239097307445888987}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13750403, y: -0, z: -0, w: 0.9905012}
-  m_LocalPosition: {x: 0, y: 2.07, z: -3}
+  m_LocalRotation: {x: 0.079872176, y: -0, z: -0, w: 0.99680513}
+  m_LocalPosition: {x: 0, y: 2.07, z: -4.049999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -145,6 +145,7 @@ GameObject:
   - component: {fileID: 1956206164484021501}
   - component: {fileID: 7116799338485392863}
   - component: {fileID: 2265787126803834102}
+  - component: {fileID: 4605111783119535703}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -290,10 +291,10 @@ MonoBehaviour:
   maxStamina: 100
   currentStamina: 0
   staminaRegenRate: 30
-  exhaustionTime: 1.5
   blockingRegenMultiplier: 0.5
   staminaRequiredToRun: 20
   timeBeforeRegenKicksIn: 0.7
+  upgradeStam: 10
 --- !u!114 &931004792272011639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,6 +335,7 @@ MonoBehaviour:
   - key: 0
     val: {fileID: 8150143046497804207}
   isAttacking: 0
+  dmgUpgrade: 5
 --- !u!114 &6150863968811862542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,6 +393,7 @@ MonoBehaviour:
   displayHealthbar: {fileID: 0}
   maxHealth: 100
   healthbarTag: PlayerHealthbar
+  upgradeHp: 10
   invincible: 0
 --- !u!114 &8646511285956966484
 MonoBehaviour:
@@ -434,7 +437,7 @@ MonoBehaviour:
   lobeFactor: 0.102
   staminaCost: 40
   manaCost: 25
-  damageScalingBonus: 0
+  upgradeDmg: 5
 --- !u!114 &2265787126803834102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -449,6 +452,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxMana: 100
   currentMana: 0
+  upgradeMana: 10
+--- !u!114 &4605111783119535703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291937762287850455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21732853c156b194187f4326f51e9f96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soulsTextTag: SoulsCount
+  xpAmount: 100
 --- !u!1 &3519504191883572113
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,7 +587,7 @@ MonoBehaviour:
   ShoulderOffset: {x: 0, y: 0, z: 0}
   VerticalArmLength: 1.65
   CameraSide: 0.5
-  CameraDistance: 3
+  CameraDistance: 4.05
   CameraCollisionFilter:
     serializedVersion: 2
     m_Bits: 0

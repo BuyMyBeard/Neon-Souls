@@ -9,6 +9,7 @@ public class Health : MonoBehaviour,IStat
     [SerializeField] protected float maxHealth = 100;
     [SerializeField] string healthbarTag = "PlayerHealthbar";
     [SerializeField]int upgradeHp = 10;
+    [SerializeField] GameObject droppedXp;
 
     public bool invincible = false;
     GameManager manager;
@@ -66,6 +67,9 @@ public class Health : MonoBehaviour,IStat
             animationEvents.FreezeMovement();
             animationEvents.FreezeRotation();
             animationEvents.StartIFrame();
+            Transform playerTransform = GetComponentInChildren<Animator>().transform;
+            Vector3 positionWithYOffset = new Vector3(playerTransform.position.x, playerTransform.position.y + 2, playerTransform.position.z);
+            Instantiate(droppedXp, positionWithYOffset, Quaternion.identity);
         }
         else if(gameObject.CompareTag("Enemy"))
         {
