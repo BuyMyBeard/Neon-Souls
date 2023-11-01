@@ -61,7 +61,7 @@ public class PlayerHealth : Health, IRechargeable
             animationEvents.UnFreezeMovement();
             animationEvents.UnFreezeRotation();
             animationEvents.StopIFrame();
-            animator.Play("Idle");
+            animator.SetTrigger("Reset");
             GetComponent<CameraMovement>().SyncFollowTarget();
         }
     }

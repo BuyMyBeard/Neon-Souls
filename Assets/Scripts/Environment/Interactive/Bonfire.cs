@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bonfire : Interactable
 {
+    XpMenuManager xpMenuManager;
     BonfireManager bonfireManager;
     public bool active = false;
     [SerializeField] Vector3 respawnOffset = Vector3.zero;
@@ -13,6 +14,7 @@ public class Bonfire : Interactable
     protected override void Awake()
     {
         base.Awake();
+        xpMenuManager = FindObjectOfType<XpMenuManager>();
         bonfireManager = FindObjectOfType<BonfireManager>();
         light = GetComponent<Light>();
     }
@@ -21,6 +23,8 @@ public class Bonfire : Interactable
         if (active) 
         {
             bonfireManager.SitAtBonfire(this);
+            xpMenuManager.Show();
+            
             return;
         }
         light.color = new Color(0, 1, 0);
