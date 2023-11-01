@@ -12,6 +12,7 @@ public class PlayerExperience : MonoBehaviour, IXpReceiver
     [SerializeField] Animator transactionAnimator;
     TextMeshProUGUI transactionText;
     TextMeshProUGUI xpText;
+    int transactionSum = 0;
     private void Awake()
     {
         xpText = GameObject.FindGameObjectWithTag(soulsTextTag).GetComponent<TextMeshProUGUI>();
@@ -22,20 +23,22 @@ public class PlayerExperience : MonoBehaviour, IXpReceiver
     
     public void GainXp(int amount)
     { 
+        transactionSum += amount;
         xpAmount += amount;
-        transactionText.text = "+" + amount.ToString();
-        transactionAnimator.Play("SoulsCount");
+        transactionText.text = (Mathf.Sign(transactionSum) == 1 ? "+" : "") + transactionSum.ToString();
+        transactionAnimator.SetTrigger("Display");
     }
     public void UpdateDisplay()
     {
+        transactionSum = 0;
         xpText.text = xpAmount.ToString();
     }
 
-    public void removeXp(int amount)
+    public void RemoveXp(int amount)
     {
+        transactionSum -= amount;
         xpAmount -= amount;
-        Debug.Log(amount);
-        transactionText.text = "-" + amount.ToString();
-        transactionAnimator.Play("SoulsCount");
+        transactionText.text = (Mathf.Sign(transactionSum) == 1 ? "+" : "") + transactionSum.ToString();
+        transactionAnimator.SetTrigger("Display");
     }
 }

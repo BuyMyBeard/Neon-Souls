@@ -81,7 +81,7 @@ public class XpManager : MonoBehaviour
             }
         }
         ResetXpManager();
-        playerXp.removeXp(sum);
+        playerXp.RemoveXp(sum);
     }
     public void ResetXpManager()
     {
