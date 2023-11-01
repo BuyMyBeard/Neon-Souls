@@ -191,11 +191,20 @@ VisualEffect:
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 0.5
+        m_Name: Size
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 0.5, y: -0.5, z: -0.5}
+        m_Name: MinimumParticleSpeed
+        m_Overridden: 1
+      - m_Value: {x: 5, y: 0.5, z: 0.5}
+        m_Name: MaximumParticleSpeed
+        m_Overridden: 1
     m_Vector4f:
       m_Array: []
     m_Uint:
