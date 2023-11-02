@@ -22,26 +22,31 @@ public class MeleeEnemy : Enemy
     }
     protected override void IdleInit()
     {
+        base.IdleInit();
         agent.ResetPath();
     }
     protected override void InRangeInit()
     {
+        base.InRangeInit();
         agent.enabled = true;
         agent.updateRotation = true;
     }
     protected override void InRangeMain()
     {
+        base.InRangeMain();
         agent.Move(Time.deltaTime * 3 * Vector3.left);
         agent.SetDestination(Target.position);
         AnimateMovement();
     }
     protected override void InRangeExit()
     {
+        base.InRangeExit();
         animator.SetBool("IsMoving", false);
         agent.ResetPath();
     }
     protected override void CloseMain()
     {
+        base.CloseMain();
         Quaternion towardsPlayer = Quaternion.LookRotation(-DistanceFromPlayer, Vector3.up);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, towardsPlayer, turnSpeed * Time.deltaTime);
     }
