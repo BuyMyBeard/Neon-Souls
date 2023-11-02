@@ -32,7 +32,8 @@ public abstract class ObjectPool : MonoBehaviour
     {
         if (bag.TryTake(out GameObject obj))
         {
-            obj.transform.SetPositionAndRotation(transform.position, transform.rotation);
+            if (transform != null)
+                obj.transform.SetPositionAndRotation(transform.position, transform.rotation);
             obj.SetActive(true);
             p_returnCoroutine = StartCoroutine(ReturnCoroutine(obj));
             return obj;

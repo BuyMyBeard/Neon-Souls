@@ -6,10 +6,9 @@ using UnityEngine.Events;
 
 public abstract class Health : MonoBehaviour
 {
-    public DisplayBar displayHealthbar;
     [SerializeField] protected float maxHealth = 100;
     [SerializeField] protected float timeShowingHealthbar = 3;
-    protected string healthbarTag = "EnemyHealthbar";
+    public DisplayBar displayHealthbar;
     public bool invincible = false;
     GameManager manager;
     protected Animator animator;
@@ -20,12 +19,8 @@ public abstract class Health : MonoBehaviour
     public float MaxHealth { get => maxHealth; }
     protected PlayerAnimationEvents animationEvents;
     protected LockOn lockOn;
-    public Coroutine showHealthbarCoroutine = null;
     protected void Awake()
     {
-        if (displayHealthbar == null)
-            displayHealthbar = GameObject.FindGameObjectWithTag(healthbarTag).GetComponent<DisplayBar>();
-
         animator = GetComponentInChildren<Animator>();
         manager = FindObjectOfType<GameManager>();
         animationEvents = GetComponentInChildren<PlayerAnimationEvents>();
@@ -36,13 +31,7 @@ public abstract class Health : MonoBehaviour
         ResetHealth();
     }
 
-    IEnumerator ShowHealthbarTemporarily(float time)
-    {
-        displayHealthbar.Show();
-        yield return new WaitForSeconds(time);
-        showHealthbarCoroutine = null;
-        displayHealthbar.Hide();
-    }
+    public abstract void HandleHealthbar(int damage);
 
     //TODO: Refactor this to make it not public
     /// <summary>
@@ -55,16 +44,7 @@ public abstract class Health : MonoBehaviour
             return;
         OnHit.Invoke();
         CurrentHealth -= damage;
-        if (displayHealthbar != null)
-        {
-            if (displayHealthbar is EnemyHealthbar)
-            {
-                if (showHealthbarCoroutine != null)
-                    StopCoroutine(showHealthbarCoroutine);
-                showHealthbarCoroutine = StartCoroutine(ShowHealthbarTemporarily(timeShowingHealthbar));
-            }
-            displayHealthbar.Remove(damage, maxHealth, true);//TODO: change to false.
-        }
+        HandleHealthbar(damage);
         if (IsDead)
         {
             CurrentHealth = 0;

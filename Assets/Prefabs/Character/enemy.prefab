@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2945289816596351068
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1439193549498905410}
+  m_Layer: 13
+  m_Name: HealthbarContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1439193549498905410
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2945289816596351068}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.08, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 826964868278621945}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &933161393770000658
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -274,7 +305,10 @@ PrefabInstance:
     - {fileID: 8121718470689072185, guid: c2d43aac54ffdca4f8a7c6e4de9caf4c, type: 3}
     - {fileID: -5364744893643090350, guid: c2d43aac54ffdca4f8a7c6e4de9caf4c, type: 3}
     - {fileID: -3923175130372764083, guid: c2d43aac54ffdca4f8a7c6e4de9caf4c, type: 3}
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: c2d43aac54ffdca4f8a7c6e4de9caf4c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1439193549498905410}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c2d43aac54ffdca4f8a7c6e4de9caf4c, type: 3}
       insertIndex: -1
@@ -456,7 +490,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayHealthbar: {fileID: 0}
   maxHealth: 100
+  timeShowingHealthbar: 3
   invincible: 0
+  OnHit:
+    m_PersistentCalls:
+      m_Calls: []
+  healthbarContainer: {fileID: 1439193549498905410}
 --- !u!136 &4186570677867809131
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -531,6 +570,11 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -3796090498641192378, guid: c2d43aac54ffdca4f8a7c6e4de9caf4c, type: 3}
+--- !u!4 &826964868278621945 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c2d43aac54ffdca4f8a7c6e4de9caf4c, type: 3}
+  m_PrefabInstance: {fileID: 933161393770000658}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2218156257672226377 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1313705335182595931, guid: c2d43aac54ffdca4f8a7c6e4de9caf4c, type: 3}

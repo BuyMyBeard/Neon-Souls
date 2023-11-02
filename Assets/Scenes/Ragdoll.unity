@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1191207585}
-  m_IndirectSpecularColor: {r: 0.4817528, g: 0.30355152, b: 0.5639355, a: 1}
+  m_IndirectSpecularColor: {r: 0.48175228, g: 0.30355093, b: 0.56393427, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,6 +123,25 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &15995543 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9061504654779275769, guid: fa6d5b97262db7743a0d073caec2571e, type: 3}
+  m_PrefabInstance: {fileID: 235903891}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &15995545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15995543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e78f26fba60cc4044b55147cbc3f9ef9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  capacity: 15
+  objToPool: {fileID: 3487640433487351361, guid: f6c86211762926442b9f7a6531f49f43, type: 3}
 --- !u!20 &60799276 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 4767291778183930998, guid: fa6d5b97262db7743a0d073caec2571e, type: 3}
@@ -378,6 +397,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1283858283864350334, guid: fa6d5b97262db7743a0d073caec2571e, type: 3}
+      propertyPath: offset.y
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 2043039889698664470, guid: fa6d5b97262db7743a0d073caec2571e, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -397,6 +420,10 @@ PrefabInstance:
     - target: {fileID: 2337034628849566466, guid: fa6d5b97262db7743a0d073caec2571e, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 12.300049
+      objectReference: {fileID: 0}
+    - target: {fileID: 4381934052385847486, guid: fa6d5b97262db7743a0d073caec2571e, type: 3}
+      propertyPath: m_TagString
+      value: Indicator
       objectReference: {fileID: 0}
     - target: {fileID: 8101953007460202681, guid: fa6d5b97262db7743a0d073caec2571e, type: 3}
       propertyPath: m_Pivot.x
@@ -510,10 +537,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9061504654779275769, guid: fa6d5b97262db7743a0d073caec2571e, type: 3}
+      propertyPath: m_TagString
+      value: EnemyHealthbarPool
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6239879054803229225, guid: fa6d5b97262db7743a0d073caec2571e, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9061504654779275769, guid: fa6d5b97262db7743a0d073caec2571e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 15995545}
   m_SourcePrefab: {fileID: 100100000, guid: fa6d5b97262db7743a0d073caec2571e, type: 3}
 --- !u!850595691 &278671758
 LightingSettings:
@@ -1034,6 +1069,14 @@ PrefabInstance:
       propertyPath: m_LocalRotation.x
       value: 0.13750403
       objectReference: {fileID: 0}
+    - target: {fileID: 7554152430200764734, guid: 0ccd5db62eaa0554394ba120838ab584, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 8138852493157334010, guid: 0ccd5db62eaa0554394ba120838ab584, type: 3}
+      propertyPath: baseDamage
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1255,6 +1298,14 @@ PrefabInstance:
     - target: {fileID: 7900298106661064578, guid: b8e36fd9d363e8f4e88e6977d1c5dbc2, type: 3}
       propertyPath: m_Name
       value: EnemySpawner (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7900298106661064578, guid: b8e36fd9d363e8f4e88e6977d1c5dbc2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773959035091634340, guid: b8e36fd9d363e8f4e88e6977d1c5dbc2, type: 3}
+      propertyPath: healthbar
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1579,6 +1630,10 @@ PrefabInstance:
     - target: {fileID: 7900298106661064578, guid: b8e36fd9d363e8f4e88e6977d1c5dbc2, type: 3}
       propertyPath: m_Name
       value: EnemySpawner (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773959035091634340, guid: b8e36fd9d363e8f4e88e6977d1c5dbc2, type: 3}
+      propertyPath: healthbar
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2579,6 +2634,14 @@ PrefabInstance:
     - target: {fileID: 7900298106661064578, guid: b8e36fd9d363e8f4e88e6977d1c5dbc2, type: 3}
       propertyPath: m_Name
       value: EnemySpawner (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7900298106661064578, guid: b8e36fd9d363e8f4e88e6977d1c5dbc2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773959035091634340, guid: b8e36fd9d363e8f4e88e6977d1c5dbc2, type: 3}
+      propertyPath: healthbar
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

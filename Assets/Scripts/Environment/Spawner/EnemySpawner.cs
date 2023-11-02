@@ -8,9 +8,6 @@ public class EnemySpawner : Spawner
     public override void Recharge()
     {
         GameObject enemy = Instantiate(entity);
-        enemy.GetComponent<Health>().displayHealthbar = healthbar;
-        healthbar.TrackedEnemy = enemy.transform;
-        enemy.transform.position = transform.position;
-        enemy.transform.rotation = transform.rotation;
+        enemy.transform.SetPositionAndRotation(transform.position, transform.rotation);
     }
 }
