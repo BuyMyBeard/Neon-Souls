@@ -141,7 +141,6 @@ GameObject:
   - component: {fileID: 1389185903735294112}
   - component: {fileID: 3151910380780960717}
   - component: {fileID: 7062208496829682287}
-  - component: {fileID: 8646511285956966484}
   - component: {fileID: 1956206164484021501}
   - component: {fileID: 7116799338485392863}
   - component: {fileID: 2265787126803834102}
@@ -392,23 +391,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayHealthbar: {fileID: 0}
   maxHealth: 100
+  timeShowingHealthbar: 3
   invincible: 0
   OnHit:
     m_PersistentCalls:
       m_Calls: []
   isAutoParryOn: 0
---- !u!114 &8646511285956966484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1291937762287850455}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 974141ffb8ea4354d94bf8bfc4f05639, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1956206164484021501
 MonoBehaviour:
   m_ObjectHideFlags: 0

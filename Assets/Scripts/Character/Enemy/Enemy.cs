@@ -6,8 +6,9 @@ using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Animator))]
-public abstract class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour, IRechargeable
 {
+    Transform origin;
     public enum ModeId
     {
         Idle,
@@ -43,6 +44,7 @@ public abstract class Enemy : MonoBehaviour
         Target = GameObject.FindGameObjectWithTag("PlayerTarget").transform;
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        origin = transform;
     }
     protected virtual void OnEnable()
     {
@@ -72,4 +74,9 @@ public abstract class Enemy : MonoBehaviour
     protected virtual void IdleExit() { }
     protected virtual void InRangeExit() { }
     protected virtual void CloseExit() { }
+
+    public virtual void Recharge()
+    {
+        transform.SetPositionAndRotation(origin.position, origin.rotation);
+    }
 }
