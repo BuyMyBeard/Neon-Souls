@@ -13,4 +13,5 @@ public class EnemyAnimationEvents : AnimationEvents
     {
 
     }
+    public void Shoot() => GetComponent<ShooterEnemy>().Shoot();
 }
