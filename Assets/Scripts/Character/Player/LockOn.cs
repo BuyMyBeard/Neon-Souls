@@ -25,19 +25,35 @@ public class LockOn : MonoBehaviour
     Coroutine CamLockOnTargetCoroutine;
     public bool IsLocked { get; private set; } = false;
     public Transform TargetEnemy { get; private set; } = null;
-    public Health enemyHealth { get; private set; } = null;
+    public EnemyHealth enemyHealth { get; private set; } = null;
+    Canvas canvas;
+    [SerializeField] RectTransform indicator;
 
     public void Awake()
     {
+        canvas = FindObjectOfType<DisplayBar>().GetComponentInParent<Canvas>();
         player = GetComponentInChildren<CharacterController>().transform;
         playerController = GetComponent<PlayerController>();
         camFollowTarget = GameObject.Find("FollowTarget").transform;
         mainCam = Camera.main;
+        indicator = GameObject.FindGameObjectWithTag("Indicator").GetComponent<RectTransform>();
+        indicator.gameObject.SetActive(false);
     }
     public void Start()
     {
         StartCoroutine(FindEnemiesCoroutine());
         StartCoroutine(SwitchTargetCoroutine());
+    }
+    public void LateUpdate()
+    {
+        if (IsLocked)
+        {
+            RectTransform parent = (enemyHealth.displayHealthbar as EnemyHealthbar).rt;
+            var vp2 = mainCam.WorldToViewportPoint(TargetEnemy.position);
+            var sp2 = canvas.worldCamera.ViewportToScreenPoint(vp2);
+            RectTransformUtility.ScreenPointToWorldPointInRectangle(parent, sp2, canvas.worldCamera, out Vector3 worldPoint2);
+            indicator.position = worldPoint2;
+        }
     }
     IEnumerator SwitchTargetCoroutine()
     {
@@ -67,8 +83,8 @@ public class LockOn : MonoBehaviour
         if (IsLocked)
         {
             IsLocked = false;
-            enemyHealthbar.Hide();
-            enemyHealthbar = null;
+            enemyHealth.HideHealthbar();
+            indicator.gameObject.SetActive(false);
             enemyHealth = null;
         }
         else if (enemiesInSight.Count > 0)
@@ -89,7 +105,10 @@ public class LockOn : MonoBehaviour
                 IsLocked = false;
                 yield return new WaitForSeconds(healthbarLingerTimeOnEnemyDeath);
                 if (!IsLocked)
-                    enemyHealthbar.Hide();
+                {
+                    enemyHealth.HideHealthbar();
+                    indicator.gameObject.SetActive(false);
+                }
                 yield break;
             }
             if (isSmoothLooking)
@@ -102,7 +121,8 @@ public class LockOn : MonoBehaviour
             if (Vector3.Distance(camFollowTarget.position, targetEnemy.position) > viewRadius * maxLockOnDistance)
             {
                 IsLocked = false;
-                enemyHealthbar.Hide();
+                enemyHealth.HideHealthbar();
+                indicator.gameObject.SetActive(false);
             }
             yield return null;
         }
@@ -170,11 +190,11 @@ public class LockOn : MonoBehaviour
     }
     void LookAtTarget(bool isSwitchingTarget)
     {
-        enemyHealth = TargetEnemy.gameObject.GetComponentInParent<Health>();
-        enemyHealthbar = enemyHealth.displayHealthbar as EnemyHealthbar;
+        enemyHealth = TargetEnemy.gameObject.GetComponentInParent<EnemyHealth>();
         if (enemyHealth != null)
         {
-            enemyHealthbar.Show();
+            enemyHealth.ShowHealthbar();
+            indicator.gameObject.SetActive(true);
         }
 
         //Debug.DrawLine(camFollowTarget.position, TargetEnemy.position,Color.blue,1);
@@ -187,7 +207,7 @@ public class LockOn : MonoBehaviour
     {
         if (enemiesInSight.Count > 0 && TargetEnemy != null)
         {
-            enemyHealthbar.Hide();
+            enemyHealth.HideHealthbar();
             List<Transform> enemies = enemiesInSight.OrderBy((e) => mainCam.WorldToViewportPoint(e.position).x).ToList();
 
             int targetIndex = enemies.FindIndex((e) => mainCam.WorldToViewportPoint(TargetEnemy.position).x == mainCam.WorldToViewportPoint(e.position).x);

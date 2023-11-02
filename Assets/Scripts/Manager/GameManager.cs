@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    static public ObjectPool enemyHealthbarsPool;
     BonfireManager bonfireManager;
     List<IRechargeable> rechargeables = new();
     readonly List<IRechargeable> tempRechargeables = new();
@@ -15,6 +17,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        enemyHealthbarsPool = GameObject.FindGameObjectWithTag("EnemyHealthbarPool").GetComponent<ObjectPool>();
         Instance = this;
         bonfireManager = GetComponent<BonfireManager>();
         rechargeables = FindObjectsOfType<MonoBehaviour>().OfType<IRechargeable>().ToList();

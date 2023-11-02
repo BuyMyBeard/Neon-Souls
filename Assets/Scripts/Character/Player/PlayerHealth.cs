@@ -10,11 +10,15 @@ public class PlayerHealth : Health, IRechargeable
     public bool isAutoParryOn = false;
     private new void Awake()
     {
-        healthbarTag = "PlayerHealthbar";
         base.Awake();
+        displayHealthbar = GameObject.FindGameObjectWithTag("PlayerHealthbar").GetComponent<DisplayBar>();
         stamina = GetComponent<Stamina>();
         stagger = GetComponent<Stagger>();
         block = GetComponent<Block>();
+    }
+    public override void HandleHealthbar(int damage)
+    {
+        displayHealthbar.Remove(damage, maxHealth, true);//TODO: change to false.
     }
     public override void InflictBlockableDamage(int damage, int staminaBlockCost, Transform attackerPosition)
     {
