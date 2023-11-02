@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem.XR;
 using Unity.Mathematics;
 
+[RequireComponent(typeof(Enemy))]
 public class FieldOfViewDetector : MonoBehaviour, IPlayerDetector
 {
     [SerializeField] Transform eyes;
@@ -18,9 +19,6 @@ public class FieldOfViewDetector : MonoBehaviour, IPlayerDetector
     {
         enemy = GetComponent<Enemy>();
         playerTarget = GameObject.FindGameObjectWithTag("PlayerTarget").transform;
-    }
-    private void Start()
-    {
         enemy.idleInitEvent.AddListener(StartDetectingPlayer);
     }
     bool IsPlayerSighted
@@ -38,7 +36,7 @@ public class FieldOfViewDetector : MonoBehaviour, IPlayerDetector
         Vector2 flatDelta = new(directionToTarget.x, directionToTarget.z);
         Vector2 flatEnemyForward = new(eyes.forward.x, eyes.forward.z);
         float dot = Vector2.Dot(flatEnemyForward.normalized, flatDelta.normalized);
-        return dot < DotViewAngle;
+        return dot > DotViewAngle;
     }
     bool TargetInRangeAndSight(Vector3 directionToTarget, float distanceToTarget) => !Physics.Raycast(eyes.position, directionToTarget, distanceToTarget, environmentMask);
 

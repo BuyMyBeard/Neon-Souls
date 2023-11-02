@@ -47,6 +47,8 @@ public class Stagger : MonoBehaviour
         animationEvents.FreezeRotation();
         animationEvents.FreezeMovement();
         animationEvents.DisableActions();
+        if (animationEvents is PlayerAnimationEvents)
+            (animationEvents as PlayerAnimationEvents).StopStaminaRegen();
         IsStaggered = true;
         animator.SetTrigger("BlockHit");
         animator.SetFloat("Knockback", knockback);

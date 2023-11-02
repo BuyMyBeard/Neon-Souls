@@ -31,6 +31,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5329977388471306088}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &8298265374610616033
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5973898160111761695}
+  m_Layer: 14
+  m_Name: Muzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5973898160111761695
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8298265374610616033}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.2, z: -2.539}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7992779009034172087}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8150860943154857297
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -301,6 +332,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4101177159331840569, guid: f1a8833f20644bc48a8f8dec102dc569, type: 3}
       insertIndex: -1
       addedObject: {fileID: 560455574288869476}
+    - targetCorrespondingSourceObject: {fileID: -6921571936259017754, guid: f1a8833f20644bc48a8f8dec102dc569, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5973898160111761695}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f1a8833f20644bc48a8f8dec102dc569, type: 3}
       insertIndex: -1
@@ -820,6 +854,11 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 2716752491632724409, guid: f1a8833f20644bc48a8f8dec102dc569, type: 3}
+--- !u!4 &7992779009034172087 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -6921571936259017754, guid: f1a8833f20644bc48a8f8dec102dc569, type: 3}
+  m_PrefabInstance: {fileID: 8150860943154857297}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8025197613488367544 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2180470519232504553, guid: f1a8833f20644bc48a8f8dec102dc569, type: 3}
@@ -1021,8 +1060,7 @@ MonoBehaviour:
       m_Calls: []
   poolTag: BulletPool
   pool: {fileID: 0}
-  arm: {fileID: 0}
-  gunSight: {fileID: 0}
+  gunMuzzle: {fileID: 5973898160111761695}
   shootCooldown: 3
   turnSpeed: 200
   shootingAngleMin: 5

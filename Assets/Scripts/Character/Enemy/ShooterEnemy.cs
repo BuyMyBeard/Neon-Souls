@@ -9,8 +9,8 @@ public class ShooterEnemy : Enemy
     // InRange
     [SerializeField] string poolTag = "BulletPool";
     [SerializeField] ObjectPool pool;
-    [SerializeField] Transform arm;
-    [SerializeField] Transform gunSight;
+    // [SerializeField] Transform arm;
+    [SerializeField] Transform gunMuzzle;
     [SerializeField] float shootCooldown;
     [SerializeField] float turnSpeed;
     [SerializeField] float shootingAngleMin = 5f;
@@ -43,8 +43,8 @@ public class ShooterEnemy : Enemy
         Quaternion towardsPlayer = Quaternion.LookRotation(-DistanceFromPlayer, Vector3.up);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, towardsPlayer, turnSpeed * Time.deltaTime);
 
-        var armTowardsPlayer = Quaternion.LookRotation(Target.position - arm.position);
-        arm.rotation = Quaternion.RotateTowards(arm.rotation, armTowardsPlayer, turnSpeed * Time.deltaTime);
+       // var armTowardsPlayer = Quaternion.LookRotation(Target.position - arm.position);
+       // arm.rotation = Quaternion.RotateTowards(arm.rotation, armTowardsPlayer, turnSpeed * Time.deltaTime);
     }
 
     protected override void CloseMain()
@@ -78,14 +78,14 @@ public class ShooterEnemy : Enemy
                 //Debug.Log($"{towardsPlayer} - {currentRotation}");
                 return (towardsPlayer - currentRotation) < shootingAngleMin;
             });
-            Shoot();
+            animator.SetTrigger("Shoot");
             yield return new WaitForSeconds(shootCooldown);
         }
     }
 
-    void Shoot()
+    public void Shoot()
     {
-        var bullet = pool.SpawnObject(gunSight, out Coroutine p_returnCoroutine).GetComponent<Bullet>();
+        var bullet = pool.SpawnObject(gunMuzzle, out Coroutine p_returnCoroutine).GetComponent<Bullet>();
         bullet.target = Target;
         bullet.p_returnCoroutine = p_returnCoroutine;
     }

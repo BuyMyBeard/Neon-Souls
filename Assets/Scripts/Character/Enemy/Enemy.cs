@@ -10,6 +10,8 @@ using UnityEngine.Events;
 public abstract class Enemy : MonoBehaviour, IRechargeable
 {
     Transform origin;
+
+    public Vector3 OriginPosition { get => origin.position; }
     public enum ModeId
     {
         Idle,
@@ -85,5 +87,6 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
     public virtual void Recharge()
     {
         transform.SetPositionAndRotation(origin.position, origin.rotation);
+        ChangeMode(ModeId.Idle);
     }
 }
