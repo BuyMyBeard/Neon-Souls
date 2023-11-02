@@ -4,27 +4,32 @@ using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class FallApart : MonoBehaviour
+public class FallApart : MonoBehaviour, IRechargeable
 {
     [SerializeField] float density = 10.0f;
     Collider[] parts;
     Animator animator;
+    GameObject model;
+    GameObject character;
     [SerializeField] Transform explosionSource;
     [SerializeField] float explosionStrength = 10f;
     [SerializeField] float explosionRadius = 10f;
     [SerializeField] float upwardsModifier = 2f;
     [SerializeField] int partsLayer = 0;
+
     private void Awake()
     {
-        parts = GetComponentsInChildren<Collider>();
         animator = GetComponent<Animator>();
+        character = animator.gameObject;
+        model = character.transform.GetChild(0).gameObject;
+        parts = model.GetComponentsInChildren<Collider>();
     }
 
     [ContextMenu("Activate")]
     public void Activate()
     {
         animator.enabled = false;
-        GameObject ragdoll = new GameObject("Ragdoll");
+        GameObject ragdoll = new("Ragdoll");
         ragdoll.AddComponent<DestroyOnRecharge>();
         foreach (Collider part in parts)
         {
@@ -69,6 +74,22 @@ public class FallApart : MonoBehaviour
         if (mw != null) Destroy(mw); 
         part.transform.parent = ragdoll.transform;
         rb.AddExplosionForce(explosionStrength, explosionSource != null ? explosionSource.position : transform.position, explosionRadius, upwardsModifier);
+    }
+
+    [ContextMenu("Decompose")]
+    public void Decompose()
+    {
+        GameObject dummy = Instantiate(character);
+        dummy.transform.SetPositionAndRotation(character.transform.position, character.transform.rotation);
+        if (TryGetComponent(out Enemy _)) gameObject.SetActive(false);
+        else model.SetActive(false);
+        dummy.GetComponent<FallApart>().Activate();
+    }
+
+    public void Recharge()
+    {
+        if (TryGetComponent(out Enemy _)) gameObject.SetActive(true);
+        else model.SetActive(true);
     }
 }
 

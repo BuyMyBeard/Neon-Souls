@@ -5,7 +5,6 @@ public class PlayerAnimationEvents : AnimationEvents
     Potions potions;
     Spells spells;
     Stamina stamina;
-    PlayerDeath playerDeath;
 
     protected override void Awake()
     {
@@ -15,7 +14,6 @@ public class PlayerAnimationEvents : AnimationEvents
         potions = GetComponentInParent<Potions>();
         spells = GetComponentInParent<Spells>();
         stamina = GetComponentInParent<Stamina>();
-        playerDeath = GetComponentInParent<PlayerDeath>();
     }
     
     public override void EnableActions()
@@ -46,6 +44,4 @@ public class PlayerAnimationEvents : AnimationEvents
         HidePotion();
         RestoreMovement();
     }
-    public override void FallApart() => playerDeath.Decompose();
-
 }

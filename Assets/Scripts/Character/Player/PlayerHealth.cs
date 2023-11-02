@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealth : Health, IRechargeable
+public class PlayerHealth : Health
 {
     Stamina stamina;
     Stagger stagger;
@@ -10,8 +10,8 @@ public class PlayerHealth : Health, IRechargeable
     public bool isAutoParryOn = false;
     private new void Awake()
     {
-        healthbarTag = "PlayerHealthbar";
         base.Awake();
+        displayHealthbar = GameObject.FindGameObjectWithTag("PlayerHealthbar").GetComponent<DisplayBar>();
         stamina = GetComponent<Stamina>();
         stagger = GetComponent<Stagger>();
         block = GetComponent<Block>();
@@ -51,19 +51,16 @@ public class PlayerHealth : Health, IRechargeable
         }
         return false;
     }
-    public virtual void Recharge()
+    public override void Recharge()
     {
-        ResetHealth();
+        base.Recharge();
         displayHealthbar.Add(maxHealth, maxHealth);
-        if (CompareTag("Player"))
-        {
-            animationEvents.HidePotion();
-            animationEvents.EnableActions();
-            animationEvents.UnFreezeMovement();
-            animationEvents.UnFreezeRotation();
-            animationEvents.StopIFrame();
-            animator.Play("Idle");
-            GetComponent<CameraMovement>().SyncFollowTarget();
-        }
+        animationEvents.HidePotion();
+        animationEvents.EnableActions();
+        animationEvents.UnFreezeMovement();
+        animationEvents.UnFreezeRotation();
+        animationEvents.StopIFrame();
+        animator.Play("Idle");
+        GetComponent<CameraMovement>().SyncFollowTarget();
     }
 }
