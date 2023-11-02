@@ -36,7 +36,7 @@ public abstract class AnimationEvents : MonoBehaviour
         DisableAllWeaponColliders();
         EndStagger();
     }
-    public virtual void FallApart() => fallApart.Activate();
+    public virtual void FallApart() => fallApart.Decompose();
     public virtual void FreezeMovement() { }
     public virtual void UnFreezeMovement() { }
 }

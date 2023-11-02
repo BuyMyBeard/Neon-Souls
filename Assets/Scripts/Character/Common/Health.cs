@@ -4,12 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class Health : MonoBehaviour
+public abstract class Health : MonoBehaviour, IRechargeable
 {
     public DisplayBar displayHealthbar;
     [SerializeField] protected float maxHealth = 100;
     [SerializeField] protected float timeShowingHealthbar = 3;
-    protected string healthbarTag = "EnemyHealthbar";
     public bool invincible = false;
     GameManager manager;
     protected Animator animator;
@@ -23,9 +22,6 @@ public abstract class Health : MonoBehaviour
     public Coroutine showHealthbarCoroutine = null;
     protected void Awake()
     {
-        if (displayHealthbar == null)
-            displayHealthbar = GameObject.FindGameObjectWithTag(healthbarTag).GetComponent<DisplayBar>();
-
         animator = GetComponentInChildren<Animator>();
         manager = FindObjectOfType<GameManager>();
         animationEvents = GetComponentInChildren<PlayerAnimationEvents>();
@@ -117,4 +113,10 @@ public abstract class Health : MonoBehaviour
     /// Rounds current health to the nearest integer. Used to avoid float imprecision caused by healing over time
     /// </summary>
     public void Round() => CurrentHealth = Mathf.RoundToInt(CurrentHealth);
+
+    public virtual void Recharge()
+    {
+        ResetHealth();
+        invincible = false;
+    }
 }
