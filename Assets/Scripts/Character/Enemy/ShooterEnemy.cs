@@ -15,9 +15,6 @@ public class ShooterEnemy : Enemy
     [SerializeField] float turnSpeed;
     [SerializeField] float shootingAngleMin = 5f;
 
-    // Close
-    NavMeshAgent agent;
-
     // Coroutine handling helpers
     bool shouldEndShootCoroutine = false;
     Coroutine shoot;
@@ -25,22 +22,24 @@ public class ShooterEnemy : Enemy
     protected override void Awake()
     {
         base.Awake();
-        agent = GetComponent<NavMeshAgent>();
 
         var existingPool = GameObject.FindGameObjectWithTag(poolTag);
         pool = existingPool != null ? existingPool.GetComponent<ObjectPool>() : Instantiate(pool);
     }
     protected override void InRangeExit()
     {
+        base.InRangeExit();
         shouldEndShootCoroutine = true;
     }
 
     protected override void InRangeInit()
     {
+        base.InRangeInit();
         StartCoroutine(StartShoot());
     }
     protected override void InRangeMain()
     {
+        base.InRangeMain();
         Quaternion towardsPlayer = Quaternion.LookRotation(-DistanceFromPlayer, Vector3.up);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, towardsPlayer, turnSpeed * Time.deltaTime);
 
@@ -50,7 +49,7 @@ public class ShooterEnemy : Enemy
 
     protected override void CloseMain()
     {
-        
+        base.CloseMain();
     }
     IEnumerator StartShoot()
     {

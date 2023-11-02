@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Animator))]
@@ -31,6 +32,12 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
     protected bool lockMode = false;
     protected NavMeshAgent agent;
     protected Animator animator;
+    public UnityEvent idleInitEvent = new();
+    public UnityEvent inRangeInitEvent = new();
+    public UnityEvent closeInitEvent = new();
+    public UnityEvent idleExitEvent = new();
+    public UnityEvent inRangeExitEvent = new();
+    public UnityEvent closeExitEvent = new();
 
     protected virtual void Awake()
     {
@@ -65,15 +72,15 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
         Mode = modeDefs[(int)modeId];
         Mode.Init();
     }
-    protected virtual void IdleInit() { }
-    protected virtual void InRangeInit() { }
-    protected virtual void CloseInit() { }
+    protected virtual void IdleInit() => idleInitEvent.Invoke();
+    protected virtual void InRangeInit() => inRangeInitEvent.Invoke();
+    protected virtual void CloseInit() => closeInitEvent.Invoke();
     protected virtual void IdleMain() { }
     protected virtual void InRangeMain() { }
     protected virtual void CloseMain() { }
-    protected virtual void IdleExit() { }
-    protected virtual void InRangeExit() { }
-    protected virtual void CloseExit() { }
+    protected virtual void IdleExit() => idleExitEvent.Invoke();
+    protected virtual void InRangeExit() => inRangeExitEvent.Invoke();
+    protected virtual void CloseExit() => closeExitEvent.Invoke();
 
     public virtual void Recharge()
     {
