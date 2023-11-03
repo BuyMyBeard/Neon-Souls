@@ -7,6 +7,31 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Blade
+    second: {fileID: 2100000, guid: 7ef41784572ae15429ff12faa4a7e083, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grip
+    second: {fileID: 2100000, guid: 58cf68b1a20c9eb42828059eede851ab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Guard
+    second: {fileID: 2100000, guid: 0e4072696694b6d4086ee28647a8d18d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pommel
+    second: {fileID: 2100000, guid: 0e4072696694b6d4086ee28647a8d18d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ring
+    second: {fileID: 2100000, guid: 0e4072696694b6d4086ee28647a8d18d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Wireframe
     second: {fileID: 2100000, guid: ecac9cedcd5865041b507958dce9c3ef, type: 2}
   materials:

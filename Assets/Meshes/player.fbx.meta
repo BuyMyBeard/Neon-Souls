@@ -7,6 +7,41 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Blade
+    second: {fileID: 2100000, guid: 7ef41784572ae15429ff12faa4a7e083, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fluid
+    second: {fileID: 2100000, guid: 190fc41784235774083352dff897e7d4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass
+    second: {fileID: 2100000, guid: 5ff393db77f8a26458e7a814acb551db, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grip
+    second: {fileID: 2100000, guid: 58cf68b1a20c9eb42828059eede851ab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Guard
+    second: {fileID: 2100000, guid: 0e4072696694b6d4086ee28647a8d18d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pommel
+    second: {fileID: 2100000, guid: 0e4072696694b6d4086ee28647a8d18d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ring
+    second: {fileID: 2100000, guid: 0e4072696694b6d4086ee28647a8d18d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Wireframe
     second: {fileID: 2100000, guid: fc5eaaa4aa0b33c4c96f279f639d12b6, type: 2}
   materials:
@@ -228,9 +263,9 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
@@ -1275,53 +1310,53 @@ ModelImporter:
     - name: upper_arm.R
       parentName: torso
       position: {x: 0.21549106, y: -0.019714762, z: -0.28570363}
-      rotation: {x: 0.15412411, y: -0.7047621, z: -0.09921306, w: 0.685356}
-      scale: {x: 1.0000113, y: 1.0000342, z: 0.9999976}
+      rotation: {x: 0.12264762, y: -0.7175123, z: -0.13818853, w: 0.6715933}
+      scale: {x: 1.0000117, y: 1.0000364, z: 0.9999937}
     - name: RightUpperArm
       parentName: upper_arm.R
-      position: {x: 0.19557536, y: 0.16121088, z: -0.52670336}
+      position: {x: 0.1955753, y: 0.16121092, z: -0.5267034}
       rotation: {x: 0.37872785, y: 0.5686334, z: 0.63482594, w: 0.36085635}
-      scale: {x: 1.001251, y: 1.000021, z: 0.9994267}
+      scale: {x: 1.001251, y: 1.000021, z: 0.99942654}
     - name: RightUpperArmWireframe
       parentName: upper_arm.R
-      position: {x: 0.19557536, y: 0.16121088, z: -0.52670336}
+      position: {x: 0.1955753, y: 0.16121092, z: -0.5267034}
       rotation: {x: 0.37872785, y: 0.5686334, z: 0.63482594, w: 0.36085635}
-      scale: {x: 1.001251, y: 1.000021, z: 0.9994267}
+      scale: {x: 1.001251, y: 1.000021, z: 0.99942654}
     - name: forearm.R
       parentName: upper_arm.R
-      position: {x: -0.000000024726614, y: -0.00000002514571, z: -0.3727398}
-      rotation: {x: 0.00074413425, y: 0.0016054214, z: 0.15145837, w: 0.9884621}
-      scale: {x: 1.0000077, y: 0.99996424, z: 1.0000007}
+      position: {x: 0.000000043585896, y: 0.000000010896474, z: -0.3727398}
+      rotation: {x: 0.049965445, y: 0.024946304, z: 0.15174624, w: 0.98684055}
+      scale: {x: 1.000008, y: 0.999971, z: 0.9999939}
     - name: RightForeArm
       parentName: forearm.R
-      position: {x: 0.25378674, y: 0.0013509146, z: -0.1525218}
-      rotation: {x: 0.25110862, y: 0.6355617, z: 0.41916555, w: 0.5977508}
-      scale: {x: 1.0012503, y: 1.0000217, z: 0.99942654}
+      position: {x: 0.25378698, y: 0.0013509481, z: -0.15252185}
+      rotation: {x: 0.2511086, y: 0.63556176, z: 0.41916543, w: 0.59775084}
+      scale: {x: 1.0012501, y: 1.0000216, z: 0.9994265}
     - name: RightForeArmWireframe
       parentName: forearm.R
-      position: {x: 0.25378674, y: 0.0013509146, z: -0.1525218}
-      rotation: {x: 0.25110862, y: 0.6355617, z: 0.41916555, w: 0.5977508}
-      scale: {x: 1.0012503, y: 1.0000217, z: 0.99942654}
+      position: {x: 0.25378698, y: 0.0013509481, z: -0.15252185}
+      rotation: {x: 0.2511086, y: 0.63556176, z: 0.41916543, w: 0.59775084}
+      scale: {x: 1.0012501, y: 1.0000216, z: 0.9994265}
     - name: hand.R
       parentName: forearm.R
-      position: {x: -0.000000028708017, y: -0.000000020116566, z: -0.3401158}
-      rotation: {x: -0.06696149, y: -0.042830817, z: 0.6719448, w: 0.73632324}
-      scale: {x: 1.0000023, y: 0.999998, z: 0.999999}
+      position: {x: 0.000000017444835, y: -0.000000015087425, z: -0.34011576}
+      rotation: {x: -0.072521694, y: -0.040220667, z: 0.67481446, w: 0.73331326}
+      scale: {x: 1.0000066, y: 0.9999977, z: 0.99999535}
     - name: RightHand
       parentName: hand.R
-      position: {x: -0.059434384, y: -0.29168952, z: 0.1103987}
+      position: {x: -0.0594344, y: -0.2916895, z: 0.11039865}
       rotation: {x: 0.7311788, y: 0.17154327, z: -0.028612243, w: 0.6596452}
-      scale: {x: 1.0212379, y: 1.0102234, z: 1.006804}
+      scale: {x: 1.0212377, y: 1.0102233, z: 1.0068038}
     - name: RightHandWireframe
       parentName: hand.R
-      position: {x: -0.059434384, y: -0.29168952, z: 0.1103987}
+      position: {x: -0.0594344, y: -0.2916895, z: 0.11039865}
       rotation: {x: 0.7311788, y: 0.17154327, z: -0.028612243, w: 0.6596452}
-      scale: {x: 1.0212379, y: 1.0102234, z: 1.006804}
+      scale: {x: 1.0212377, y: 1.0102233, z: 1.0068038}
     - name: Sword
       parentName: RightHandWireframe
-      position: {x: 0.59623104, y: -0.043898854, z: -0.25435615}
-      rotation: {x: 0.57075506, y: -0.4174191, z: -0.57075495, w: -0.4174192}
-      scale: {x: 0.043415196, y: 1.3798327, z: 0.0434152}
+      position: {x: 0.7160272, y: -0.006399965, z: -0.25917166}
+      rotation: {x: -0.5585087, y: 0.4189091, z: 0.5767374, w: 0.42421356}
+      scale: {x: 0.99323106, y: 0.9800844, z: 0.9890053}
     - name: thigh.L
       parentName: pelvis
       position: {x: -0.08810375, y: -0.009155924, z: -0.015828358}
@@ -1409,12 +1444,12 @@ ModelImporter:
       scale: {x: 1.0012395, y: 1.0010027, z: 0.9998387}
     - name: RightFootWireframe
       parentName: foot.R
-      position: {x: 0.044307914, y: -1.0422662, z: 0.036939383}
-      rotation: {x: -0.6999889, y: 0.006561781, z: 0.7110295, w: -0.06640497}
-      scale: {x: 1.0012395, y: 1.0010027, z: 0.9998387}
+      position: {x: 1.0204599, y: -1.5410255, z: -0.6434233}
+      rotation: {x: 0.48017007, y: -0.48399967, z: -0.45775372, w: 0.570651}
+      scale: {x: 0.99999964, y: 0.9999902, z: 0.9999833}
     - name: ik-hand.R
       parentName: root
-      position: {x: 1.0722712, y: 0.05580553, z: -1.5930284}
+      position: {x: 0.9253121, y: 0.002905087, z: -1.5968852}
       rotation: {x: 0.49206612, y: 0.5971979, z: -0.42237994, w: -0.47203904}
       scale: {x: 1.0000004, y: 1.0000002, z: 1.0000026}
     - name: elbow-target.R
