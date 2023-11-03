@@ -6,6 +6,7 @@ public class PlayerDeath : MonoBehaviour, IRechargeable
 {
     GameObject model;
     GameObject character;
+    [SerializeField] GameObject droppedXp;
 
     private void Awake()
     {
@@ -19,6 +20,9 @@ public class PlayerDeath : MonoBehaviour, IRechargeable
         dummy.transform.SetPositionAndRotation(character.transform.position, character.transform.rotation);
         model.SetActive(false);
         dummy.GetComponent<FallApart>().Activate();
+        DroppedXp previousDroppedXp = FindObjectOfType<DroppedXp>();
+        if(previousDroppedXp != null ) { Destroy(previousDroppedXp.gameObject); }
+        Instantiate(droppedXp, character.transform.position, Quaternion.identity);
     }
 
     public void Recharge()

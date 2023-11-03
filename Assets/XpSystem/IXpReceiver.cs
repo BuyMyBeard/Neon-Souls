@@ -7,5 +7,5 @@ public interface IXpReceiver
     GameObject gameObject { get; }
     public int XpAmount { get; }
     public void GainXp(int amount);
-    public void removeXp(int amount);
+    public void RemoveXp(int amount);
 }

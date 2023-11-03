@@ -56,6 +56,7 @@ public class XpMenuManager : MonoBehaviour
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        xpManager.ResetXpManager();
     }
     [ContextMenu("Reset")]
     public void ResetAffichage()
@@ -65,6 +66,6 @@ public class XpMenuManager : MonoBehaviour
             button.ResetDefault();
             button.ResetShownedValue();
         }
-        xpManager.Reset();
+        xpManager.ResetXpManager();
     }
 }
