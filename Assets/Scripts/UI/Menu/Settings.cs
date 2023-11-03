@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Settings : MonoBehaviour
 {
     [SerializeField] Slider masterVolume, sfxVolume, musicVolume, controllerSensX, controllerSensY, mouseSens;
-    [SerializeField] Toggle controllerInvertX, controllerInvertY, mouseInvert;
+    [SerializeField] Toggle controllerInvertX, controllerInvertY, mouseInvert, vibration;
     [SerializeField] AudioMixer audioMixer;
     private void Awake()
     {
@@ -34,6 +34,12 @@ public class Settings : MonoBehaviour
     public void ChangeControllerInvertX(bool inverted) => Preferences.ControllerInvertX = inverted;
     public void ChangeControllerInvertY(bool inverted) => Preferences.ControllerInvertY = inverted;
     public void ChangeMouseInvert(bool inverted) => Preferences.MouseInvert = inverted;
+    public void ChangeVibration(bool on)
+    {
+        Preferences.Vibration = on;
+        if (on) Haptics.ExplosionShort();
+        else Haptics.Stop();
+    }
 
     private void InitiateValues()
     {
@@ -46,6 +52,7 @@ public class Settings : MonoBehaviour
         controllerInvertX.isOn = Preferences.ControllerInvertX;
         controllerInvertY.isOn = Preferences.ControllerInvertY;
         mouseInvert.isOn = Preferences.MouseInvert;
+        vibration.isOn = Preferences.Vibration;
         UpdateMaster();
         UpdateSFX();
         UpdateMusic();

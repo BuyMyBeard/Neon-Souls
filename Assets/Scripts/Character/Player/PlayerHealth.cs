@@ -20,12 +20,14 @@ public class PlayerHealth : Health, IRechargeable
         if (invincible) return;
         if (block.IsParrying && !stamina.IsExhausted && IsAttackerInFront(attackerPosition))
         {
+            Haptics.ImpactLight();
             stamina.Remove(staminaBlockCost);
             block.ResetParryWindow();
             stagger.BlockHit(0.5f);
         }
         else if (block.IsBlocking && !stamina.IsExhausted && IsAttackerInFront(attackerPosition)) 
         {
+            Haptics.Impact();
             int damageReduced = (int) (damage * block.DamageReduction);
             stamina.Remove(staminaBlockCost);
             InflictDamage(damageReduced);
@@ -33,6 +35,7 @@ public class PlayerHealth : Health, IRechargeable
         }
         else
         {
+            Haptics.ImpactHeavy();
             block.StopBlocking();
             InflictDamage(damage);
             stagger.BecomeStaggered(attackerPosition, 1);
