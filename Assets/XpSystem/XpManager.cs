@@ -10,7 +10,6 @@ public class XpManager : MonoBehaviour
     PlayerExperience playerXp;
     Dictionary<IStat, int> DictioChangesStat = new();
     XpAmountText xpAmountText;
-
     [SerializeField] int CostForUpgrade = 10;
 
 
@@ -35,14 +34,14 @@ public class XpManager : MonoBehaviour
     public void RefreshXPAmountRender() => xpAmountText.RefreshRender(localXpAmount.ToString());
     public void DistributeXp(int xpAmount)
     {
+
         playerXp.GainXp(xpAmount);
         localXpAmount = playerXp.XpAmount;
         RefreshXPAmountRender();
     }
     public void UseXp(IStat targetedStat, int upgradeCount)
     {
-        targetedStat.UpgradeStat(upgradeCount);
-        playerXp.removeXp(CostForUpgrade * upgradeCount);
+        targetedStat.UpgradeStat(upgradeCount);  
     }
     //LocalChange to verify integrity
     public bool AddNbChanges(IStat stat)
@@ -70,18 +69,21 @@ public class XpManager : MonoBehaviour
     //Aplies changes to stat
     public void ValidateChanges()
     {
+        int sum = 0;
         foreach (IStat stat in upgradableStats)
         {
             UseXp(stat, DictioChangesStat[stat]);
+            sum += DictioChangesStat[stat] * CostForUpgrade;
             if (typeof(IRechargeable).IsAssignableFrom(stat.GetType()))
             {
                var i = (IRechargeable)stat;
                i.Recharge();
             }
         }
-        Reset();
+        ResetXpManager();
+        playerXp.RemoveXp(sum);
     }
-    public void Reset()
+    public void ResetXpManager()
     {
         foreach (IStat stat in upgradableStats)
             DictioChangesStat[stat] = 0;
