@@ -10,20 +10,18 @@ public abstract class Health : MonoBehaviour, IRechargeable
     [SerializeField] protected float timeShowingHealthbar = 3;
     public DisplayBar displayHealthbar;
     public bool invincible = false;
-    GameManager manager;
     protected Animator animator;
     [HideInInspector]
     public UnityEvent OnHit;
     public float CurrentHealth { get; protected set; }
     public bool IsDead { get => CurrentHealth <= 0; }
     public float MaxHealth { get => maxHealth; }
-    protected PlayerAnimationEvents animationEvents;
+    protected AnimationEvents animationEvents;
     protected LockOn lockOn;
     protected void Awake()
     {
         animator = GetComponentInChildren<Animator>();
-        manager = FindObjectOfType<GameManager>();
-        animationEvents = GetComponentInChildren<PlayerAnimationEvents>();
+        animationEvents = GetComponentInChildren<AnimationEvents>();
         lockOn = FindObjectOfType<LockOn>();      
     }
     void OnEnable()
@@ -57,21 +55,15 @@ public abstract class Health : MonoBehaviour, IRechargeable
         // for now it's just
         InflictDamage(damage);
     }
-
-    [ContextMenu("Die")]
     protected virtual void Die()
     {
-        if (gameObject.CompareTag("Player"))
-        {
-            animator.SetTrigger("Die");
-            manager.PlayerDie();
-            animationEvents.DisableActions();
-            animationEvents.FreezeMovement();
-            animationEvents.FreezeRotation();
-            animationEvents.StartIFrame();
-        }
-        else
-            Debug.Log("EnemyDead");
+        invincible = true;
+        animator.ResetTrigger("Stagger");
+        animator.SetTrigger("Die");
+        animationEvents.DisableActions();
+        animationEvents.FreezeMovement();
+        animationEvents.FreezeRotation();
+        animationEvents.StartIFrame();
     }
 
     /// <summary>

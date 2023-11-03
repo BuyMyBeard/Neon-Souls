@@ -13,6 +13,10 @@ public class TriggerboxDetector : MonoBehaviour, IRechargeable
 
     private void Awake()
     {
+        Collider collider = GetComponent<Collider>();
+        collider.enabled = true;
+        collider.isTrigger = true;
+        gameObject.layer = 22;
         if (TryGetComponent(out Renderer renderer)) renderer.enabled = false;
         if (enemies.Length == 0) throw new MissingReferenceException("Enemy has not been assigned to triggerbox detector");
     }
@@ -28,12 +32,5 @@ public class TriggerboxDetector : MonoBehaviour, IRechargeable
     public void Recharge()
     {
         alreadyTriggered = false;
-    }
-    private void OnValidate()
-    {
-        gameObject.layer = 22;
-        Collider collider = GetComponent<Collider>();
-        collider.enabled = true;
-        collider.isTrigger = true;
     }
 }
