@@ -70,10 +70,9 @@ public class FallApart : MonoBehaviour, IRechargeable
         rb.SetDensity(density);
         rb.isKinematic = false;
         rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
-        var mw = part.GetComponent<MeleeWeapon>();
-        if (mw != null) Destroy(mw); 
+        if (part.TryGetComponent(out MeleeWeapon mw)) Destroy(mw); 
         part.transform.parent = ragdoll.transform;
-        rb.AddExplosionForce(explosionStrength, explosionSource != null ? explosionSource.position : transform.position, explosionRadius, upwardsModifier);
+        // rb.AddExplosionForce(explosionStrength, explosionSource != null ? explosionSource.position : transform.position, explosionRadius, upwardsModifier);
     }
 
     [ContextMenu("Decompose")]
