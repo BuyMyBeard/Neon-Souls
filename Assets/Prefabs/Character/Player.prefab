@@ -1078,6 +1078,46 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 7730892064863791868, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.0012395
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730892064863791868, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.0010027
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730892064863791868, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.9998387
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730892064863791868, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.044307914
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730892064863791868, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.0422662
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730892064863791868, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.036939383
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730892064863791868, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.06640497
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730892064863791868, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.6999889
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730892064863791868, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.006561781
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730892064863791868, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7110295
+      objectReference: {fileID: 0}
     - target: {fileID: 7999047260219677003, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
       propertyPath: m_Layer
       value: 10
@@ -1510,8 +1550,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2.7
-  m_Height: 1.29
+  m_Radius: 0.15
+  m_Height: 1.51
   m_Direction: 1
   m_Center: {x: -0.000008161174, y: -0.33, z: -0.00000034830336}
 --- !u!1 &3845905489050742677 stripped
