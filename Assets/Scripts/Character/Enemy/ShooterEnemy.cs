@@ -12,7 +12,6 @@ public class ShooterEnemy : Enemy
     // [SerializeField] Transform arm;
     [SerializeField] Transform gunMuzzle;
     [SerializeField] float shootCooldown;
-    [SerializeField] float turnSpeed;
     [SerializeField] float shootingAngleMin = 5f;
 
     // Coroutine handling helpers

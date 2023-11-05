@@ -18,7 +18,7 @@ public abstract class Health : MonoBehaviour, IRechargeable
     public float MaxHealth { get => maxHealth; }
     protected AnimationEvents animationEvents;
     protected LockOn lockOn;
-    protected void Awake()
+    protected virtual void Awake()
     {
         animator = GetComponentInChildren<Animator>();
         animationEvents = GetComponentInChildren<AnimationEvents>();

@@ -44,4 +44,7 @@ public class PlayerAnimationEvents : AnimationEvents
         HidePotion();
         RestoreMovement();
     }
+
+    public override void ChangeTurnSpeed(float turnSpeed) => playerMovement.turnSpeed = turnSpeed;
+    public override void RestoreTurnSpeed() => playerMovement.RestoreTurnSpeed();
 }

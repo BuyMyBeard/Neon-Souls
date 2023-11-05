@@ -249,13 +249,14 @@ MonoBehaviour:
   sprintSpeed: 6
   runThreshold: 0.7
   deadZone: 0.5
-  turnSpeed: 600
+  baseTurnSpeed: 600
   acceleration: 5
   deceleration: 25
   sprintStaminaCost: 20
   movementFrozen: 0
   rotationFrozen: 0
   movementReduced: 0
+  turnSpeed: 600
 --- !u!114 &5681390686070186532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,7 +335,7 @@ MonoBehaviour:
   - key: 0
     val: {fileID: 8150143046497804207}
   isAttacking: 0
-  baseDamage: 1
+  baseDamage: 20
   damageBonus: 0
 --- !u!114 &6150863968811862542
 MonoBehaviour:
@@ -628,7 +629,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 36.22
+      value: 4.57
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1531,6 +1532,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   damage: 0
+  staminaBlockCost: 0
 --- !u!136 &4484690215047543269
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1713,7 +1715,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 2
-  m_Radius: 0.25
+  m_Radius: 0.32
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08

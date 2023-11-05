@@ -10,6 +10,11 @@ using UnityEngine.Events;
 public abstract class Enemy : MonoBehaviour, IRechargeable
 {
     Transform origin;
+    protected EnemyAnimationEvents enemyAnimationEvents;
+    [SerializeField] float baseTurnSpeed;
+    [HideInInspector] public float turnSpeed;
+    public bool rotationFrozen = false;
+
 
     public Vector3 OriginPosition { get => origin.position; }
     public enum ModeId
@@ -53,7 +58,9 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
         Target = GameObject.FindGameObjectWithTag("PlayerTarget").transform;
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        enemyAnimationEvents = GetComponent<EnemyAnimationEvents>();
         origin = transform;
+        turnSpeed = baseTurnSpeed;
     }
     protected virtual void OnEnable()
     {
@@ -79,7 +86,12 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
     protected virtual void CloseInit() => closeInitEvent.Invoke();
     protected virtual void IdleMain() { }
     protected virtual void InRangeMain() { }
-    protected virtual void CloseMain() { }
+    protected virtual void CloseMain()
+    {
+        if (rotationFrozen) return;
+        Quaternion towardsPlayer = Quaternion.LookRotation(-DistanceFromPlayer, Vector3.up);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, towardsPlayer, turnSpeed * Time.deltaTime);
+    }
     protected virtual void IdleExit() => idleExitEvent.Invoke();
     protected virtual void InRangeExit() => inRangeExitEvent.Invoke();
     protected virtual void CloseExit() => closeExitEvent.Invoke();
@@ -89,4 +101,5 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
         transform.SetPositionAndRotation(origin.position, origin.rotation);
         ChangeMode(ModeId.Idle);
     }
+    public void RestoreTurnSpeed() => turnSpeed = baseTurnSpeed;
 }

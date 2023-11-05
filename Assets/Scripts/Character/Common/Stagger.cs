@@ -20,7 +20,7 @@ public class Stagger : MonoBehaviour
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
-        animationEvents = GetComponentInChildren<PlayerAnimationEvents>();
+        animationEvents = GetComponentInChildren<AnimationEvents>();
         health = GetComponent<Health>();
     }
     public void BecomeStaggered(Transform target, float knockback = 1)

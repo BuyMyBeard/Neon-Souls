@@ -52,12 +52,11 @@ ModelImporter:
     animationImportWarnings: "\nClip 'Enemy|StartBlocking' has import animation warnings
       that might lower retargeting quality:\nNote: Activate translation DOF on avatar
       to improve retargeting quality.\n\t'forearm.L' has scale animation that will
-      be discarded.\n\t'hand.L' has scale animation that will be discarded.\n\t'forearm.R'
-      has scale animation that will be discarded.\n\nClip 'Enemy|StopBlocking' has
-      import animation warnings that might lower retargeting quality:\nNote: Activate
-      translation DOF on avatar to improve retargeting quality.\n\t'forearm.L' has
-      scale animation that will be discarded.\n\t'hand.L' has scale animation that
-      will be discarded.\n\t'forearm.R' has scale animation that will be discarded.\n"
+      be discarded.\n\t'hand.L' has scale animation that will be discarded.\n\nClip
+      'Enemy|StopBlocking' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'forearm.L'
+      has scale animation that will be discarded.\n\t'hand.L' has scale animation
+      that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -145,100 +144,6 @@ ModelImporter:
       loopBlendOrientation: 1
       loopBlendPositionY: 1
       loopBlendPositionXZ: 1
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Enemy|LightAttack1
-      takeName: Enemy|LightAttack1
-      internalID: 6043610821150416329
-      firstFrame: 0
-      lastFrame: 31
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events:
-      - time: 0.3
-        functionName: EnableWeaponCollider
-        data: 
-        objectReferenceParameter: {fileID: 11400000, guid: 4dce4042d5634e845b8feea6712de0de, type: 2}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Enemy|LightAttack2
-      takeName: Enemy|LightAttack2
-      internalID: 2680932696120134306
-      firstFrame: 0
-      lastFrame: 31
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Enemy|LightAttack3
-      takeName: Enemy|LightAttack3
-      internalID: -2613593292823771373
-      firstFrame: 0
-      lastFrame: 49
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
@@ -595,6 +500,127 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Enemy|SliceOverHead
+      takeName: Enemy|Attack1
+      internalID: 3134273874052584025
+      firstFrame: 0
+      lastFrame: 106
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0.5217701
+        functionName: InitWeaponCollider
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 9751587f2115b93418f0d247bd2deaf0, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5538901
+        functionName: DisableWeaponCollider
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 9751587f2115b93418f0d247bd2deaf0, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.9000714
+        functionName: ResetAll
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 9751587f2115b93418f0d247bd2deaf0, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.50035685
+        functionName: FreezeRotation
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Enemy|BackhandSlice
+      takeName: Enemy|Attack2
+      internalID: 8329035979778004350
+      firstFrame: 0
+      lastFrame: 79
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0.430572
+        functionName: InitWeaponCollider
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: a2bb3dd31a3668b40b41168fa854670b, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.48534384
+        functionName: DisableWeaponCollider
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: a2bb3dd31a3668b40b41168fa854670b, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.71505016
+        functionName: InitWeaponCollider
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 9d4e72b9a7cd0e64fbfb40acf53bd69f, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.7690846
+        functionName: DisableWeaponCollider
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 9d4e72b9a7cd0e64fbfb40acf53bd69f, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.9128427
+        functionName: ResetAll
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 9d4e72b9a7cd0e64fbfb40acf53bd69f, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
