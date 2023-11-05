@@ -6,16 +6,16 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     Vector3 movement;
-    Health playerHealth;
+    PlayerHealth playerHealth;
 
-    public Transform target = null;
+    public Transform target;
     [SerializeField] float speed;
     [SerializeField] float rotationSpeed;
     [SerializeField] float homingTime;
     [SerializeField] float yDirDiffLimit;
     [SerializeField] int damage;
     [SerializeField] LayerMask playerLayer;
-    [SerializeField] LayerMask enemyLayer;
+    [SerializeField] int staminaBlockCost = 15;
 
     ObjectPool pool;
     public Coroutine p_returnCoroutine;
@@ -23,25 +23,24 @@ public class Bullet : MonoBehaviour
 
     float originalYdir;
     float newYdir;
+    bool hasAlreadyHit = false;
 
     // Start is called before the first frame update
     void Awake()
     {
-        if (transform == target) target = null;
-        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponentInParent<Health>();
+        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponentInParent<PlayerHealth>();
+        //target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void OnEnable()
     {
         pool = GetComponentInParent<ObjectPool>();
         movement = Vector3.forward;
-        if (target != null)
-        {
-            transform.rotation = Quaternion.LookRotation(target.position - transform.position);
-            originalYdir = transform.rotation.eulerAngles.y;
-            if (originalYdir > 180f) originalYdir = 360f - originalYdir;
-            p_homingCoroutine = StartCoroutine(HomingCoroutine());
-        }
+        transform.rotation = Quaternion.LookRotation(target.position - transform.position);
+        originalYdir = transform.rotation.eulerAngles.y;
+        if (originalYdir > 180f) originalYdir = 360f - originalYdir;
+        p_homingCoroutine = StartCoroutine(HomingCoroutine());
+        hasAlreadyHit = false;
     }
     void OnDisable()
     {
@@ -74,11 +73,11 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (((1 << other.gameObject.layer) & playerLayer) != 0)
-        {
-            playerHealth.InflictDamage(damage);
-            Despawn();
-        }
+        if (hasAlreadyHit) return;
+
+        playerHealth.InflictBlockableDamage(damage, staminaBlockCost, transform);
+        Despawn();
+        hasAlreadyHit = true;
     }
 
     void Despawn()

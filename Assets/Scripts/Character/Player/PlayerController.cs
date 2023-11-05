@@ -3,22 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using UnityEngine.Windows;
 public class PlayerController : MonoBehaviour
 {
     public Vector2 Look { get; private set; } = Vector2.zero;
     public Vector2 Move { get; private set; } = Vector2.zero;
     public bool IsSprinting { get; private set; } = false;
-    public bool IsBlocking { get; private set; } = false;
+    public bool BlockInput { get; private set; } = false;
 
+    private bool pausedThisFrame = false;
     public string CurrentControlScheme { get => playerInput.currentControlScheme; }
     public bool KeyboardAndMouseActive { get => CurrentControlScheme == "Keyboard&Mouse"; }
     public bool GamepadActive { get => CurrentControlScheme == "Gamepad"; }
 
-    InputAction run, dodge, parry;
+    InputAction runAction, dodgeAction, parryAction, blockAction;
 
     PlayerInput playerInput;
     MenuManager menuManager;
+    XpMenuManager xpMenuManager;
 
     public void SwitchToPlayerControls() => playerInput.SwitchCurrentActionMap("PlayerControls");
     public void SwitchToUI() => playerInput.SwitchCurrentActionMap("UI");
@@ -26,27 +29,37 @@ public class PlayerController : MonoBehaviour
     {
         playerInput = GetComponent<PlayerInput>();
         menuManager = FindObjectOfType<MenuManager>();
-        run = playerInput.currentActionMap.FindAction("RunButton");
-        dodge = playerInput.currentActionMap.FindAction("DodgeButton");
-        parry = playerInput.currentActionMap.FindAction("Parry");
+        xpMenuManager = FindObjectOfType<XpMenuManager>();
+        runAction = playerInput.currentActionMap.FindAction("RunButton");
+        dodgeAction = playerInput.currentActionMap.FindAction("DodgeButton");
+        parryAction = playerInput.currentActionMap.FindAction("ParryButton");
+        blockAction = playerInput.currentActionMap.FindAction("BlockButton");
     }
-    private void Start()
+    private void OnEnable()
     {
-        dodge.performed += Dodge_performed;
-        run.performed += Run_performed;
-        run.canceled += Run_canceled;
-        parry.started += Parry_started;
-        parry.canceled += Parry_canceled;
-        menuManager.Resume();
+        dodgeAction.performed += Dodge_performed;
+        runAction.performed += Run_performed;
+        runAction.canceled += Run_canceled;
+        parryAction.started += Parry_started;
+        blockAction.canceled += Block_canceled;
     }
-    private void Parry_canceled(InputAction.CallbackContext obj)
+    private void OnDisable()
     {
-        IsBlocking = false;
+        dodgeAction.performed -= Dodge_performed;
+        runAction.performed -= Run_performed;
+        runAction.canceled -= Run_canceled;
+        parryAction.started -= Parry_started;
+        blockAction.canceled -= Block_canceled;
+    }
+    private void Block_canceled(InputAction.CallbackContext obj)
+    {
+        BlockInput = false;
     }
 
     private void Parry_started(InputAction.CallbackContext obj)
     {
-        IsBlocking = true;
+        BlockInput = true;
+        gameObject.SendMessage("OnParry");
     }
 
     private void Run_canceled(InputAction.CallbackContext obj)
@@ -65,14 +78,30 @@ public class PlayerController : MonoBehaviour
     }
     void OnPlayerPause()
     {
+        if (!pausedThisFrame)
+            StartCoroutine(Pause());
+    }
+
+
+    IEnumerator Pause()
+    {
+        pausedThisFrame = true;
+        yield return null;
         if (menuManager.Paused) menuManager.Resume();
         else menuManager.Pause();
+        yield return null;
+        pausedThisFrame = false;
     }
 
     void OnUIPause()
     {
-        if (menuManager.Paused) menuManager.Resume();
-        else menuManager.Pause();
+        if (xpMenuManager.Active)
+        {
+            xpMenuManager.Hide();
+            xpMenuManager.ResetAffichage();
+        }
+        else if (!pausedThisFrame)
+            StartCoroutine(Pause());
     }
     void OnDodge()
     {

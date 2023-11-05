@@ -10,23 +10,31 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] Selectable firstSelected;
     [SerializeField] GameObject optionsMenu;
-    [SerializeField] bool pausable = false;
+    [SerializeField] GameObject menuDisplay;
     Selectable firstSelectedOverride;
     EventSystem eventSystem;
     InputSystemUIInputModule inputModule;
-    Canvas menuDisplay;
     PlayerController playerController;
-    public bool Paused { get; private set; } = false;
+    XpMenuManager xpMenu;
+    [HideInInspector] public SelectableRebindAction currentlyRebinding;
+    public bool isInLevelingMenu = false;
+    public bool Paused { get; private set; } = true;
     public SubMenus CurrentSubMenu { get; private set; } = SubMenus.None;
-
     public bool IsInSubMenu { get => CurrentSubMenu != SubMenus.None; }
     public bool IsInMainMenu { get => SceneManager.GetActiveScene().buildIndex == 0; }
     private void Awake()
     {
         eventSystem = EventSystem.current;
         inputModule = eventSystem.GetComponent<InputSystemUIInputModule>();
-        menuDisplay = GetComponentInChildren<Canvas>();
-         if (!IsInMainMenu) playerController = FindObjectOfType<PlayerController>();
+        if (!IsInMainMenu)
+        {
+            playerController = FindObjectOfType<PlayerController>();
+            xpMenu = FindObjectOfType<XpMenuManager>();
+        }     
+    }
+    private void Start()
+    {
+        if (!IsInMainMenu) menuDisplay.SetActive(false);
     }
     private void OnEnable()
     {
@@ -50,18 +58,27 @@ public class MenuManager : MonoBehaviour
         inputModule.cancel.ToInputAction().performed -= BackInput;
         inputModule.actionsAsset.FindActionMap("UI").FindAction("RestoreDefaults").started -= RestoreDefaultsInput;
     }
-    private void RestoreDefaultsInput(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void RestoreDefaultsInput(InputAction.CallbackContext obj)
     {
         if (CurrentSubMenu == SubMenus.Options)
+        {
             GetComponentInChildren<Settings>().ResetValues();
+        }
     }
 
-    private void BackInput(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void BackInput(InputAction.CallbackContext obj)
     {
-        GoBack();
+        if (!IsInMainMenu && xpMenu.Active)
+        {
+            xpMenu.Hide();
+            xpMenu.ResetAffichage();
+        }
+        else if (Paused)
+            GoBack();
     }
     public void GoBack()
     {
+        if (!Paused || currentlyRebinding != null) return;
         StartCoroutine(Back());
     }
     IEnumerator Back()
@@ -79,11 +96,11 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    private void MousePerformed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void MousePerformed(InputAction.CallbackContext obj)
     {
         StartCoroutine(ResetSelected());
     }
-    private void MovePerformed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void MovePerformed(InputAction.CallbackContext obj)
     {
         StartCoroutine(MovePerformed());
     }
@@ -105,26 +122,29 @@ public class MenuManager : MonoBehaviour
     }
     public void Play()
     {
+        Paused = false;
+        Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         SceneManager.LoadScene(1);
     }
     public void Pause()
     {
         Paused = true;
         Time.timeScale = 0;
-        menuDisplay.gameObject.SetActive(true);
+        menuDisplay.SetActive(true);
         playerController.SwitchToUI();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
     public void Resume()
     {
-        if (IsInSubMenu)
-        {
-            GoBack();
-            return;
-        }
         Paused = false;
         Time.timeScale = 1;
-        menuDisplay.gameObject.SetActive(false);
+        menuDisplay.SetActive(false);
         playerController.SwitchToPlayerControls();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
     public void Quit()
     {
@@ -132,6 +152,7 @@ public class MenuManager : MonoBehaviour
     }
     public void MainMenu()
     {
+        Paused = true;
         FindObjectOfType<PlayerInput>().gameObject.SetActive(false);
         SceneManager.LoadScene(0);
     }
