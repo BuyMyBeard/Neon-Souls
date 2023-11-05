@@ -155,6 +155,7 @@ public class DisplayBar : MonoBehaviour
 
     public virtual void Show()
     {
+        if (!Hidden) return;
         Hidden = false;
         foreach (Transform child in transform)
             child.gameObject.SetActive(true);
@@ -165,6 +166,7 @@ public class DisplayBar : MonoBehaviour
 
     public virtual void Hide()
     {
+        if (Hidden) return;
         Hidden = true;
         if (lingerTimerStarted)
         {

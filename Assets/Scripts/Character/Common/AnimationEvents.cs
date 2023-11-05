@@ -7,7 +7,8 @@ public abstract class AnimationEvents : MonoBehaviour
     protected MeleeAttack attack;
     protected FallApart fallApart;
 
-    public bool ActionAvailable { get; protected set; } = true;
+    protected bool actionAvailable = true;
+    public bool ActionAvailable { get => actionAvailable && !health.IsDead; set => actionAvailable = value; }
     protected virtual void Awake()
     {
         health = GetComponentInParent<Health>();
@@ -36,6 +37,7 @@ public abstract class AnimationEvents : MonoBehaviour
         DisableAllWeaponColliders();
         EndStagger();
         RestoreTurnSpeed();
+        Debug.Log("Resetted all");
     }
     public virtual void FallApart() => fallApart.Decompose();
     public virtual void FreezeMovement() { }

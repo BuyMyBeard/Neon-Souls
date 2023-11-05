@@ -68,23 +68,6 @@ public class PlayerHealth : Health
     {
         base.Die();
         gameManager.PlayerDie();
-        DetachSword();
-    }
-    private void DetachSword()
-    {
-        MeleeWeapon ragdollSword = Instantiate(sword, sword.transform.position, sword.transform.rotation, null);
-        Rigidbody rb = ragdollSword.GetComponent<Rigidbody>();
-        sword.gameObject.SetActive(false);
-        ragdollSword.gameObject.layer = 16;
-        Collider collider = ragdollSword.GetComponent<Collider>();
-        ragdollSword.gameObject.AddComponent<DestroyOnRecharge>();
-        ragdollSword.AddComponent<MeshCollider>().convex = true;
-        Destroy(collider);
-        Destroy(ragdollSword);
-        rb.SetDensity(1);
-        rb.isKinematic = false;
-        rb.useGravity = true;
-        rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
     }
     public override void Recharge()
     {

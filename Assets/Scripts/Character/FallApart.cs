@@ -16,13 +16,15 @@ public class FallApart : MonoBehaviour, IRechargeable
     [SerializeField] float explosionRadius = 10f;
     [SerializeField] float upwardsModifier = 2f;
     [SerializeField] int partsLayer = 0;
+    MeleeWeapon[] meleeWeapons;
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         character = animator.gameObject;
         model = character.transform.GetChild(0).gameObject;
         parts = model.GetComponentsInChildren<Collider>();
+        meleeWeapons = GetComponentsInChildren<MeleeWeapon>();
     }
 
     [ContextMenu("Activate")]
@@ -40,6 +42,16 @@ public class FallApart : MonoBehaviour, IRechargeable
     }
     void DetachAndSetUp(Collider part, GameObject ragdoll)
     {
+        if (part.TryGetComponent(out MeleeWeapon mw))
+        {
+            if (mw.deathBehaviour == MeleeWeapon.DeathBehaviour.DetachEarly) 
+                Destroy(mw); 
+            else
+            {
+                Destroy(mw.gameObject);
+                return;
+            }
+        }
         Transform parent = part.transform.parent;
         Transform wireframe = null;
         if (parent != null)
@@ -70,7 +82,6 @@ public class FallApart : MonoBehaviour, IRechargeable
         rb.SetDensity(density);
         rb.isKinematic = false;
         rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
-        if (part.TryGetComponent(out MeleeWeapon mw)) Destroy(mw); 
         part.transform.parent = ragdoll.transform;
         // rb.AddExplosionForce(explosionStrength, explosionSource != null ? explosionSource.position : transform.position, explosionRadius, upwardsModifier);
     }
@@ -89,6 +100,33 @@ public class FallApart : MonoBehaviour, IRechargeable
     {
         if (TryGetComponent(out Enemy _)) gameObject.SetActive(true);
         else model.SetActive(true);
+        ReenableWeapons();
+    }
+
+    public void DetachWeapons()
+    {
+        foreach (var weapon in meleeWeapons)
+        {
+            if (weapon.deathBehaviour == MeleeWeapon.DeathBehaviour.Destroy) continue;
+            MeleeWeapon ragdollWeapon = Instantiate(weapon, weapon.transform.position, weapon.transform.rotation, null);
+            Rigidbody rb = ragdollWeapon.GetComponent<Rigidbody>();
+            weapon.gameObject.SetActive(false);
+            ragdollWeapon.gameObject.layer = 16;
+            Collider collider = ragdollWeapon.GetComponent<Collider>();
+            ragdollWeapon.gameObject.AddComponent<DestroyOnRecharge>();
+            ragdollWeapon.AddComponent<MeshCollider>().convex = true;
+            Destroy(collider);
+            Destroy(ragdollWeapon);
+            rb.SetDensity(1);
+            rb.isKinematic = false;
+            rb.useGravity = true;
+            rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+        }
+    }
+    private void ReenableWeapons()
+    {
+        foreach (var weapon in meleeWeapons)
+            weapon.gameObject.SetActive(true);
     }
 }
 
