@@ -35,8 +35,11 @@ public abstract class AnimationEvents : MonoBehaviour
         UnFreezeRotation();
         DisableAllWeaponColliders();
         EndStagger();
+        RestoreTurnSpeed();
     }
     public virtual void FallApart() => fallApart.Decompose();
     public virtual void FreezeMovement() { }
     public virtual void UnFreezeMovement() { }
+    public abstract void ChangeTurnSpeed(float turnSpeed);
+    public abstract void RestoreTurnSpeed();
 }

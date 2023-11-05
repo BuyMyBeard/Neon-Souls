@@ -4,7 +4,6 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class MeleeEnemy : Enemy
 {
-    [SerializeField] float turnSpeed;
     public Vector3 Velocity { get; private set; }
     Vector3 prevPosition;
     void Start()
@@ -34,7 +33,6 @@ public class MeleeEnemy : Enemy
     protected override void InRangeMain()
     {
         base.InRangeMain();
-        agent.Move(Time.deltaTime * 3 * Vector3.left);
         agent.SetDestination(Target.position);
         AnimateMovement();
     }
@@ -47,12 +45,12 @@ public class MeleeEnemy : Enemy
     protected override void CloseMain()
     {
         base.CloseMain();
-        Quaternion towardsPlayer = Quaternion.LookRotation(-DistanceFromPlayer, Vector3.up);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, towardsPlayer, turnSpeed * Time.deltaTime);
     }
 
     protected void AnimateMovement()
     {
+        if (!enemyAnimationEvents.ActionAvailable) return;
+
         animator.SetBool("IsMoving", Velocity.magnitude > 0);
         Vector3 relativeVelocity = transform.InverseTransformDirection(Velocity);
         Vector2 flatRelativeVelocity = new Vector2(relativeVelocity.x, relativeVelocity.z).normalized;

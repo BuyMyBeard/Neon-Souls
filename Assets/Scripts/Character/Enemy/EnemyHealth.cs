@@ -8,6 +8,14 @@ public class EnemyHealth : Health
     public Transform healthbarContainer;
     public Coroutine showHealthbarCoroutine = null;
     public int healthBarDisplayCounter = 0;
+    bool staggerable;
+    Stagger stagger;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        staggerable = TryGetComponent<Stagger>(out stagger);
+    }
     IEnumerator ShowHealthbarTemporarily(float time)
     {
         ShowHealthbar();
@@ -45,5 +53,11 @@ public class EnemyHealth : Health
             GameManager.enemyHealthbarsPool.ReturnObject(displayHealthbar.gameObject);
             displayHealthbar = null;
         }
+    }
+    public override void InflictBlockableDamage(int damage, int staminaBlockCost, Transform attackerPosition)
+    {
+        InflictDamage(damage);
+        if (staggerable)
+            stagger.BecomeStaggered(attackerPosition, 1);
     }
 }

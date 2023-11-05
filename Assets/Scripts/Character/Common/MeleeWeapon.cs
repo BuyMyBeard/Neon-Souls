@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,9 +7,11 @@ using UnityEngine.Events;
 public class MeleeWeapon : MonoBehaviour
 {
     [HideInInspector] public UnityEvent<Collider> onTrigger;
-    public int damage;
+    [HideInInspector] public int damage;
+    [HideInInspector] public int staminaBlockCost;
     new Collider collider;
     readonly List<Health> opponentsHit = new();
+    Transform user;
     public bool ColliderEnabled
     {
         get => collider.enabled;
@@ -26,6 +26,7 @@ public class MeleeWeapon : MonoBehaviour
         collider = GetComponent<Collider>();
         ColliderEnabled = false;
         collider.isTrigger = true;
+        user = GetComponentInParent<Health>().transform;
     }
     private void Start()
     {
@@ -40,7 +41,7 @@ public class MeleeWeapon : MonoBehaviour
         else if (!opponentsHit.Contains(opponentHealth))
         {
             opponentsHit.Add(opponentHealth);
-            opponentHealth.InflictDamage(damage);
+            opponentHealth.InflictBlockableDamage(damage, staminaBlockCost, user);
         }
     }
 }
