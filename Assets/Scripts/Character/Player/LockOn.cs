@@ -116,7 +116,7 @@ public class LockOn : MonoBehaviour
                 yield return null;
                 continue;
             }
-            camFollowTarget.LookAt(new Vector3(targetEnemy.position.x, targetEnemy.position.y - yAxisLockOffset, targetEnemy.position.z));
+            camFollowTarget.LookAt(new Vector3(targetEnemy.position.x, camFollowTarget.position.y - yAxisLockOffset, targetEnemy.position.z));
 
             if (Vector3.Distance(camFollowTarget.position, targetEnemy.position) > viewRadius * maxLockOnDistance)
             {

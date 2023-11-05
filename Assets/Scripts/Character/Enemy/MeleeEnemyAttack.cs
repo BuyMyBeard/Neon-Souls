@@ -12,6 +12,7 @@ public class EnemyMeleeAttack : MeleeAttack
     float timeSinceLastAction = 0;
     EnemyAnimationEvents enemyAnimationEvents;
     Enemy enemy;
+    [SerializeField] AttackDef fullBody;
 
     [SerializeField] AttackType[] possibleActions;
     [Range(0f, 10f)]
@@ -102,5 +103,21 @@ public class EnemyMeleeAttack : MeleeAttack
         }
         public Action actionName;
         public float weight; 
+    }
+
+    public void StartFlickerBodyCollider() => StartCoroutine(nameof(FlickerBodyCollider));
+    public void StopFlickerBodyCollider() => StopCoroutine(nameof(FlickerBodyCollider));
+
+
+    private IEnumerator FlickerBodyCollider()
+    {
+        const float FlickerFrequency = .3f;
+        while (true)
+        {
+            enemyAnimationEvents.InitWeaponCollider(fullBody);
+            yield return new WaitForSeconds(FlickerFrequency);
+            enemyAnimationEvents.DisableWeaponCollider(fullBody);
+            yield return null;
+        }
     }
 }

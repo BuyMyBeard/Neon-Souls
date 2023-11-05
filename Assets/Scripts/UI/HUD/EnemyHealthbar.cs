@@ -41,7 +41,10 @@ public class EnemyHealthbar : DisplayBar
     {
         if (Hidden) return;
         RectTransform parent = (RectTransform)rt.parent;
+        
         var vp = cam.WorldToViewportPoint(TrackedEnemy.position + offset);
+        if (vp.z < 0) Hide();
+        else Show();
         var sp = canvas.worldCamera.ViewportToScreenPoint(vp);
         RectTransformUtility.ScreenPointToWorldPointInRectangle(parent, sp, canvas.worldCamera, out Vector3 worldPoint);
         rt.position = worldPoint;

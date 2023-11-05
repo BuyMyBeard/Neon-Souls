@@ -2,13 +2,17 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+
+
 [RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(Rigidbody))]
 public class MeleeWeapon : MonoBehaviour
 {
+    public enum DeathBehaviour { Destroy, DetachEarly }
     [HideInInspector] public UnityEvent<Collider> onTrigger;
     [HideInInspector] public int damage;
     [HideInInspector] public int staminaBlockCost;
+    public DeathBehaviour deathBehaviour;
     new Collider collider;
     readonly List<Health> opponentsHit = new();
     Transform user;

@@ -14,7 +14,7 @@ public class EnemyHealth : Health
     protected override void Awake()
     {
         base.Awake();
-        staggerable = TryGetComponent<Stagger>(out stagger);
+        staggerable = TryGetComponent(out stagger);
     }
     IEnumerator ShowHealthbarTemporarily(float time)
     {

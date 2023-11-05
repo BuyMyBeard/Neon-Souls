@@ -7,7 +7,8 @@ public enum AttackWeapon
     RightHandSword,
     LeftHandFist,
     LeftBackhand,
-    GunHit
+    GunHit,
+    FullBody
 }
 [CreateAssetMenu(fileName = "AttackDef", menuName = "Scriptables/Attack Def")]
 public class AttackDef : ScriptableObject

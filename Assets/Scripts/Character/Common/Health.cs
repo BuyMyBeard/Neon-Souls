@@ -18,11 +18,14 @@ public abstract class Health : MonoBehaviour, IRechargeable
     public float MaxHealth { get => maxHealth; }
     protected AnimationEvents animationEvents;
     protected LockOn lockOn;
+    protected FallApart fallApart;
+    protected bool canFallApart;
     protected virtual void Awake()
     {
         animator = GetComponentInChildren<Animator>();
         animationEvents = GetComponentInChildren<AnimationEvents>();
-        lockOn = FindObjectOfType<LockOn>();      
+        lockOn = FindObjectOfType<LockOn>();   
+        canFallApart = TryGetComponent(out fallApart);
     }
     void OnEnable()
     {
@@ -64,6 +67,7 @@ public abstract class Health : MonoBehaviour, IRechargeable
         animationEvents.FreezeMovement();
         animationEvents.FreezeRotation();
         animationEvents.StartIFrame();
+        if (canFallApart) fallApart.DetachWeapons();
     }
 
     /// <summary>
