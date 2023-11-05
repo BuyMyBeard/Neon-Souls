@@ -3,7 +3,32 @@ guid: 1d5143e1c1dedae4eae1f6c687c107ae
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: dirt
+    second: {fileID: 2100000, guid: 2d1d57585d99f2849b60a292834f8df4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: leaf
+    second: {fileID: 2100000, guid: 8e18c26904987c842a6f0bcb9b6fb3ca, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: leaf wireframe
+    second: {fileID: 2100000, guid: 7e4eed3fc441e0f4bbeb4c8a64752452, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pot
+    second: {fileID: 2100000, guid: 8332e756bdb7f204f82f6b33ff4b11f9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: trunk
+    second: {fileID: 2100000, guid: 43c3b85c84e4f7549b9cb82c3ff06c63, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
