@@ -1,34 +1,36 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-enum PlayerAttackType { Light, Heavy }
-
 [RequireComponent(typeof(Stamina))]
 [RequireComponent(typeof(PlayerInput))]
-public class PlayerMeleeAttack : MeleeAttack
+public class PlayerMeleeAttack : MeleeAttack ,IStat
 {
-    [SerializeField] int lightAttackStaminaCost = 15;
-    [SerializeField] int heavyAttackStaminaCost = 30;
-    [SerializeField] int lightAttackDamage = 25;
-    [SerializeField] int heavyAttackDamage = 50;
     Stamina stamina;
     PlayerAnimationEvents animationEvents;
-    PlayerAttackType attackType;
+    [SerializeField] int dmgUpgrade = 0;
+    int modifAttack = 0;
+    public float Value => modifAttack;
+    public int Upgrade => dmgUpgrade;
     protected override void Awake()
     {
         base.Awake();
         stamina = GetComponent<Stamina>();
         animationEvents = GetComponentInChildren<PlayerAnimationEvents>();
     }
+    public override void InitWeaponCollider(AttackDef attackDef, int modifAtk = 0)
+    {
+        base.InitWeaponCollider(attackDef,Upgrade);
+        stamina.Remove(attackDef.staminaCost);
+    }
     void OnLightAttack()
     {
         if (!animationEvents.ActionAvailable || stamina.IsExhausted) return;
         
-        stamina.Remove(lightAttackStaminaCost);
         animator.SetTrigger("LightAttack");
-        attackType = PlayerAttackType.Light;
+        animationEvents.StopStaminaRegen();
         animationEvents.DisableActions();
         animationEvents.FreezeMovement();
     }
@@ -36,22 +38,13 @@ public class PlayerMeleeAttack : MeleeAttack
     {
         if (!animationEvents.ActionAvailable || stamina.IsExhausted) return;
 
-        stamina.Remove(heavyAttackStaminaCost);
         animator.SetTrigger("HeavyAttack");
-        attackType = PlayerAttackType.Heavy;
+        animationEvents.StopStaminaRegen();
         animationEvents.DisableActions();
         animationEvents.FreezeMovement();
     }
-    protected override void DamageOpponent(Health opponentHealth)
+    public void UpgradeStat(int nbAmelioration)
     {
-        if (attackType == PlayerAttackType.Light)
-        {
-            opponentHealth.InflictDamage(lightAttackDamage);
-        }
-        else if (attackType == PlayerAttackType.Heavy)
-        {
-            opponentHealth.InflictDamage(heavyAttackDamage);
-        }
+        modifAttack += nbAmelioration * dmgUpgrade;
     }
-
 }

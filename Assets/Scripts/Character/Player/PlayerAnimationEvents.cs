@@ -1,45 +1,54 @@
-using JetBrains.Annotations;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class PlayerAnimationEvents : MonoBehaviour
+public class PlayerAnimationEvents : AnimationEvents
 {
-    Health health;
-    CharacterController characterController;
     PlayerMovement playerMovement;
     CameraMovement cameraMovement;
-    MeleeAttack attack;
     Potions potions;
+    Spells spells;
+    Stamina stamina;
+    PlayerDeath playerDeath;
+    Interact interact;
 
-    bool actionAvailable = true;
-    public bool ActionAvailable { get => actionAvailable; }
-    private void Awake()
+    protected override void Awake()
     {
-        health = GetComponentInParent<Health>();
-        characterController = GetComponentInParent<CharacterController>();
+        base.Awake();
         playerMovement = GetComponentInParent<PlayerMovement>();
         cameraMovement = GetComponentInParent<CameraMovement>();
-        attack = GetComponentInParent<MeleeAttack>();
         potions = GetComponentInParent<Potions>();
+        spells = GetComponentInParent<Spells>();
+        stamina = GetComponentInParent<Stamina>();
+        playerDeath = GetComponentInParent<PlayerDeath>();
+        interact = GetComponentInParent<Interact>();
     }
-    public void EnableActions() => actionAvailable = true;
-    public void DisableActions() => actionAvailable = false;
-    public void StartIFrame() => health.invincible = true;
-    public void StopIFrame() => health.invincible = false;
+    
+    public override void EnableActions()
+    {
+        base.EnableActions();
+        stamina.StartRegen();
+    }
     public void FreezeMovement() => playerMovement.movementFrozen = true;
     public void UnFreezeMovement() => playerMovement.movementFrozen = false;
     public void FreezeCamera() => cameraMovement.enabled = false;
     public void UnFreezeCamera() => cameraMovement.enabled = true;
-    public void FreezeRotation() => playerMovement.rotationFrozen = true;
-    public void UnFreezeRotation() => playerMovement.rotationFrozen = false;
-    public void EnableWeaponCollider() => attack.EnableWeaponCollider();
-    public void DisableWeaponCollider() => attack.DisableWeaponCollider();
+    public override void FreezeRotation() => playerMovement.rotationFrozen = true;
+    public override void UnFreezeRotation() => playerMovement.rotationFrozen = false;
     public void DrinkPotion() => potions.DrinkOnePotion();
     public void ReduceMovement() => playerMovement.movementReduced = true;
     public void RestoreMovement() => playerMovement.movementReduced = false;
     public void SyncRotation() => playerMovement.SyncRotation();
     public void ShowPotion() => potions.ShowPotion();
     public void HidePotion() => potions.HidePotion();
+    public void FocusSpell() => spells.FocusFireball();
+    public void ThrowSpell() => spells.ThrowFireball();
+    public void StopStaminaRegen() => stamina.StopRegen();
+    public override void ResetAll()
+    {
+        base.ResetAll();
+        UnFreezeMovement();
+        UnFreezeCamera();
+        HidePotion();
+        RestoreMovement();
+    }
+    public override void FallApart() => playerDeath.Decompose();
+    public void DoInteraction() => interact.DoInteraction();
+
 }
