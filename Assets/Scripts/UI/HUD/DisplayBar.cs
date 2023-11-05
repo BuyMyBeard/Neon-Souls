@@ -166,7 +166,6 @@ public class DisplayBar : MonoBehaviour
 
     public virtual void Hide()
     {
-        if (Hidden) return;
         Hidden = true;
         if (lingerTimerStarted)
         {
