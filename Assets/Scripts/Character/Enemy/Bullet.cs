@@ -15,7 +15,6 @@ public class Bullet : MonoBehaviour
     [SerializeField] float yDirDiffLimit;
     [SerializeField] int damage;
     [SerializeField] LayerMask playerLayer;
-    [SerializeField] LayerMask enemyLayer;
     [SerializeField] int staminaBlockCost = 15;
 
     ObjectPool pool;
@@ -24,6 +23,7 @@ public class Bullet : MonoBehaviour
 
     float originalYdir;
     float newYdir;
+    bool hasAlreadyHit = false;
 
     // Start is called before the first frame update
     void Awake()
@@ -40,6 +40,7 @@ public class Bullet : MonoBehaviour
         originalYdir = transform.rotation.eulerAngles.y;
         if (originalYdir > 180f) originalYdir = 360f - originalYdir;
         p_homingCoroutine = StartCoroutine(HomingCoroutine());
+        hasAlreadyHit = false;
     }
     void OnDisable()
     {
@@ -72,11 +73,11 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (((1 << other.gameObject.layer) & playerLayer) != 0)
-        {
-            playerHealth.InflictBlockableDamage(damage, staminaBlockCost, transform);
-            Despawn();
-        }
+        if (hasAlreadyHit) return;
+
+        playerHealth.InflictBlockableDamage(damage, staminaBlockCost, transform);
+        Despawn();
+        hasAlreadyHit = true;
     }
 
     void Despawn()

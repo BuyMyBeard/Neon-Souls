@@ -11,6 +11,9 @@ public class SawScript : MonoBehaviour
     Vector3 initialPosition;
     Rigidbody rb;
     Transform model;
+    Dictionary<Health,float> healthList = new();
+    [SerializeField]
+    float sawDamageCooldown = 1f;
 
     // Start is called before the first frame update
     void Awake()
@@ -22,6 +25,15 @@ public class SawScript : MonoBehaviour
     void Update()
     {
         model.Rotate(0, 0, -spinSpeed * Time.deltaTime, Space.Self);
+        List<Health> outdatedList = new List<Health>();
+        foreach(KeyValuePair<Health, float> entry in healthList)
+        {
+            if(entry.Value + sawDamageCooldown < Time.time)
+                outdatedList.Add(entry.Key);
+        }
+        foreach(Health health in outdatedList)
+            healthList.Remove(health);
+
     }
     public IEnumerator MoveSaw(float yOffset)
     {
@@ -37,8 +49,12 @@ public class SawScript : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 10) // 10 == Player layer
-            other.gameObject.GetComponentInParent<PlayerHealth>().InflictUnblockableDamage(sawDamage);
+        Health health = other.gameObject.GetComponentInParent<Health>();
+        if(!health.invincible && !healthList.ContainsKey(health))
+        {
+            healthList.Add(health, Time.time);
+            health.InflictDamage(sawDamage);
+        }
     }
     IEnumerator LerpPosition(float yOffset)
     {

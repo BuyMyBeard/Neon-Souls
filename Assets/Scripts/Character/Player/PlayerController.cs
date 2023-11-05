@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using UnityEngine.Windows;
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public bool IsSprinting { get; private set; } = false;
     public bool BlockInput { get; private set; } = false;
 
+    private bool pausedThisFrame = false;
     public string CurrentControlScheme { get => playerInput.currentControlScheme; }
     public bool KeyboardAndMouseActive { get => CurrentControlScheme == "Keyboard&Mouse"; }
     public bool GamepadActive { get => CurrentControlScheme == "Gamepad"; }
@@ -19,6 +21,7 @@ public class PlayerController : MonoBehaviour
 
     PlayerInput playerInput;
     MenuManager menuManager;
+    XpMenuManager xpMenuManager;
 
     public void SwitchToPlayerControls() => playerInput.SwitchCurrentActionMap("PlayerControls");
     public void SwitchToUI() => playerInput.SwitchCurrentActionMap("UI");
@@ -26,19 +29,27 @@ public class PlayerController : MonoBehaviour
     {
         playerInput = GetComponent<PlayerInput>();
         menuManager = FindObjectOfType<MenuManager>();
+        xpMenuManager = FindObjectOfType<XpMenuManager>();
         runAction = playerInput.currentActionMap.FindAction("RunButton");
         dodgeAction = playerInput.currentActionMap.FindAction("DodgeButton");
         parryAction = playerInput.currentActionMap.FindAction("ParryButton");
         blockAction = playerInput.currentActionMap.FindAction("BlockButton");
     }
-    private void Start()
+    private void OnEnable()
     {
         dodgeAction.performed += Dodge_performed;
         runAction.performed += Run_performed;
         runAction.canceled += Run_canceled;
         parryAction.started += Parry_started;
         blockAction.canceled += Block_canceled;
-        menuManager.Resume();
+    }
+    private void OnDisable()
+    {
+        dodgeAction.performed -= Dodge_performed;
+        runAction.performed -= Run_performed;
+        runAction.canceled -= Run_canceled;
+        parryAction.started -= Parry_started;
+        blockAction.canceled -= Block_canceled;
     }
     private void Block_canceled(InputAction.CallbackContext obj)
     {
@@ -67,14 +78,30 @@ public class PlayerController : MonoBehaviour
     }
     void OnPlayerPause()
     {
+        if (!pausedThisFrame)
+            StartCoroutine(Pause());
+    }
+
+
+    IEnumerator Pause()
+    {
+        pausedThisFrame = true;
+        yield return null;
         if (menuManager.Paused) menuManager.Resume();
         else menuManager.Pause();
+        yield return null;
+        pausedThisFrame = false;
     }
 
     void OnUIPause()
     {
-        if (menuManager.Paused) menuManager.Resume();
-        else menuManager.Pause();
+        if (xpMenuManager.Active)
+        {
+            xpMenuManager.Hide();
+            xpMenuManager.ResetAffichage();
+        }
+        else if (!pausedThisFrame)
+            StartCoroutine(Pause());
     }
     void OnDodge()
     {
