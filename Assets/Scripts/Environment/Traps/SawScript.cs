@@ -33,7 +33,7 @@ public class SawScript : MonoBehaviour
     }
     IEnumerator SawCoroutine()
     {
-        yield return new WaitUntil(() => transform.position.x < initialPosition.x - travelDistance);
+        yield return new WaitUntil(() => transform.position.x > initialPosition.x + travelDistance);
     }
     private void OnTriggerEnter(Collider other)
     {
