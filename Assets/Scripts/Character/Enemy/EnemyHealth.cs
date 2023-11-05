@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyHealth : Health
@@ -15,6 +16,15 @@ public class EnemyHealth : Health
     {
         base.Awake();
         staggerable = TryGetComponent(out stagger);
+    }
+    private void OnDisable()
+    {
+        if (showHealthbarCoroutine != null)
+        {
+            StopCoroutine(showHealthbarCoroutine);
+            showHealthbarCoroutine = null;
+            HideHealthbar();
+        }
     }
     IEnumerator ShowHealthbarTemporarily(float time)
     {
@@ -35,6 +45,7 @@ public class EnemyHealth : Health
     }
     public void ShowHealthbar()
     {
+        Debug.Log("Counter increased");
         healthBarDisplayCounter++;
         if (displayHealthbar != null)
         {
@@ -46,6 +57,7 @@ public class EnemyHealth : Health
     }
     public void HideHealthbar()
     {
+        Debug.Log("Counter decreased");
         healthBarDisplayCounter--;
         if (healthBarDisplayCounter <= 0)
         {
