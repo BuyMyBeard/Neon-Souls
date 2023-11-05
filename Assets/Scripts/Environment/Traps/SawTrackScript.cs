@@ -24,12 +24,9 @@ public class SawTrackScript : MonoBehaviour, IRechargeable
     }
     private void OnTriggerEnter(Collider c)
     {
-        if (c.gameObject.layer == 10) //Player layer
-        {
             isActive = true;
             StartCoroutine(LaunchSawCoroutine());
-            GetComponent<Collider>().enabled = false;
-        }
+            GetComponent<Collider>().enabled = false;   
     }
     IEnumerator LaunchSawCoroutine()
     {

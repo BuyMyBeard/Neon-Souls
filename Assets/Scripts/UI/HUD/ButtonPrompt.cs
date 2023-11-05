@@ -125,11 +125,11 @@ public class ButtonPrompt : MonoBehaviour
     {
         possiblePrompts.Remove(interactable);
     }
-    void HidePrompt()
+    public void HidePrompt()
     {
         foreach (var c in display) c.SetActive(false);
     }
-    void ShowPrompt(string message)
+    public void ShowPrompt(string message)
     {
         textPrompt.SetText(message);
         foreach (var c in display) c.SetActive(true);

@@ -7,16 +7,19 @@ public class TrapBullet : MonoBehaviour
     [SerializeField] float travelSpeed = 5f;
     [SerializeField] float lifeSpan = 1f;
     [SerializeField] int bulletDamage = 60;
+    [SerializeField] int staminaBlockCost = 20;
     Rigidbody rb;
+    bool hasAlreadyHit = false;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collider)
     {
-        if (collision.gameObject.layer == 10) // 10 == Player layer
-            collision.gameObject.GetComponentInParent<Health>().InflictDamage(bulletDamage);
+        if (hasAlreadyHit) return;
+        collider.gameObject.GetComponentInParent<PlayerHealth>().InflictBlockableDamage(bulletDamage, staminaBlockCost, transform);
         Destroy(gameObject);
+        hasAlreadyHit = true;
     }
     public void MoveBullet(Vector3 direction)
     {

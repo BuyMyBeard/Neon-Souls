@@ -5,7 +5,7 @@ using UnityEngine;
 public static class Preferences
 {
     static private float musicVolume, sfxVolume, masterVolume, controllerSensX, controllerSensY, mouseSens;
-    static private int controllerInvertX, controllerInvertY, mouseInvert;
+    static private int controllerInvertX, controllerInvertY, mouseInvert, vibration;
     static public float MasterVolume
     {
         get => masterVolume;
@@ -63,6 +63,16 @@ public static class Preferences
             PlayerPrefs.SetInt("MouseInvert", intVal);
         }
     }
+    static public bool Vibration
+    {
+        get => vibration == 1;
+        set
+        {
+            int intVal = value ? 1 : 0;
+            vibration = intVal;
+            PlayerPrefs.SetInt("Vibration", intVal);
+        }
+    }
     static public float ControllerSensitivityX
     {
         get => controllerSensX;
@@ -106,6 +116,7 @@ public static class Preferences
         ControllerSensitivityX = PlayerPrefs.GetFloat("ControllerSensX", .7f);
         ControllerSensivityY = PlayerPrefs.GetFloat("ControllerSensY", .7f);
         MouseSensitivity = PlayerPrefs.GetFloat("MouseSens", .2f);
+        Vibration = PlayerPrefs.GetInt("Vibration", 1) == 1;
     }
     static public void ResetPlayerPrefs()
     {

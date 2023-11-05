@@ -76,7 +76,7 @@ public class ShooterEnemy : Enemy
                 currentRotation = transform.rotation.eulerAngles.y;
                 if (towardsPlayer > 180f) towardsPlayer = 360f - towardsPlayer;
                 if (currentRotation > 180f) currentRotation = 360f - currentRotation;
-                Debug.Log($"{towardsPlayer} - {currentRotation}");
+                //Debug.Log($"{towardsPlayer} - {currentRotation}");
                 return (towardsPlayer - currentRotation) < shootingAngleMin;
             });
             Shoot();

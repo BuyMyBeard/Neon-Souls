@@ -3,22 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : MonoBehaviour,IRechargeable
+public class Health : MonoBehaviour,IStat
 {
     public DisplayBar displayHealthbar;
-    [SerializeField] float maxHealth = 100;
+    [SerializeField] protected float maxHealth = 100;
     [SerializeField] string healthbarTag = "PlayerHealthbar";
+    [SerializeField]int upgradeHp = 10;
+
     public bool invincible = false;
-    PlayerAnimationEvents animationEvents;
     GameManager manager;
-
-    float currentHealth;
-    Animator animator;
-    public float CurrentHealth { get => currentHealth; }
-
-    public bool IsDead { get => currentHealth <= 0; }
+    protected Animator animator;
+    public float CurrentHealth { get; protected set; }
+    public bool IsDead { get => CurrentHealth <= 0; }
     public float MaxHealth { get => maxHealth; }
-    void Awake()
+    public int Upgrade { get => upgradeHp;}
+    public float Value => MaxHealth;
+
+
+    
+    protected PlayerAnimationEvents animationEvents;
+    protected void Awake()
     {
         if (displayHealthbar == null)
             displayHealthbar = GameObject.FindGameObjectWithTag(healthbarTag).GetComponent<DisplayBar>();    
@@ -30,6 +34,9 @@ public class Health : MonoBehaviour,IRechargeable
     {
         ResetHealth();
     }
+
+
+    //TODO: Refactor this to make it not public
     /// <summary>
     /// Apply damage to health
     /// </summary>
@@ -38,20 +45,21 @@ public class Health : MonoBehaviour,IRechargeable
     {
         if (invincible)
             return;
-        currentHealth -= damage;
+        CurrentHealth -= damage;
         if(displayHealthbar != null)
             displayHealthbar.Remove(damage, maxHealth, true);//TODO: change to false.
         if(IsDead) 
         {
-            currentHealth = 0;
+            CurrentHealth = 0;
             Die();
         }
     }
-    private void Die()
+    [ContextMenu("Die")]
+    protected virtual void Die()
     {
-
         if (gameObject.CompareTag("Player"))
         {
+            animator.ResetTrigger("Reset");
             animator.SetTrigger("Die");
             manager.PlayerDie();
             animationEvents.DisableActions();
@@ -59,8 +67,13 @@ public class Health : MonoBehaviour,IRechargeable
             animationEvents.FreezeRotation();
             animationEvents.StartIFrame();
         }
-        else
-            Debug.Log("EnemyDead");
+        else if(gameObject.CompareTag("Enemy"))
+        {
+            GetComponent<Enemy>().GiveXp();
+            /*
+             And other anim for ennemie
+             */
+        }
     }
 
 
@@ -71,36 +84,24 @@ public class Health : MonoBehaviour,IRechargeable
     public void Heal(float healthRestored)
     {
         if (IsDead) return;
-        currentHealth += healthRestored;
-        if (currentHealth > maxHealth)
-            currentHealth = maxHealth;
+        CurrentHealth += healthRestored;
+        if (CurrentHealth > maxHealth)
+            CurrentHealth = maxHealth;
         displayHealthbar.Add(healthRestored, maxHealth);
     }
     /// <summary>
     /// Returns current health back to full
     /// </summary>
-    private void ResetHealth()
+    protected void ResetHealth()
     {
-        currentHealth = maxHealth;
+        CurrentHealth = maxHealth;
     }
     /// <summary>
     /// Rounds current health to the nearest integer. Used to avoid float imprecision caused by healing over time
     /// </summary>
-    public void Round() => currentHealth = Mathf.RoundToInt(currentHealth);
-    
-    public void Recharge()
+    public void UpgradeStat(int nbAmelioration)
     {
-        ResetHealth();
-        displayHealthbar.Add(maxHealth, maxHealth);
-        if (CompareTag("Player"))
-        {
-            animationEvents.HidePotion();
-            animationEvents.EnableActions();
-            animationEvents.UnFreezeMovement();
-            animationEvents.UnFreezeRotation();
-            animationEvents.StopIFrame();
-            animator.Play("Idle");
-            GetComponent<CameraMovement>().SyncFollowTarget();
-        }
+        maxHealth += nbAmelioration * Upgrade;
     }
+    public void Round() => CurrentHealth = Mathf.RoundToInt(CurrentHealth);
 }

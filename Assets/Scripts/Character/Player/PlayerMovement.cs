@@ -37,6 +37,8 @@ public class PlayerMovement : MonoBehaviour
     float targetSpeed = 0;
     bool wasSprinting = false;
     bool isDecelerating = false;
+
+    public bool IsSprinting { get; private set; } = false;
     Vector2 previousMovement = Vector2.zero;
     public float Gravity
     {
@@ -93,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 movementInput = playerController.Move; 
         float movementMagnitude = movementInput.magnitude;
-        bool IsSprinting = playerController.IsSprinting && !stamina.IsExhausted && animationEvents.ActionAvailable;
+        IsSprinting = playerController.IsSprinting && movementMagnitude >= runThreshold && stamina.CanRun && !movementReduced && animationEvents.ActionAvailable;
         animator.SetBool("IsSprinting", IsSprinting);
         if (movementFrozen)
         {
