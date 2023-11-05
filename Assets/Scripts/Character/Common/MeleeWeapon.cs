@@ -15,7 +15,7 @@ public class MeleeWeapon : MonoBehaviour
     public DeathBehaviour deathBehaviour;
     new Collider collider;
     readonly List<Health> opponentsHit = new();
-    Transform user;
+    Transform user = null;
     public bool ColliderEnabled
     {
         get => collider.enabled;
@@ -30,7 +30,9 @@ public class MeleeWeapon : MonoBehaviour
         collider = GetComponent<Collider>();
         ColliderEnabled = false;
         collider.isTrigger = true;
-        user = GetComponentInParent<Health>().transform;
+        var health = GetComponentInParent<Health>();
+        if (health != null)
+            user = health.transform;
     }
     private void Start()
     {
