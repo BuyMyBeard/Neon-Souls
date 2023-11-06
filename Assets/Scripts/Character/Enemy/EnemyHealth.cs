@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class EnemyHealth : Health
 {
+    public Enemy enemy;
     public Transform healthbarContainer;
     public Coroutine showHealthbarCoroutine = null;
     public int healthBarDisplayCounter = 0;
@@ -16,6 +17,7 @@ public class EnemyHealth : Health
     {
         base.Awake();
         staggerable = TryGetComponent(out stagger);
+        enemy = GetComponent<Enemy>();
     }
     private void OnDisable()
     {
@@ -71,5 +73,9 @@ public class EnemyHealth : Health
         InflictDamage(damage);
         if (staggerable)
             stagger.BecomeStaggered(attackerPosition, 1);
+        if(enemy.Mode.Id == Enemy.ModeId.Idle)
+        {
+            enemy.ChangeMode(Enemy.ModeId.InRange);
+        }
     }
 }

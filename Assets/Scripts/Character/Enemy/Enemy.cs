@@ -35,7 +35,7 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
     public Vector3 DistanceFromPlayer => distanceFromPlayer;
 
     ModeDef[] modeDefs;
-    protected ModeDef Mode { get; private set; }
+    public ModeDef Mode { get; private set; }
     protected bool lockMode = false;
     protected NavMeshAgent agent;
     protected Animator animator;
