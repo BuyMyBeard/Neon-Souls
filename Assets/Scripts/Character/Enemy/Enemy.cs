@@ -81,6 +81,7 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
         Mode.Exit();
         Mode = modeDefs[(int)modeId];
         Mode.Init();
+        Debug.Log(Mode.Id);
     }
     protected virtual void IdleInit() => idleInitEvent.Invoke();
     protected virtual void InRangeInit() => inRangeInitEvent.Invoke();
