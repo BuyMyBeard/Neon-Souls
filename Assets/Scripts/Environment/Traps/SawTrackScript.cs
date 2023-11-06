@@ -44,12 +44,12 @@ public class SawTrackScript : MonoBehaviour, IRechargeable
             if (launcherPosition == leftLauncher)
             {
                 spawnPosition.z -= spawnXOffset * transform.lossyScale.z;
-                spawnPosition.x += spawnYOffset * transform.lossyScale.x;
+                spawnPosition.x -= spawnYOffset * transform.lossyScale.x;
             }
             else if (launcherPosition == rightLauncher)
             {
                 spawnPosition.z += spawnXOffset * transform.lossyScale.z;
-                spawnPosition.x += spawnYOffset * transform.lossyScale.x;
+                spawnPosition.x -= spawnYOffset * transform.lossyScale.x;
             }
             else
             {

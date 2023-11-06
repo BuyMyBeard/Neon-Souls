@@ -50,7 +50,7 @@ public class SawScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Health health = other.gameObject.GetComponentInParent<Health>();
-        if(!health.invincible && !healthList.ContainsKey(health))
+        if(health != null && !health.invincible && !healthList.ContainsKey(health))
         {
             healthList.Add(health, Time.time);
             health.InflictDamage(sawDamage);
