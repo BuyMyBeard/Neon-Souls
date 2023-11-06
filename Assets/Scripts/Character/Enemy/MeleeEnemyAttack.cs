@@ -26,15 +26,11 @@ public class EnemyMeleeAttack : MeleeAttack
         enemy = GetComponent<Enemy>();
     }
 
-    private void OnEnable()
+    protected override void Start()
     {
+        base.Start();
         enemy.closeInitEvent.AddListener(StartLookForAttack);
         enemy.closeExitEvent.AddListener(StopLookForAttack);
-    }
-    private void OnDisable()
-    {
-        enemy.closeInitEvent.RemoveListener(StartLookForAttack);
-        enemy.closeExitEvent.RemoveListener(StopLookForAttack);
     }
     protected void Update()
     {

@@ -62,8 +62,9 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
         origin = transform;
         turnSpeed = baseTurnSpeed;
     }
-    protected virtual void OnEnable()
+    protected virtual IEnumerator Start()
     {
+        yield return null;
         Mode.Init();
     }
     protected virtual void Update()

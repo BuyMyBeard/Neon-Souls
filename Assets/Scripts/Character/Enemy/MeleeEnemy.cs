@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,23 +7,22 @@ public class MeleeEnemy : Enemy
 {
     public Vector3 Velocity { get; private set; }
     Vector3 prevPosition;
-    void Start()
-    {
-        prevPosition = transform.position;
-    }
+
     protected override void Update()
     {
         base.Update();
+        AnimateMovement();
         Velocity = (transform.position - prevPosition) / Time.deltaTime;
+        prevPosition = transform.position;
     }
     protected override void Awake()
     {
         base.Awake();
+        prevPosition = transform.position;
     }
     protected override void IdleInit()
     {
         base.IdleInit();
-        agent.ResetPath();
     }
     protected override void InRangeInit()
     {
@@ -34,7 +34,6 @@ public class MeleeEnemy : Enemy
     {
         base.InRangeMain();
         agent.SetDestination(Target.position);
-        AnimateMovement();
     }
     protected override void InRangeExit()
     {
