@@ -51,6 +51,7 @@ public class MeleeAttack : MonoBehaviour
         {
             meleeWeapon.ColliderEnabled = false;
         }
+        if (this is EnemyMeleeAttack) (this as EnemyMeleeAttack).StopFlickerBodyCollider();
     }
     protected virtual void Awake()
     {

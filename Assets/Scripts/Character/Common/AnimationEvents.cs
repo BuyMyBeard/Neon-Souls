@@ -27,7 +27,7 @@ public abstract class AnimationEvents : MonoBehaviour
         attack.InitWeaponCollider(attackDef);
     }
     public void DisableWeaponCollider(AttackDef attackDef) => attack.DisableWeaponCollider(attackDef);
-    public void DisableAllWeaponColliders() => attack.DisableAllWeaponColliders();
+    public virtual void DisableAllWeaponColliders() => attack.DisableAllWeaponColliders();
     public void EndStagger() => stagger.IsStaggered = false;
     public virtual void ResetAll()
     {

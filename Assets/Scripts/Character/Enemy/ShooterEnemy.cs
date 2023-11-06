@@ -39,7 +39,7 @@ public class ShooterEnemy : Enemy
     protected override void InRangeMain()
     {
         base.InRangeMain();
-        Quaternion towardsPlayer = Quaternion.LookRotation(-DistanceFromPlayer, Vector3.up);
+        Quaternion towardsPlayer = Quaternion.LookRotation(-DirectionToPlayer, Vector3.up);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, towardsPlayer, turnSpeed * Time.deltaTime);
 
        // var armTowardsPlayer = Quaternion.LookRotation(Target.position - arm.position);
@@ -70,7 +70,7 @@ public class ShooterEnemy : Enemy
             float towardsPlayer;
             float currentRotation;
             yield return new WaitUntil(() => {
-                towardsPlayer = Quaternion.LookRotation(-DistanceFromPlayer, Vector3.up).eulerAngles.y;
+                towardsPlayer = Quaternion.LookRotation(-DirectionToPlayer, Vector3.up).eulerAngles.y;
                 currentRotation = transform.rotation.eulerAngles.y;
                 if (towardsPlayer > 180f) towardsPlayer = 360f - towardsPlayer;
                 if (currentRotation > 180f) currentRotation = 360f - currentRotation;
