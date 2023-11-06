@@ -26,12 +26,12 @@ public class MeleeTryGetClose : MonoBehaviour
     private void StopCheckIfStillClose() => StopCoroutine(nameof(CheckIfStillClose));
     IEnumerator TryGetClose()
     {
-        yield return new WaitUntil(() => enemy.DistanceFromPlayer.magnitude < closeIn);
+        yield return new WaitUntil(() => enemy.DistanceFromPlayer < closeIn);
         enemy.ChangeMode(Enemy.ModeId.Close);
     }
     IEnumerator CheckIfStillClose()
     {
-        yield return new WaitUntil(() => enemy.DistanceFromPlayer.magnitude > closeOut);
+        yield return new WaitUntil(() => enemy.DistanceFromPlayer > closeOut);
         enemy.ChangeMode(Enemy.ModeId.InRange);
     }
     

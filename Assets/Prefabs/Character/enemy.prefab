@@ -31,6 +31,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 826964868278621945}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5869185293041141421
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4406005351841678952}
+  - component: {fileID: 5730709831338715657}
+  m_Layer: 0
+  m_Name: PatrolPoint (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4406005351841678952
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5869185293041141421}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.5249996, y: 0.8287034, z: 7.983}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 826964868278621945}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5730709831338715657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5869185293041141421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bff7cd6653ad7046b749d78e5abc5de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6810373783553236918
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,6 +310,50 @@ MonoBehaviour:
   damage: 40
   staminaBlockCost: 0
   deathBehaviour: 0
+--- !u!1 &8590731616932004925
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6669809912835181682}
+  - component: {fileID: 4116433395137489833}
+  m_Layer: 0
+  m_Name: PatrolPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6669809912835181682
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8590731616932004925}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -9.89, y: 0.775, z: -0.15}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 826964868278621945}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4116433395137489833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8590731616932004925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bff7cd6653ad7046b749d78e5abc5de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &933161393770000658
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -548,6 +636,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: c2d43aac54ffdca4f8a7c6e4de9caf4c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1439193549498905410}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: c2d43aac54ffdca4f8a7c6e4de9caf4c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6669809912835181682}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: c2d43aac54ffdca4f8a7c6e4de9caf4c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4406005351841678952}
     - targetCorrespondingSourceObject: {fileID: -4226663789211813932, guid: c2d43aac54ffdca4f8a7c6e4de9caf4c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2888626750956327914}
@@ -712,6 +806,7 @@ MonoBehaviour:
   baseTurnSpeed: 200
   turnSpeed: 200
   rotationFrozen: 0
+  movementFrozen: 0
   idleInitEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -730,6 +825,20 @@ MonoBehaviour:
   closeExitEvent:
     m_PersistentCalls:
       m_Calls: []
+  closeMovementChance:
+  - actionName: 0
+    weight: 1
+  - actionName: 1
+    weight: 1
+  - actionName: 2
+    weight: 2
+  sprintingSpeed: 5
+  strafingSpeed: 0.7
+  idealRange: 1.5
+  idealRangeTopMargin: 0.7
+  idealRangeBottomMargin: 0.7
+  movementChangeTimeMin: 2
+  movementChangeTimeMax: 5
 --- !u!114 &5628382251835995949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -749,6 +858,7 @@ MonoBehaviour:
   OnHit:
     m_PersistentCalls:
       m_Calls: []
+  enemy: {fileID: 0}
   healthbarContainer: {fileID: 1439193549498905410}
   healthBarDisplayCounter: 0
 --- !u!136 &4186570677867809131
@@ -823,13 +933,13 @@ MonoBehaviour:
   fullBody: {fileID: 11400000, guid: 196cc22cf2b906149bd0cb5c326f8aa3, type: 2}
   possibleActions:
   - actionName: 0
-    weight: 6
+    weight: 1
   - actionName: 1
-    weight: 0
+    weight: 1
   - actionName: 2
-    weight: 0
-  minActionCooldown: 1
-  maxActionCooldown: 2
+    weight: 1
+  minActionCooldown: 0
+  maxActionCooldown: 3
 --- !u!114 &2848173867034494544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -843,9 +953,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tasks:
-  - patrolPoint: {fileID: 0}
+  - patrolPoint: {fileID: 4116433395137489833}
     waitTime: 3
-  - patrolPoint: {fileID: 0}
+  - patrolPoint: {fileID: 5730709831338715657}
     waitTime: 3
   minRemainingDistance: 0.2
 --- !u!114 &6484954475046364963
@@ -878,8 +988,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8215ebeb2194c394bb71333e355e3b79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  closeIn: 4
-  closeOut: 6
+  closeIn: 2.5
+  closeOut: 5
 --- !u!1 &713708970058600167 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 366159160697339893, guid: c2d43aac54ffdca4f8a7c6e4de9caf4c, type: 3}

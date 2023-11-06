@@ -4,17 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-
 public class EnemyMeleeAttack : MeleeAttack
 {
-    enum Action { Attack1, Attack2, Attack3 };
-
+    enum EnemyAction { SliceOverHead, BackhandSlice, Attack3, Block };
     float timeSinceLastAction = 0;
     EnemyAnimationEvents enemyAnimationEvents;
     Enemy enemy;
     [SerializeField] AttackDef fullBody;
 
-    [SerializeField] AttackType[] possibleActions;
+    [SerializeField] WeightedAction<EnemyAction>[] possibleActions;
     [Range(0f, 10f)]
     [SerializeField] float minActionCooldown = 1;
     [Range(0f, 10f)]
@@ -49,61 +47,37 @@ public class EnemyMeleeAttack : MeleeAttack
                 if (!enemyAnimationEvents.ActionAvailable) return false;
                 return timeSinceLastAction >= timeBeforeNextAction;
             });
-            DoAction(PickRandomAction());
+            DoAction(possibleActions.PickRandom());
             yield return new WaitUntil(() => enemyAnimationEvents.ActionAvailable);
         }
     }
-
-    private Action PickRandomAction()
-    {
-        float totalWeight = possibleActions.Sum(action => action.weight);
-        List<(float, Action)> chanceList = new();
-        float current = 0;
-        foreach (var action in possibleActions)
-        {
-            current += action.weight;
-            chanceList.Add((current, action.actionName));
-        }
-        float pickedNumber = UnityEngine.Random.Range(0, totalWeight);
-        return chanceList.Find(action => pickedNumber <= action.Item1).Item2;
-    }
-    private void DoAction(Action action)
+    private void DoAction(EnemyAction action)
     {
         switch(action)
         {
-            case Action.Attack1:
+            case EnemyAction.SliceOverHead:
                 Debug.Log("Attack1");
                 animator.SetTrigger("SliceOverHead");
+                enemyAnimationEvents.FreezeMovement();
                 enemyAnimationEvents.ChangeTurnSpeed(100);
                 enemyAnimationEvents.DisableActions();
                 break;
 
-            case Action.Attack2:
+            case EnemyAction.BackhandSlice:
                 animator.SetTrigger("BackhandSlice");
+                enemyAnimationEvents.FreezeMovement();
                 enemyAnimationEvents.DisableActions();
                 Debug.Log("Attack2");
                 break;
 
-            case Action.Attack3:
+            case EnemyAction.Attack3:
                 Debug.Log("Attack3");
                 break;
         }
     }
-    [Serializable]
-    struct AttackType
-    {
-        public AttackType(Action actionName, float weight = 1)
-        {
-            this.actionName = actionName;
-            this.weight = weight;
-        }
-        public Action actionName;
-        public float weight; 
-    }
 
     public void StartFlickerBodyCollider() => StartCoroutine(nameof(FlickerBodyCollider));
     public void StopFlickerBodyCollider() => StopCoroutine(nameof(FlickerBodyCollider));
-
 
     private IEnumerator FlickerBodyCollider()
     {

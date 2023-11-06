@@ -16,7 +16,7 @@ public class Patrol : MonoBehaviour
     [Serializable]
     public struct Task
     {
-        public Transform patrolPoint;
+        public PatrolPoint patrolPoint;
         public float waitTime;
     }
     private void Awake()
@@ -37,7 +37,7 @@ public class Patrol : MonoBehaviour
         while (true)
         {
             Task currentTask = tasks[i];
-            agent.SetDestination(currentTask.patrolPoint.position);
+            agent.SetDestination(currentTask.patrolPoint.transform.position);
             yield return null;
             yield return new WaitUntil(() => agent.remainingDistance < minRemainingDistance);
             agent.ResetPath();

@@ -30,6 +30,7 @@ public class Stagger : MonoBehaviour
         animationEvents.FreezeRotation();
         animationEvents.FreezeMovement();
         animationEvents.DisableActions();
+        animationEvents.DisableAllWeaponColliders();
         Vector3 playerPlanePos = new Vector3(animator.transform.position.x,0,animator.transform.position.z);
         Vector3 targetPlanePos = new Vector3(target.transform.position.x, 0, target.transform.position.z);
         Vector3 targetDir = animator.transform.InverseTransformDirection((targetPlanePos - playerPlanePos).normalized);
@@ -47,6 +48,7 @@ public class Stagger : MonoBehaviour
         animationEvents.FreezeRotation();
         animationEvents.FreezeMovement();
         animationEvents.DisableActions();
+        animationEvents.DisableAllWeaponColliders();
         if (animationEvents is PlayerAnimationEvents)
             (animationEvents as PlayerAnimationEvents).StopStaminaRegen();
         IsStaggered = true;

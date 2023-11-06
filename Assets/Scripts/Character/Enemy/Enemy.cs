@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using System.Linq;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Animator))]
@@ -14,6 +15,8 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
     [SerializeField] float baseTurnSpeed;
     [HideInInspector] public float turnSpeed;
     public bool rotationFrozen = false;
+    public bool movementFrozen = false;
+    public float BaseSpeed { get; protected set; }
 
 
     public Vector3 OriginPosition { get => origin.position; }
@@ -31,9 +34,9 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
         public Action Exit { get; init; }
     }
     public Transform Target { get; protected set; }
-    private Vector3 distanceFromPlayer;
-    public Vector3 DistanceFromPlayer => distanceFromPlayer;
-
+    private float distanceFromPlayer;
+    public float DistanceFromPlayer => distanceFromPlayer; 
+    public Vector3 DirectionToPlayer { get; private set; }
     ModeDef[] modeDefs;
     public ModeDef Mode { get; private set; }
     protected bool lockMode = false;
@@ -61,6 +64,7 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
         enemyAnimationEvents = GetComponent<EnemyAnimationEvents>();
         origin = transform;
         turnSpeed = baseTurnSpeed;
+        BaseSpeed = agent.speed;
     }
     protected virtual IEnumerator Start()
     {
@@ -69,9 +73,11 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
     }
     protected virtual void Update()
     {
-        distanceFromPlayer = transform.position - Target.position;
-        distanceFromPlayer.y = 0;
         Mode.Main();
+        Vector3 target = new Vector3(Target.position.x, 0, Target.position.z);
+        Vector3 current = new Vector3(transform.position.x, 0, transform.position.z);
+        DirectionToPlayer = current - target;
+        distanceFromPlayer = Vector3.Distance(target, current);
     }
 
     public void ChangeMode(ModeId modeId)
@@ -91,7 +97,7 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
     protected virtual void CloseMain()
     {
         if (rotationFrozen) return;
-        Quaternion towardsPlayer = Quaternion.LookRotation(-DistanceFromPlayer, Vector3.up);
+        Quaternion towardsPlayer = Quaternion.LookRotation(-DirectionToPlayer, Vector3.up);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, towardsPlayer, turnSpeed * Time.deltaTime);
     }
     protected virtual void IdleExit() => idleExitEvent.Invoke();
@@ -104,4 +110,5 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
         ChangeMode(ModeId.Idle);
     }
     public void RestoreTurnSpeed() => turnSpeed = baseTurnSpeed;
+    public void RestoreSpeed() => agent.speed = BaseSpeed;
 }
