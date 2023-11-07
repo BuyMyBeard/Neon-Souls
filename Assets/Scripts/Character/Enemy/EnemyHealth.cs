@@ -73,9 +73,5 @@ public class EnemyHealth : Health
         InflictDamage(damage);
         if (staggerable)
             stagger.BecomeStaggered(attackerPosition, 1);
-        if(enemy.Mode.Id == Enemy.ModeId.Idle)
-        {
-            enemy.ChangeMode(Enemy.ModeId.InRange);
-        }
     }
 }

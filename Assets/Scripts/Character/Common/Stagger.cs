@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Stagger : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class Stagger : MonoBehaviour
     AnimationEvents animationEvents;
     Health health;
     bool isStaggered = false;
+    public UnityEvent onStagger = new();
     public bool IsStaggered
     {
         get => isStaggered;
@@ -35,6 +37,7 @@ public class Stagger : MonoBehaviour
         Vector3 targetPlanePos = new Vector3(target.transform.position.x, 0, target.transform.position.z);
         Vector3 targetDir = animator.transform.InverseTransformDirection((targetPlanePos - playerPlanePos).normalized);
         IsStaggered = true;
+        onStagger.Invoke();
 
         animator.SetTrigger("Stagger");
         animator.SetFloat("StaggerX", targetDir.x);

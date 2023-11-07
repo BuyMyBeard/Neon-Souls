@@ -9,8 +9,6 @@ public class MeleeEnemy : Enemy
 
     enum CloseMovementType { StrafeLeft, StrafeRight, None }
     [SerializeField] WeightedAction<CloseMovementType>[] closeMovementChance;
-    public Vector3 Velocity { get; private set; }
-    Vector3 prevPosition;
     [SerializeField] float sprintingSpeed = 5;
     [SerializeField] float strafingSpeed = .7f;
     [SerializeField] float idealRange = 2;
@@ -31,14 +29,10 @@ public class MeleeEnemy : Enemy
     protected override void Update()
     {
         base.Update();
-        AnimateMovement();
-        Velocity = (transform.position - prevPosition) / Time.deltaTime;
-        prevPosition = transform.position;
     }
     protected override void Awake()
     {
         base.Awake();
-        prevPosition = transform.position;
     }
     protected override void IdleInit()
     {
@@ -133,21 +127,5 @@ public class MeleeEnemy : Enemy
         timeSinceLastMovementChange = 0;
         TimeBeforeNextMovementChange = Random.Range(movementChangeTimeMin, movementChangeTimeMax);
         currentMovement = closeMovementChance.PickRandom();
-    }
-
-    protected void AnimateMovement()
-    {
-        if (!enemyAnimationEvents.ActionAvailable)
-        {
-            animator.SetBool("IsMoving", false);
-            return;
-
-        }
-
-        animator.SetBool("IsMoving", Velocity.magnitude > 0);
-        Vector3 relativeVelocity = transform.InverseTransformDirection(Velocity);
-        Vector2 flatRelativeVelocity = new Vector2(relativeVelocity.x, relativeVelocity.z).normalized;
-        animator.SetFloat("MovementX", flatRelativeVelocity.x);
-        animator.SetFloat("MovementY", flatRelativeVelocity.y);
     }
 }

@@ -11,12 +11,9 @@ public class ShooterEnemy : Enemy
     [SerializeField] ObjectPool pool;
     // [SerializeField] Transform arm;
     [SerializeField] Transform gunMuzzle;
-    [SerializeField] float shootCooldown;
+    [SerializeField] float shootCooldown = 5;
     [SerializeField] float shootingAngleMin = 5f;
-
-    // Coroutine handling helpers
-    bool shouldEndShootCoroutine = false;
-    Coroutine shoot;
+    [SerializeField] float getAwayDistance = 5;
 
     protected override void Awake()
     {
@@ -28,19 +25,22 @@ public class ShooterEnemy : Enemy
     protected override void InRangeExit()
     {
         base.InRangeExit();
-        shouldEndShootCoroutine = true;
+        StopCoroutine(nameof(Aim));
     }
 
     protected override void InRangeInit()
     {
         base.InRangeInit();
-        StartCoroutine(StartShoot());
+        StartCoroutine(nameof(Aim));
     }
     protected override void InRangeMain()
     {
         base.InRangeMain();
-        Quaternion towardsPlayer = Quaternion.LookRotation(-DirectionToPlayer, Vector3.up);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, towardsPlayer, turnSpeed * Time.deltaTime);
+        if (!rotationFrozen)
+        {
+            Quaternion towardsPlayer = Quaternion.LookRotation(-DirectionToPlayer, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, towardsPlayer, turnSpeed * Time.deltaTime);
+        }
 
        // var armTowardsPlayer = Quaternion.LookRotation(Target.position - arm.position);
        // arm.rotation = Quaternion.RotateTowards(arm.rotation, armTowardsPlayer, turnSpeed * Time.deltaTime);
@@ -49,35 +49,21 @@ public class ShooterEnemy : Enemy
     protected override void CloseMain()
     {
         base.CloseMain();
+        if (!movementFrozen && enemyAnimationEvents.ActionAvailable)
+        {
+            agent.Move(-BaseSpeed * Time.deltaTime * transform.forward);
+            if (DistanceFromPlayer > getAwayDistance) ChangeMode(ModeId.InRange);
+        }
     }
-    IEnumerator StartShoot()
-    {
-        yield return new WaitUntil(() => shoot == null);
-        if (Mode.Id != ModeId.InRange) yield break;
-        shoot = StartCoroutine(ShootCoroutine());
-    }
-    IEnumerator ShootCoroutine()
+    
+    IEnumerator Aim()
     {
         while (true)
         {
-            if (shouldEndShootCoroutine)
-            {
-                shouldEndShootCoroutine = false;
-                shoot = null;
-                yield break;
-            }
-
-            float towardsPlayer;
-            float currentRotation;
-            yield return new WaitUntil(() => {
-                towardsPlayer = Quaternion.LookRotation(-DirectionToPlayer, Vector3.up).eulerAngles.y;
-                currentRotation = transform.rotation.eulerAngles.y;
-                if (towardsPlayer > 180f) towardsPlayer = 360f - towardsPlayer;
-                if (currentRotation > 180f) currentRotation = 360f - currentRotation;
-                //Debug.Log($"{towardsPlayer} - {currentRotation}");
-                return (towardsPlayer - currentRotation) < shootingAngleMin;
-            });
-            animator.SetTrigger("Shoot");
+            yield return new WaitUntil(() => enemyAnimationEvents.ActionAvailable);animator.SetTrigger("Shoot");
+            enemyAnimationEvents.DisableActions();
+            enemyAnimationEvents.FreezeMovement();
+            
             yield return new WaitForSeconds(shootCooldown);
         }
     }
