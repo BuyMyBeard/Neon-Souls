@@ -2,10 +2,25 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.Events;
+using System.Linq;
 
-public abstract class Enemy : MonoBehaviour,IXpGiver
+[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(Animator))]
+public abstract class Enemy : MonoBehaviour, IRechargeable
 {
+    public Quaternion OriginRot { get; private set; }
+    public Vector3 OriginPos { get; private set; }
+    protected EnemyAnimationEvents enemyAnimationEvents;
+    [SerializeField] float baseTurnSpeed;
     [SerializeField] int xpPrice = 5;
+    [HideInInspector] public float turnSpeed;
+    public bool rotationFrozen = false;
+    public bool movementFrozen = false;
+    public float BaseSpeed { get; protected set; }
+
+
     public enum ModeId
     {
         Idle,
@@ -19,15 +34,24 @@ public abstract class Enemy : MonoBehaviour,IXpGiver
         public Action Main { get; init; }
         public Action Exit { get; init; }
     }
-
-    [SerializeField] protected Transform target;
-    public Transform Target => target;
-    private Vector3 distanceFromPlayer;
-    public Vector3 DistanceFromPlayer => distanceFromPlayer;
-
+    public Transform Target { get; protected set; }
+    private float distanceFromPlayer;
+    public float DistanceFromPlayer => distanceFromPlayer; 
+    public Vector3 DirectionToPlayer { get; private set; }
     ModeDef[] modeDefs;
-    protected ModeDef Mode { get; private set; }
+    public ModeDef Mode { get; private set; }
     protected bool lockMode = false;
+    protected NavMeshAgent agent;
+    protected Animator animator;
+    public UnityEvent idleInitEvent = new();
+    public UnityEvent inRangeInitEvent = new();
+    public UnityEvent closeInitEvent = new();
+    public UnityEvent idleExitEvent = new();
+    public UnityEvent inRangeExitEvent = new();
+    public UnityEvent closeExitEvent = new();
+    public Vector3 Velocity { get; private set; }
+    protected Vector3 prevPosition;
+
     XpManager xpManager;
     protected virtual void Awake()
     {
@@ -38,36 +62,88 @@ public abstract class Enemy : MonoBehaviour,IXpGiver
             new ModeDef { Id = ModeId.Close, Init = CloseInit, Main = CloseMain, Exit = CloseExit },
         };
         Mode = modeDefs[(int)ModeId.Idle];
+        Target = GameObject.FindGameObjectWithTag("PlayerTarget").transform;
+        agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
+        enemyAnimationEvents = GetComponent<EnemyAnimationEvents>();
+        
+        turnSpeed = baseTurnSpeed;
+        BaseSpeed = agent.speed;
+        prevPosition = transform.position;
         Mode.Init();
         xpManager = FindObjectOfType<XpManager>();
+        OriginPos = transform.position;
+        OriginRot = transform.rotation;
     }
-    void Update()
+    protected virtual IEnumerator Start()
     {
-        distanceFromPlayer = transform.position - target.position;
-        distanceFromPlayer.y = 0;
+        yield return null;
+        Mode.Init();
+    }
+    protected virtual void Update()
+    {
         Mode.Main();
+        Vector3 target = new Vector3(Target.position.x, 0, Target.position.z);
+        Vector3 current = new Vector3(transform.position.x, 0, transform.position.z);
+        DirectionToPlayer = current - target;
+        distanceFromPlayer = Vector3.Distance(target, current);
+        Velocity = (transform.position - prevPosition) / Time.deltaTime;
+        prevPosition = transform.position;
+        AnimateMovement();
     }
 
     public void ChangeMode(ModeId modeId)
     {
         if (lockMode) return;
-        if (Mode.Id == modeId) return;
-        //Debug.Log($"Enemy.ChangeMode(): {GetInstanceID()} {Enum.GetName(typeof(ModeId), Mode.Id)} -> {Enum.GetName(typeof(ModeId), modeId)}");
+        // if (Mode.Id == modeId) return;
         Mode.Exit();
         Mode = modeDefs[(int)modeId];
         Mode.Init();
     }
-
-    protected virtual void IdleInit() { }
-    protected virtual void InRangeInit() { }
-    protected virtual void CloseInit() { }
+    protected virtual void IdleInit() => idleInitEvent.Invoke();
+    protected virtual void InRangeInit() => inRangeInitEvent.Invoke();
+    protected virtual void CloseInit() => closeInitEvent.Invoke();
     protected virtual void IdleMain() { }
     protected virtual void InRangeMain() { }
-    protected virtual void CloseMain() { }
-    protected virtual void IdleExit() { }
-    protected virtual void InRangeExit() { }
-    protected virtual void CloseExit() { }
+    protected virtual void CloseMain()
+    {
+        if (!rotationFrozen)
+        {
+            Quaternion towardsPlayer = Quaternion.LookRotation(-DirectionToPlayer, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, towardsPlayer, turnSpeed * Time.deltaTime);
+        }
+    }
+    protected virtual void IdleExit() => idleExitEvent.Invoke();
+    protected virtual void InRangeExit() => inRangeExitEvent.Invoke();
+    protected virtual void CloseExit() => closeExitEvent.Invoke();
 
+    public virtual void Recharge()
+    {
+        gameObject.SetActive(false);
+        transform.SetPositionAndRotation(OriginPos, OriginRot);
+        gameObject.SetActive(true);
+        animator.SetBool("IsMoving", false);
+        animator.SetBool("IsRunning", false);
+        animator.Play("Idle");
+        enemyAnimationEvents.ResetAll();
+        ChangeMode(ModeId.Idle);
+
+    }
+    public void RestoreTurnSpeed() => turnSpeed = baseTurnSpeed;
+    public void RestoreSpeed() => agent.speed = BaseSpeed;
+    protected void AnimateMovement()
+    {
+        if (!enemyAnimationEvents.ActionAvailable)
+        {
+            animator.SetBool("IsMoving", false);
+            return;
+        }
+        animator.SetBool("IsMoving", Velocity.magnitude > 0);
+        Vector3 relativeVelocity = transform.InverseTransformDirection(Velocity);
+        Vector2 flatRelativeVelocity = new Vector2(relativeVelocity.x, relativeVelocity.z).normalized;
+        animator.SetFloat("MovementX", flatRelativeVelocity.x);
+        animator.SetFloat("MovementY", flatRelativeVelocity.y);
+    }
     public void GiveXp()
     {
         xpManager.DistributeXp(xpPrice);

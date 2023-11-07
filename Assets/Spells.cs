@@ -24,7 +24,7 @@ public class Spells : MonoBehaviour,IStat
     Mana mana;
     int damageScalingBonus = 0;
 
-    public float Value => damageScalingBonus;
+    public float Value => fireballPrefab.GetComponent<Fireball>().BaseDamage;
 
     public int Upgrade => upgradeDmg;
 
