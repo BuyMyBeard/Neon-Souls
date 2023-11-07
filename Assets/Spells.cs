@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(LockOn))]
 [RequireComponent(typeof(Mana))]
 [RequireComponent(typeof(Stamina))]
-public class Spells : MonoBehaviour
+public class Spells : MonoBehaviour,IStat
 {
     [SerializeField] GameObject fireballPrefab;
     [SerializeField] Transform attachPoint;
@@ -15,13 +15,18 @@ public class Spells : MonoBehaviour
     [SerializeField] float lobeFactor = 0f;
     [SerializeField] int staminaCost;
     [SerializeField] int manaCost;
+    [SerializeField] int upgradeDmg;
     Animator animator;
     Fireball fireball;
     PlayerAnimationEvents animationEvents;
     LockOn lockOn;
     Stamina stamina;
     Mana mana;
-    public int damageScalingBonus; 
+    int damageScalingBonus = 0;
+
+    public float Value => damageScalingBonus;
+
+    public int Upgrade => upgradeDmg;
 
     private void Awake()
     {
@@ -66,5 +71,10 @@ public class Spells : MonoBehaviour
         rb.AddForce(throwDirection * throwSpeed + throwSpeed * lobeFactor * Vector3.up, ForceMode.VelocityChange);
         fireball.GetComponent<Collider>().enabled = true;
         fireball.thrown = true;
+    }
+
+    public void UpgradeStat(int nbAmelioration)
+    {
+        damageScalingBonus += upgradeDmg * nbAmelioration;
     }
 }

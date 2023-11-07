@@ -92,6 +92,10 @@ public abstract class Health : MonoBehaviour, IRechargeable
     /// <summary>
     /// Rounds current health to the nearest integer. Used to avoid float imprecision caused by healing over time
     /// </summary>
+    public void UpgradeStat(int nbAmelioration)
+    {
+        maxHealth += nbAmelioration * Upgrade;
+    }
     public void Round() => CurrentHealth = Mathf.RoundToInt(CurrentHealth);
 
     public virtual void Recharge()

@@ -1236,6 +1236,7 @@ RectTransform:
   m_Children:
   - {fileID: 5394920055630183729}
   - {fileID: 7413982387252008711}
+  - {fileID: 5329381871153126870}
   m_Father: {fileID: 8101953007460202681}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1668,7 +1669,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -1756,8 +1757,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Vous \xCAtes Mort"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 76c22e0f7eda77544a2cdd9828165880, type: 2}
-  m_sharedMaterial: {fileID: 3463208601368968854, guid: 76c22e0f7eda77544a2cdd9828165880, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2011,7 +2012,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3516055474413513379, guid: 06d8ebb3263957845a4ded3bd398ca91, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 12.299988
+      value: 12.300049
       objectReference: {fileID: 0}
     - target: {fileID: 3516055474413513379, guid: 06d8ebb3263957845a4ded3bd398ca91, type: 3}
       propertyPath: m_AnchoredPosition.y

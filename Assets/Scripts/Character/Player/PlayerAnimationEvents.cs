@@ -5,6 +5,7 @@ public class PlayerAnimationEvents : AnimationEvents
     Potions potions;
     Spells spells;
     Stamina stamina;
+    Interact interact;
 
     protected override void Awake()
     {
@@ -14,6 +15,7 @@ public class PlayerAnimationEvents : AnimationEvents
         potions = GetComponentInParent<Potions>();
         spells = GetComponentInParent<Spells>();
         stamina = GetComponentInParent<Stamina>();
+        interact = GetComponentInParent<Interact>();
     }
     
     public override void EnableActions()
@@ -44,6 +46,7 @@ public class PlayerAnimationEvents : AnimationEvents
         HidePotion();
         RestoreMovement();
     }
+    public void DoInteraction() => interact.DoInteraction();
 
     public override void ChangeTurnSpeed(float turnSpeed) => playerMovement.turnSpeed = turnSpeed;
     public override void RestoreTurnSpeed() => playerMovement.RestoreTurnSpeed();

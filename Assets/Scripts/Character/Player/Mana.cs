@@ -1,13 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering;
 
-public class Mana : MonoBehaviour, IRechargeable
+public class Mana : MonoBehaviour, IRechargeable,IStat
 {
     DisplayBar playerManabar;
     [SerializeField] int maxMana = 100;
     [SerializeField] float currentMana;
+    [SerializeField] int upgradeMana;
     public bool IsExhausted { get => currentMana <= 0; }
+
+    public float Value => maxMana;
+
+    public int Upgrade => upgradeMana;
 
     private void Awake()
     {
@@ -40,5 +46,10 @@ public class Mana : MonoBehaviour, IRechargeable
     {
         ResetMana();
         playerManabar.Add(maxMana, maxMana);
+    }
+
+    public void UpgradeStat(int nbAmelioration)
+    {
+        maxMana += upgradeMana * nbAmelioration;
     }
 }

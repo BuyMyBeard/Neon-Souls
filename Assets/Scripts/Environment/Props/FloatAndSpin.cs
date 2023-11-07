@@ -16,7 +16,7 @@ public class FloatAndSpin : MonoBehaviour
     }
     void Update()
     {
-        transform.Rotate(0, spinSpeed, 0);
-        transform.position = new Vector3(transform.position.x, initialY + verticalShift + Mathf.Sin(Time.time * frequency) * amplitude, transform.position.z);
+        transform.Rotate(0, spinSpeed * Time.unscaledDeltaTime, 0);
+        transform.position = new Vector3(transform.position.x, initialY + verticalShift + Mathf.Sin(Time.unscaledTime * frequency) * amplitude, transform.position.z);
     }
 }
