@@ -61,7 +61,7 @@ public class EnemyHealth : Health
     {
         Debug.Log("Counter decreased");
         healthBarDisplayCounter--;
-        if (healthBarDisplayCounter <= 0)
+        if (healthBarDisplayCounter <= 0 && displayHealthbar != null)
         {
             displayHealthbar.Hide();
             GameManager.enemyHealthbarsPool.ReturnObject(displayHealthbar.gameObject);

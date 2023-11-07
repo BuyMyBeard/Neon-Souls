@@ -48,11 +48,19 @@ public class LockOn : MonoBehaviour
     {
         if (IsLocked)
         {
-            RectTransform parent = (enemyHealth.displayHealthbar as EnemyHealthbar).rt;
-            var vp2 = mainCam.WorldToViewportPoint(TargetEnemy.position);
-            var sp2 = canvas.worldCamera.ViewportToScreenPoint(vp2);
-            RectTransformUtility.ScreenPointToWorldPointInRectangle(parent, sp2, canvas.worldCamera, out Vector3 worldPoint2);
-            indicator.position = worldPoint2;
+            if(enemyHealth.displayHealthbar != null)
+            {
+                RectTransform parent = (enemyHealth.displayHealthbar as EnemyHealthbar).rt;
+                var vp2 = mainCam.WorldToViewportPoint(TargetEnemy.position);
+                var sp2 = canvas.worldCamera.ViewportToScreenPoint(vp2);
+                RectTransformUtility.ScreenPointToWorldPointInRectangle(parent, sp2, canvas.worldCamera, out Vector3 worldPoint2);
+                indicator.position = worldPoint2;
+            }
+            else
+            {
+                enemyHealth.ShowHealthbar();
+                indicator.gameObject.SetActive(true);
+            }
         }
     }
     IEnumerator SwitchTargetCoroutine()
@@ -67,10 +75,10 @@ public class LockOn : MonoBehaviour
             {
                 yield return new WaitUntil(() => IsLocked && Mathf.Abs(playerController.Look.x) > 0.5f || playerController.KeyboardAndMouseActive);
             }
-            bool enemyAvailable;
+            bool enemyAvailable = false;
             if (playerController.Look.x > 0)
                 enemyAvailable = SwitchLockedEnemy(Directions.Left);
-            else
+            else if (playerController.Look.x < 0)
                 enemyAvailable = SwitchLockedEnemy(Directions.Right);
             if (!enemyAvailable)
                 continue;
@@ -207,6 +215,7 @@ public class LockOn : MonoBehaviour
     {
         if (enemiesInSight.Count > 0 && TargetEnemy != null)
         {
+            indicator.gameObject.SetActive(false);
             enemyHealth.HideHealthbar();
             List<Transform> enemies = enemiesInSight.OrderBy((e) => mainCam.WorldToViewportPoint(e.position).x).ToList();
 
