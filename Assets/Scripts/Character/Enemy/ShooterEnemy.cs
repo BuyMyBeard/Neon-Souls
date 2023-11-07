@@ -12,7 +12,6 @@ public class ShooterEnemy : Enemy
     // [SerializeField] Transform arm;
     [SerializeField] Transform gunMuzzle;
     [SerializeField] float shootCooldown = 5;
-    [SerializeField] float shootingAngleMin = 5f;
     [SerializeField] float getAwayDistance = 5;
 
     protected override void Awake()

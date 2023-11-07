@@ -13,20 +13,18 @@ public class AttackUp : Powerup
     protected override void Awake()
     {
         base.Awake();
-        meleeAttack = player.GetComponentInParent<MeleeAttack>();
-        spells = player.GetComponentInParent<Spells>();
+        // meleeAttack = player.GetComponentInParent<MeleeAttack>();
+        // spells = player.GetComponentInParent<Spells>();
     }
     public override void Apply()
     {
-        
-
-        meleeAttack.damageBonus += meleeBonus;
-        spells.damageScalingBonus += spellsBonus;
+        // meleeAttack.damageBonus += meleeBonus;
+        // spells.damageScalingBonus += spellsBonus;
     }
 
     public override void Revert()
     {
-        meleeAttack.damageBonus -= meleeBonus;
-        spells.damageScalingBonus -= spellsBonus;
+        // meleeAttack.damageBonus -= meleeBonus;
+        // spells.damageScalingBonus -= spellsBonus;
     }
 }

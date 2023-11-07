@@ -7,5 +7,5 @@ public interface IStat
     GameObject gameObject { get; }
     public float Value {get;}
     int Upgrade { get;}
-    public void UpgradeStat(int nbAmelioration);
+    public void UpgradeStat(int upgradeCount);
 }

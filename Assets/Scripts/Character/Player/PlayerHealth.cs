@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class PlayerHealth : Health
+public class PlayerHealth : Health, IStat
 {
     [SerializeField]int upgradeHp = 10;
     public int Upgrade { get => upgradeHp;}
@@ -44,9 +44,9 @@ public class PlayerHealth : Health
         else if (block.IsBlocking && !stamina.IsExhausted && IsAttackerInFront(attackerPosition)) 
         {
             Haptics.Impact();
-            int damageReduced = (int) (damage * block.DamageReduction);
+            int damageReduced = (int) (damage * block.DamageModifier);
             stamina.Remove(staminaBlockCost);
-            InflictDamage(damageModifier);
+            InflictDamage(damageReduced);
             stagger.BlockHit(1);
         }
         else
@@ -87,5 +87,9 @@ public class PlayerHealth : Health
         animator.Play("Idle");
         GetComponent<CameraMovement>().SyncFollowTarget();
         sword.gameObject.SetActive(true);
+    }
+    public void UpgradeStat(int upgrade)
+    {
+        maxHealth += upgrade * Upgrade;
     }
 }

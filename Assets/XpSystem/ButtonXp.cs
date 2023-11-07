@@ -40,7 +40,7 @@ public class ButtonXp : MonoBehaviour
     }
     void Plus()
     {
-        if (xpManager.AddNbChanges(typeStat.statVisé))
+        if (xpManager.AddNbChanges(typeStat.TargetedStat))
         {
             shownedValue += typeStat.Ameliorateur;
             textAfficher.text = (shownedValue).ToString();
@@ -50,7 +50,7 @@ public class ButtonXp : MonoBehaviour
     }
     void Minus()
     {
-        if (xpManager.substractNbChanges(typeStat.statVisé))
+        if (xpManager.substractNbChanges(typeStat.TargetedStat))
         {
             shownedValue -= typeStat.Ameliorateur;
             textAfficher.text = (shownedValue).ToString();

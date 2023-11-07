@@ -74,4 +74,9 @@ public class EnemyHealth : Health
         if (staggerable)
             stagger.BecomeStaggered(attackerPosition, 1);
     }
+    protected override void Die()
+    {
+        base.Die();
+        GetComponent<Enemy>().GiveXp();
+    }
 }

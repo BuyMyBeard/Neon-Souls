@@ -17,7 +17,7 @@ public class MeleeAttack : MonoBehaviour
     protected Animator animator;
     public bool isAttacking = false;
     public int baseDamage;
-    public int damageBonus = 0;
+    protected int bonusDamage = 0; 
 
     private void OnValidate()
     {
@@ -35,7 +35,7 @@ public class MeleeAttack : MonoBehaviour
     {
         MeleeWeapon mw = weaponColliders[attackDef.weapon];
         mw.ColliderEnabled = true;
-        mw.damage = Mathf.FloorToInt(baseDamage * attackDef.baseDamageMultiplier) + damageBonus;
+        mw.damage = Mathf.FloorToInt(baseDamage * attackDef.baseDamageMultiplier) + bonusDamage;
         mw.staminaBlockCost = attackDef.staminaCost;
     }
     /// <summary>
