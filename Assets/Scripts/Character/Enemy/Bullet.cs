@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour
 
     float originalYdir;
     float newYdir;
-    bool hasAlreadyHit = false;
+    [SerializeField] bool hasAlreadyHit = false;
 
     // Start is called before the first frame update
     void Awake()
@@ -36,7 +36,6 @@ public class Bullet : MonoBehaviour
     {
         pool = GetComponentInParent<ObjectPool>();
         movement = Vector3.forward;
-        transform.rotation = Quaternion.LookRotation(target.position - transform.position);
         originalYdir = transform.rotation.eulerAngles.y;
         if (originalYdir > 180f) originalYdir = 360f - originalYdir;
         p_homingCoroutine = StartCoroutine(HomingCoroutine());
@@ -74,8 +73,9 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (hasAlreadyHit) return;
-
-        playerHealth.InflictBlockableDamage(damage, staminaBlockCost, transform);
+        Health health = other.GetComponentInParent<Health>();
+        if (health != null)
+            health.InflictBlockableDamage(damage, staminaBlockCost, transform);
         Despawn();
         hasAlreadyHit = true;
     }
