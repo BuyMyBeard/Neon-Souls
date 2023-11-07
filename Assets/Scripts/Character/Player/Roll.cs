@@ -10,12 +10,14 @@ public class Roll : MonoBehaviour
     PlayerAnimationEvents animationEvents;
     Stamina stamina;
     IEnumerator bufferCoroutine;
+    Health health;
 
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
         animationEvents = GetComponentInChildren<PlayerAnimationEvents>();
         stamina = GetComponent<Stamina>();
+        health = GetComponent<Health>();
     }
     void OnDodge()
     {
@@ -32,7 +34,7 @@ public class Roll : MonoBehaviour
 
     void Dodge()
     {
-        if (!animationEvents.ActionAvailable || stamina.IsExhausted)
+        if (!animationEvents.ActionAvailable || stamina.IsExhausted || health.IsDead)
             return;
 
         animator.SetTrigger("Roll");

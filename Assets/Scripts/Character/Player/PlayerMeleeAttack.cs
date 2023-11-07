@@ -11,8 +11,7 @@ public class PlayerMeleeAttack : MeleeAttack ,IStat
     Stamina stamina;
     PlayerAnimationEvents animationEvents;
     [SerializeField] int dmgUpgrade = 0;
-    int modifAttack = 0;
-    public float Value => modifAttack;
+    public float Value => baseDamage;
     public int Upgrade => dmgUpgrade;
     protected override void Awake()
     {
@@ -20,9 +19,9 @@ public class PlayerMeleeAttack : MeleeAttack ,IStat
         stamina = GetComponent<Stamina>();
         animationEvents = GetComponentInChildren<PlayerAnimationEvents>();
     }
-    public override void InitWeaponCollider(AttackDef attackDef, int modifAtk = 0)
+    public override void InitWeaponCollider(AttackDef attackDef)
     {
-        base.InitWeaponCollider(attackDef,Upgrade);
+        base.InitWeaponCollider(attackDef);
         stamina.Remove(attackDef.staminaCost);
     }
     void OnLightAttack()
@@ -45,6 +44,6 @@ public class PlayerMeleeAttack : MeleeAttack ,IStat
     }
     public void UpgradeStat(int nbAmelioration)
     {
-        modifAttack += nbAmelioration * dmgUpgrade;
+        bonusDamage += nbAmelioration * dmgUpgrade;
     }
 }

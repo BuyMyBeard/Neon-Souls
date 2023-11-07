@@ -28,6 +28,9 @@ public class CameraMovement : MonoBehaviour
     CharacterController characterController;
     PlayerController playerController;
 
+    public float CamMinClamp => camMinClamp;
+    public float CameraMaxClamp => camMaxClamp;
+
     [HideInInspector]
     public bool frozen = false;
     float driftTime = 0;
