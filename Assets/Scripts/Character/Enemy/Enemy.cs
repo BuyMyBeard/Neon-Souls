@@ -48,6 +48,8 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
     public UnityEvent idleExitEvent = new();
     public UnityEvent inRangeExitEvent = new();
     public UnityEvent closeExitEvent = new();
+    public Vector3 Velocity { get; private set; }
+    protected Vector3 prevPosition;
 
     protected virtual void Awake()
     {
@@ -65,6 +67,7 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
         origin = transform;
         turnSpeed = baseTurnSpeed;
         BaseSpeed = agent.speed;
+        prevPosition = transform.position;
     }
     protected virtual IEnumerator Start()
     {
@@ -78,6 +81,9 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
         Vector3 current = new Vector3(transform.position.x, 0, transform.position.z);
         DirectionToPlayer = current - target;
         distanceFromPlayer = Vector3.Distance(target, current);
+        Velocity = (transform.position - prevPosition) / Time.deltaTime;
+        prevPosition = transform.position;
+        AnimateMovement();
     }
 
     public void ChangeMode(ModeId modeId)
@@ -87,7 +93,6 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
         Mode.Exit();
         Mode = modeDefs[(int)modeId];
         Mode.Init();
-        Debug.Log(Mode.Id);
     }
     protected virtual void IdleInit() => idleInitEvent.Invoke();
     protected virtual void InRangeInit() => inRangeInitEvent.Invoke();
@@ -96,9 +101,11 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
     protected virtual void InRangeMain() { }
     protected virtual void CloseMain()
     {
-        if (rotationFrozen) return;
-        Quaternion towardsPlayer = Quaternion.LookRotation(-DirectionToPlayer, Vector3.up);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, towardsPlayer, turnSpeed * Time.deltaTime);
+        if (!rotationFrozen)
+        {
+            Quaternion towardsPlayer = Quaternion.LookRotation(-DirectionToPlayer, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, towardsPlayer, turnSpeed * Time.deltaTime);
+        }
     }
     protected virtual void IdleExit() => idleExitEvent.Invoke();
     protected virtual void InRangeExit() => inRangeExitEvent.Invoke();
@@ -111,4 +118,17 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
     }
     public void RestoreTurnSpeed() => turnSpeed = baseTurnSpeed;
     public void RestoreSpeed() => agent.speed = BaseSpeed;
+    protected void AnimateMovement()
+    {
+        if (!enemyAnimationEvents.ActionAvailable)
+        {
+            animator.SetBool("IsMoving", false);
+            return;
+        }
+        animator.SetBool("IsMoving", Velocity.magnitude > 0);
+        Vector3 relativeVelocity = transform.InverseTransformDirection(Velocity);
+        Vector2 flatRelativeVelocity = new Vector2(relativeVelocity.x, relativeVelocity.z).normalized;
+        animator.SetFloat("MovementX", flatRelativeVelocity.x);
+        animator.SetFloat("MovementY", flatRelativeVelocity.y);
+    }
 }

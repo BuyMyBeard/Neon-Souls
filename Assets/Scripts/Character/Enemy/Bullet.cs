@@ -36,7 +36,6 @@ public class Bullet : MonoBehaviour
     {
         pool = GetComponentInParent<ObjectPool>();
         movement = Vector3.forward;
-        transform.rotation = Quaternion.LookRotation(target.position - transform.position);
         originalYdir = transform.rotation.eulerAngles.y;
         if (originalYdir > 180f) originalYdir = 360f - originalYdir;
         p_homingCoroutine = StartCoroutine(HomingCoroutine());

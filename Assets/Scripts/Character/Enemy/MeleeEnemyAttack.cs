@@ -4,15 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+public enum EnemyAction { None, SliceOverHead, BackhandSlice, SpinAttack, MaleniaAttack, Block, RollAttack, GunAttack, Shoot };
 public class EnemyMeleeAttack : MeleeAttack
 {
-    enum EnemyAction { SliceOverHead, BackhandSlice, SpinAttack, MaleniaAttack, Block };
     float timeSinceLastAction = 0;
     EnemyAnimationEvents enemyAnimationEvents;
     Enemy enemy;
     [SerializeField] AttackDef fullBody;
 
     [SerializeField] WeightedAction<EnemyAction>[] possibleActions;
+    [SerializeField] WeightedAction<EnemyAction>[] initiateActions;
     [Range(0f, 10f)]
     [SerializeField] float minActionCooldown = 1;
     [Range(0f, 10f)]
@@ -38,6 +39,8 @@ public class EnemyMeleeAttack : MeleeAttack
     private void StopLookForAttack() => StopCoroutine(nameof(LookForAttack));
     IEnumerator LookForAttack()
     {
+        DoAction(initiateActions.PickRandom());
+        yield return new WaitUntil(() => enemyAnimationEvents.ActionAvailable);
         while (true)
         {
             timeSinceLastAction = 0;
@@ -81,6 +84,17 @@ public class EnemyMeleeAttack : MeleeAttack
                 enemyAnimationEvents.DisableActions();
                 break;
 
+            case EnemyAction.GunAttack:
+                animator.SetTrigger(action.ToString());
+                enemyAnimationEvents.FreezeMovement();
+                enemyAnimationEvents.DisableActions();
+                break;
+
+            case EnemyAction.Shoot:
+                animator.SetTrigger(action.ToString());
+                enemyAnimationEvents.DisableActions();
+                enemyAnimationEvents.FreezeMovement();
+                break;
             default:
                 break;
         }
