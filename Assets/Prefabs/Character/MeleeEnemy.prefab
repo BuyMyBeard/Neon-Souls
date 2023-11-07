@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 8297732265007001358}
   - component: {fileID: 1986165939169450108}
   - component: {fileID: 5584310047577292952}
-  m_Layer: 13
+  m_Layer: 15
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 5306534281603561145}
   - component: {fileID: 1130700290111092711}
   - component: {fileID: 4472012168669524569}
-  m_Layer: 13
+  m_Layer: 15
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -324,7 +324,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7133623365943768532}
-  m_Enabled: 0
+  m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
@@ -369,3 +369,6 @@ MonoBehaviour:
   maxHealth: 100
   healthbarTag: EnemyHealthbar
   invincible: 0
+  OnHit:
+    m_PersistentCalls:
+      m_Calls: []

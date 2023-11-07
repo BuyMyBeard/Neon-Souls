@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float runThreshold = .7f;
     [Range(0, 1)]
     [SerializeField] float deadZone = .1f;
-    [SerializeField] float turnSpeed = 100;
+    [SerializeField] float baseTurnSpeed = 100;
     [Range(0, 50)]
     [SerializeField] float acceleration = 5;
     [Range(0,50)]
@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     float targetSpeed = 0;
     bool wasSprinting = false;
     bool isDecelerating = false;
+    [HideInInspector] public float turnSpeed;
 
     public bool IsSprinting { get; private set; } = false;
     Vector2 previousMovement = Vector2.zero;
@@ -64,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         if (animator == null)
             throw new MissingComponentException("Animator missing on player");
+        turnSpeed = baseTurnSpeed;
     }
 
     void Update()
@@ -183,4 +185,6 @@ public class PlayerMovement : MonoBehaviour
         currentSpeed = targetSpeed;
         isDecelerating = false;
     }
+
+    public void RestoreTurnSpeed() => turnSpeed = baseTurnSpeed;
 }

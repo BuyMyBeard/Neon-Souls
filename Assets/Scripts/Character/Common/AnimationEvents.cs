@@ -7,7 +7,8 @@ public abstract class AnimationEvents : MonoBehaviour
     protected MeleeAttack attack;
     protected FallApart fallApart;
 
-    public bool ActionAvailable { get; protected set; } = true;
+    protected bool actionAvailable = true;
+    public bool ActionAvailable { get => actionAvailable && !health.IsDead; set => actionAvailable = value; }
     protected virtual void Awake()
     {
         health = GetComponentInParent<Health>();
@@ -26,7 +27,7 @@ public abstract class AnimationEvents : MonoBehaviour
         attack.InitWeaponCollider(attackDef);
     }
     public void DisableWeaponCollider(AttackDef attackDef) => attack.DisableWeaponCollider(attackDef);
-    public void DisableAllWeaponColliders() => attack.DisableAllWeaponColliders();
+    public virtual void DisableAllWeaponColliders() => attack.DisableAllWeaponColliders();
     public void EndStagger() => stagger.IsStaggered = false;
     public virtual void ResetAll()
     {
@@ -35,6 +36,12 @@ public abstract class AnimationEvents : MonoBehaviour
         UnFreezeRotation();
         DisableAllWeaponColliders();
         EndStagger();
+        RestoreTurnSpeed();
+        Debug.Log("Resetted all");
     }
-    public virtual void FallApart() => fallApart.Activate();
+    public virtual void FallApart() => fallApart.Decompose();
+    public virtual void FreezeMovement() { }
+    public virtual void UnFreezeMovement() { }
+    public abstract void ChangeTurnSpeed(float turnSpeed);
+    public abstract void RestoreTurnSpeed();
 }
