@@ -13,9 +13,9 @@ class RadiusPlayerDetector : MonoBehaviour, IPlayerDetector
     }
     private void Update()
     {
-        if (enemy.DistanceFromPlayer.magnitude > noticeThreshold)
+        if (enemy.DistanceFromPlayer > noticeThreshold)
             enemy.ChangeMode(Enemy.ModeId.Idle);
-        else if (enemy.DistanceFromPlayer.magnitude > moveTowardsThreshold)
+        else if (enemy.DistanceFromPlayer > moveTowardsThreshold)
             enemy.ChangeMode(Enemy.ModeId.InRange);
         else
             enemy.ChangeMode(Enemy.ModeId.Close);

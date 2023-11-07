@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class EnemySpawner : Spawner
 {
+    [SerializeField] EnemyHealthbar healthbar;
     public override void Recharge()
     {
         GameObject enemy = Instantiate(entity);
-        enemy.transform.position = transform.position;
-        enemy.transform.rotation = transform.rotation;
+        enemy.transform.SetPositionAndRotation(transform.position, transform.rotation);
     }
 }

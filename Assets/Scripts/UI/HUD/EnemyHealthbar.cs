@@ -6,49 +6,59 @@ using UnityEngine.UI;
 
 public class EnemyHealthbar : DisplayBar
 {
-    public Health trackedEnemy;
+    private Transform trackedEnemy;
+    public Transform TrackedEnemy
+    {
+        get => trackedEnemy;
+        set
+        {
+            trackedEnemy = value;
+            enemyHealth = value.GetComponentInParent<EnemyHealth>();
+        }
+    }
+    EnemyHealth enemyHealth;
     [SerializeField] Vector3 offset;
-    [SerializeField] RectTransform indicator;
     Camera cam;
     Canvas canvas;
+    public RectTransform rt;
 
     protected override void Awake()
     {
         base.Awake();
         cam = Camera.main;
         canvas = GetComponentInParent<Canvas>();
-        damageValue = GetComponentInChildren<TextMeshProUGUI>(); 
+        damageValue = GetComponentInChildren<TextMeshProUGUI>();
+        rt = GetComponent<RectTransform>();
+        Hide();
     }
     private void Start()
     {
-        Hide();
     }
 
     // Followed this implementation: https://gist.github.com/snlehton/27d2aa9591588fdacf75c8ab65bfb5f4
     // LateUpdate to track ennemies after they moved in Update
     private void LateUpdate()
     {
-        if (hidden) return;
-        var rt = GetComponent<RectTransform>();
+        if (Hidden) return;
         RectTransform parent = (RectTransform)rt.parent;
-        var vp = cam.WorldToViewportPoint(trackedEnemy.transform.position + offset);
-        var vp2 = cam.WorldToViewportPoint(trackedEnemy.transform.position);
+        
+        var vp = cam.WorldToViewportPoint(TrackedEnemy.position + offset);
+        if (vp.z < 0) Hide();
+        else Show();
         var sp = canvas.worldCamera.ViewportToScreenPoint(vp);
-        var sp2 = canvas.worldCamera.ViewportToScreenPoint(vp2);
         RectTransformUtility.ScreenPointToWorldPointInRectangle(parent, sp, canvas.worldCamera, out Vector3 worldPoint);
-        RectTransformUtility.ScreenPointToWorldPointInRectangle(parent, sp2, canvas.worldCamera, out Vector3 worldPoint2);
         rt.position = worldPoint;
-        indicator.position = worldPoint2;
     }
 
     public override void Hide()
     {
+        if (Hidden) return;
         base.Hide();
-        indicator.gameObject.SetActive(false);
     }
     public override void Show()
     {
+        if (!Hidden) return;
+        Set(enemyHealth.CurrentHealth, enemyHealth.MaxHealth);
         base.Show();
-        indicator.gameObject.SetActive(true);
     }
 }

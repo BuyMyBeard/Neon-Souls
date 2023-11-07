@@ -1,24 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class PlayerHealth : Health, IRechargeable
+public class PlayerHealth : Health, IStat
 {
+    [SerializeField]int upgradeHp = 10;
+    public int Upgrade { get => upgradeHp;}
+    public float Value => MaxHealth;
     Stamina stamina;
     Stagger stagger;
     Block block;
+    public bool isAutoParryOn = false;
+    GameManager gameManager;
+    PlayerAnimationEvents playerAnimationEvents;
+    MeleeWeapon sword;
     private new void Awake()
     {
         base.Awake();
+        displayHealthbar = GameObject.FindGameObjectWithTag("PlayerHealthbar").GetComponent<DisplayBar>();
         stamina = GetComponent<Stamina>();
         stagger = GetComponent<Stagger>();
         block = GetComponent<Block>();
+        gameManager = FindObjectOfType<GameManager>();
+        playerAnimationEvents = GetComponentInChildren<PlayerAnimationEvents>();
+        sword = GetComponentInChildren<MeleeWeapon>();
     }
-    public void InflictUnblockableDamage(int damage) => InflictDamage(damage);
-    public void InflictBlockableDamage(int damage, int staminaBlockCost, Transform attackerPosition)
+    public override void HandleHealthbar(int damage)
+    {
+        displayHealthbar.Remove(damage, maxHealth, true);//TODO: change to false.
+    }
+    public override void InflictBlockableDamage(int damage, int staminaBlockCost, Transform attackerPosition)
     {
         if (invincible) return;
-        if (block.IsParrying && !stamina.IsExhausted && IsAttackerInFront(attackerPosition))
+        if ((block.IsParrying || block.IsBlocking && isAutoParryOn) && !stamina.IsExhausted && IsAttackerInFront(attackerPosition))
         {
             Haptics.ImpactLight();
             stamina.Remove(staminaBlockCost);
@@ -28,7 +44,7 @@ public class PlayerHealth : Health, IRechargeable
         else if (block.IsBlocking && !stamina.IsExhausted && IsAttackerInFront(attackerPosition)) 
         {
             Haptics.Impact();
-            int damageReduced = (int) (damage * block.DamageReduction);
+            int damageReduced = (int) (damage * block.DamageModifier);
             stamina.Remove(staminaBlockCost);
             InflictDamage(damageReduced);
             stagger.BlockHit(1);
@@ -53,19 +69,27 @@ public class PlayerHealth : Health, IRechargeable
         }
         return false;
     }
-    public virtual void Recharge()
+    [ContextMenu("Die")]
+    protected override void Die()
     {
-        ResetHealth();
+        base.Die();
+        gameManager.PlayerDie();
+    }
+    public override void Recharge()
+    {
+        base.Recharge();
         displayHealthbar.Add(maxHealth, maxHealth);
-        if (CompareTag("Player"))
-        {
-            animationEvents.HidePotion();
-            animationEvents.EnableActions();
-            animationEvents.UnFreezeMovement();
-            animationEvents.UnFreezeRotation();
-            animationEvents.StopIFrame();
-            animator.SetTrigger("Reset");
-            GetComponent<CameraMovement>().SyncFollowTarget();
-        }
+        playerAnimationEvents.HidePotion();
+        playerAnimationEvents.EnableActions();
+        playerAnimationEvents.UnFreezeMovement();
+        playerAnimationEvents.UnFreezeRotation();
+        playerAnimationEvents.StopIFrame();
+        animator.Play("Idle");
+        GetComponent<CameraMovement>().SyncFollowTarget();
+        sword.gameObject.SetActive(true);
+    }
+    public void UpgradeStat(int upgrade)
+    {
+        maxHealth += upgrade * Upgrade;
     }
 }

@@ -5,7 +5,6 @@ public class PlayerAnimationEvents : AnimationEvents
     Potions potions;
     Spells spells;
     Stamina stamina;
-    PlayerDeath playerDeath;
     Interact interact;
 
     protected override void Awake()
@@ -16,7 +15,6 @@ public class PlayerAnimationEvents : AnimationEvents
         potions = GetComponentInParent<Potions>();
         spells = GetComponentInParent<Spells>();
         stamina = GetComponentInParent<Stamina>();
-        playerDeath = GetComponentInParent<PlayerDeath>();
         interact = GetComponentInParent<Interact>();
     }
     
@@ -25,8 +23,8 @@ public class PlayerAnimationEvents : AnimationEvents
         base.EnableActions();
         stamina.StartRegen();
     }
-    public void FreezeMovement() => playerMovement.movementFrozen = true;
-    public void UnFreezeMovement() => playerMovement.movementFrozen = false;
+    public override void FreezeMovement() => playerMovement.movementFrozen = true;
+    public override void UnFreezeMovement() => playerMovement.movementFrozen = false;
     public void FreezeCamera() => cameraMovement.enabled = false;
     public void UnFreezeCamera() => cameraMovement.enabled = true;
     public override void FreezeRotation() => playerMovement.rotationFrozen = true;
@@ -48,7 +46,8 @@ public class PlayerAnimationEvents : AnimationEvents
         HidePotion();
         RestoreMovement();
     }
-    public override void FallApart() => playerDeath.Decompose();
     public void DoInteraction() => interact.DoInteraction();
 
+    public override void ChangeTurnSpeed(float turnSpeed) => playerMovement.turnSpeed = turnSpeed;
+    public override void RestoreTurnSpeed() => playerMovement.RestoreTurnSpeed();
 }
