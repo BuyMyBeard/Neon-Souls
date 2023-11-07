@@ -211,7 +211,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f1a8833f20644bc48a8f8dec102dc569, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.036
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f1a8833f20644bc48a8f8dec102dc569, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1225,9 +1225,9 @@ MonoBehaviour:
   poolTag: BulletPool
   pool: {fileID: 0}
   gunMuzzle: {fileID: 5973898160111761695}
-  shootCooldown: 3
+  shootCooldown: 5
   shootingAngleMin: 5
-  getAwayDistance: 5
+  getAwayDistance: 6
 --- !u!114 &8130855382866642300
 MonoBehaviour:
   m_ObjectHideFlags: 0

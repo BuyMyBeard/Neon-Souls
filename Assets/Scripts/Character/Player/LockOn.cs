@@ -22,12 +22,15 @@ public class LockOn : MonoBehaviour
     bool isSmoothLooking = false;
     PlayerController playerController;
     Camera mainCam;
+    CameraMovement cameraMovement;
     Coroutine CamLockOnTargetCoroutine;
     public bool IsLocked { get; private set; } = false;
     public Transform TargetEnemy { get; private set; } = null;
     public EnemyHealth enemyHealth { get; private set; } = null;
     Canvas canvas;
     [SerializeField] RectTransform indicator;
+    [SerializeField] float minTopDownDistance = .2f;
+
 
     public void Awake()
     {
@@ -38,6 +41,7 @@ public class LockOn : MonoBehaviour
         mainCam = Camera.main;
         indicator = GameObject.FindGameObjectWithTag("Indicator").GetComponent<RectTransform>();
         indicator.gameObject.SetActive(false);
+        cameraMovement = GetComponent<CameraMovement>();
     }
     public void Start()
     {
@@ -108,14 +112,16 @@ public class LockOn : MonoBehaviour
     {
         while (IsLocked)
         {
-            if (enemyHealth != null && enemyHealth.IsDead)
+            float topDownDistance = Vector2.Distance(new Vector2(player.position.x, player.position.z), new Vector2(targetEnemy.position.x, targetEnemy.position.z));
+            // float heightDifference = Mathf.Abs(player.position.y - targetEnemy.position.y);
+            if (enemyHealth != null && enemyHealth.IsDead || topDownDistance < minTopDownDistance)
             {
                 IsLocked = false;
+                indicator.gameObject.SetActive(false);
                 yield return new WaitForSeconds(healthbarLingerTimeOnEnemyDeath);
                 if (!IsLocked)
                 {
                     enemyHealth.HideHealthbar();
-                    indicator.gameObject.SetActive(false);
                 }
                 yield break;
             }
@@ -124,7 +130,12 @@ public class LockOn : MonoBehaviour
                 yield return null;
                 continue;
             }
-            camFollowTarget.LookAt(new Vector3(targetEnemy.position.x, camFollowTarget.position.y - yAxisLockOffset, targetEnemy.position.z));
+            camFollowTarget.LookAt(new Vector3(targetEnemy.position.x, targetEnemy.position.y + yAxisLockOffset, targetEnemy.position.z));
+            Vector3 euler = camFollowTarget.eulerAngles;
+            euler.z = 0;
+            euler.x = euler.x > 180 ? euler.x - 360 : euler.x;
+            euler.x = Mathf.Clamp(euler.x, cameraMovement.CamMinClamp, cameraMovement.CameraMaxClamp);
+            camFollowTarget.transform.localEulerAngles = new Vector3(euler.x, euler.y, 0);
 
             if (Vector3.Distance(camFollowTarget.position, targetEnemy.position) > viewRadius * maxLockOnDistance)
             {
@@ -159,7 +170,8 @@ public class LockOn : MonoBehaviour
 
             Vector3 enemyPos = mainCam.WorldToViewportPoint(enemy.position);
 
-            if (EnemyInCamAngle(enemyPos) && EnemyInRangeAndSight(directionToEnemy, distanceToTarget))
+            float topDownDistance = Vector2.Distance(new Vector2(player.position.x, player.position.z), new Vector2(enemy.position.x, enemy.position.z));
+            if (EnemyInCamAngle(enemyPos) && EnemyInRangeAndSight(directionToEnemy, distanceToTarget) && topDownDistance > minTopDownDistance)
             {
                 enemiesInSight.Add(enemy);
                 //Debug.DrawRay(Camera.main.transform.position, directionToEnemy * distanceToTarget, Color.magenta, 1);
@@ -167,7 +179,7 @@ public class LockOn : MonoBehaviour
         }
     }
     // Use Camera.WorldToViewportPoint() for enemyPos
-    bool EnemyInCamAngle(Vector3 enemyPos) => enemyPos.x > 0 && enemyPos.x < 1;
+    bool EnemyInCamAngle(Vector3 enemyPos) => enemyPos.x > 0 && enemyPos.x < 1 && enemyPos.y > 0 && enemyPos.y < 1;
     bool EnemyInRangeAndSight(Vector3 directionToEnemy, float distanceToTarget) => !Physics.Raycast(Camera.main.transform.position, directionToEnemy, distanceToTarget, environmentMask);
     IEnumerator FindEnemiesCoroutine()
     {
@@ -186,6 +198,11 @@ public class LockOn : MonoBehaviour
         while (elapsedTime < LERPTIME)
         {
             camFollowTarget.rotation = Quaternion.Lerp(initialRotation, at, elapsedTime / LERPTIME);
+            Vector3 euler = camFollowTarget.eulerAngles;
+            euler.z = 0;
+            euler.x = euler.x > 180 ? euler.x - 360 : euler.x;
+            euler.x = Mathf.Clamp(euler.x, cameraMovement.CamMinClamp, cameraMovement.CameraMaxClamp);
+            camFollowTarget.transform.localEulerAngles = new Vector3(euler.x, euler.y, 0);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
