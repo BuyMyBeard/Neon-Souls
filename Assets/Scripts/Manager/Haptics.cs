@@ -16,6 +16,8 @@ public class Haptics : MonoBehaviour
     float currentLowFreqIntensity = 0;
     float currentHighFreqIntensity = 0;
 
+    bool GamepadConnected => Gamepad.all.Count > 0;
+
     static private Haptics Instance { get; set; }
     private void Awake()
     {
@@ -39,49 +41,52 @@ public class Haptics : MonoBehaviour
 
     private void Update()
     {
-        bool hasChanged = false;
-        while (lowFreqQueue.Count > 0)
+        if (GamepadConnected)
         {
-            if (lowFreqQueue[0].Item1 < Time.unscaledTime)
-                lowFreqQueue.RemoveAt(0);
-            else break;
-        }
-        while (highFreqQueue.Count > 0)
-        {
-            if (highFreqQueue[0].Item1 < Time.unscaledTime)
-                highFreqQueue.RemoveAt(0);
-            else break;
-        }
-        if (lowFreqQueue.Count > 0)
-        {
-            float highest = lowFreqQueue.Max(stamp => stamp.Item2);
-            if (highest < currentLowFreqIntensity)
+            bool hasChanged = false;
+            while (lowFreqQueue.Count > 0)
             {
-                currentLowFreqIntensity = highest;
+                if (lowFreqQueue[0].Item1 < Time.unscaledTime)
+                    lowFreqQueue.RemoveAt(0);
+                else break;
+            }
+            while (highFreqQueue.Count > 0)
+            {
+                if (highFreqQueue[0].Item1 < Time.unscaledTime)
+                    highFreqQueue.RemoveAt(0);
+                else break;
+            }
+            if (lowFreqQueue.Count > 0)
+            {
+                float highest = lowFreqQueue.Max(stamp => stamp.Item2);
+                if (highest < currentLowFreqIntensity)
+                {
+                    currentLowFreqIntensity = highest;
+                    hasChanged = true;
+                }
+            }
+            else if (currentLowFreqIntensity != 0)
+            {
+                currentLowFreqIntensity = 0;
                 hasChanged = true;
             }
-        }
-        else if (currentLowFreqIntensity != 0)
-        {
-            currentLowFreqIntensity = 0;
-            hasChanged = true;
-        }
-        if (highFreqQueue.Count > 0)
-        {
-            float highest = highFreqQueue.Max(stamp => stamp.Item2);
-            if (highest < currentHighFreqIntensity)
+            if (highFreqQueue.Count > 0)
             {
-                currentHighFreqIntensity = highest;
+                float highest = highFreqQueue.Max(stamp => stamp.Item2);
+                if (highest < currentHighFreqIntensity)
+                {
+                    currentHighFreqIntensity = highest;
+                    hasChanged = true;
+                }
+            }
+            else if (currentHighFreqIntensity != 0)
+            {
+                currentHighFreqIntensity = 0;
                 hasChanged = true;
             }
-        }
-        else if (currentHighFreqIntensity != 0)
-        {
-            currentHighFreqIntensity = 0;
-            hasChanged = true;
-        }
 
-        if (hasChanged) ResumeHaptics();
+            if (hasChanged) ResumeHaptics();
+        }
     }
     public void Vibrate(float lowFreq, float highFreq, float time)
     {
@@ -91,29 +96,37 @@ public class Haptics : MonoBehaviour
 
     public void VibrateHighFreq(float intensity, float time)
     {
-        Mathf.Clamp01(intensity);
-        if (intensity > currentHighFreqIntensity)
+        if( GamepadConnected )
         {
-            currentHighFreqIntensity = intensity;
-            ResumeHaptics();
+            Mathf.Clamp01(intensity);
+            if (intensity > currentHighFreqIntensity)
+            {
+                currentHighFreqIntensity = intensity;
+                ResumeHaptics();
+            }
+            float vibrationExpiration = Time.unscaledTime + time;
+            int index = highFreqQueue.FindIndex(stamp => stamp.Item1 < vibrationExpiration);
+            if (index == -1) highFreqQueue.Add((vibrationExpiration, intensity));
+            else highFreqQueue.Insert(index, (vibrationExpiration, intensity));
+
         }
-        float vibrationExpiration = Time.unscaledTime + time;
-        int index = highFreqQueue.FindIndex(stamp => stamp.Item1 < vibrationExpiration);
-        if (index == -1) highFreqQueue.Add((vibrationExpiration, intensity));
-        else highFreqQueue.Insert(index, (vibrationExpiration, intensity));
     }
     public void VibrateLowFreq(float intensity, float time)
     {
-        Mathf.Clamp01(intensity);
-        if (intensity > currentLowFreqIntensity)
+        if ( GamepadConnected )
         {
-            currentLowFreqIntensity = intensity;
-            ResumeHaptics();
+            Mathf.Clamp01(intensity);
+            if (intensity > currentLowFreqIntensity)
+            {
+                currentLowFreqIntensity = intensity;
+                ResumeHaptics();
+            }
+            float vibrationExpiration = Time.unscaledTime + time;
+            int index = lowFreqQueue.FindIndex(stamp => stamp.Item1 < vibrationExpiration);
+            if (index == -1) lowFreqQueue.Add((vibrationExpiration, intensity));
+            else lowFreqQueue.Insert(index, (vibrationExpiration, intensity));
+
         }
-        float vibrationExpiration = Time.unscaledTime + time;
-        int index = lowFreqQueue.FindIndex(stamp => stamp.Item1 < vibrationExpiration);
-        if (index == -1) lowFreqQueue.Add((vibrationExpiration, intensity));
-        else lowFreqQueue.Insert(index, (vibrationExpiration, intensity));
     }
     public void StopHaptics() => Gamepad.current.SetMotorSpeeds(0, 0);
     private void ResumeHaptics()
@@ -123,7 +136,10 @@ public class Haptics : MonoBehaviour
 
     private void OnDestroy()
     {
-        StopHaptics();
+        if( GamepadConnected )
+        {
+            StopHaptics();
+        }
     }
     public static void ButtonPress() => Instance.InstanceButtonPress();
     public static void ImpactLight() => Instance.InstanceImpactLight();

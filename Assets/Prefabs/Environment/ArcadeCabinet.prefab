@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4957083671071473520}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: InteractPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,8 +44,8 @@ GameObject:
   - component: {fileID: 604671594795562087}
   - component: {fileID: 8997796308121784621}
   - component: {fileID: 7548242233267119659}
-  - component: {fileID: 3212998466257959651}
-  m_Layer: 22
+  - component: {fileID: 7098987355384248439}
+  m_Layer: 3
   m_Name: ArcadeCabinet
   m_TagString: StartingBonfire
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626cc767d7f61c249a437fe039712040, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spinSpeed: 0.5
+  spinSpeed: 90
   amplitude: 0.2
   frequency: 3
   verticalShift: 0.5
@@ -186,7 +186,7 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &3212998466257959651
+--- !u!114 &7098987355384248439
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 9014781081825103925}
   - component: {fileID: 2034605716145914383}
   - component: {fileID: 5915140915804452445}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Joystick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -775,7 +775,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2578
+  m_VersionIndex: 2575
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -873,7 +873,7 @@ GameObject:
   - component: {fileID: 1298920276815677746}
   - component: {fileID: 2025711973253920405}
   - component: {fileID: 7328218619503913151}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1100,7 +1100,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 441
+  m_VersionIndex: 438
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1114,8 +1114,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2467048054502915410}
-  - component: {fileID: 2248601395466246713}
-  m_Layer: 0
+  - component: {fileID: 6996790665491349360}
+  m_Layer: 3
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1140,7 +1140,7 @@ Transform:
   - {fileID: 4048730722760872406}
   m_Father: {fileID: 807219348444764835}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &2248601395466246713
+--- !u!136 &6996790665491349360
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1155,14 +1155,14 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.59
-  m_Height: 2.27
+  m_Radius: 0.6
+  m_Height: 2.511285
   m_Direction: 1
-  m_Center: {x: 0, y: 1.07, z: 0}
+  m_Center: {x: 0, y: 0.75564253, z: 0}
 --- !u!1 &7101832237312918446
 GameObject:
   m_ObjectHideFlags: 0
@@ -1176,7 +1176,7 @@ GameObject:
   - component: {fileID: 4735408483871270677}
   - component: {fileID: 3783483549887392738}
   - component: {fileID: 5854497517280289604}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35150,7 +35150,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1043
+  m_VersionIndex: 1040
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -35247,7 +35247,7 @@ GameObject:
   - component: {fileID: 6753336542292499921}
   - component: {fileID: 5226972119426407264}
   - component: {fileID: 6543367049552760058}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35943,7 +35943,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 509
+  m_VersionIndex: 506
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []

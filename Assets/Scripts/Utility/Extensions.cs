@@ -43,6 +43,10 @@ public static class Extensions
         float pickedNumber = UnityEngine.Random.Range(0, totalWeight);
         return chanceList.Find(action => pickedNumber <= action.Item1).Item2;
     }
+    public static bool IsBetween<T>(this T obj, T minBound, T maxBound) where T: IComparable
+    {
+        return obj.CompareTo(minBound) > -1 && obj.CompareTo(maxBound) < 1;
+    }
 }
 [Serializable]
 public struct WeightedAction<T>
