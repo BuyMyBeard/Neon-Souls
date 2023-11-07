@@ -1,12 +1,14 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Stagger : MonoBehaviour
 {
     Animator animator;
-    PlayerAnimationEvents animationEvents;
+    AnimationEvents animationEvents;
     Health health;
     bool isStaggered = false;
+    public UnityEvent onStagger = new();
     public bool IsStaggered
     {
         get => isStaggered;
@@ -20,7 +22,7 @@ public class Stagger : MonoBehaviour
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
-        animationEvents = GetComponentInChildren<PlayerAnimationEvents>();
+        animationEvents = GetComponentInChildren<AnimationEvents>();
         health = GetComponent<Health>();
     }
     public void BecomeStaggered(Transform target, float knockback = 1)
@@ -30,10 +32,12 @@ public class Stagger : MonoBehaviour
         animationEvents.FreezeRotation();
         animationEvents.FreezeMovement();
         animationEvents.DisableActions();
-        Vector3 playerPlanePos = new Vector3(animator.transform.position.x,0,animator.transform.position.z);
-        Vector3 targetPlanePos = new Vector3(target.transform.position.x, 0, target.transform.position.z);
+        animationEvents.DisableAllWeaponColliders();
+        Vector3 playerPlanePos = new(animator.transform.position.x,0,animator.transform.position.z);
+        Vector3 targetPlanePos = new(target.transform.position.x, 0, target.transform.position.z);
         Vector3 targetDir = animator.transform.InverseTransformDirection((targetPlanePos - playerPlanePos).normalized);
         IsStaggered = true;
+        onStagger.Invoke();
 
         animator.SetTrigger("Stagger");
         animator.SetFloat("StaggerX", targetDir.x);
@@ -47,6 +51,9 @@ public class Stagger : MonoBehaviour
         animationEvents.FreezeRotation();
         animationEvents.FreezeMovement();
         animationEvents.DisableActions();
+        animationEvents.DisableAllWeaponColliders();
+        if (animationEvents is PlayerAnimationEvents)
+            (animationEvents as PlayerAnimationEvents).StopStaminaRegen();
         IsStaggered = true;
         animator.SetTrigger("BlockHit");
         animator.SetFloat("Knockback", knockback);

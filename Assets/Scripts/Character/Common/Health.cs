@@ -2,39 +2,37 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class Health : MonoBehaviour,IStat
+public abstract class Health : MonoBehaviour, IRechargeable
 {
-    public DisplayBar displayHealthbar;
     [SerializeField] protected float maxHealth = 100;
-    [SerializeField] string healthbarTag = "PlayerHealthbar";
-    [SerializeField]int upgradeHp = 10;
-
+    [SerializeField] protected float timeShowingHealthbar = 3;
+    public DisplayBar displayHealthbar;
     public bool invincible = false;
-    GameManager manager;
     protected Animator animator;
+    [HideInInspector]
+    public UnityEvent OnHit;
     public float CurrentHealth { get; protected set; }
     public bool IsDead { get => CurrentHealth <= 0; }
     public float MaxHealth { get => maxHealth; }
-    public int Upgrade { get => upgradeHp;}
-    public float Value => MaxHealth;
-
-
-    
-    protected PlayerAnimationEvents animationEvents;
-    protected void Awake()
+    protected AnimationEvents animationEvents;
+    protected LockOn lockOn;
+    protected FallApart fallApart;
+    protected bool canFallApart;
+    protected virtual void Awake()
     {
-        if (displayHealthbar == null)
-            displayHealthbar = GameObject.FindGameObjectWithTag(healthbarTag).GetComponent<DisplayBar>();    
         animator = GetComponentInChildren<Animator>();
-        manager = FindObjectOfType<GameManager>();
-        animationEvents = GetComponentInChildren<PlayerAnimationEvents>();
+        animationEvents = GetComponentInChildren<AnimationEvents>();
+        lockOn = FindObjectOfType<LockOn>();   
+        canFallApart = TryGetComponent(out fallApart);
     }
     void OnEnable()
     {
         ResetHealth();
     }
 
+    public abstract void HandleHealthbar(int damage);
 
     //TODO: Refactor this to make it not public
     /// <summary>
@@ -45,37 +43,32 @@ public class Health : MonoBehaviour,IStat
     {
         if (invincible)
             return;
+        OnHit.Invoke();
         CurrentHealth -= damage;
-        if(displayHealthbar != null)
-            displayHealthbar.Remove(damage, maxHealth, true);//TODO: change to false.
-        if(IsDead) 
+        HandleHealthbar(damage);
+        if (IsDead)
         {
             CurrentHealth = 0;
             Die();
         }
     }
-    [ContextMenu("Die")]
+    public virtual void InflictBlockableDamage(int damage, int staminaBlockCost, Transform attackerPosition)
+    {
+        // One day enemies might be able to block or have stamina idk
+        // for now it's just
+        InflictDamage(damage);
+    }
     protected virtual void Die()
     {
-        if (gameObject.CompareTag("Player"))
-        {
-            animator.ResetTrigger("Reset");
-            animator.SetTrigger("Die");
-            manager.PlayerDie();
-            animationEvents.DisableActions();
-            animationEvents.FreezeMovement();
-            animationEvents.FreezeRotation();
-            animationEvents.StartIFrame();
-        }
-        else if(gameObject.CompareTag("Enemy"))
-        {
-            GetComponent<Enemy>().GiveXp();
-            /*
-             And other anim for ennemie
-             */
-        }
+        invincible = true;
+        animator.ResetTrigger("Stagger");
+        animator.SetTrigger("Die");
+        animationEvents.DisableActions();
+        animationEvents.FreezeMovement();
+        animationEvents.FreezeRotation();
+        animationEvents.StartIFrame();
+        if (canFallApart) fallApart.DetachWeapons();
     }
-
 
     /// <summary>
     /// Restores health
@@ -99,9 +92,11 @@ public class Health : MonoBehaviour,IStat
     /// <summary>
     /// Rounds current health to the nearest integer. Used to avoid float imprecision caused by healing over time
     /// </summary>
-    public void UpgradeStat(int nbAmelioration)
-    {
-        maxHealth += nbAmelioration * Upgrade;
-    }
     public void Round() => CurrentHealth = Mathf.RoundToInt(CurrentHealth);
+
+    public virtual void Recharge()
+    {
+        ResetHealth();
+        invincible = false;
+    }
 }

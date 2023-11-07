@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public abstract class MeleeAttack : MonoBehaviour
+public class MeleeAttack : MonoBehaviour
 {
     [Serializable]
     public struct WeaponEnumCollider
@@ -16,6 +16,8 @@ public abstract class MeleeAttack : MonoBehaviour
     protected Dictionary<AttackWeapon, MeleeWeapon> weaponColliders = new();
     protected Animator animator;
     public bool isAttacking = false;
+    public int baseDamage;
+    protected int bonusDamage = 0; 
 
     private void OnValidate()
     {
@@ -25,18 +27,16 @@ public abstract class MeleeAttack : MonoBehaviour
             weaponColliders.Add(e.key, e.val);
         }
     }
-    ///// <summary>
-    ///// Enables the children weapon collider
-    ///// </summary>
-    //public void EnableWeaponCollider()
-    //{
-    //    weapon.ColliderEnabled = true;
-    //}
-    public virtual void InitWeaponCollider(AttackDef attackDef, int modifAtk = 0)
+    /// <summary>
+    /// Enables the weapon's collider and initializes the damage
+    /// </summary>
+    /// <param name="attackDef"></param>
+    public virtual void InitWeaponCollider(AttackDef attackDef)
     {
         MeleeWeapon mw = weaponColliders[attackDef.weapon];
         mw.ColliderEnabled = true;
-        mw.damage = attackDef.baseDamage + modifAtk;
+        mw.damage = Mathf.FloorToInt(baseDamage * attackDef.baseDamageMultiplier) + bonusDamage;
+        mw.staminaBlockCost = attackDef.staminaCost;
     }
     /// <summary>
     /// Disables the children weapon collider
@@ -51,6 +51,7 @@ public abstract class MeleeAttack : MonoBehaviour
         {
             meleeWeapon.ColliderEnabled = false;
         }
+        if (this is EnemyMeleeAttack) (this as EnemyMeleeAttack).StopFlickerBodyCollider();
     }
     protected virtual void Awake()
     {
