@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class EnemyMeleeAttack : MeleeAttack
 {
-    enum EnemyAction { SliceOverHead, BackhandSlice, Attack3, Block };
+    enum EnemyAction { SliceOverHead, BackhandSlice, SpinAttack, MaleniaAttack, Block };
     float timeSinceLastAction = 0;
     EnemyAnimationEvents enemyAnimationEvents;
     Enemy enemy;
@@ -56,22 +56,32 @@ public class EnemyMeleeAttack : MeleeAttack
         switch(action)
         {
             case EnemyAction.SliceOverHead:
-                Debug.Log("Attack1");
-                animator.SetTrigger("SliceOverHead");
+                animator.SetTrigger(action.ToString());
                 enemyAnimationEvents.FreezeMovement();
                 enemyAnimationEvents.ChangeTurnSpeed(100);
                 enemyAnimationEvents.DisableActions();
                 break;
 
             case EnemyAction.BackhandSlice:
-                animator.SetTrigger("BackhandSlice");
+                animator.SetTrigger(action.ToString());
                 enemyAnimationEvents.FreezeMovement();
                 enemyAnimationEvents.DisableActions();
-                Debug.Log("Attack2");
                 break;
 
-            case EnemyAction.Attack3:
-                Debug.Log("Attack3");
+            case EnemyAction.SpinAttack:
+                animator.SetTrigger(action.ToString());
+                enemyAnimationEvents.FreezeMovement();
+                enemyAnimationEvents.FreezeRotation();
+                enemyAnimationEvents.DisableActions();
+                break;
+
+            case EnemyAction.MaleniaAttack:
+                animator.SetTrigger(action.ToString());
+                enemyAnimationEvents.FreezeMovement();
+                enemyAnimationEvents.DisableActions();
+                break;
+
+            default:
                 break;
         }
     }
