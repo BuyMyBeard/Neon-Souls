@@ -45,12 +45,12 @@ public class SawScript : MonoBehaviour
     }
     IEnumerator SawCoroutine()
     {
-        yield return new WaitUntil(() => transform.position.x < initialPosition.x - travelDistance);
+        yield return new WaitUntil(() => transform.position.x > initialPosition.x + travelDistance);
     }
     private void OnTriggerEnter(Collider other)
     {
         Health health = other.gameObject.GetComponentInParent<Health>();
-        if(!health.invincible && !healthList.ContainsKey(health))
+        if(health != null && !health.invincible && !healthList.ContainsKey(health))
         {
             healthList.Add(health, Time.time);
             health.InflictDamage(sawDamage);

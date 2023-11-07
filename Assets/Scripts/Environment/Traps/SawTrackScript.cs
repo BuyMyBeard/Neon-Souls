@@ -43,18 +43,18 @@ public class SawTrackScript : MonoBehaviour, IRechargeable
             Vector3 spawnPosition = launcherPosition.position;
             if (launcherPosition == leftLauncher)
             {
-                spawnPosition.z -= spawnXOffset;
-                spawnPosition.x += spawnYOffset;
+                spawnPosition.z -= spawnXOffset * transform.lossyScale.z;
+                spawnPosition.x -= spawnYOffset * transform.lossyScale.x;
             }
             else if (launcherPosition == rightLauncher)
             {
-                spawnPosition.z += spawnXOffset;
-                spawnPosition.x += spawnYOffset;
+                spawnPosition.z += spawnXOffset * transform.lossyScale.z;
+                spawnPosition.x -= spawnYOffset * transform.lossyScale.x;
             }
             else
             {
-                spawnPosition.x += spawnXOffset;
-                spawnPosition.y += spawnYOffset;
+                spawnPosition.x += spawnXOffset * transform.lossyScale.x;
+                spawnPosition.y += spawnYOffset * transform.lossyScale.y;
             }
             GameObject newSaw = Instantiate(saw, spawnPosition, launcherPosition.rotation, launcherPosition);
             newSaw.transform.localRotation = Quaternion.identity;
