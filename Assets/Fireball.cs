@@ -13,6 +13,8 @@ public class Fireball : MonoBehaviour
     Rigidbody rb;
     Explosion explosion;
     public bool thrown = false;
+
+    public int BaseDamage => baseDamage;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();

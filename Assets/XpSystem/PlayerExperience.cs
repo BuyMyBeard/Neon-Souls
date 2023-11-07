@@ -9,7 +9,7 @@ public class PlayerExperience : MonoBehaviour, IXpReceiver
     [SerializeField] string soulsTextTag = "SoulsCount";
     [SerializeField] string transactionTextTag = "TransactionText";
     [SerializeField]int xpAmount = 0;
-    [SerializeField] Animator transactionAnimator;
+    Animator animator;
     TextMeshProUGUI transactionText;
     TextMeshProUGUI xpText;
     int transactionSum = 0;
@@ -17,6 +17,7 @@ public class PlayerExperience : MonoBehaviour, IXpReceiver
     {
         xpText = GameObject.FindGameObjectWithTag(soulsTextTag).GetComponent<TextMeshProUGUI>();
         transactionText = GameObject.FindGameObjectWithTag(transactionTextTag).GetComponent<TextMeshProUGUI>();
+        animator = transactionText.GetComponent<Animator>();
         xpText.text = xpAmount.ToString();
     }
     public int XpAmount => xpAmount; 
@@ -26,7 +27,7 @@ public class PlayerExperience : MonoBehaviour, IXpReceiver
         transactionSum += amount;
         xpAmount += amount;
         transactionText.text = (Mathf.Sign(transactionSum) == 1 ? "+" : "") + transactionSum.ToString();
-        transactionAnimator.SetTrigger("Display");
+        animator.SetTrigger("Display");
     }
     public void UpdateDisplay()
     {
@@ -39,6 +40,6 @@ public class PlayerExperience : MonoBehaviour, IXpReceiver
         transactionSum -= amount;
         xpAmount -= amount;
         transactionText.text = (Mathf.Sign(transactionSum) == 1 ? "+" : "") + transactionSum.ToString();
-        transactionAnimator.SetTrigger("Display");
+        animator.SetTrigger("Display");
     }
 }

@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 239097307445888987}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.079872176, y: -0, z: -0, w: 0.99680513}
-  m_LocalPosition: {x: 0, y: 2.07, z: -4.049999}
+  m_LocalRotation: {x: 0.07987211, y: -0, z: -0, w: 0.99680513}
+  m_LocalPosition: {x: 0, y: 2.07, z: -4.050001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -337,6 +337,7 @@ MonoBehaviour:
   - key: 0
     val: {fileID: 8150143046497804207}
   isAttacking: 0
+  baseDamage: 30
   dmgUpgrade: 5
 --- !u!114 &6150863968811862542
 MonoBehaviour:
@@ -399,6 +400,7 @@ MonoBehaviour:
   OnHit:
     m_PersistentCalls:
       m_Calls: []
+  upgradeHp: 10
   isAutoParryOn: 0
 --- !u!114 &1956206164484021501
 MonoBehaviour:
@@ -462,6 +464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soulsTextTag: SoulsCount
+  transactionTextTag: TransactionText
   xpAmount: 100
 --- !u!1 &3519504191883572113
 GameObject:
@@ -648,7 +651,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.57
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1197,9 +1200,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5018622385483710073}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 9213636193033852484}
     - targetCorrespondingSourceObject: {fileID: -2775852485278277196, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7355795546116247376}
@@ -1770,26 +1770,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   density: 10
   explosionSource: {fileID: 0}
-  explosionStrength: 10
-  explosionRadius: 10
-  upwardsModifier: 2
   partsLayer: 9
---- !u!208 &9213636193033852484
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7178294909268747140}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 0.25, y: 1, z: 0.25}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 0
-  m_Center: {x: 0, y: 1.02, z: 0}
-  m_TimeToStationary: 0.5
+  droppedXp: {fileID: 0}
 --- !u!1 &7403290559235418197 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8511027676247312768, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}

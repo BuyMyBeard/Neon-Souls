@@ -22,7 +22,6 @@ public class MeleeEnemy : Enemy
 
     Direction moveDirection = Direction.None;
 
-    bool goingToIdeal = false;
     bool OverMargin => DistanceFromPlayer > idealRange + idealRangeTopMargin;
     bool UnderMargin => DistanceFromPlayer < idealRange - idealRangeBottomMargin;
     bool InMargin => !OverMargin && !UnderMargin;

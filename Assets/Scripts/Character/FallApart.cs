@@ -12,10 +12,11 @@ public class FallApart : MonoBehaviour, IRechargeable
     GameObject model;
     GameObject character;
     [SerializeField] Transform explosionSource;
-    [SerializeField] float explosionStrength = 10f;
-    [SerializeField] float explosionRadius = 10f;
-    [SerializeField] float upwardsModifier = 2f;
+    //[SerializeField] float explosionStrength = 10f;
+    //[SerializeField] float explosionRadius = 10f;
+    //[SerializeField] float upwardsModifier = 2f;
     [SerializeField] int partsLayer = 0;
+    [SerializeField] GameObject droppedXp;
     MeleeWeapon[] meleeWeapons;
 
     private void Awake()
@@ -68,8 +69,7 @@ public class FallApart : MonoBehaviour, IRechargeable
         part.transform.parent = null;
         if (wireframe != null)
             wireframe.parent = part.transform;
-        Rigidbody rb = part.GetComponent<Rigidbody>();
-        if (rb == null)
+        if (!part.TryGetComponent<Rigidbody>(out var rb))
         {
             rb = part.AddComponent<Rigidbody>();
             rb.useGravity = true;
@@ -94,12 +94,15 @@ public class FallApart : MonoBehaviour, IRechargeable
         if (TryGetComponent(out Enemy _)) gameObject.SetActive(false);
         else model.SetActive(false);
         dummy.GetComponent<FallApart>().Activate();
+        if (droppedXp == null) return;
+        DroppedXp previousDroppedXp = FindObjectOfType<DroppedXp>();
+        if(previousDroppedXp != null ) { Destroy(previousDroppedXp.gameObject); }
+        Instantiate(droppedXp, character.transform.position, Quaternion.identity);
     }
 
     public void Recharge()
     {
-        if (TryGetComponent(out Enemy _)) gameObject.SetActive(true);
-        else model.SetActive(true);
+        if (CompareTag("Player")) model.SetActive(true);
         ReenableWeapons();
     }
 

@@ -10,7 +10,8 @@ using System.Linq;
 [RequireComponent(typeof(Animator))]
 public abstract class Enemy : MonoBehaviour, IRechargeable
 {
-    Transform origin;
+    public Quaternion OriginRot { get; private set; }
+    public Vector3 OriginPos { get; private set; }
     protected EnemyAnimationEvents enemyAnimationEvents;
     [SerializeField] float baseTurnSpeed;
     [SerializeField] int xpPrice = 5;
@@ -20,7 +21,6 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
     public float BaseSpeed { get; protected set; }
 
 
-    public Vector3 OriginPosition { get => origin.position; }
     public enum ModeId
     {
         Idle,
@@ -66,12 +66,14 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         enemyAnimationEvents = GetComponent<EnemyAnimationEvents>();
-        origin = transform;
+        
         turnSpeed = baseTurnSpeed;
         BaseSpeed = agent.speed;
         prevPosition = transform.position;
         Mode.Init();
         xpManager = FindObjectOfType<XpManager>();
+        OriginPos = transform.position;
+        OriginRot = transform.rotation;
     }
     protected virtual IEnumerator Start()
     {
@@ -93,7 +95,7 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
     public void ChangeMode(ModeId modeId)
     {
         if (lockMode) return;
-        if (Mode.Id == modeId) return;
+        // if (Mode.Id == modeId) return;
         Mode.Exit();
         Mode = modeDefs[(int)modeId];
         Mode.Init();
@@ -117,8 +119,15 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
 
     public virtual void Recharge()
     {
-        transform.SetPositionAndRotation(origin.position, origin.rotation);
+        gameObject.SetActive(false);
+        transform.SetPositionAndRotation(OriginPos, OriginRot);
+        gameObject.SetActive(true);
+        animator.SetBool("IsMoving", false);
+        animator.SetBool("IsRunning", false);
+        animator.Play("Idle");
+        enemyAnimationEvents.ResetAll();
         ChangeMode(ModeId.Idle);
+
     }
     public void RestoreTurnSpeed() => turnSpeed = baseTurnSpeed;
     public void RestoreSpeed() => agent.speed = BaseSpeed;

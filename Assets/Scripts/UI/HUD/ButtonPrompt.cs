@@ -54,7 +54,7 @@ public class ButtonPrompt : MonoBehaviour
     [SerializeField] GameObject[] display;
     //[SerializeField] float cooldown = 0.5f;
     Transform player;
-    List<Interactable> possiblePrompts = new();
+    readonly List<Interactable> possiblePrompts = new();
     public Interactable currentPrompt;
     //bool onCooldown = false;
 
