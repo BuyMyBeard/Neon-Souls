@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 239097307445888987}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.07987211, y: -0, z: -0, w: 0.99680513}
-  m_LocalPosition: {x: 0, y: 2.07, z: -4.050001}
+  m_LocalRotation: {x: 0.07987266, y: -0, z: -0, w: 0.9968051}
+  m_LocalPosition: {x: 0, y: 3.4489498, z: -4.049988}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -619,7 +619,7 @@ Transform:
   m_GameObject: {fileID: 7010702175356666323}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.41999996, z: 0}
+  m_LocalPosition: {x: 0, y: 1.79895, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1200,6 +1200,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5018622385483710073}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7098539124076227250}
     - targetCorrespondingSourceObject: {fileID: -2775852485278277196, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7355795546116247376}
@@ -1772,6 +1775,19 @@ MonoBehaviour:
   explosionSource: {fileID: 0}
   partsLayer: 9
   droppedXp: {fileID: 0}
+--- !u!114 &7098539124076227250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7178294909268747140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4764db1cb6214945a1525343cbf8253, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceDePousser: 2
 --- !u!1 &7403290559235418197 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8511027676247312768, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
