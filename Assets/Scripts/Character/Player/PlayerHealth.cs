@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class PlayerHealth : Health
 {
+    [SerializeField]int upgradeHp = 10;
+    public int Upgrade { get => upgradeHp;}
+    public float Value => MaxHealth;
     Stamina stamina;
     Stagger stagger;
     Block block;
@@ -33,19 +36,22 @@ public class PlayerHealth : Health
         if (invincible) return;
         if ((block.IsParrying || block.IsBlocking && isAutoParryOn) && !stamina.IsExhausted && IsAttackerInFront(attackerPosition))
         {
+            Haptics.ImpactLight();
             stamina.Remove(staminaBlockCost);
             block.ResetParryWindow();
             stagger.BlockHit(0.5f);
         }
         else if (block.IsBlocking && !stamina.IsExhausted && IsAttackerInFront(attackerPosition)) 
         {
-            int damageModifier = (int) (damage * block.DamageModifier);
+            Haptics.Impact();
+            int damageReduced = (int) (damage * block.DamageReduction);
             stamina.Remove(staminaBlockCost);
             InflictDamage(damageModifier);
             stagger.BlockHit(1);
         }
         else
         {
+            Haptics.ImpactHeavy();
             block.StopBlocking();
             InflictDamage(damage);
             stagger.BecomeStaggered(attackerPosition, 1);

@@ -13,6 +13,7 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
     Transform origin;
     protected EnemyAnimationEvents enemyAnimationEvents;
     [SerializeField] float baseTurnSpeed;
+    [SerializeField] int xpPrice = 5;
     [HideInInspector] public float turnSpeed;
     public bool rotationFrozen = false;
     public bool movementFrozen = false;
@@ -51,6 +52,7 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
     public Vector3 Velocity { get; private set; }
     protected Vector3 prevPosition;
 
+    XpManager xpManager;
     protected virtual void Awake()
     {
         modeDefs = new ModeDef[3]
@@ -68,6 +70,8 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
         turnSpeed = baseTurnSpeed;
         BaseSpeed = agent.speed;
         prevPosition = transform.position;
+        Mode.Init();
+        xpManager = FindObjectOfType<XpManager>();
     }
     protected virtual IEnumerator Start()
     {
@@ -130,5 +134,9 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
         Vector2 flatRelativeVelocity = new Vector2(relativeVelocity.x, relativeVelocity.z).normalized;
         animator.SetFloat("MovementX", flatRelativeVelocity.x);
         animator.SetFloat("MovementY", flatRelativeVelocity.y);
+    }
+    public void GiveXp()
+    {
+        xpManager.DistributeXp(xpPrice);
     }
 }
