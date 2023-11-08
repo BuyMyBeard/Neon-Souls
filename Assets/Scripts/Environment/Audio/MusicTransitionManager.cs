@@ -5,36 +5,41 @@ using UnityEngine;
 
 public class MusicTransitionManager : MonoBehaviour
 {
-    [Serializable]
-    struct Checkpoint
-    {
-        public Transform transform;
-        public float lowPassVal;
-    }
+    //[Serializable]
+    //struct Checkpoint
+    //{
+    //    public Transform transform;
+    //    public float lowPassVal;
+    //}
     MusicManager musicManager;
     Transform player;
-    [SerializeField] List<Checkpoint> checkpoints;
+    //[SerializeField] List<Checkpoint> checkpoints;
+    [SerializeField] bool isInTrigger = false;
+    [SerializeField] MusicTransitionCheckpoint checkpoint1;
+    [SerializeField] MusicTransitionCheckpoint checkpoint2;
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>().transform;
         musicManager = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<MusicManager>();
     }
 
-    // Update is called once per frame
-    void OnTriggerStay()
+    private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("in stay");
-        int ckptId = -1;
-        Checkpoint left, right;
-        float progress = -1;
-        do
+        isInTrigger = true;
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        isInTrigger = false;
+    }
+
+    private void Update()
+    {
+        if (isInTrigger)
         {
-            ckptId++;
-            left = checkpoints[ckptId];
-            right = checkpoints[ckptId + 1 % checkpoints.Count];
-            progress = Extensions.Vector3InverseLerp(left.transform.position, right.transform.position, player.position);
-        } while (!progress.IsBetween(0, 1));
-        float newLowPass = Mathf.Lerp(left.lowPassVal, right.lowPassVal, progress);
-        musicManager.audioSource.outputAudioMixerGroup.audioMixer.SetFloat("LowPass", newLowPass);
+            float progress = Extensions.Vector3InverseLerp(checkpoint1.transform.position, checkpoint2.transform.position, player.position);
+            Debug.Log($"Progress: {progress}");
+            float newLowPass = Mathf.Lerp(checkpoint1.lowPassValue, checkpoint2.lowPassValue, progress);
+            musicManager.audioSource.outputAudioMixerGroup.audioMixer.SetFloat("LowPass", newLowPass);
+        }
     }
 }
