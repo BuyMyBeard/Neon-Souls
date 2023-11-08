@@ -77,6 +77,7 @@ public class SawTrackScript : MonoBehaviour, IRechargeable
     {
         isActive = false;
         GetComponent<Collider>().enabled = true;
+        StopAllCoroutines();
     }
 
     public void Recharge()
