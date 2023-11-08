@@ -57,20 +57,23 @@ public class Spells : MonoBehaviour,IStat
 
     public void ThrowFireball()
     {
-        fireball.transform.parent = null;
-        Rigidbody rb = fireball.GetComponent<Rigidbody>();
-        Vector3 throwDirection;
-        if (lockOn.IsLocked)
+        if(fireball != null)
         {
-            throwDirection = (lockOn.TargetEnemy.transform.position - fireball.transform.position).normalized;
+            fireball.transform.parent = null;
+            Rigidbody rb = fireball.GetComponent<Rigidbody>();
+            Vector3 throwDirection;
+            if (lockOn.IsLocked)
+            {
+                throwDirection = (lockOn.TargetEnemy.transform.position - fireball.transform.position).normalized;
+            }
+            else
+            {
+                throwDirection = animator.transform.forward;
+            }
+            rb.AddForce(throwDirection * throwSpeed + throwSpeed * lobeFactor * Vector3.up, ForceMode.VelocityChange);
+            fireball.GetComponent<Collider>().enabled = true;
+            fireball.thrown = true;
         }
-        else
-        {
-            throwDirection = animator.transform.forward;
-        }
-        rb.AddForce(throwDirection * throwSpeed + throwSpeed * lobeFactor * Vector3.up, ForceMode.VelocityChange);
-        fireball.GetComponent<Collider>().enabled = true;
-        fireball.thrown = true;
     }
 
     public void UpgradeStat(int nbAmelioration)
