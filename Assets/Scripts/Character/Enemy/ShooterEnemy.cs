@@ -17,7 +17,6 @@ public class ShooterEnemy : Enemy
     protected override void Awake()
     {
         base.Awake();
-
         var existingPool = GameObject.FindGameObjectWithTag(poolTag);
         pool = existingPool != null ? existingPool.GetComponent<ObjectPool>() : Instantiate(pool);
     }

@@ -45,10 +45,10 @@ public class ValueXpMenu : MonoBehaviour
             TypeStat.AttaqueMagie => playerExperience.GetComponent<Spells>(),
             _ => throw new Exception("Type de stat introuvable : AffichageXp"),
         };
-        Reset();
+        ResetValue();
         Ameliorateur = TargetedStat.Upgrade;
     }
-    public void Reset()
+    public void ResetValue()
     {
         TextUi.text = TargetedStat.Value.ToString();
     }

@@ -18,6 +18,12 @@ public class Bonfire : Interactable
         bonfireManager = FindObjectOfType<BonfireManager>();
         light = GetComponent<Light>();
     }
+    private IEnumerator Start()
+    {
+        yield return null;
+        if (active)
+            light.color = Color.green;
+    }
     public override void Interact()
     {
         if (active) 

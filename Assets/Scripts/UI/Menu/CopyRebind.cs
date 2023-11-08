@@ -50,7 +50,7 @@ public class CopyRebind : MonoBehaviour, IResetableRemap
     }
     public void Copy(SelectableRebindAction component, string bindingDisplayString, string deviceLayoutName, string controlPath)
     {
-        if (!ResolveActionAndBinding(out var action, out var bindingIndex))
+        if (!ResolveActionAndBinding(out var action, out var bindingIndex) || !gameObject.activeInHierarchy)
             return;
         SelectableRebindAction.isCopyingBinding = true;
         InputActionRebindingExtensions.ApplyBindingOverride(actionReference, bindingIndex, $"/{deviceLayoutName}/{controlPath}");

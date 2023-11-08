@@ -1201,6 +1201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseTurnSpeed: 200
+  xpPrice: 5
   turnSpeed: 200
   rotationFrozen: 0
   movementFrozen: 0
@@ -1223,10 +1224,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   poolTag: BulletPool
-  pool: {fileID: 0}
+  pool: {fileID: 8023061886880811016, guid: 95add22e22201944bb8bc6c68eb728bd, type: 3}
   gunMuzzle: {fileID: 5973898160111761695}
   shootCooldown: 5
-  shootingAngleMin: 5
   getAwayDistance: 6
 --- !u!114 &8130855382866642300
 MonoBehaviour:
@@ -1322,7 +1322,6 @@ MonoBehaviour:
     val: {fileID: 5099727615490112259}
   isAttacking: 0
   baseDamage: 30
-  damageBonus: 0
   fullBody: {fileID: 0}
   possibleActions:
   - actionName: 0
@@ -1346,7 +1345,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   density: 10
   explosionSource: {fileID: 0}
-  explosionStrength: 10
-  explosionRadius: 10
-  upwardsModifier: 2
   partsLayer: 16
+  droppedXp: {fileID: 0}
