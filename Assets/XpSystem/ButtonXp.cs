@@ -72,6 +72,6 @@ public class ButtonXp : MonoBehaviour
     public void ResetShownedValue()
     {
         shownedValue = defaultValue;
-        typeStat.Reset();
+        typeStat.ResetValue();
     }
 }
