@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class MusicManager : MonoBehaviour
 {
+    [HideInInspector]
     public AudioSource audioSource;
     public int loopStartSample;
     public int loopEndSample;
