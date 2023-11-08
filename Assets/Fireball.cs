@@ -13,17 +13,21 @@ public class Fireball : MonoBehaviour
     Rigidbody rb;
     Explosion explosion;
     public bool thrown = false;
+    Stagger playerStagger;
 
     public int BaseDamage => baseDamage;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         explosion = GetComponent<Explosion>();
+        playerStagger = GameObject.Find("Player").GetComponent<Stagger>();
     }
     private void FixedUpdate()
     {
         if (thrown)
             rb.AddForce(gravity, ForceMode.Acceleration);
+        else if (!thrown && playerStagger.IsStaggered)
+            Destroy(gameObject);
     }
     private void Update()
     {
