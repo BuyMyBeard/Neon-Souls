@@ -77,6 +77,8 @@ public class PlayerHealth : Health, IStat
     }
     public override void Recharge()
     {
+        if (IsDead)
+            animator.Play("Idle");
         base.Recharge();
         displayHealthbar.Add(maxHealth, maxHealth);
         playerAnimationEvents.HidePotion();
@@ -84,7 +86,6 @@ public class PlayerHealth : Health, IStat
         playerAnimationEvents.UnFreezeMovement();
         playerAnimationEvents.UnFreezeRotation();
         playerAnimationEvents.StopIFrame();
-        animator.Play("Idle");
         GetComponent<CameraMovement>().SyncFollowTarget();
         sword.gameObject.SetActive(true);
     }

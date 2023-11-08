@@ -153,7 +153,7 @@ public class DisplayBar : MonoBehaviour
         }
     }
 
-    public virtual void Show()
+    public virtual void Show(int damage = 0)
     {
         if (!Hidden) return;
         Hidden = false;

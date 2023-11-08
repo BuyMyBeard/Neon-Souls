@@ -28,24 +28,24 @@ public class EnemyHealth : Health
             HideHealthbar();
         }
     }
-    IEnumerator ShowHealthbarTemporarily(float time)
+    IEnumerator ShowHealthbarTemporarily(float time, int damageInflicted = 0)
     {
-        ShowHealthbar();
+        ShowHealthbar(damageInflicted);
         yield return new WaitForSeconds(time);
         showHealthbarCoroutine = null;
         HideHealthbar();
     }
-    public override void HandleHealthbar(int damage)
+    public override void HandleHealthbar(int damage = 0)
     {
         if (showHealthbarCoroutine != null)
         {
             StopCoroutine(showHealthbarCoroutine);
             healthBarDisplayCounter--;
         }
-        showHealthbarCoroutine = StartCoroutine(ShowHealthbarTemporarily(timeShowingHealthbar));
+        showHealthbarCoroutine = StartCoroutine(ShowHealthbarTemporarily(timeShowingHealthbar, damage));
         displayHealthbar.Remove(damage, maxHealth, true);
     }
-    public void ShowHealthbar()
+    public void ShowHealthbar(int damage = 0)
     {
         Debug.Log("Counter increased");
         healthBarDisplayCounter++;
@@ -55,7 +55,7 @@ public class EnemyHealth : Health
         }
         displayHealthbar = GameManager.enemyHealthbarsPool.SpawnObject(null, out _).GetComponent<EnemyHealthbar>();
         (displayHealthbar as EnemyHealthbar).TrackedEnemy = healthbarContainer;
-        displayHealthbar.Show();
+        displayHealthbar.Show(damage);
     }
     public void HideHealthbar()
     {
