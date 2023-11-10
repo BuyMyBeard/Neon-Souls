@@ -63,9 +63,9 @@ public class CameraMovement : MonoBehaviour
         }
 
         // Quaternion * Quaternion is the same as applying rotation from second to first
-        Quaternion cameraRotation = followTarget.transform.rotation *= Quaternion.AngleAxis(playerController.Look.x * appliedXSens * invertX, Vector3.up);
+        Quaternion cameraRotation = followTarget.transform.rotation *= Quaternion.AngleAxis(playerController.Look.x * appliedXSens * invertX * Time.deltaTime, Vector3.up);
 
-        cameraRotation *= Quaternion.AngleAxis(-playerController.Look.y * appliedYSens * invertY, Vector3.right);
+        cameraRotation *= Quaternion.AngleAxis(-playerController.Look.y * appliedYSens * invertY * Time.deltaTime, Vector3.right);
 
         Vector3 cameraAngles = cameraRotation.eulerAngles;
 

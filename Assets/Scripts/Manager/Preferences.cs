@@ -113,9 +113,9 @@ public static class Preferences
         ControllerInvertX = PlayerPrefs.GetInt("ControllerInvertX", 0) == 1;
         ControllerInvertY = PlayerPrefs.GetInt("ControllerInvertY", 0) == 1;
         MouseInvert = PlayerPrefs.GetInt("MouseInvert", 0) == 1;
-        ControllerSensitivityX = PlayerPrefs.GetFloat("ControllerSensX", .7f);
-        ControllerSensivityY = PlayerPrefs.GetFloat("ControllerSensY", .7f);
-        MouseSensitivity = PlayerPrefs.GetFloat("MouseSens", .2f);
+        ControllerSensitivityX = PlayerPrefs.GetFloat("ControllerSensX", 140f);
+        ControllerSensivityY = PlayerPrefs.GetFloat("ControllerSensY", 140f);
+        MouseSensitivity = PlayerPrefs.GetFloat("MouseSens", 3f);
         Vibration = PlayerPrefs.GetInt("Vibration", 1) == 1;
     }
     static public void ResetPlayerPrefs()
