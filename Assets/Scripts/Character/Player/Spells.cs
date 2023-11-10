@@ -82,7 +82,7 @@ public class Spells : MonoBehaviour,IStat
     }
     public void ClearHand()
     {
-        foreach (Transform t in transform)
+        foreach (Transform t in attachPoint)
         {
             Destroy(t.gameObject);
         }
