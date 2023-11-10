@@ -40,6 +40,7 @@ public class PlayerAnimationEvents : AnimationEvents
     public void FocusSpell() => spells.FocusFireball();
     public void ThrowSpell() => spells.ThrowFireball();
     public void StopStaminaRegen() => stamina.StopRegen();
+    public void ClearHand() => spells.ClearHand();
     public override void ResetAll()
     {
         base.ResetAll();
@@ -48,6 +49,7 @@ public class PlayerAnimationEvents : AnimationEvents
         HidePotion();
         RestoreMovement();
         ResetCombo();
+        ClearHand();
     }
     public void DoInteraction() => interact.DoInteraction();
 
