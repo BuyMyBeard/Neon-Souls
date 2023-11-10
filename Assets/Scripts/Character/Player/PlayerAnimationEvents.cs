@@ -6,6 +6,7 @@ public class PlayerAnimationEvents : AnimationEvents
     Spells spells;
     Stamina stamina;
     Interact interact;
+    PlayerMeleeAttack playerMeleeAttack;
 
     protected override void Awake()
     {
@@ -16,6 +17,7 @@ public class PlayerAnimationEvents : AnimationEvents
         spells = GetComponentInParent<Spells>();
         stamina = GetComponentInParent<Stamina>();
         interact = GetComponentInParent<Interact>();
+        playerMeleeAttack = GetComponentInParent<PlayerMeleeAttack>();
     }
     
     public override void EnableActions()
@@ -45,9 +47,11 @@ public class PlayerAnimationEvents : AnimationEvents
         UnFreezeCamera();
         HidePotion();
         RestoreMovement();
+        ResetCombo();
     }
     public void DoInteraction() => interact.DoInteraction();
 
     public override void ChangeTurnSpeed(float turnSpeed) => playerMovement.turnSpeed = turnSpeed;
     public override void RestoreTurnSpeed() => playerMovement.RestoreTurnSpeed();
+    public void ResetCombo() => playerMeleeAttack.ResetCombo();
 }
