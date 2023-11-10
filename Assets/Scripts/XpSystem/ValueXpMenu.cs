@@ -50,6 +50,7 @@ public class ValueXpMenu : MonoBehaviour
     }
     public void ResetValue()
     {
-        TextUi.text = TargetedStat.Value.ToString();
+        if(TextUi != null && TargetedStat != null)
+            TextUi.text = TargetedStat.Value.ToString();
     }
 }
