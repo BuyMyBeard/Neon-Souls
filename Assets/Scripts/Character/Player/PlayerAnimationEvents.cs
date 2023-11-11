@@ -7,6 +7,7 @@ public class PlayerAnimationEvents : AnimationEvents
     Stamina stamina;
     Interact interact;
 
+
     protected override void Awake()
     {
         base.Awake();
