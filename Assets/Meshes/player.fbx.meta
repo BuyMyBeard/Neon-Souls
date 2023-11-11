@@ -59,25 +59,28 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: "\nClip 'armature|LightAttackCombo' has import animation
-      warnings that might lower retargeting quality:\nNote: Activate translation
-      DOF on avatar to improve retargeting quality.\n\t'hand.L' has scale animation
-      that will be discarded.\n\nClip 'armature|Stagger-Back' has import animation
-      warnings that might lower retargeting quality:\nNote: Activate translation
-      DOF on avatar to improve retargeting quality.\n\t'hand.L' has scale animation
-      that will be discarded.\n\nClip 'armature|Stagger-Front' has import animation
-      warnings that might lower retargeting quality:\nNote: Activate translation
-      DOF on avatar to improve retargeting quality.\n\t'hand.L' has scale animation
-      that will be discarded.\n\nClip 'armature|Stagger-Left' has import animation
-      warnings that might lower retargeting quality:\nNote: Activate translation
-      DOF on avatar to improve retargeting quality.\n\t'hand.L' has scale animation
-      that will be discarded.\n\nClip 'armature|Stagger-Right' has import animation
-      warnings that might lower retargeting quality:\nNote: Activate translation
-      DOF on avatar to improve retargeting quality.\n\t'hand.L' has scale animation
-      that will be discarded.\n\nClip 'armature|StartBlocking' has import animation
-      warnings that might lower retargeting quality:\nNote: Activate translation
-      DOF on avatar to improve retargeting quality.\n\t'forearm.L' has scale animation
-      that will be discarded.\n\t'hand.L' has scale animation that will be discarded.\n\t'forearm.R'
+    animationImportWarnings: "\nClip 'armature|Death' has import animation warnings
+      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'foot.L' has scale animation that will be
+      discarded.\n\nClip 'armature|HeavyAttackCombo' has import animation warnings
+      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'hand.L' has scale animation that will be
+      discarded.\n\nClip 'armature|Stagger-Back' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'hand.L' has scale animation that will be
+      discarded.\n\nClip 'armature|Stagger-Front' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'hand.L' has scale animation that will be
+      discarded.\n\nClip 'armature|Stagger-Left' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'hand.L' has scale animation that will be
+      discarded.\n\nClip 'armature|Stagger-Right' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'hand.L' has scale animation that will be
+      discarded.\n\nClip 'armature|StartBlocking' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'forearm.L' has scale animation that will
+      be discarded.\n\t'hand.L' has scale animation that will be discarded.\n\t'forearm.R'
       has scale animation that will be discarded.\n\t'hand.R' has scale animation
       that will be discarded.\n\nClip 'armature|StopBlocking' has import animation
       warnings that might lower retargeting quality:\nNote: Activate translation
@@ -109,7 +112,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
@@ -122,28 +125,28 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.3809524
+      - time: 0.35934746
         functionName: FreezeRotation
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.44110274
+      - time: 0.42875707
         functionName: InitWeaponCollider
         data: 
         objectReferenceParameter: {fileID: 11400000, guid: 0a2661b6984aaf34ba36b7da956aa750, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.5104008
+      - time: 0.5752156
         functionName: DisableWeaponCollider
         data: 
         objectReferenceParameter: {fileID: 11400000, guid: 0a2661b6984aaf34ba36b7da956aa750, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.82299495
+      - time: 0.8569456
         functionName: ResetAll
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -959,7 +962,7 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
-      loopBlendOrientation: 0
+      loopBlendOrientation: 1
       loopBlendPositionY: 1
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
