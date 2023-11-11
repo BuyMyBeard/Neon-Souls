@@ -4,8 +4,8 @@ using UnityEngine;
 
 public static class Preferences
 {
-    static private float musicVolume, sfxVolume, masterVolume, controllerSensX, controllerSensY, mouseSens;
-    static private int controllerInvertX, controllerInvertY, mouseInvert, vibration;
+    static private float musicVolume, sfxVolume, masterVolume, controllerSensX, controllerSensY, mouseSens, colorblindFilterIntensity;
+    static private int controllerInvertX, controllerInvertY, mouseInvert, vibration, colorblindFilter;
     static public float MasterVolume
     {
         get => masterVolume;
@@ -100,6 +100,24 @@ public static class Preferences
             PlayerPrefs.SetFloat("MouseSens", value);
         }
     }
+    static public int ColorblindFilter
+    {
+        get => colorblindFilter;
+        set
+        {
+            colorblindFilter = value;
+            PlayerPrefs.SetInt("ColorblindFilter", value);
+        }
+    }
+    static public float ColorblindFilterIntensity
+    {
+        get => colorblindFilterIntensity;
+        set
+        {
+            colorblindFilterIntensity = value;
+            PlayerPrefs.SetFloat("ColorblindFilterIntensity", value);
+        }
+    }
 
     static Preferences()
     {
@@ -117,6 +135,8 @@ public static class Preferences
         ControllerSensivityY = PlayerPrefs.GetFloat("ControllerSensY", 140f);
         MouseSensitivity = PlayerPrefs.GetFloat("MouseSens", 3f);
         Vibration = PlayerPrefs.GetInt("Vibration", 1) == 1;
+        ColorblindFilter = PlayerPrefs.GetInt("ColorblindFilter", 0);
+        ColorblindFilterIntensity = PlayerPrefs.GetFloat("ColorblindFilterIntensity", 1f);
     }
     static public void ResetPlayerPrefs()
     {
