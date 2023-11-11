@@ -11,6 +11,9 @@ public class Bonfire : Interactable
     new Light light;
 
     public Vector3 RespawnOffset { get => respawnOffset; }
+
+    public override string animationTriggerName => "Interact";
+
     protected override void Awake()
     {
         base.Awake();
@@ -37,7 +40,7 @@ public class Bonfire : Interactable
         active = true;
         bonfireManager.ActivateBonfire(this);
         StartCoroutine(FlickerCollider());
-        promptMessage = "Play";
+        promptMessage = "Jouer à l'arcade";
     }
     IEnumerator FlickerCollider()
     {

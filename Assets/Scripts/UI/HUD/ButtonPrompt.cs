@@ -9,10 +9,11 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Collider))]
 public abstract class Interactable : MonoBehaviour
 {
-    [SerializeField]Transform snapObject;
+    [SerializeField] Transform snapObject;
     CharacterController playerCharacter;
     ButtonPrompt buttonPrompt;
     public string promptMessage = "Interact";
+    public abstract string animationTriggerName { get; }
     protected virtual void Awake()
     {
         buttonPrompt = FindObjectOfType<ButtonPrompt>(); 
