@@ -78,6 +78,10 @@ public class SawTrackScript : MonoBehaviour, IRechargeable
         isActive = false;
         GetComponent<Collider>().enabled = true;
         StopAllCoroutines();
+        foreach (var item in FindObjectsOfType<SawScript>())
+        {
+            Destroy(item.gameObject);
+        }
     }
 
     public void Recharge()
