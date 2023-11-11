@@ -1672,6 +1672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0895ef3e3adcbf8439a411fb0eb68bfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unFreezeRotation: 1
 --- !u!1101 &4368128926237990939
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1885,6 +1886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0895ef3e3adcbf8439a411fb0eb68bfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unFreezeRotation: 1
 --- !u!1102 &7148243378735235025
 AnimatorState:
   serializedVersion: 6
