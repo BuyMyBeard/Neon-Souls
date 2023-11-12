@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Audio;
+
 [RequireComponent(typeof(AudioSource))]
 
 public class Sounds : MonoBehaviour
@@ -18,6 +21,19 @@ public class Sounds : MonoBehaviour
     /// <param name="sound">Sound to play</param>
     /// <param name="volumeScale">Volume of the sound in %</param>
     public void Play(Sound sound, float volumeScale = 1) => soundSource.PlayOneShot(AudioClips.Get(sound), volumeScale);
+    /// <summary>
+    /// Pick a random sound according to weight to play once
+    /// </summary>
+    /// <param name="soundPool"></param>
+    /// <param name="volumeScale"></param>
+    public void PlayRandom(WeightedAction<Sound>[] soundPool, float volumeScale = 1) => soundSource.PlayOneShot(AudioClips.Get(soundPool.PickRandom()), volumeScale);
+    /// <summary>
+    /// Pick a random sound, all weighted the same
+    /// </summary>
+    /// <param name="sounds"></param>
+    /// <param name="volumeScale"></param>
+    public void PlayRandom(IEnumerable<Sound> sounds, float volumeScale = 1) => soundSource.PlayOneShot(AudioClips.Get(sounds.ElementAt(Random.Range(0, sounds.Count() - 1))), volumeScale);
+    public void PlayRandom(RandomSoundDef sounds) => soundSource.PlayOneShot(AudioClips.Get(sounds.soundPool.PickRandom()), sounds.volume);
 
     /// <summary>
     /// Starts looping a sound effect
@@ -40,6 +56,7 @@ public class Sounds : MonoBehaviour
             newAudioSource.volume = volumeScale;
             newAudioSource.playOnAwake = false;
             newAudioSource.loop = true;
+            newAudioSource.outputAudioMixerGroup = soundSource.outputAudioMixerGroup;
             newAudioSource.Play();
         }
     }

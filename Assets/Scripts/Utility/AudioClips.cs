@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum Sound { PotionDrink, Kindle, Died, NakedRoll }
+public enum Sound { PotionDrink, Kindle, Died, NakedRoll, LightRoll }
 
 public class AudioClips : MonoBehaviour
 {

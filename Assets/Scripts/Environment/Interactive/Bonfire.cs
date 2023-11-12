@@ -31,6 +31,7 @@ public class Bonfire : Interactable
     }
     public override void Interact()
     {
+        sounds.Play(Sound.Kindle, .25f);
         if (active) 
         {
             bonfireManager.SitAtBonfire(this);
@@ -43,7 +44,6 @@ public class Bonfire : Interactable
         bonfireManager.ActivateBonfire(this);
         StartCoroutine(FlickerCollider());
         promptMessage = "Jouer à l'arcade";
-        sounds.Play(Sound.Kindle);
         
     }
     IEnumerator FlickerCollider()

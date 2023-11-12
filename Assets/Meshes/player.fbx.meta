@@ -233,6 +233,13 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.46009392
+        functionName: PlaySound
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e71f28df72f17404082f3075f4e16d1a, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -406,6 +413,13 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.28408104
+        functionName: PlaySound
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 9b7db2c1258630044b2298a473f80a86, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.5012407
         functionName: StopIFrame
         data: 

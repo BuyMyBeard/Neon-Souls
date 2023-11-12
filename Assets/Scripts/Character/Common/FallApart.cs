@@ -27,7 +27,7 @@ public class FallApart : MonoBehaviour, IRechargeable
         model = character.transform.GetChild(0).gameObject;
         parts = model.GetComponentsInChildren<Collider>();
         meleeWeapons = GetComponentsInChildren<MeleeWeapon>();
-        sounds = GetComponent<Sounds>();
+        sounds = GetComponentInParent<Sounds>();
     }
 
     [ContextMenu("Activate")]
@@ -97,7 +97,7 @@ public class FallApart : MonoBehaviour, IRechargeable
         else model.SetActive(false);
         dummy.GetComponent<FallApart>().Activate();
         if (droppedXp == null) return;
-        sounds.Play(Sound.Died);
+        sounds.Play(Sound.Died, .25f);
         DroppedXp previousDroppedXp = FindObjectOfType<DroppedXp>();
         if(previousDroppedXp != null ) { Destroy(previousDroppedXp.gameObject); }
         Instantiate(droppedXp, character.transform.position, Quaternion.identity);
