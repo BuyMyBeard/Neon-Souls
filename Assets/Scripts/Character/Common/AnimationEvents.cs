@@ -6,6 +6,7 @@ public abstract class AnimationEvents : MonoBehaviour
     protected Stagger stagger;
     protected MeleeAttack attack;
     protected FallApart fallApart;
+    protected Sounds sounds;
 
     protected bool actionAvailable = true;
     public bool ActionAvailable { get => actionAvailable && !health.IsDead; set => actionAvailable = value; }
@@ -15,6 +16,7 @@ public abstract class AnimationEvents : MonoBehaviour
         attack = GetComponentInParent<MeleeAttack>();
         stagger = GetComponentInParent<Stagger>();
         fallApart = GetComponentInParent<FallApart>();
+        sounds = GetComponentInParent<Sounds>();
     }
     public virtual void EnableActions() => ActionAvailable = true;
     public virtual void DisableActions() => ActionAvailable = false;
@@ -44,4 +46,5 @@ public abstract class AnimationEvents : MonoBehaviour
     public virtual void UnFreezeMovement() { }
     public abstract void ChangeTurnSpeed(float turnSpeed);
     public abstract void RestoreTurnSpeed();
+    public virtual void PlaySound(SoundDef sound) => sounds.Play(sound.sound, sound.volume);
 }
