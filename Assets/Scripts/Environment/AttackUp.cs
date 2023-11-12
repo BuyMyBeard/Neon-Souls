@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackUp : Powerup
+public class AttackUp : TimedPowerup
 {
     [SerializeField] int meleeBonus;
     [SerializeField] int spellsBonus;
@@ -13,18 +13,20 @@ public class AttackUp : Powerup
     protected override void Awake()
     {
         base.Awake();
-        // meleeAttack = player.GetComponentInParent<MeleeAttack>();
-        // spells = player.GetComponentInParent<Spells>();
+        meleeAttack = player.GetComponentInParent<MeleeAttack>();
+        spells = player.GetComponentInParent<Spells>();
     }
     public override void Apply()
     {
-        // meleeAttack.damageBonus += meleeBonus;
-        // spells.damageScalingBonus += spellsBonus;
+        base.Apply();
+        meleeAttack.bonusDamage += meleeBonus;
+        spells.damageScalingBonus += spellsBonus;
     }
 
     public override void Revert()
     {
-        // meleeAttack.damageBonus -= meleeBonus;
-        // spells.damageScalingBonus -= spellsBonus;
+        base.Revert();
+        meleeAttack.bonusDamage -= meleeBonus;
+        spells.damageScalingBonus -= spellsBonus;
     }
 }

@@ -119,5 +119,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6562e9a7f35c39b48a79a000a75f9bbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTemporary: 1
-  timeActive: 0
+  statusIconDef: {fileID: 1015621139844491753, guid: a4eb40dc0094ba645b87eaf2cc5c75d4, type: 3}
+  editorCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -3
+      outSlope: -3
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.041666668
+    - serializedVersion: 3
+      time: 0.65194917
+      value: 0.036794003
+      inSlope: -0.22917345
+      outSlope: -0.22917345
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.5386694
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.009433962
+      outSlope: -0.009433962
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.25
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  statusIconDisappearTime: 1
+  editorEND_ANIM_LENGTH: 1.7
