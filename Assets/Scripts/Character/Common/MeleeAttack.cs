@@ -17,7 +17,7 @@ public class MeleeAttack : MonoBehaviour
     protected Animator animator;
     public bool isAttacking = false;
     public int baseDamage;
-    protected int bonusDamage = 0; 
+    public int bonusDamage = 0; 
 
     private void OnValidate()
     {

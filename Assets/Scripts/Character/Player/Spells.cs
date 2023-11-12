@@ -22,7 +22,7 @@ public class Spells : MonoBehaviour,IStat
     LockOn lockOn;
     Stamina stamina;
     Mana mana;
-    int damageScalingBonus = 0;
+    public int damageScalingBonus = 0;
 
     public float Value => fireballPrefab.GetComponent<Fireball>().BaseDamage;
 

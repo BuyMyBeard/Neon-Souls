@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
-public abstract class Powerup : MonoBehaviour, IRechargeable
+public abstract class Powerup : MonoBehaviour
 {
+    [SerializeField] GameObject statusIconDef;
+    protected GameObject statusIconInstance;
     new Renderer renderer;
     new Collider collider;
     public bool IsVisibleAndTangible
@@ -20,9 +23,6 @@ public abstract class Powerup : MonoBehaviour, IRechargeable
     }
 
     protected GameObject player;
-    protected virtual bool IsTemporary => false;
-
-    Coroutine revertAfterTime = null;
 
     // Awake is called before the first frame update
     protected virtual void Awake()
@@ -32,40 +32,19 @@ public abstract class Powerup : MonoBehaviour, IRechargeable
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    protected void SetRevertTimer(float time)
-    {
-        revertAfterTime = StartCoroutine(RevertAfterTime(time));
-    }
-
     [ContextMenu("Apply")]
-    public abstract void Apply();
-
-    [ContextMenu("Revert")]
-    public abstract void Revert();
-
-    protected IEnumerator RevertAfterTime(float time)
+    public virtual void Apply()
     {
-        yield return new WaitForSeconds(time);
-        Revert();
-        revertAfterTime = null;
+        IsVisibleAndTangible = false;
+        if (statusIconDef != null)
+        {
+            var statusBar = GameObject.FindGameObjectWithTag("PowerupEffectsHUD");
+            statusIconInstance = Instantiate(statusIconDef, statusBar.transform);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         Apply();
-        IsVisibleAndTangible = false;
-    }
-    public void Recharge()
-    {
-        if (IsTemporary)
-        {
-            IsVisibleAndTangible = true;
-            Revert();
-            if (revertAfterTime != null)
-            {
-                revertAfterTime = null;
-                StopCoroutine(revertAfterTime);
-            }
-        }
     }
 }

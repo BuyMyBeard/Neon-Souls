@@ -119,5 +119,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 138b754cd85f22f448e1a33be38e5df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTemporary: 0
-  amountToIncrease: 10
+  statusIconDef: {fileID: 1015621139844491753, guid: e9816bbe975cab94385ca8f3c217072a, type: 3}
+  statusIconDisappearTime: 1
+  cooldown: 20
+  meleeBonus: 20
+  spellsBonus: 20
