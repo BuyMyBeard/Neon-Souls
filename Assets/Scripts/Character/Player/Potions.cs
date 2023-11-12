@@ -36,6 +36,7 @@ public class Potions : MonoBehaviour ,IRechargeable
     {
         currentPotions--;
         StartCoroutine(UpdateFillLevelProgressively());
+        
         refillHealthCoroutine = RefillHealth();
         StartCoroutine(refillHealthCoroutine);
 

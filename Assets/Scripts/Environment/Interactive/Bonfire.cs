@@ -9,6 +9,7 @@ public class Bonfire : Interactable
     public bool active = false;
     [SerializeField] Vector3 respawnOffset = Vector3.zero;
     new Light light;
+    Sounds sounds;
 
     public Vector3 RespawnOffset { get => respawnOffset; }
 
@@ -20,6 +21,7 @@ public class Bonfire : Interactable
         xpMenuManager = FindObjectOfType<XpMenuManager>();
         bonfireManager = FindObjectOfType<BonfireManager>();
         light = GetComponent<Light>();
+        sounds = GetComponent<Sounds>();
     }
     private IEnumerator Start()
     {
@@ -41,6 +43,8 @@ public class Bonfire : Interactable
         bonfireManager.ActivateBonfire(this);
         StartCoroutine(FlickerCollider());
         promptMessage = "Jouer à l'arcade";
+        sounds.Play(Sound.Kindle);
+        
     }
     IEnumerator FlickerCollider()
     {
