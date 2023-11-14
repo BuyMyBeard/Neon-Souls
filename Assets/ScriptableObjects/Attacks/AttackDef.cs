@@ -8,7 +8,9 @@ public enum AttackWeapon
     LeftHandFist,
     LeftBackhand,
     GunHit,
-    FullBody
+    FullBody,
+    LeftFoot,
+    MeteorSlam
 }
 [CreateAssetMenu(fileName = "AttackDef", menuName = "Scriptables/Attack Def")]
 public class AttackDef : ScriptableObject
@@ -17,4 +19,5 @@ public class AttackDef : ScriptableObject
     public float baseDamageMultiplier;
     [Range(0, 100)]
     public int staminaCost;
+    public bool blockable = true;
 }
