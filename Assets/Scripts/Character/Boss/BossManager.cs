@@ -80,6 +80,8 @@ public class BossManager : MonoBehaviour, IRechargeable
         animator1.speed = 0;
         animator2.Play("PoseRight");
         animator2.speed = 0;
+        animator1.SetBool("ExtendAttacks", false);
+        animator2.SetBool("ExtendAttacks", false);
     }
     public void EndCinematic() => cinematicInProgress = false;
 }

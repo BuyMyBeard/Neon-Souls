@@ -84,6 +84,7 @@ public class MeteorAttack : MonoBehaviour, IRechargeable
         {
             yield return new WaitUntil(() => enemyAnimationEvents.ActionAvailable);
             StartAttack();
+            animator.SetBool("ExtendAttacks", true);
             yield return new WaitForSeconds(Random.Range(minCooldown, maxCooldown));
         }
     }
