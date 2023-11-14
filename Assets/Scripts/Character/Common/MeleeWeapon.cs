@@ -9,6 +9,7 @@ using UnityEngine.Events;
 public class MeleeWeapon : MonoBehaviour
 {
     public enum DeathBehaviour { Destroy, DetachEarly }
+    [HideInInspector] public bool blockable = false;
     [HideInInspector] public UnityEvent<Collider> onTrigger;
     [HideInInspector] public int damage;
     [HideInInspector] public int staminaBlockCost;
@@ -47,7 +48,10 @@ public class MeleeWeapon : MonoBehaviour
         else if (!opponentsHit.Contains(opponentHealth))
         {
             opponentsHit.Add(opponentHealth);
-            opponentHealth.InflictBlockableDamage(damage, staminaBlockCost, user);
+            if (blockable)
+                opponentHealth.InflictBlockableDamage(damage, staminaBlockCost, user);
+            else
+                opponentHealth.InflictDamage(damage, user);
         }
     }
 }

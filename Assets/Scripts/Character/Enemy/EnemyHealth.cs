@@ -10,13 +10,10 @@ public class EnemyHealth : Health
     public Transform healthbarContainer;
     public Coroutine showHealthbarCoroutine = null;
     public int healthBarDisplayCounter = 0;
-    bool staggerable;
-    Stagger stagger;
 
     protected override void Awake()
     {
         base.Awake();
-        staggerable = TryGetComponent(out stagger);
         enemy = GetComponent<Enemy>();
     }
     private void OnDisable()

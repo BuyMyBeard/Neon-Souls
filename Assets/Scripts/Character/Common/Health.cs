@@ -20,12 +20,15 @@ public abstract class Health : MonoBehaviour, IRechargeable
     protected LockOn lockOn;
     protected FallApart fallApart;
     protected bool canFallApart;
+    protected bool staggerable;
+    protected Stagger stagger;
     protected virtual void Awake()
     {
         animator = GetComponentInChildren<Animator>();
         animationEvents = GetComponentInChildren<AnimationEvents>();
         lockOn = FindObjectOfType<LockOn>();   
         canFallApart = TryGetComponent(out fallApart);
+        staggerable = TryGetComponent(out stagger);
     }
     void OnEnable()
     {
@@ -34,15 +37,18 @@ public abstract class Health : MonoBehaviour, IRechargeable
 
     public abstract void HandleHealthbar(int damage);
 
+
     //TODO: Refactor this to make it not public
     /// <summary>
     /// Apply damage to health
     /// </summary>
     /// <param name="damage">Amount of damage applied</param>
-    public void InflictDamage(int damage)
+    public void InflictDamage(int damage, Transform attackerPosition = null)
     {
         if (invincible)
             return;
+        if (attackerPosition != null)
+            stagger.BecomeStaggered(attackerPosition);
         OnHit.Invoke();
         CurrentHealth -= damage;
         HandleHealthbar(damage);

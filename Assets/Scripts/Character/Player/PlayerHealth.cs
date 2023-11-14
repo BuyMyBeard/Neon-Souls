@@ -10,7 +10,6 @@ public class PlayerHealth : Health, IStat
     public int Upgrade { get => upgradeHp;}
     public float Value => MaxHealth;
     Stamina stamina;
-    Stagger stagger;
     Block block;
     public bool isAutoParryOn = false;
     GameManager gameManager;
@@ -21,7 +20,6 @@ public class PlayerHealth : Health, IStat
         base.Awake();
         displayHealthbar = GameObject.FindGameObjectWithTag("PlayerHealthbar").GetComponent<DisplayBar>();
         stamina = GetComponent<Stamina>();
-        stagger = GetComponent<Stagger>();
         block = GetComponent<Block>();
         gameManager = FindObjectOfType<GameManager>();
         playerAnimationEvents = GetComponentInChildren<PlayerAnimationEvents>();
@@ -36,14 +34,14 @@ public class PlayerHealth : Health, IStat
         if (invincible) return;
         if ((block.IsParrying || block.IsBlocking && isAutoParryOn) && !stamina.IsExhausted && IsAttackerInFront(attackerPosition))
         {
-            Haptics.ImpactLight();
+            // Haptics.ImpactLight();
             stamina.Remove(staminaBlockCost);
             block.ResetParryWindow();
             stagger.BlockHit(0.5f);
         }
         else if (block.IsBlocking && !stamina.IsExhausted && IsAttackerInFront(attackerPosition)) 
         {
-            Haptics.Impact();
+            // Haptics.Impact();
             int damageReduced = (int) (damage * block.DamageModifier);
             stamina.Remove(staminaBlockCost);
             InflictDamage(damageReduced);
@@ -51,7 +49,7 @@ public class PlayerHealth : Health, IStat
         }
         else
         {
-            Haptics.ImpactHeavy();
+            // Haptics.ImpactHeavy();
             block.StopBlocking();
             InflictDamage(damage);
             stagger.BecomeStaggered(attackerPosition, 1);

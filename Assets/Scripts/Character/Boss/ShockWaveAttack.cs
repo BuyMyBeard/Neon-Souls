@@ -1,12 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShockWaveAttack : MonoBehaviour
 {
     [SerializeField] Material shockWaveMaterial;
-    [SerializeField] LayerMask player;
-    [SerializeField] float baseDamage = 80;
+    [SerializeField] int baseDamage = 80;
     [SerializeField] float damageInflictedNormalizedTime = 0f;
     [SerializeField] float attackRadius = 10f;
     [SerializeField] float duration = 1f;
@@ -15,10 +13,27 @@ public class ShockWaveAttack : MonoBehaviour
     [SerializeField] float initialDistance = -0.1f;
     [SerializeField] float finalDistance = 2f;
     [SerializeField] float size = .05f;
-    IEnumerator ShockWave()
+    [SerializeField] GameObject smallCracks;
+    [SerializeField] GameObject largeCracks;
+    PlayerHealth playerHealth;
+    Enemy enemy;
+    EnemyAnimationEvents enemyAnimationEvents;
+    Animator animator;
+    bool firstWave = false;
+    private void Awake()
+    {
+        playerHealth = FindObjectOfType<PlayerHealth>();
+        enemy = GetComponent<Enemy>();
+        enemyAnimationEvents = GetComponent<EnemyAnimationEvents>();
+        animator = GetComponent<Animator>();
+    }
+    IEnumerator Shockwave()
     {
         bool hasDoneDamage = false;
+        Instantiate(firstWave? smallCracks : largeCracks, transform.position, smallCracks.transform.rotation);
+
         shockWaveMaterial.SetFloat("_Size", size);
+        Haptics.Impact();
         for (float t = 0; t < 1; t += Time.deltaTime / duration)
         {
             if (Time.timeScale == 0)
@@ -40,10 +55,20 @@ public class ShockWaveAttack : MonoBehaviour
             yield return null;
         }
         ResetShockWaveMaterial();
+        firstWave = false;
     }
 
-    [ContextMenu("Start Shockwave")]
-    public void StartShockWave() => StartCoroutine(ShockWave());
+    public void StartShockwave() => StartCoroutine(Shockwave());
+
+    [ContextMenu("Start Attack")]
+    public void StartAttack()
+    {
+        firstWave = true;
+        animator.SetTrigger("ShockwaveAttack");
+        enemyAnimationEvents.FreezeMovement();
+        enemyAnimationEvents.FreezeRotation();
+        enemyAnimationEvents.DisableActions();
+    }
     private void OnDestroy()
     {
         ResetShockWaveMaterial();
@@ -55,6 +80,7 @@ public class ShockWaveAttack : MonoBehaviour
     }
     private void InflictDamage()
     {
-
+        if (enemy.DistanceFromPlayer < attackRadius)
+            playerHealth.InflictDamage(baseDamage, transform);
     }
 }
