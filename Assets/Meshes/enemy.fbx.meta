@@ -1153,6 +1153,106 @@ ModelImporter:
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Enemy|Attack3-Ex
+      takeName: Enemy|Attack3-Ex
+      internalID: -2352083797404806353
+      firstFrame: 0
+      lastFrame: 53
+      wrapMode: 0
+      orientationOffsetY: 2.43
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0.8958036
+        functionName: ResetAll
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.06882495
+        functionName: InitWeaponCollider
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: af59c7ae3153e354d96dca2a6697fecd, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.3991902
+        functionName: DisableWeaponCollider
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: af59c7ae3153e354d96dca2a6697fecd, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Enemy|AgileEliteAttack-Ext
+      takeName: Enemy|AgileEliteAttack-Ext
+      internalID: 5103932848458883127
+      firstFrame: 0
+      lastFrame: 48
+      wrapMode: 0
+      orientationOffsetY: 45
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0.8878404
+        functionName: ResetAll
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.04804278
+        functionName: InitWeaponCollider
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 724a5f4f6c9de574587010078588092c, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.129631
+        functionName: DisableWeaponCollider
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 724a5f4f6c9de574587010078588092c, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []

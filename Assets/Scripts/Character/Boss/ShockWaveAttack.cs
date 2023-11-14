@@ -99,7 +99,8 @@ public class ShockWaveAttack : MonoBehaviour, IRechargeable
         while (!health.IsDead)
         {
             yield return new WaitUntil(() => enemyAnimationEvents.ActionAvailable);
-            StartAttack(); 
+            StartAttack();
+            animator.SetBool("ExtendAttacks", true);
             yield return new WaitForSeconds(Random.Range(minCooldown, maxCooldown));
         }
     }
