@@ -1,7 +1,8 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class ShockWaveAttack : MonoBehaviour
+public class ShockWaveAttack : MonoBehaviour, IRechargeable
 {
     [SerializeField] Material shockWaveMaterial;
     [SerializeField] int baseDamage = 80;
@@ -13,10 +14,13 @@ public class ShockWaveAttack : MonoBehaviour
     [SerializeField] float initialDistance = -0.1f;
     [SerializeField] float finalDistance = 2f;
     [SerializeField] float size = .05f;
+    [SerializeField] float minCooldown = 30;
+    [SerializeField] float maxCooldown = 45;
     [SerializeField] GameObject smallCracks;
     [SerializeField] GameObject largeCracks;
     PlayerHealth playerHealth;
     Enemy enemy;
+    Health health;
     EnemyAnimationEvents enemyAnimationEvents;
     Animator animator;
     bool firstWave = false;
@@ -26,6 +30,11 @@ public class ShockWaveAttack : MonoBehaviour
         enemy = GetComponent<Enemy>();
         enemyAnimationEvents = GetComponent<EnemyAnimationEvents>();
         animator = GetComponent<Animator>();
+        health = GetComponent<Health>();
+    }
+    void Start()
+    {
+        StartCoroutine(nameof(AttackPeriodically));
     }
     IEnumerator Shockwave()
     {
@@ -82,5 +91,22 @@ public class ShockWaveAttack : MonoBehaviour
     {
         if (enemy.DistanceFromPlayer < attackRadius)
             playerHealth.InflictDamage(baseDamage, transform);
+    }
+
+    IEnumerator AttackPeriodically()
+    {
+        yield return new WaitUntil(() => health.CurrentHealth / health.MaxHealth < .5f);
+        while (!health.IsDead)
+        {
+            yield return new WaitUntil(() => enemyAnimationEvents.ActionAvailable);
+            StartAttack(); 
+            yield return new WaitForSeconds(Random.Range(minCooldown, maxCooldown));
+        }
+    }
+
+    public void Recharge()
+    {
+        StopCoroutine(nameof(AttackPeriodically));
+        StartCoroutine(nameof(AttackPeriodically));
     }
 }
