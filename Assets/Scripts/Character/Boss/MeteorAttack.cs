@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.TextCore.Text;
 
-public class MeteorAttack : MonoBehaviour
+public class MeteorAttack : MonoBehaviour, IRechargeable
 {
     [SerializeField] float hoverTime = 3;
+    [SerializeField] float minCooldown = 30;
+    [SerializeField] float maxCooldown = 45;
     [SerializeField] GameObject cracksDecal;
     [SerializeField] GameObject shadowDecal;
     Enemy enemy;
@@ -14,6 +16,7 @@ public class MeteorAttack : MonoBehaviour
     Animator animator;
     NavMeshAgent agent;
     GameObject model;
+    Health health;
     new Collider collider;
     public bool SkipThisFrameRootMotion { get; private set; } = false;
 
@@ -25,6 +28,11 @@ public class MeteorAttack : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         model = enemy.transform.GetChild(0).gameObject;
         collider = GetComponent<Collider>();
+        health = GetComponent<Health>();
+    }
+    void Start()
+    {
+        StartCoroutine(nameof(AttackPeriodically));
     }
 
     [ContextMenu("Start Attack")]
@@ -68,5 +76,21 @@ public class MeteorAttack : MonoBehaviour
         collider.enabled = true;
         enemyAnimationEvents.FreezeRotation();
         Instantiate(cracksDecal).transform.position = transform.position;
+    }
+    IEnumerator AttackPeriodically()
+    {
+        yield return new WaitUntil(() => health.CurrentHealth / health.MaxHealth < .5f);
+        while (!health.IsDead)
+        {
+            yield return new WaitUntil(() => enemyAnimationEvents.ActionAvailable);
+            StartAttack();
+            yield return new WaitForSeconds(Random.Range(minCooldown, maxCooldown));
+        }
+    }
+
+    public void Recharge()
+    {
+        StopCoroutine(nameof(AttackPeriodically));
+        StartCoroutine(nameof(AttackPeriodically));
     }
 }
