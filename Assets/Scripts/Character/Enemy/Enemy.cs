@@ -133,7 +133,7 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
     public void RestoreSpeed() => agent.speed = BaseSpeed;
     protected void AnimateMovement()
     {
-        if (!enemyAnimationEvents.ActionAvailable)
+        if (!enemyAnimationEvents.ActionAvailable || movementFrozen)
         {
             animator.SetBool("IsMoving", false);
             return;
