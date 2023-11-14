@@ -14,9 +14,9 @@ public class Retaliate : MonoBehaviour
     {
         enemy = GetComponent<Enemy>();
         animator = GetComponent<Animator>();
-        stagger = GetComponent<Stagger>();
         enemyAnimationEvents = GetComponent<EnemyAnimationEvents>();
-        stagger.onStagger.AddListener(StartLookForRetaliation);
+        if (TryGetComponent(out stagger))
+            stagger.onStagger.AddListener(StartLookForRetaliation);
     }
     
     void StartLookForRetaliation()
