@@ -12,28 +12,31 @@ public abstract class RechargeablePowerup : Powerup, IRechargeable
     [SerializeField] float statusIconDisappearTime;
     IEnumerator StatusEnd()
     {
-        Slider sliderInstance = statusIconInstance.GetComponent<Slider>();
+        var currentStatusIcon = statusIconInstance;
+        Slider sliderInstance = currentStatusIcon.GetComponent<Slider>();
         float elapsedTime = 0.0f;
+        float original = sliderInstance.value;
         while (sliderInstance.value > 0.0)
         {
             yield return null;
-            elapsedTime += Time.fixedDeltaTime;
-            sliderInstance.value = curve.Evaluate(elapsedTime);
+            elapsedTime += Time.deltaTime;
+            sliderInstance.value = curve.Evaluate(elapsedTime) * original;
         }
 
-        Image image = statusIconInstance.GetComponentInChildren<Image>();
+        Image image = currentStatusIcon.GetComponentInChildren<Image>();
         Color a = image.color;
         Color b = image.color;
         b.a = 0;
 
-        for (float t = 0.0f; t < 1.0f; t += Time.fixedDeltaTime / statusIconDisappearTime)
+        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / statusIconDisappearTime)
         {
             yield return null;
             image.color = Color.Lerp(a, b, t);
         }
 
-        Destroy(statusIconInstance);
-        statusIconInstance = null;
+        Destroy(currentStatusIcon);
+        if (statusIconInstance == currentStatusIcon)
+            statusIconInstance = null;
     }
 
     public virtual void Recharge()
