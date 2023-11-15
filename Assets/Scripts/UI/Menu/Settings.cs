@@ -9,7 +9,7 @@ public class Settings : MonoBehaviour
     [SerializeField] Slider masterVolume, sfxVolume, musicVolume, controllerSensX, controllerSensY, mouseSens;
     [SerializeField] Toggle controllerInvertX, controllerInvertY, mouseInvert, vibration;
     [SerializeField] AudioMixer audioMixer;
-    [SerializeField] Slider songPosition;
+    //[SerializeField] Slider songPosition;
     [SerializeField] MusicManager musicManager;
     [SerializeField] Toggle enableLoop;
     private void Awake()
@@ -18,7 +18,7 @@ public class Settings : MonoBehaviour
     }
     private void Update()
     {
-        songPosition.value = musicManager.audioSource.timeSamples;
+        //songPosition.value = musicManager.audioSource.timeSamples;
     }
     public void ChangeMasterVolume(float volume)
     {

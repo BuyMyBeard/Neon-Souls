@@ -5,6 +5,7 @@ using UnityEngine;
 public class MusicTransitionCheckpoint : MonoBehaviour
 {
     public float lowPassValue;
+    public float volume;
     // Start is called before the first frame update
     void Awake()
     {
