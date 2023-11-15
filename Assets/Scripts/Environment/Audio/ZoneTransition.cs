@@ -25,8 +25,14 @@ public class ZoneTransition : MonoBehaviour
         directionToPlayer.y = 0;
         directionToPlayer = directionToPlayer.normalized;
         if (Vector3.Dot(directionToPlayer, transform.forward) > 0)
+        {
+            Debug.Log("Entered");
             zoneTransitionManager.EnterZone(enterZone);
+        }
         else
+        {
+            Debug.Log("Exited");
             zoneTransitionManager.EnterZone(exitZone);
+        }
     }
 }
