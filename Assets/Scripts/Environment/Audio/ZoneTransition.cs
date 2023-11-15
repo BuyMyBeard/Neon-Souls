@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class ZoneTransition : MonoBehaviour
 {
-    [SerializeField] ZoneExclusiveLoop[] zone1Exclusive;
-    [SerializeField] ZoneExclusiveLoop[] zone2Exclusive;
+    ZoneTransitionManager zoneTransitionManager;
+    [SerializeField] Zone enterZone;
+    [SerializeField] Zone exitZone;
+    private void Awake()
+    {
+        zoneTransitionManager = FindObjectOfType<ZoneTransitionManager>();
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
@@ -20,24 +25,8 @@ public class ZoneTransition : MonoBehaviour
         directionToPlayer.y = 0;
         directionToPlayer = directionToPlayer.normalized;
         if (Vector3.Dot(directionToPlayer, transform.forward) > 0)
-            EnterZone2();
+            zoneTransitionManager.EnterZone(enterZone);
         else
-            EnterZone1();
-    }
-
-    public void EnterZone1()
-    {
-        foreach (ZoneExclusiveLoop loop in zone1Exclusive)
-            loop.StartFadeOut();
-        foreach (ZoneExclusiveLoop loop in zone2Exclusive)
-            loop.StartFadeIn();
-    }
-
-    public void EnterZone2() 
-    {
-        foreach (ZoneExclusiveLoop loop in zone1Exclusive)
-            loop.StartFadeIn();
-        foreach (ZoneExclusiveLoop loop in zone2Exclusive)
-            loop.StartFadeOut();
+            zoneTransitionManager.EnterZone(exitZone);
     }
 }
