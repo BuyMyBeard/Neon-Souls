@@ -11,7 +11,6 @@ public class Roll : MonoBehaviour
     Stamina stamina;
     IEnumerator bufferCoroutine;
     Health health;
-
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
