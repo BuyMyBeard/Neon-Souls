@@ -76,9 +76,11 @@ public class DisplayBar : MonoBehaviour
     /// </summary>
     /// <param name="value">Value added</param>
     /// <param name="max">Value the display bar would take if it was full</param>
-    public void Add(float value, float max)
+    public void Add(float value, float max, bool shouldLinger = true)
     {
         TrueValue += value / max;
+
+        if (!shouldLinger) return;
 
         if (lingerTimerStarted)
         {
