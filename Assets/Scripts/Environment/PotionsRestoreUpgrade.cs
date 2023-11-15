@@ -13,6 +13,7 @@ public class PotionsRestoreUpgrade : Powerup
     {
         base.Awake();
         potions = player.GetComponentInParent<Potions>();
+        currentLevel = 0;
     }
 
     public override void Apply()
