@@ -42,6 +42,13 @@ public class Mana : MonoBehaviour, IRechargeable,IStat
             playerManabar.Remove(value, maxMana, true, false);
         }
     }
+    public void Add(float value, bool shouldLinger = true)
+    {
+        currentMana += value;
+        if (currentMana > maxMana)
+            currentMana = maxMana;
+        playerManabar.Add(value, maxMana, shouldLinger);
+    }
     public void Recharge()
     {
         ResetMana();
