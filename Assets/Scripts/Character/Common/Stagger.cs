@@ -29,10 +29,12 @@ public class Stagger : MonoBehaviour
     {
         if (health.IsDead)
             return;
+
+        animationEvents.ResetAll();
         animationEvents.FreezeRotation();
         animationEvents.FreezeMovement();
         animationEvents.DisableActions();
-        animationEvents.DisableAllWeaponColliders();
+
         Vector3 playerPlanePos = new(animator.transform.position.x,0,animator.transform.position.z);
         Vector3 targetPlanePos = new(target.transform.position.x, 0, target.transform.position.z);
         Vector3 targetDir = animator.transform.InverseTransformDirection((targetPlanePos - playerPlanePos).normalized);
@@ -48,12 +50,15 @@ public class Stagger : MonoBehaviour
     {
         if (health.IsDead)
             return;
+        animationEvents.ResetAll();
+        if (animationEvents is PlayerAnimationEvents)
+        {
+            (animationEvents as PlayerAnimationEvents).StopStaminaRegen();
+        }
         animationEvents.FreezeRotation();
         animationEvents.FreezeMovement();
         animationEvents.DisableActions();
         animationEvents.DisableAllWeaponColliders();
-        if (animationEvents is PlayerAnimationEvents)
-            (animationEvents as PlayerAnimationEvents).StopStaminaRegen();
         IsStaggered = true;
         animator.SetTrigger("BlockHit");
         animator.SetFloat("Knockback", knockback);
