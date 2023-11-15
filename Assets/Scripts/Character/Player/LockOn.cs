@@ -231,6 +231,9 @@ public class LockOn : MonoBehaviour
     {
         if (enemiesInSight.Count > 0 && TargetEnemy != null)
         {
+            if (enemiesInSight == null)
+                return false;
+
             indicator.gameObject.SetActive(false);
             EnemyHealth.HideHealthbar();
             List<Transform> enemies = enemiesInSight.OrderBy((e) => mainCam.WorldToViewportPoint(e.position).x).ToList();

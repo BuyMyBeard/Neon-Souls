@@ -13,6 +13,9 @@ public class Bonfire : Interactable
 
     public Zone Zone => zone;
     public Vector3 RespawnOffset => respawnOffset;
+
+    public override string animationTriggerName => "Interact";
+
     protected override void Awake()
     {
         base.Awake();
@@ -39,7 +42,7 @@ public class Bonfire : Interactable
         active = true;
         bonfireManager.ActivateBonfire(this);
         StartCoroutine(FlickerCollider());
-        promptMessage = "Play";
+        promptMessage = "Jouer � l'arcade";
     }
     IEnumerator FlickerCollider()
     {

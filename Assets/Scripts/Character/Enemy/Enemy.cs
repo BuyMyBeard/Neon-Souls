@@ -94,7 +94,7 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
 
     public void ChangeMode(ModeId modeId)
     {
-        if (lockMode) return;
+        if (lockMode || !gameObject.activeInHierarchy) return;
         // if (Mode.Id == modeId) return;
         Mode.Exit();
         Mode = modeDefs[(int)modeId];

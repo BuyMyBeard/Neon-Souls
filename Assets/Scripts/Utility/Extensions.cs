@@ -30,6 +30,12 @@ public static class Extensions
         Vector3 AV = value - a;
         return Vector3.Dot(AV, AB) / Vector3.Dot(AB, AB);
     }
+    public static void ResetAllTriggers(this Animator animator)
+    {
+        foreach (var param in animator.parameters)
+            if (param.type == AnimatorControllerParameterType.Trigger)
+                animator.ResetTrigger(param.name);
+    }
     public static T PickRandom<T>(this IEnumerable<WeightedAction<T>> possibleActions)
     {
         float totalWeight = possibleActions.Sum(action => action.weight);

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Lever : Interactable
-{   
+{
+    public override string animationTriggerName => "Interact";
+
     public override void Interact()
     {
         base.Interact();

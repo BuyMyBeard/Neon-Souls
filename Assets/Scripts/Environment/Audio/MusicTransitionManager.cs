@@ -19,7 +19,7 @@ public class MusicTransitionManager : MonoBehaviour
     [SerializeField] MusicTransitionCheckpoint checkpoint2;
     void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>().transform;
+        player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<CharacterController>().transform;
         musicManager = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<MusicManager>();
     }
 

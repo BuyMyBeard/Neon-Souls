@@ -17,7 +17,8 @@ public class MeleeAttack : MonoBehaviour
     protected Animator animator;
     public bool isAttacking = false;
     public int baseDamage;
-    protected int bonusDamage = 0; 
+    public int bonusDamage = 0;
+    protected Health health;
 
     private void OnValidate()
     {
@@ -56,6 +57,7 @@ public class MeleeAttack : MonoBehaviour
     protected virtual void Awake()
     {
         animator = GetComponentInChildren<Animator>();
+        health = GetComponent<Health>();
     }
     protected virtual void Start()
     {

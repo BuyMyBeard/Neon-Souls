@@ -10,7 +10,10 @@ public class FieldOfViewDetector : MonoBehaviour, IPlayerDetector
 {
     [SerializeField] Transform eyes;
     [SerializeField] LayerMask environmentMask;
+
+    //why is viewRange not used anywhere?
     [SerializeField] float viewRange = 40f;
+    
     [Range(0f, 90f)]
     [SerializeField] float viewAngle = 90f;
     [SerializeField] float timeToForget = 10;

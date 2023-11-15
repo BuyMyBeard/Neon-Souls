@@ -19,7 +19,7 @@ public class Interact : MonoBehaviour
             return;
 
         buttonPrompt.HidePrompt();
-        animator.SetTrigger("Interact");
+        animator.SetTrigger(buttonPrompt.currentPrompt.animationTriggerName);
         animationEvents.DisableActions();
         animationEvents.StartIFrame();
         animationEvents.FreezeMovement();
