@@ -67,7 +67,7 @@ public abstract class Health : MonoBehaviour, IRechargeable
     protected virtual void Die()
     {
         invincible = true;
-        animator.ResetTrigger("Stagger");
+        animator.ResetAllTriggers();
         animator.SetTrigger("Die");
         animationEvents.DisableActions();
         animationEvents.FreezeMovement();

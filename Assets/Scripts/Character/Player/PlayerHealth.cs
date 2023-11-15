@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerHealth : Health, IStat
 {
-    [SerializeField]int upgradeHp = 10;
+    [SerializeField] int upgradeHp = 10;
     public int Upgrade { get => upgradeHp;}
     public float Value => MaxHealth;
     Stamina stamina;

@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Potions : MonoBehaviour ,IRechargeable
+public class Potions : MonoBehaviour, IRechargeable
 {
-
-    [SerializeField] Material potionMat;
-    [SerializeField] GameObject potionObject;
-    [SerializeField] int maxPotions = 3;
-    [SerializeField] int currentPotions;
-    [SerializeField] int restoreValue = 60;
+    [SerializeField] public Material potionMat;
+    [SerializeField] public GameObject potionObject;
+    [SerializeField] public int maxPotions = 3;
+    [SerializeField] public int currentPotions;
+    [SerializeField] public int restoreValue = 60;
     [SerializeField] float timeToDrinkOne = .5f;
     Health health;
     IEnumerator refillHealthCoroutine;
@@ -22,6 +22,9 @@ public class Potions : MonoBehaviour ,IRechargeable
     }
     void Awake()
     {
+        var potionDisplay = GameObject.FindGameObjectWithTag("PotionDisplay").GetComponent<Image>();
+        potionMat = new Material(potionMat);
+        potionDisplay.material = potionMat;
         health = GetComponent<Health>();
         ResetPotions();
         animator = GetComponentInChildren<Animator>();
@@ -45,7 +48,7 @@ public class Potions : MonoBehaviour ,IRechargeable
         currentPotions = maxPotions;
         UpdateFillLevel();
     }
-    void UpdateFillLevel() => FillLevel = (float) currentPotions / maxPotions;
+    public void UpdateFillLevel() => FillLevel = (float) currentPotions / maxPotions;
     IEnumerator UpdateFillLevelProgressively()
     {
         for (float t = 0; t < 1; t += Time.deltaTime / timeToDrinkOne)

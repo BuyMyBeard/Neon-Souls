@@ -22,7 +22,7 @@ public class Spells : MonoBehaviour,IStat
     LockOn lockOn;
     Stamina stamina;
     Mana mana;
-    int damageScalingBonus = 0;
+    public int damageScalingBonus = 0;
 
     public float Value => fireballPrefab.GetComponent<Fireball>().BaseDamage;
 
@@ -79,5 +79,12 @@ public class Spells : MonoBehaviour,IStat
     public void UpgradeStat(int nbAmelioration)
     {
         damageScalingBonus += upgradeDmg * nbAmelioration;
+    }
+    public void ClearHand()
+    {
+        foreach (Transform t in attachPoint)
+        {
+            Destroy(t.gameObject);
+        }
     }
 }
