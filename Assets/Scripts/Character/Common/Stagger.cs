@@ -29,16 +29,8 @@ public class Stagger : MonoBehaviour
     {
         if (health.IsDead)
             return;
-        if (animationEvents is PlayerAnimationEvents)
-        {
-            PlayerAnimationEvents pae = animationEvents as PlayerAnimationEvents;
-            pae.ResetAll();
-        }
-        else if (animationEvents is EnemyAnimationEvents)
-        {
-            EnemyAnimationEvents eae = animationEvents as EnemyAnimationEvents;
-            eae.ResetAll();
-        }
+
+        animationEvents.ResetAll();
         animationEvents.FreezeRotation();
         animationEvents.FreezeMovement();
         animationEvents.DisableActions();
@@ -58,16 +50,10 @@ public class Stagger : MonoBehaviour
     {
         if (health.IsDead)
             return;
+        animationEvents.ResetAll();
         if (animationEvents is PlayerAnimationEvents)
         {
-            PlayerAnimationEvents pae = animationEvents as PlayerAnimationEvents;
-            pae.ResetAll();
-            pae.StopStaminaRegen();
-        }
-        else if (animationEvents is EnemyAnimationEvents)
-        {
-            EnemyAnimationEvents eae = animationEvents as EnemyAnimationEvents;
-            eae.ResetAll();
+            (animationEvents as PlayerAnimationEvents).StopStaminaRegen();
         }
         animationEvents.FreezeRotation();
         animationEvents.FreezeMovement();
