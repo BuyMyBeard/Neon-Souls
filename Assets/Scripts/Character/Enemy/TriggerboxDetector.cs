@@ -27,6 +27,7 @@ public class TriggerboxDetector : MonoBehaviour, IRechargeable
         if (alreadyTriggered) return;
         foreach (Enemy enemy in enemies) enemy.ChangeMode(modeToChangeTo);
         OnTrigger.Invoke();
+        alreadyTriggered = true;
     }
 
     public void Recharge()

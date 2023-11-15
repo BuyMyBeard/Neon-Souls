@@ -55,10 +55,10 @@ public class EnemyHealthbar : DisplayBar
         if (Hidden) return;
         base.Hide();
     }
-    public override void Show()
+    public override void Show(int damageTaken = 0)
     {
         if (!Hidden) return;
-        Set(enemyHealth.CurrentHealth, enemyHealth.MaxHealth);
+        Set(enemyHealth.CurrentHealth + damageTaken, enemyHealth.MaxHealth);
         base.Show();
     }
 }

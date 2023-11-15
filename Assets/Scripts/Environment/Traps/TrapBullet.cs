@@ -17,7 +17,7 @@ public class TrapBullet : MonoBehaviour
     private void OnTriggerEnter(Collider collider)
     {
         if (hasAlreadyHit) return;
-        collider.gameObject.GetComponentInParent<PlayerHealth>().InflictBlockableDamage(bulletDamage, staminaBlockCost, transform);
+        collider.gameObject.GetComponentInParent<Health>().InflictBlockableDamage(bulletDamage, staminaBlockCost, transform);
         Destroy(gameObject);
         hasAlreadyHit = true;
     }

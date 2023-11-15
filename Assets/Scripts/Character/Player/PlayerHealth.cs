@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerHealth : Health, IStat
 {
-    [SerializeField]int upgradeHp = 10;
+    [SerializeField] int upgradeHp = 10;
     public int Upgrade { get => upgradeHp;}
     public float Value => MaxHealth;
     Stamina stamina;
@@ -77,6 +77,8 @@ public class PlayerHealth : Health, IStat
     }
     public override void Recharge()
     {
+        if (IsDead)
+            animator.Play("Idle");
         base.Recharge();
         displayHealthbar.Add(maxHealth, maxHealth);
         playerAnimationEvents.HidePotion();
@@ -84,7 +86,6 @@ public class PlayerHealth : Health, IStat
         playerAnimationEvents.UnFreezeMovement();
         playerAnimationEvents.UnFreezeRotation();
         playerAnimationEvents.StopIFrame();
-        animator.Play("Idle");
         GetComponent<CameraMovement>().SyncFollowTarget();
         sword.gameObject.SetActive(true);
     }
