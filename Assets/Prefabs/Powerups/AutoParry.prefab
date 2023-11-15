@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1464151164391111420}
   - component: {fileID: 7843888787557334164}
   - component: {fileID: -927503172729660869}
+  - component: {fileID: 451611766421086622}
   m_Layer: 22
   m_Name: AutoParry
   m_TagString: Untagged
@@ -119,5 +120,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6562e9a7f35c39b48a79a000a75f9bbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTemporary: 1
-  timeActive: 0
+  statusIconDef: {fileID: 1015621139844491753, guid: a4eb40dc0094ba645b87eaf2cc5c75d4, type: 3}
+  curve: {fileID: 11400000, guid: d22cc8e826b0a2745a123a63a24d70a4, type: 2}
+  statusIconDisappearTime: 1
+--- !u!114 &451611766421086622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4883428407219778389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626cc767d7f61c249a437fe039712040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spinSpeed: -90
+  amplitude: 0.125
+  frequency: 1.5
+  verticalShift: 0
