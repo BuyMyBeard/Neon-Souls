@@ -9,8 +9,10 @@ public class Bonfire : Interactable
     public bool active = false;
     [SerializeField] Vector3 respawnOffset = Vector3.zero;
     new Light light;
+    [SerializeField] Zone zone;
 
-    public Vector3 RespawnOffset { get => respawnOffset; }
+    public Zone Zone => zone;
+    public Vector3 RespawnOffset => respawnOffset;
     protected override void Awake()
     {
         base.Awake();
