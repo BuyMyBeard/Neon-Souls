@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public abstract class TimedPowerup : RechargeablePowerup
 {
-    [SerializeField] int cooldown;
+    [SerializeField] protected float duration;
     Coroutine revertAfterTime = null;
     protected IEnumerator RevertAfterTime(float time)
     {
@@ -17,12 +17,12 @@ public abstract class TimedPowerup : RechargeablePowerup
             while (sliderInstance.value > 0.0)
             {
                 yield return null;
-                sliderInstance.value -= Time.deltaTime / cooldown;
+                sliderInstance.value -= Time.deltaTime / duration;
             }
         }
         else
         {
-            yield return new WaitForSeconds(cooldown);
+            yield return new WaitForSeconds(duration);
         }
         Revert();
         revertAfterTime = null;
@@ -44,7 +44,7 @@ public abstract class TimedPowerup : RechargeablePowerup
     public override void Apply()
     {
         base.Apply();
-        revertAfterTime = StartCoroutine(RevertAfterTime(cooldown));
+        revertAfterTime = StartCoroutine(RevertAfterTime(duration));
     }
     public override void Revert()
     {

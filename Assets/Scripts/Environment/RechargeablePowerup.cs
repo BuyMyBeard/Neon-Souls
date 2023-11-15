@@ -10,6 +10,8 @@ public abstract class RechargeablePowerup : Powerup, IRechargeable
     protected bool isActive = false;
     [SerializeField] AnimationCurveScriptable curve;
     [SerializeField] float statusIconDisappearTime;
+    [SerializeField] GameObject statusIconDef;
+    protected GameObject statusIconInstance;
     IEnumerator StatusEnd()
     {
         var currentStatusIcon = statusIconInstance;
@@ -50,6 +52,11 @@ public abstract class RechargeablePowerup : Powerup, IRechargeable
     public override void Apply()
     {
         base.Apply();
+        if (statusIconDef != null)
+        {
+            var statusBar = GameObject.FindGameObjectWithTag("PowerupEffectsHUD");
+            statusIconInstance = Instantiate(statusIconDef, statusBar.transform);
+        }
         isActive = true;
     }
     public virtual void Revert()

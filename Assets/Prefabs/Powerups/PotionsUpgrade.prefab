@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1464151164391111420}
   - component: {fileID: 7843888787557334164}
   - component: {fileID: -241352000750241827}
+  - component: {fileID: 4140369731988189632}
   m_Layer: 22
   m_Name: PotionsUpgrade
   m_TagString: Untagged
@@ -120,8 +121,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statusIconDef: {fileID: 0}
-  statusIconDisappearTime: 0
+  hdrMultiplier: 0
   upgradeColors:
   - {r: 0, g: 0.56486773, b: 1, a: 0}
   - {r: 0.12454414, g: 1, b: 0, a: 0}
   potionRestoreBonus: 10
+--- !u!114 &4140369731988189632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4883428407219778389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626cc767d7f61c249a437fe039712040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spinSpeed: -90
+  amplitude: 0.125
+  frequency: 1.5
+  verticalShift: 0

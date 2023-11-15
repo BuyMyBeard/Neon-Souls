@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public abstract class Powerup : MonoBehaviour
 {
-    [SerializeField] GameObject statusIconDef;
-    protected GameObject statusIconInstance;
     new Renderer renderer;
     new Collider collider;
     public bool IsVisibleAndTangible
@@ -36,11 +34,6 @@ public abstract class Powerup : MonoBehaviour
     public virtual void Apply()
     {
         IsVisibleAndTangible = false;
-        if (statusIconDef != null)
-        {
-            var statusBar = GameObject.FindGameObjectWithTag("PowerupEffectsHUD");
-            statusIconInstance = Instantiate(statusIconDef, statusBar.transform);
-        }
     }
 
     private void OnTriggerEnter(Collider other)

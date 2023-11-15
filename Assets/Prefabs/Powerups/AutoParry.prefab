@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1464151164391111420}
   - component: {fileID: 7843888787557334164}
   - component: {fileID: -927503172729660869}
+  - component: {fileID: 451611766421086622}
   m_Layer: 22
   m_Name: AutoParry
   m_TagString: Untagged
@@ -120,38 +121,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statusIconDef: {fileID: 1015621139844491753, guid: a4eb40dc0094ba645b87eaf2cc5c75d4, type: 3}
-  editorCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: -3
-      outSlope: -3
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.041666668
-    - serializedVersion: 3
-      time: 0.65194917
-      value: 0.036794003
-      inSlope: -0.22917345
-      outSlope: -0.22917345
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.5386694
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -0.009433962
-      outSlope: -0.009433962
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.25
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  curve: {fileID: 11400000, guid: d22cc8e826b0a2745a123a63a24d70a4, type: 2}
   statusIconDisappearTime: 1
-  editorEND_ANIM_LENGTH: 1.7
+--- !u!114 &451611766421086622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4883428407219778389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626cc767d7f61c249a437fe039712040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spinSpeed: -90
+  amplitude: 0.125
+  frequency: 1.5
+  verticalShift: 0

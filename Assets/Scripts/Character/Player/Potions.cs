@@ -8,7 +8,7 @@ public class Potions : MonoBehaviour, IRechargeable
     [SerializeField] public Material potionMat;
     [SerializeField] public GameObject potionObject;
     [SerializeField] public int maxPotions = 3;
-    [SerializeField] int currentPotions;
+    [SerializeField] public int currentPotions;
     [SerializeField] public int restoreValue = 60;
     [SerializeField] float timeToDrinkOne = .5f;
     Health health;
@@ -48,7 +48,7 @@ public class Potions : MonoBehaviour, IRechargeable
         currentPotions = maxPotions;
         UpdateFillLevel();
     }
-    void UpdateFillLevel() => FillLevel = (float) currentPotions / maxPotions;
+    public void UpdateFillLevel() => FillLevel = (float) currentPotions / maxPotions;
     IEnumerator UpdateFillLevelProgressively()
     {
         for (float t = 0; t < 1; t += Time.deltaTime / timeToDrinkOne)
