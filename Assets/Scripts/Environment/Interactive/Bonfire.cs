@@ -10,6 +10,7 @@ public class Bonfire : Interactable
     [SerializeField] Vector3 respawnOffset = Vector3.zero;
     new Light light;
     [SerializeField] Zone zone;
+    Sounds sounds;
 
     public Zone Zone => zone;
     public Vector3 RespawnOffset => respawnOffset;
@@ -22,6 +23,7 @@ public class Bonfire : Interactable
         xpMenuManager = FindObjectOfType<XpMenuManager>();
         bonfireManager = FindObjectOfType<BonfireManager>();
         light = GetComponent<Light>();
+        sounds = GetComponent<Sounds>();
     }
     private IEnumerator Start()
     {
@@ -31,6 +33,7 @@ public class Bonfire : Interactable
     }
     public override void Interact()
     {
+        sounds.Play(Sound.Kindle, .25f);
         if (active) 
         {
             bonfireManager.SitAtBonfire(this);
