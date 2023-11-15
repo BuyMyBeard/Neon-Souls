@@ -80,4 +80,11 @@ public class Spells : MonoBehaviour,IStat
     {
         damageScalingBonus += upgradeDmg * nbAmelioration;
     }
+    public void ClearHand()
+    {
+        foreach (Transform t in attachPoint)
+        {
+            Destroy(t.gameObject);
+        }
+    }
 }
