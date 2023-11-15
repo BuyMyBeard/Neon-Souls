@@ -7,24 +7,20 @@ using UnityEngine;
 public enum Zone { Street, DanceClub, Garden, Mansion, MansionBackyard, Roof }
 public class ZoneTransitionManager : MonoBehaviour
 {
-    [SerializeField] ZoneLoops[] zoneLoops;
-    [Serializable] struct ZoneLoops
-    {
-        public Zone zone;
-        public ZoneExclusiveLoop[] loops;
-    }
+    ZoneExclusiveLoop[] zoneLoops;
 
+    private void Awake()
+    {
+        zoneLoops = FindObjectsByType<ZoneExclusiveLoop>(FindObjectsSortMode.InstanceID);
+    }
     public void EnterZone(Zone zone)
     {
-        foreach (ZoneLoops zoneLoops in zoneLoops)
+        foreach (ZoneExclusiveLoop zoneLoop in zoneLoops)
         {
-            if (zoneLoops.zone == zone)
-                foreach (ZoneExclusiveLoop loop in zoneLoops.loops)
-                    loop.StartFadeIn();
-
+            if (zoneLoop.Zone == zone)
+                zoneLoop.StartFadeIn();
             else
-                foreach(ZoneExclusiveLoop loop in zoneLoops.loops)
-                    loop.StartFadeOut();
+                zoneLoop.StartFadeOut();
         }
     }
 }
