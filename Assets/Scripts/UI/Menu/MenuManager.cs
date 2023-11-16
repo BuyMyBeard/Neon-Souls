@@ -150,6 +150,10 @@ public class MenuManager : MonoBehaviour
     {
         Application.Quit();
     }
+    public void Credits()
+    {
+
+    }
     public void MainMenu()
     {
         Paused = true;

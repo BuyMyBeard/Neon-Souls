@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class ZoneExclusiveLoop : MonoBehaviour
 {
+    [SerializeField] Zone zone;
+    public Zone Zone => zone;
     [SerializeField] float fadeSpeed = .5f;
     float maxVolume;
     AudioSource audioSource;

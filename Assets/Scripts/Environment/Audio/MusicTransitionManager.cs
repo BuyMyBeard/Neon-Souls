@@ -37,7 +37,6 @@ public class MusicTransitionManager : MonoBehaviour
         if (isInTrigger)
         {
             float progress = Extensions.Vector3InverseLerp(checkpoint1.transform.position, checkpoint2.transform.position, player.position);
-            Debug.Log($"Progress: {progress}");
             float newLowPass = Mathf.Lerp(checkpoint1.lowPassValue, checkpoint2.lowPassValue, progress);
             float newVolume = Mathf.Lerp(checkpoint1.volume, checkpoint2.volume, progress);
             musicManager.audioSource.GetComponent<AudioLowPassFilter>().cutoffFrequency = newLowPass;
