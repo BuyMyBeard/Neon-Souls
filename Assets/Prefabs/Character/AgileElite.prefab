@@ -366,6 +366,7 @@ PrefabInstance:
     - {fileID: 5238902981165767782, guid: 5f37ccc52d22b784eb52a6dbdbe0a31c, type: 3}
     - {fileID: 2848173867034494544, guid: 5f37ccc52d22b784eb52a6dbdbe0a31c, type: 3}
     - {fileID: 6484954475046364963, guid: 5f37ccc52d22b784eb52a6dbdbe0a31c, type: 3}
+    - {fileID: 6592103069110389925, guid: 5f37ccc52d22b784eb52a6dbdbe0a31c, type: 3}
     m_RemovedGameObjects:
     - {fileID: 5869185293041141421, guid: 5f37ccc52d22b784eb52a6dbdbe0a31c, type: 3}
     - {fileID: 8590731616932004925, guid: 5f37ccc52d22b784eb52a6dbdbe0a31c, type: 3}
@@ -376,8 +377,59 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 869520197277447294, guid: 5f37ccc52d22b784eb52a6dbdbe0a31c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8467653446970974492}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 14118305191808067, guid: 5f37ccc52d22b784eb52a6dbdbe0a31c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -3486676136467811231}
   m_SourcePrefab: {fileID: 100100000, guid: 5f37ccc52d22b784eb52a6dbdbe0a31c, type: 3}
+--- !u!1 &1387694942897608203 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 14118305191808067, guid: 5f37ccc52d22b784eb52a6dbdbe0a31c, type: 3}
+  m_PrefabInstance: {fileID: 1400687331002636872}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-3486676136467811231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1387694942897608203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c15d9f65105b9f24784c3b2bea3cc75e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseTurnSpeed: 0
+  xpPrice: 1000
+  turnSpeed: 0
+  rotationFrozen: 0
+  movementFrozen: 0
+  idleInitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  inRangeInitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  closeInitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  idleExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  inRangeExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  closeExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  closeMovementChance: []
+  sprintingSpeed: 5
+  strafingSpeed: 0.7
+  idealRange: 2
+  idealRangeTopMargin: 0.2
+  idealRangeBottomMargin: 0.5
+  movementChangeTimeMin: 1
+  movementChangeTimeMax: 5
 --- !u!4 &2261112367506173494 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 869520197277447294, guid: 5f37ccc52d22b784eb52a6dbdbe0a31c, type: 3}

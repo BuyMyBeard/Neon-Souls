@@ -146,6 +146,7 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
     }
     public void GiveXp()
     {
+        if (xpPrice <= 0) return; 
         xpManager.DistributeXp(xpPrice);
     }
 }

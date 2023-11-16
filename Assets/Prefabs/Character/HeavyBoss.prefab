@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5062292614691833600, guid: 0bc4cf1970ccb384780027ac1bf4846e, type: 3}
+      propertyPath: xpPrice
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6398807710241770510, guid: 0bc4cf1970ccb384780027ac1bf4846e, type: 3}
     m_RemovedGameObjects: []
@@ -117,3 +121,4 @@ MonoBehaviour:
   enemy: {fileID: 0}
   healthbarContainer: {fileID: 0}
   healthBarDisplayCounter: 0
+  healthbarLingerTime: 2
