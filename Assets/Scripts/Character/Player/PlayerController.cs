@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     PlayerInput playerInput;
     MenuManager menuManager;
     XpMenuManager xpMenuManager;
+    BossManager bossManager;
 
     public void SwitchToPlayerControls() => playerInput.SwitchCurrentActionMap("PlayerControls");
     public void SwitchToUI() => playerInput.SwitchCurrentActionMap("UI");
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         menuManager = FindObjectOfType<MenuManager>();
         xpMenuManager = FindObjectOfType<XpMenuManager>();
+        bossManager = FindObjectOfType<BossManager>();
         runAction = playerInput.currentActionMap.FindAction("RunButton");
         dodgeAction = playerInput.currentActionMap.FindAction("DodgeButton");
         parryAction = playerInput.currentActionMap.FindAction("ParryButton");
@@ -78,7 +80,9 @@ public class PlayerController : MonoBehaviour
     }
     void OnPlayerPause()
     {
-        if (!pausedThisFrame)
+        if (bossManager != null && bossManager.CutsceneInProgress)
+            Time.timeScale = 10;
+        else if (!pausedThisFrame)
             StartCoroutine(Pause());
     }
 

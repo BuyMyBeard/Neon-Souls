@@ -1,76 +1,84 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BossManager : MonoBehaviour, IRechargeable
 {
     [SerializeField] BossHealth boss1Health;
     [SerializeField] BossHealth boss2Health;
-
-    [SerializeField] DisplayBar bossBar1;
-    [SerializeField] DisplayBar bossBar2;
+    DisplayBar bossbar1;
+    DisplayBar bossbar2;
 
     Animator animator1;
     Animator animator2;
+    Animator cutscene;
     EnemyAnimationEvents boss1Events;
     EnemyAnimationEvents boss2Events;
     Enemy boss1;
     Enemy boss2;
     PlayerAnimationEvents playerAnimationEvents;
+    FadeFilter fadeFilter;
+    public bool CutsceneInProgress { get; private set; } = false;
     bool defeated = false;
-    bool cinematicInProgress = false;
     void Awake()
     {
+        fadeFilter = GetComponentInChildren<FadeFilter>();
         playerAnimationEvents = FindObjectOfType<PlayerAnimationEvents>();
         boss1 = boss1Health.GetComponent<Enemy>();
         boss2 = boss2Health.GetComponent<Enemy>();
         animator1 = boss1.GetComponent<Animator>();
         animator2 = boss2.GetComponent<Animator>();
+        cutscene = GetComponent<Animator>();
         boss1Events = boss1.GetComponent<EnemyAnimationEvents>();
         boss2Events = boss2.GetComponent<EnemyAnimationEvents>();
+        bossbar1 = GameObject.FindGameObjectWithTag("BossBar1").GetComponent<DisplayBar>();
+        bossbar2 = GameObject.FindGameObjectWithTag("BossBar2").GetComponent<DisplayBar>();
+        boss1Health.displayHealthbar = bossbar1;
+        boss2Health.displayHealthbar = bossbar2;
     }
     void Start()
     {
-        InitBosses();
+        ResetBosses();
     }
+        
     [ContextMenu("Start Boss Fight")]
-    public void StartBossFight()
+    public void StartCutscene()
     {
         if (defeated) return;
-        StartCoroutine(nameof(BossFight));
+        playerAnimationEvents.FreezeCamera();
+        playerAnimationEvents.FreezeMovement();
+        playerAnimationEvents.DisableActions();
+        playerAnimationEvents.FreezeRotation();
+        cutscene.Play("Cutscene");
+        CutsceneInProgress = true;
     }
-
-    IEnumerator BossFight()
+    void StartBossAnimation()
     {
-        cinematicInProgress = true;
-        //playerAnimationEvents.DisableActions();
-        //playerAnimationEvents.FreezeCamera();
-        // yield return new WaitWhile(() => cinematicInProgress);
-        yield return new WaitForSeconds(2);
         animator1.speed = 1;
         animator2.speed = 1;
-        yield return new WaitForSeconds(4);
-        // playerAnimationEvents.ResetAll();
+    }
+    void StopPosing()
+    {
         animator1.SetTrigger("StopPosing");
         animator2.SetTrigger("StopPosing");
-        yield return new WaitForSeconds(.5f);
+    }
+    void ActivateBosses()
+    {
         boss1.ChangeMode(Enemy.ModeId.InRange);
         boss2.ChangeMode(Enemy.ModeId.InRange);
         boss1Events.EnableActions();
         boss2Events.EnableActions();
         boss1Events.UnFreezeMovement();
         boss2Events.UnFreezeMovement();
-        yield return new WaitWhile(() => boss1Health.CurrentHealth > 0 && boss2Health.CurrentHealth > 0);
-        defeated = true;
     }
     public void Recharge()
     {
         if (defeated) return;
-        StopCoroutine(nameof(BossFight));
-        InitBosses();
+        ResetBosses();
     }
 
-    void InitBosses()
+    void ResetBosses()
     {
         boss1Events.DisableActions();
         boss2Events.DisableActions();
@@ -82,6 +90,34 @@ public class BossManager : MonoBehaviour, IRechargeable
         animator2.speed = 0;
         animator1.SetBool("ExtendAttacks", false);
         animator2.SetBool("ExtendAttacks", false);
+        bossbar1.Hide();
+        bossbar2.Hide();
+        StopCoroutine(nameof(WaitForDeath));
+        boss1Health.invincible = true;
+        boss2Health.invincible = true;
     }
-    public void EndCinematic() => cinematicInProgress = false;
+    void StopCutscene()
+    {
+        Time.timeScale = 1;
+        playerAnimationEvents.ResetAll();
+        ActivateBosses();
+        CutsceneInProgress = false;
+        bossbar1.Show();
+        bossbar2.Show();
+        boss1Health.invincible = false;
+        boss2Health.invincible = false;
+        StartCoroutine(nameof(WaitForDeath));
+    }
+
+    IEnumerator WaitForDeath()
+    {
+        yield return new WaitWhile(() => boss1Health.CurrentHealth > 0 || boss2Health.CurrentHealth > 0);
+        defeated = true;
+        yield return new WaitForSeconds(5);
+        cutscene.enabled = false;
+        fadeFilter.StartFadeIn(3);
+        yield return new WaitForSeconds(4);
+        cutscene.enabled = true;
+        SceneManager.LoadScene(2);
+    }
 }
