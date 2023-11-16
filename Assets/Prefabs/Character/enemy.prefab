@@ -202,6 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 292e7c691eb76c545a28c88765172b9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockable: 0
   onTrigger:
     m_PersistentCalls:
       m_Calls: []
@@ -304,6 +305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 292e7c691eb76c545a28c88765172b9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockable: 0
   onTrigger:
     m_PersistentCalls:
       m_Calls: []
@@ -772,10 +774,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   density: 200
   explosionSource: {fileID: 0}
-  explosionStrength: 100
-  explosionRadius: 10
-  upwardsModifier: 2
   partsLayer: 16
+  droppedXp: {fileID: 0}
 --- !u!195 &-7337860955012261918
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -811,6 +811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseTurnSpeed: 200
+  xpPrice: 20
   turnSpeed: 200
   rotationFrozen: 0
   movementFrozen: 0
@@ -939,7 +940,7 @@ MonoBehaviour:
     val: {fileID: 3761475377701715548}
   isAttacking: 0
   baseDamage: 40
-  damageBonus: 0
+  bonusDamage: 0
   fullBody: {fileID: 11400000, guid: 196cc22cf2b906149bd0cb5c326f8aa3, type: 2}
   possibleActions:
   - actionName: 0
@@ -1154,6 +1155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 292e7c691eb76c545a28c88765172b9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockable: 0
   onTrigger:
     m_PersistentCalls:
       m_Calls: []

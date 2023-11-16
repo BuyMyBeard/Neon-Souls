@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 public class BossManager : MonoBehaviour, IRechargeable
@@ -113,11 +115,16 @@ public class BossManager : MonoBehaviour, IRechargeable
     {
         yield return new WaitWhile(() => boss1Health.CurrentHealth > 0 || boss2Health.CurrentHealth > 0);
         defeated = true;
-        yield return new WaitForSeconds(5);
-        cutscene.enabled = false;
+        yield return new WaitForSeconds(3);
+        VolumeProfile profile = Camera.main.GetComponent<Volume>().profile;
+        profile.TryGet(out Bloom bloom);
+        while (bloom.intensity.value < 5000)
+        {
+            bloom.intensity.value += 1500 * Time.deltaTime;
+            yield return null;
+        }
         fadeFilter.StartFadeIn(3);
         yield return new WaitForSeconds(4);
-        cutscene.enabled = true;
         SceneManager.LoadScene(2);
     }
 }

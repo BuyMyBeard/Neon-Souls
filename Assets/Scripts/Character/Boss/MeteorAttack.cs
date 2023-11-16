@@ -18,6 +18,7 @@ public class MeteorAttack : MonoBehaviour, IRechargeable
     GameObject model;
     Health health;
     new Collider collider;
+    GameObject shadow;
     public bool SkipThisFrameRootMotion { get; private set; } = false;
 
     private void Awake()
@@ -39,6 +40,7 @@ public class MeteorAttack : MonoBehaviour, IRechargeable
     public void StartAttack()
     {
         animator.SetTrigger("MeteorLaunch");
+        enemy.ChangeMode(Enemy.ModeId.Idle);
         enemyAnimationEvents.FreezeMovement();
         enemyAnimationEvents.FreezeRotation();
         enemyAnimationEvents.DisableActions();
@@ -52,6 +54,9 @@ public class MeteorAttack : MonoBehaviour, IRechargeable
     {
         SkipThisFrameRootMotion = true;
         transform.position = new Vector3(enemy.Target.position.x, transform.position.y, enemy.Target.position.z) + Vector3.forward * 0.001f + animator.deltaPosition;
+        transform.rotation = Quaternion.LookRotation(enemy.DirectionToPlayer, Vector3.up);
+        shadow.transform.parent = null;
+        shadow.transform.position = new Vector3(transform.position.x, shadow.transform.position.y, transform.position.z);
         yield return null;
         SkipThisFrameRootMotion = false;
     }
@@ -59,14 +64,13 @@ public class MeteorAttack : MonoBehaviour, IRechargeable
     IEnumerator WaitInSky()
     {
         model.SetActive(false);
-        GameObject shadow = Instantiate(shadowDecal);
+        shadow = Instantiate(shadowDecal);
         Transform parent = enemy.Target.GetComponentInParent<CharacterController>().transform;
-        shadow.transform.position =parent.position;
+        shadow.transform.position = parent.position;
         shadow.transform.parent = parent;
         yield return new WaitForSeconds(hoverTime);
 
         animator.SetTrigger("MeteorAttack");
-        enemyAnimationEvents.UnFreezeRotation();
         model.SetActive(true);
     }
 
@@ -74,7 +78,7 @@ public class MeteorAttack : MonoBehaviour, IRechargeable
     {
         agent.enabled = true;
         collider.enabled = true;
-        enemyAnimationEvents.FreezeRotation();
+        enemy.ChangeMode(Enemy.ModeId.InRange);
         Instantiate(cracksDecal).transform.position = transform.position;
     }
     IEnumerator AttackPeriodically()

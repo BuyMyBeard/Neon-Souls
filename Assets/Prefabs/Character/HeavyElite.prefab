@@ -140,9 +140,61 @@ PrefabInstance:
     - {fileID: 2848173867034494544, guid: 5f37ccc52d22b784eb52a6dbdbe0a31c, type: 3}
     - {fileID: 6484954475046364963, guid: 5f37ccc52d22b784eb52a6dbdbe0a31c, type: 3}
     - {fileID: 5238902981165767782, guid: 5f37ccc52d22b784eb52a6dbdbe0a31c, type: 3}
+    - {fileID: 6592103069110389925, guid: 5f37ccc52d22b784eb52a6dbdbe0a31c, type: 3}
     m_RemovedGameObjects:
     - {fileID: 5869185293041141421, guid: 5f37ccc52d22b784eb52a6dbdbe0a31c, type: 3}
     - {fileID: 8590731616932004925, guid: 5f37ccc52d22b784eb52a6dbdbe0a31c, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 14118305191808067, guid: 5f37ccc52d22b784eb52a6dbdbe0a31c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5062292614691833600}
   m_SourcePrefab: {fileID: 100100000, guid: 5f37ccc52d22b784eb52a6dbdbe0a31c, type: 3}
+--- !u!1 &1649178268277421920 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 14118305191808067, guid: 5f37ccc52d22b784eb52a6dbdbe0a31c, type: 3}
+  m_PrefabInstance: {fileID: 1644137548398852899}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5062292614691833600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649178268277421920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7b45929678e9db41801fde94908f5f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseTurnSpeed: 0
+  xpPrice: 1000
+  turnSpeed: 0
+  rotationFrozen: 0
+  movementFrozen: 0
+  idleInitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  inRangeInitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  closeInitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  idleExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  inRangeExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  closeExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  closeMovementChance: []
+  sprintingSpeed: 5
+  strafingSpeed: 0.7
+  idealRange: 2
+  idealRangeTopMargin: 0.2
+  idealRangeBottomMargin: 0.5
+  movementChangeTimeMin: 1
+  movementChangeTimeMax: 5

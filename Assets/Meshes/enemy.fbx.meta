@@ -1032,6 +1032,20 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.09954548
+        functionName: SyncLocation
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.16895689
+        functionName: SyncLocation
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.17505638
         functionName: InitWeaponCollider
         data: 
@@ -1053,7 +1067,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.21812537
+      - time: 0.22287598
         functionName: DisableWeaponCollider
         data: 
         objectReferenceParameter: {fileID: 11400000, guid: 7043798c6499f0845a961b5af225f209, type: 2}
@@ -1069,20 +1083,6 @@ ModelImporter:
         messageOptions: 0
       - time: 0.8912387
         functionName: ResetAll
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.16895689
-        functionName: SyncLocation
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.14992471
-        functionName: SyncLocation
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -1351,6 +1351,70 @@ ModelImporter:
         functionName: ResetAll
         data: 
         objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Enemy|Attack2-Boss
+      takeName: Enemy|Attack2-Boss
+      internalID: -3671701723368100430
+      firstFrame: 0
+      lastFrame: 73
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0.392405
+        functionName: InitWeaponCollider
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: a2bb3dd31a3668b40b41168fa854670b, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5253063
+        functionName: ResetWeaponCollider
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: a2bb3dd31a3668b40b41168fa854670b, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.6915994
+        functionName: InitWeaponCollider
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 9d4e72b9a7cd0e64fbfb40acf53bd69f, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.7836592
+        functionName: DisableWeaponCollider
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 9d4e72b9a7cd0e64fbfb40acf53bd69f, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.89873403
+        functionName: ResetAll
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 9d4e72b9a7cd0e64fbfb40acf53bd69f, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
