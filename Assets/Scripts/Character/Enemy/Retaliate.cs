@@ -57,7 +57,7 @@ public class Retaliate : MonoBehaviour
 
             case EnemyAction.RollAttack:
                 animator.SetTrigger(action.ToString());
-                enemy.transform.rotation = Quaternion.LookRotation(enemy.DirectionToPlayer, Vector3.up);
+                enemy.transform.rotation = Quaternion.LookRotation(-enemy.DirectionToPlayer, Vector3.up);
                 enemyAnimationEvents.DisableActions();
                 enemyAnimationEvents.FreezeRotation();
                 enemyAnimationEvents.FreezeMovement();
