@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public enum EnemyAction { None, SliceOverHead, BackhandSlice, SpinAttack, MaleniaAttack, Block, RollAttack, GunAttack, Shoot, AgileEliteAttack };
+public enum EnemyAction { None, SliceOverHead, BackhandSlice, SpinAttack, MaleniaAttack, Block, RollAttack, GunAttack, Shoot, AgileEliteAttack, HeavyEliteAttack };
 public class EnemyMeleeAttack : MeleeAttack
 {
     float timeSinceLastAction = 0;
@@ -66,6 +66,7 @@ public class EnemyMeleeAttack : MeleeAttack
                 break;
 
             case EnemyAction.SpinAttack:
+            case EnemyAction.HeavyEliteAttack:
                 animator.SetTrigger(action.ToString());
                 enemyAnimationEvents.FreezeMovement();
                 enemyAnimationEvents.FreezeRotation();

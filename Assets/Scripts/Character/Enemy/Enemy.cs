@@ -85,7 +85,7 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
         Mode.Main();
         Vector3 target = new Vector3(Target.position.x, 0, Target.position.z);
         Vector3 current = new Vector3(transform.position.x, 0, transform.position.z);
-        DirectionToPlayer = current - target;
+        DirectionToPlayer = target - current;
         distanceFromPlayer = Vector3.Distance(target, current);
         Velocity = (transform.position - prevPosition) / Time.deltaTime;
         prevPosition = transform.position;
@@ -109,7 +109,7 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
     {
         if (!rotationFrozen)
         {
-            Quaternion towardsPlayer = Quaternion.LookRotation(-DirectionToPlayer, Vector3.up);
+            Quaternion towardsPlayer = Quaternion.LookRotation(DirectionToPlayer, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, towardsPlayer, turnSpeed * Time.deltaTime);
         }
     }

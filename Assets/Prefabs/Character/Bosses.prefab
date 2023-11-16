@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5771340135437430766}
+  - component: {fileID: 1657155605372342931}
   m_Layer: 0
   m_Name: Bosses
   m_TagString: Untagged
@@ -31,48 +32,15 @@ Transform:
   m_Children:
   - {fileID: 1060422079194110070}
   - {fileID: 2068740730824374302}
-  - {fileID: 8486347714792861957}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8060838253406155979
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8486347714792861957}
-  - component: {fileID: 3872144152634860999}
-  m_Layer: 0
-  m_Name: BossManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8486347714792861957
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8060838253406155979}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5771340135437430766}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3872144152634860999
+--- !u!114 &1657155605372342931
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8060838253406155979}
+  m_GameObject: {fileID: 5667078435773725385}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2830c0fe030a2ab4a99778cf41259475, type: 3}
@@ -143,6 +111,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3221355509229788085, guid: b405bad6510e9aa4d80e2efd952e6bcd, type: 3}
+      propertyPath: possibleActions.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221355509229788085, guid: b405bad6510e9aa4d80e2efd952e6bcd, type: 3}
       propertyPath: initiateActions.Array.data[1].weight
       value: 0
       objectReference: {fileID: 0}
@@ -157,6 +129,14 @@ PrefabInstance:
     - target: {fileID: 3221355509229788085, guid: b405bad6510e9aa4d80e2efd952e6bcd, type: 3}
       propertyPath: possibleActions.Array.data[3].weight
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221355509229788085, guid: b405bad6510e9aa4d80e2efd952e6bcd, type: 3}
+      propertyPath: possibleActions.Array.data[4].weight
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221355509229788085, guid: b405bad6510e9aa4d80e2efd952e6bcd, type: 3}
+      propertyPath: possibleActions.Array.data[4].actionName
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -209,11 +189,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3627368222462739605, guid: 7dc644b0ef0175642b056b2f076a3d5c, type: 3}
       propertyPath: possibleActions.Array.data[3].weight
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3627368222462739605, guid: 7dc644b0ef0175642b056b2f076a3d5c, type: 3}
       propertyPath: possibleActions.Array.data[4].weight
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3627368222462739605, guid: 7dc644b0ef0175642b056b2f076a3d5c, type: 3}
       propertyPath: possibleActions.Array.data[4].actionName
