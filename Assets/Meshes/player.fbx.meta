@@ -59,22 +59,28 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: "\nClip 'armature|Stagger-Back' has import animation
-      warnings that might lower retargeting quality:\nNote: Activate translation
-      DOF on avatar to improve retargeting quality.\n\t'hand.L' has scale animation
-      that will be discarded.\n\nClip 'armature|Stagger-Front' has import animation
-      warnings that might lower retargeting quality:\nNote: Activate translation
-      DOF on avatar to improve retargeting quality.\n\t'hand.L' has scale animation
-      that will be discarded.\n\nClip 'armature|Stagger-Left' has import animation
-      warnings that might lower retargeting quality:\nNote: Activate translation
-      DOF on avatar to improve retargeting quality.\n\t'hand.L' has scale animation
-      that will be discarded.\n\nClip 'armature|Stagger-Right' has import animation
-      warnings that might lower retargeting quality:\nNote: Activate translation
-      DOF on avatar to improve retargeting quality.\n\t'hand.L' has scale animation
-      that will be discarded.\n\nClip 'armature|StartBlocking' has import animation
-      warnings that might lower retargeting quality:\nNote: Activate translation
-      DOF on avatar to improve retargeting quality.\n\t'forearm.L' has scale animation
-      that will be discarded.\n\t'hand.L' has scale animation that will be discarded.\n\t'forearm.R'
+    animationImportWarnings: "\nClip 'armature|Death' has import animation warnings
+      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'foot.L' has scale animation that will be
+      discarded.\n\nClip 'armature|HeavyAttackCombo' has import animation warnings
+      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'hand.L' has scale animation that will be
+      discarded.\n\nClip 'armature|Stagger-Back' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'hand.L' has scale animation that will be
+      discarded.\n\nClip 'armature|Stagger-Front' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'hand.L' has scale animation that will be
+      discarded.\n\nClip 'armature|Stagger-Left' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'hand.L' has scale animation that will be
+      discarded.\n\nClip 'armature|Stagger-Right' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'hand.L' has scale animation that will be
+      discarded.\n\nClip 'armature|StartBlocking' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'forearm.L' has scale animation that will
+      be discarded.\n\t'hand.L' has scale animation that will be discarded.\n\t'forearm.R'
       has scale animation that will be discarded.\n\t'hand.R' has scale animation
       that will be discarded.\n\nClip 'armature|StopBlocking' has import animation
       warnings that might lower retargeting quality:\nNote: Activate translation
@@ -106,7 +112,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
@@ -119,28 +125,28 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.3809524
+      - time: 0.35934746
         functionName: FreezeRotation
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.44110274
+      - time: 0.42875707
         functionName: InitWeaponCollider
         data: 
         objectReferenceParameter: {fileID: 11400000, guid: 0a2661b6984aaf34ba36b7da956aa750, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.5104008
+      - time: 0.5752156
         functionName: DisableWeaponCollider
         data: 
         objectReferenceParameter: {fileID: 11400000, guid: 0a2661b6984aaf34ba36b7da956aa750, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.82299495
+      - time: 0.8569456
         functionName: ResetAll
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -803,6 +809,13 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0
+        functionName: DoInteraction
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.897281
         functionName: ResetAll
         data: 
@@ -928,6 +941,184 @@ ModelImporter:
         functionName: ResetAll
         data: 
         objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: HeavyAttackCombo
+      takeName: armature|HeavyAttackCombo
+      internalID: -520249449948445934
+      firstFrame: 0
+      lastFrame: 71
+      wrapMode: 0
+      orientationOffsetY: 30
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0.7511737
+        functionName: ResetAll
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.2112676
+        functionName: InitWeaponCollider
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 56e4feabdecf1854da02aa0c7330c038, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.29577467
+        functionName: DisableWeaponCollider
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 56e4feabdecf1854da02aa0c7330c038, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.09389671
+        functionName: UnFreezeRotation
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 56e4feabdecf1854da02aa0c7330c038, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.17370893
+        functionName: FreezeRotation
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 56e4feabdecf1854da02aa0c7330c038, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: LightAttackCombo
+      takeName: armature|LightAttackCombo
+      internalID: -2062507840111084322
+      firstFrame: 0
+      lastFrame: 49
+      wrapMode: 0
+      orientationOffsetY: 35
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0.30381674
+        functionName: FreezeRotation
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 48161fd11ddbafa41b33bf1bbd3d6610, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.31455398
+        functionName: InitWeaponCollider
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 48161fd11ddbafa41b33bf1bbd3d6610, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.53051645
+        functionName: DisableWeaponCollider
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 48161fd11ddbafa41b33bf1bbd3d6610, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.87323946
+        functionName: ResetAll
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 48161fd11ddbafa41b33bf1bbd3d6610, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: LightAttackCombo2
+      takeName: armature|LightAttackCombo2
+      internalID: 4631067592462383259
+      firstFrame: 0
+      lastFrame: 64
+      wrapMode: 0
+      orientationOffsetY: -23
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0.46009392
+        functionName: InitWeaponCollider
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: c4f7b54988f1acc409fc3d9954b5de71, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.57276994
+        functionName: DisableWeaponCollider
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: c4f7b54988f1acc409fc3d9954b5de71, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.887324
+        functionName: ResetAll
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: c4f7b54988f1acc409fc3d9954b5de71, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.44600937
+        functionName: FreezeRotation
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: c4f7b54988f1acc409fc3d9954b5de71, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0

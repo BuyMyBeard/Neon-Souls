@@ -13,6 +13,8 @@ public class PlayerMeleeAttack : MeleeAttack ,IStat
     [SerializeField] int dmgUpgrade = 0;
     public float Value => baseDamage;
     public int Upgrade => dmgUpgrade;
+    bool canComboLight = false;
+    bool canComboHeavy = false;
     protected override void Awake()
     {
         base.Awake();
@@ -24,26 +26,38 @@ public class PlayerMeleeAttack : MeleeAttack ,IStat
         base.InitWeaponCollider(attackDef);
         stamina.Remove(attackDef.staminaCost);
     }
+    private void Update()
+    {
+        if (stamina.IsExhausted)
+        {
+            animator.ResetTrigger("LightAttack");
+            animator.ResetTrigger("HeavyAttack");
+        }
+    }
     void OnLightAttack()
     {
-        if (!animationEvents.ActionAvailable || stamina.IsExhausted) return;
-        
+        if ((!canComboLight && !animationEvents.ActionAvailable) || stamina.IsExhausted || health.IsDead) return;
+
+        animator.ResetTrigger("LightAttack");
         animator.SetTrigger("LightAttack");
-        animationEvents.StopStaminaRegen();
-        animationEvents.DisableActions();
-        animationEvents.FreezeMovement();
+        canComboLight = true;
     }
     void OnHeavyAttack()
     {
-        if (!animationEvents.ActionAvailable || stamina.IsExhausted) return;
+        if (!canComboHeavy && !animationEvents.ActionAvailable || stamina.IsExhausted || health.IsDead) return;
 
+        animator.ResetTrigger("HeavyAttack");
         animator.SetTrigger("HeavyAttack");
-        animationEvents.StopStaminaRegen();
-        animationEvents.DisableActions();
-        animationEvents.FreezeMovement();
+        canComboHeavy = true;
     }
     public void UpgradeStat(int nbAmelioration)
     {
         bonusDamage += nbAmelioration * dmgUpgrade;
+    }
+    public void ResetCombo()
+    {
+        canComboLight = false; 
+        canComboHeavy = false;
+        animator.SetBool("Attacking", false);
     }
 }

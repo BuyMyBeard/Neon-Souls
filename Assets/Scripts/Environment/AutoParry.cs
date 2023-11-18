@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
-public class AutoParry : Powerup
+public class AutoParry : RechargeablePowerup
 {
-    protected override bool IsTemporary => true;
     PlayerHealth playerHealth;
     protected override void Awake()
     {
@@ -14,20 +15,15 @@ public class AutoParry : Powerup
     }
     public override void Apply()
     {
+        base.Apply();
         playerHealth.isAutoParryOn = true;
         playerHealth.OnHit.AddListener(Revert);
     }
-
     public override void Revert()
     {
+        base.Revert();
         playerHealth.isAutoParryOn = false;
         // TODO: Find out if this removes all occurences of Powerup.Revert or BlockIsParry.Revert
         playerHealth.OnHit.RemoveListener(Revert);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
