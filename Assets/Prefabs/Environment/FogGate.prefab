@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -161.46385, y: 11.194323, z: -147.29782}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.67739815, y: 1.4108136, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 956534281344342228}
@@ -54,8 +54,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5739822, y: 1.891365, z: 2.3280258}
-  m_Center: {x: -0.5564995, y: 0.34194183, z: 0.010185242}
+  m_Size: {x: 1.2237765, y: 1.891365, z: 2.3280258}
+  m_Center: {x: -0.73160243, y: 0.3419418, z: 0.010185242}
 --- !u!114 &5022152960365154551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,6 +166,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fog_PS
       objectReference: {fileID: 0}
+    - target: {fileID: 6191220511634214596, guid: 237af597cafe5cc488c72ebe8203e90b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9088604504897790794, guid: 237af597cafe5cc488c72ebe8203e90b, type: 3}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 0.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 9088604504897790794, guid: 237af597cafe5cc488c72ebe8203e90b, type: 3}
+      propertyPath: ShapeModule.m_Scale.y
+      value: 2.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 9088604504897790794, guid: 237af597cafe5cc488c72ebe8203e90b, type: 3}
+      propertyPath: ShapeModule.m_Scale.z
+      value: 2.84
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -203,5 +219,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.1382217, y: 2.0447152, z: 1.5708803}
-  m_Center: {x: -0.008571625, y: 0.01341784, z: 0.1715841}
+  m_Size: {x: 1.3824561, y: 2.388741, z: 1.5708802}
+  m_Center: {x: 0.113545924, y: -0.010990043, z: 0.17158413}
