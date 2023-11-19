@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     XpMenuManager xpMenuManager;
     BossManager bossManager;
 
+    List<IControlsChangedListener> controlsChangedListeners;
     public void SwitchToPlayerControls() => playerInput.SwitchCurrentActionMap("PlayerControls");
     public void SwitchToUI() => playerInput.SwitchCurrentActionMap("UI");
     private void Awake()
@@ -118,9 +119,19 @@ public class PlayerController : MonoBehaviour
 
     void OnMove(InputValue val) => Move = val.Get<Vector2>();
     void OnLook(InputValue val) => Look = val.Get<Vector2>();
+
     void OnControlsChanged()
     {
-        // TODO: Change button prompts
+        //Because this fucking garbage gets called before the thing even awakens
+        playerInput ??= GetComponent<PlayerInput>();
+        controlsChangedListeners ??= FindObjectsOfType<MonoBehaviour>().OfType<IControlsChangedListener>().ToList();
+        foreach (IControlsChangedListener listener in controlsChangedListeners)
+            listener.ControlsChanged(GamepadActive ? SupportedDevices.Gamepad : SupportedDevices.Keyboard);
     }
+}
+
+interface IControlsChangedListener
+{
+    public void ControlsChanged(SupportedDevices device);
 }
 
