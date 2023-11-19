@@ -5,6 +5,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Collider))]
 public abstract class Interactable : MonoBehaviour
@@ -49,13 +50,15 @@ public abstract class Interactable : MonoBehaviour
         Gizmos.DrawRay(snapObject.position, snapObject.forward);
     }
 }
-public class ButtonPrompt : MonoBehaviour
+public class ButtonPrompt : MonoBehaviour, IControlsChangedListener
 {
     [SerializeField] TextMeshProUGUI textPrompt;
     [SerializeField] GameObject[] display;
     //[SerializeField] float cooldown = 0.5f;
     Transform player;
     readonly List<Interactable> possiblePrompts = new();
+    [SerializeField] Image keyboardInteractIcon;
+    [SerializeField] Image gamepadInteractIcon;
     public Interactable currentPrompt;
     //bool onCooldown = false;
 
@@ -136,4 +139,17 @@ public class ButtonPrompt : MonoBehaviour
         foreach (var c in display) c.SetActive(true);
     }
 
+    public void ControlsChanged(SupportedDevices device)
+    {
+        if (device == SupportedDevices.Keyboard)
+        {
+            keyboardInteractIcon.enabled = true;
+            gamepadInteractIcon.enabled = false;
+        }
+        else
+        {
+            keyboardInteractIcon.enabled = false;
+            gamepadInteractIcon.enabled = true;
+        }
+    }
 }
