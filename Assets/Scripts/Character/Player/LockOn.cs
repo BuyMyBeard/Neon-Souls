@@ -123,7 +123,7 @@ public class LockOn : MonoBehaviour
                 IsLocked = false;
                 indicator.gameObject.SetActive(false);
                 yield return new WaitForSeconds(healthbarLingerTimeOnEnemyDeath);
-                if (!IsLocked)
+                if (!IsLocked && EnemyHealth is not BossHealth)
                 {
                     EnemyHealth.HideHealthbar();
                 }
@@ -142,11 +142,7 @@ public class LockOn : MonoBehaviour
             camFollowTarget.transform.localEulerAngles = new Vector3(euler.x, euler.y, 0);
 
             if (Vector3.Distance(camFollowTarget.position, targetEnemy.position) > viewRadius * maxLockOnDistance)
-            {
-                IsLocked = false;
-                EnemyHealth.HideHealthbar();
-                indicator.gameObject.SetActive(false);
-            }
+                StopLocking();
             yield return null;
         }
     }
