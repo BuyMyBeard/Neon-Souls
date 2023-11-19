@@ -2,16 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Doors : MonoBehaviour
+public class Doors : Interactable
 {
-    Collider[] blockingColliders;
-    private void Awake()
+    Rigidbody[] rbs;
+    public override string animationTriggerName { get; } = "Interact";
+    
+    protected override void Awake()
     {
-        blockingColliders = GetComponentsInParent<Collider>();
+        base.Awake();
+        rbs = GetComponentsInChildren<Rigidbody>();
+        promptMessage = "Ouvrir les portes";
+    }
+    public override void Interact()
+    {
+        base.Interact();
+        foreach (Rigidbody rb in rbs) { rb.isKinematic = false; }
+        GetComponent<Collider> ().enabled = false;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        foreach(Collider c in blockingColliders) { c.enabled = false; }
-    }
 }
