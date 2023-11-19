@@ -69,8 +69,8 @@ public class PlayerHealth : Health, IStat
     }
     [ContextMenu("Die")]
     protected override void Die()
-    {
-        base.Die();
+    {     
+        base.Die();      
         gameManager.PlayerDie();
     }
     public override void Recharge()

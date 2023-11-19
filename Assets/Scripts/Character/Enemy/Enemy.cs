@@ -13,6 +13,7 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
     public Quaternion OriginRot { get; private set; }
     public Vector3 OriginPos { get; private set; }
     protected EnemyAnimationEvents enemyAnimationEvents;
+    public bool canRespawn = true;
     [SerializeField] float baseTurnSpeed;
     [SerializeField] int xpPrice = 5;
     [HideInInspector] public float turnSpeed;
@@ -51,8 +52,10 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
     public UnityEvent closeExitEvent = new();
     public Vector3 Velocity { get; private set; }
     protected Vector3 prevPosition;
-
+    [SerializeField] Collider lockable;
+    LockOn lockOn;
     XpManager xpManager;
+    EnemyHealth health;
     protected virtual void Awake()
     {
         modeDefs = new ModeDef[3]
@@ -74,6 +77,8 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
         xpManager = FindObjectOfType<XpManager>();
         OriginPos = transform.position;
         OriginRot = transform.rotation;
+        lockOn = Target.GetComponentInParent<LockOn>();
+        health = GetComponent<EnemyHealth>();
     }
     protected virtual IEnumerator Start()
     {
@@ -119,6 +124,7 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
 
     public virtual void Recharge()
     {
+        if (!canRespawn && health.hasAlreadyDiedOnce) return;
         gameObject.SetActive(false);
         transform.SetPositionAndRotation(OriginPos, OriginRot);
         gameObject.SetActive(true);
@@ -148,5 +154,16 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
     {
         if (xpPrice <= 0) return; 
         xpManager.DistributeXp(xpPrice);
+    }
+
+    public void DisableLockOn()
+    {
+        lockable.enabled = false;
+        lockOn.StopLocking();
+    }
+
+    public void EnableLockOn()
+    {
+        lockable.enabled = true;
     }
 }

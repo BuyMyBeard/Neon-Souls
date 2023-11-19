@@ -19,7 +19,7 @@ public class Retaliate : MonoBehaviour
             stagger.onStagger.AddListener(StartLookForRetaliation);
     }
     
-    void StartLookForRetaliation()
+    public void StartLookForRetaliation()
     {
         StopCoroutine(LookForRetaliation());
         StartCoroutine(LookForRetaliation());

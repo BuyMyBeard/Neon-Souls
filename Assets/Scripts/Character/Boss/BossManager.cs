@@ -86,6 +86,10 @@ public class BossManager : MonoBehaviour, IRechargeable
         boss2Events.DisableActions();
         boss1Events.FreezeMovement();
         boss2Events.FreezeMovement();
+        animator1.ResetAllTriggers();
+        animator2.ResetAllTriggers();
+        animator1.ResetAllBooleans();
+        animator2.ResetAllBooleans();
         animator1.Play("PoseLeft");
         animator1.speed = 0;
         animator2.Play("PoseRight");
@@ -94,6 +98,8 @@ public class BossManager : MonoBehaviour, IRechargeable
         animator2.SetBool("ExtendAttacks", false);
         bossbar1.Hide();
         bossbar2.Hide();
+        bossbar1.Set(1, 1);
+        bossbar2.Set(1, 1);
         StopCoroutine(nameof(WaitForDeath));
         boss1Health.invincible = true;
         boss2Health.invincible = true;
