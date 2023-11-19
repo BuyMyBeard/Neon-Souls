@@ -12,6 +12,12 @@ public class NavMeshAgentRootMotion : StateMachineBehaviour
     }
     override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        agent.Move(animator.deltaPosition);
+        if (agent.isActiveAndEnabled)
+        {
+            agent.Move(animator.deltaPosition);
+            agent.transform.rotation *= animator.deltaRotation;
+        }
+        else
+            animator.ApplyBuiltinRootMotion();
     }
 }

@@ -13,6 +13,7 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
     public Quaternion OriginRot { get; private set; }
     public Vector3 OriginPos { get; private set; }
     protected EnemyAnimationEvents enemyAnimationEvents;
+    public bool canRespawn = true;
     [SerializeField] float baseTurnSpeed;
     [SerializeField] int xpPrice = 5;
     [HideInInspector] public float turnSpeed;
@@ -51,8 +52,10 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
     public UnityEvent closeExitEvent = new();
     public Vector3 Velocity { get; private set; }
     protected Vector3 prevPosition;
-
+    [SerializeField] Collider lockable;
+    LockOn lockOn;
     XpManager xpManager;
+    EnemyHealth health;
     protected virtual void Awake()
     {
         modeDefs = new ModeDef[3]
@@ -74,6 +77,8 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
         xpManager = FindObjectOfType<XpManager>();
         OriginPos = transform.position;
         OriginRot = transform.rotation;
+        lockOn = Target.GetComponentInParent<LockOn>();
+        health = GetComponent<EnemyHealth>();
     }
     protected virtual IEnumerator Start()
     {
@@ -85,7 +90,7 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
         Mode.Main();
         Vector3 target = new Vector3(Target.position.x, 0, Target.position.z);
         Vector3 current = new Vector3(transform.position.x, 0, transform.position.z);
-        DirectionToPlayer = current - target;
+        DirectionToPlayer = target - current;
         distanceFromPlayer = Vector3.Distance(target, current);
         Velocity = (transform.position - prevPosition) / Time.deltaTime;
         prevPosition = transform.position;
@@ -109,7 +114,7 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
     {
         if (!rotationFrozen)
         {
-            Quaternion towardsPlayer = Quaternion.LookRotation(-DirectionToPlayer, Vector3.up);
+            Quaternion towardsPlayer = Quaternion.LookRotation(DirectionToPlayer, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, towardsPlayer, turnSpeed * Time.deltaTime);
         }
     }
@@ -119,6 +124,7 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
 
     public virtual void Recharge()
     {
+        if (!canRespawn && health.hasAlreadyDiedOnce) return;
         gameObject.SetActive(false);
         transform.SetPositionAndRotation(OriginPos, OriginRot);
         gameObject.SetActive(true);
@@ -133,7 +139,7 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
     public void RestoreSpeed() => agent.speed = BaseSpeed;
     protected void AnimateMovement()
     {
-        if (!enemyAnimationEvents.ActionAvailable)
+        if (!enemyAnimationEvents.ActionAvailable || movementFrozen)
         {
             animator.SetBool("IsMoving", false);
             return;
@@ -146,6 +152,18 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
     }
     public void GiveXp()
     {
+        if (xpPrice <= 0) return; 
         xpManager.DistributeXp(xpPrice);
+    }
+
+    public void DisableLockOn()
+    {
+        lockable.enabled = false;
+        lockOn.StopLocking();
+    }
+
+    public void EnableLockOn()
+    {
+        lockable.enabled = true;
     }
 }

@@ -14,5 +14,6 @@ public class CharacterControllerRootMotion : StateMachineBehaviour
     override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         characterController.Move(animator.deltaPosition + Vector3.up * playerMovement.Gravity);
+        characterController.transform.rotation *= animator.deltaRotation;
     }
 }

@@ -36,7 +36,7 @@ public class ShooterEnemy : Enemy
         base.InRangeMain();
         if (!rotationFrozen)
         {
-            Quaternion towardsPlayer = Quaternion.LookRotation(-DirectionToPlayer, Vector3.up);
+            Quaternion towardsPlayer = Quaternion.LookRotation(DirectionToPlayer, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, towardsPlayer, turnSpeed * Time.deltaTime);
         }
 
