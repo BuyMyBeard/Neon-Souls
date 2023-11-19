@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SawTrackScript : MonoBehaviour, IRechargeable
@@ -19,8 +20,8 @@ public class SawTrackScript : MonoBehaviour, IRechargeable
     {
         foreach(Transform t in transform)
             sawLaunchers.Add(t);
-        leftLauncher = transform.GetChild(0);
-        rightLauncher = transform.GetChild(5);
+        leftLauncher = sawLaunchers.First<Transform>();
+        rightLauncher = sawLaunchers.Last<Transform>();
     }
     private void OnTriggerEnter(Collider c)
     {
