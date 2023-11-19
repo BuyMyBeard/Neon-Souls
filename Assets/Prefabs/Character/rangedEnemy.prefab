@@ -94,6 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 292e7c691eb76c545a28c88765172b9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockable: 0
   onTrigger:
     m_PersistentCalls:
       m_Calls: []
@@ -1074,6 +1075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 292e7c691eb76c545a28c88765172b9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockable: 0
   onTrigger:
     m_PersistentCalls:
       m_Calls: []
@@ -1201,7 +1203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseTurnSpeed: 200
-  xpPrice: 5
+  xpPrice: 20
   turnSpeed: 200
   rotationFrozen: 0
   movementFrozen: 0
@@ -1322,6 +1324,7 @@ MonoBehaviour:
     val: {fileID: 5099727615490112259}
   isAttacking: 0
   baseDamage: 30
+  bonusDamage: 0
   fullBody: {fileID: 0}
   possibleActions:
   - actionName: 0

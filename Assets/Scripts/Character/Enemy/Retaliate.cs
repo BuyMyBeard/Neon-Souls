@@ -14,12 +14,12 @@ public class Retaliate : MonoBehaviour
     {
         enemy = GetComponent<Enemy>();
         animator = GetComponent<Animator>();
-        stagger = GetComponent<Stagger>();
         enemyAnimationEvents = GetComponent<EnemyAnimationEvents>();
-        stagger.onStagger.AddListener(StartLookForRetaliation);
+        if (TryGetComponent(out stagger))
+            stagger.onStagger.AddListener(StartLookForRetaliation);
     }
     
-    void StartLookForRetaliation()
+    public void StartLookForRetaliation()
     {
         StopCoroutine(LookForRetaliation());
         StartCoroutine(LookForRetaliation());
@@ -57,7 +57,7 @@ public class Retaliate : MonoBehaviour
 
             case EnemyAction.RollAttack:
                 animator.SetTrigger(action.ToString());
-                enemy.transform.rotation = Quaternion.LookRotation(enemy.DirectionToPlayer, Vector3.up);
+                enemy.transform.rotation = Quaternion.LookRotation(-enemy.DirectionToPlayer, Vector3.up);
                 enemyAnimationEvents.DisableActions();
                 enemyAnimationEvents.FreezeRotation();
                 enemyAnimationEvents.FreezeMovement();
