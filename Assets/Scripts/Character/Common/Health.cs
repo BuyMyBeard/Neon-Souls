@@ -11,7 +11,6 @@ public abstract class Health : MonoBehaviour, IRechargeable
     public DisplayBar displayHealthbar;
     public bool invincible = false;
     protected Animator animator;
-    [HideInInspector]
     public UnityEvent OnHit;
     public float CurrentHealth { get; protected set; }
     public bool IsDead { get => CurrentHealth <= 0; }
@@ -45,7 +44,7 @@ public abstract class Health : MonoBehaviour, IRechargeable
     /// <param name="damage">Amount of damage applied</param>
     public void InflictDamage(int damage, Transform attackerPosition = null)
     {
-        if (invincible)
+        if (invincible && IsDead)
             return;
         if (attackerPosition != null)
             stagger.BecomeStaggered(attackerPosition);

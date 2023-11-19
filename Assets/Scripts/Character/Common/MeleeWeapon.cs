@@ -17,17 +17,20 @@ public class MeleeWeapon : MonoBehaviour
     new Collider collider;
     readonly List<Health> opponentsHit = new();
     Transform user = null;
+    TrailRenderer trailRenderer;
     public bool ColliderEnabled
     {
         get => collider.enabled;
         set
         {
+            if (trailRenderer != null) trailRenderer.emitting = value;
             collider.enabled = value;
             opponentsHit.Clear();
         }
     }
     void Awake()
     {
+        trailRenderer = GetComponentInChildren<TrailRenderer>();
         collider = GetComponent<Collider>();
         ColliderEnabled = false;
         collider.isTrigger = true;

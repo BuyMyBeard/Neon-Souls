@@ -1274,7 +1274,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 1
+        functionName: DisableLockOn
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -1354,6 +1361,13 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0
+        functionName: EnableLockOn
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -1391,7 +1405,7 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: 0.5253063
-        functionName: ResetWeaponCollider
+        functionName: DisableWeaponCollider
         data: 
         objectReferenceParameter: {fileID: 11400000, guid: a2bb3dd31a3668b40b41168fa854670b, type: 2}
         floatParameter: 0

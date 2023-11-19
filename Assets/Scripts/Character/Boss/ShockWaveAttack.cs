@@ -96,11 +96,12 @@ public class ShockWaveAttack : MonoBehaviour, IRechargeable
     IEnumerator AttackPeriodically()
     {
         yield return new WaitUntil(() => health.CurrentHealth / health.MaxHealth < .5f);
+        animator.SetBool("ExtendAttacks", true);
         while (!health.IsDead)
         {
             yield return new WaitUntil(() => enemyAnimationEvents.ActionAvailable);
             StartAttack();
-            animator.SetBool("ExtendAttacks", true);
+            yield return new WaitUntil(() => enemyAnimationEvents.ActionAvailable);
             yield return new WaitForSeconds(Random.Range(minCooldown, maxCooldown));
         }
     }

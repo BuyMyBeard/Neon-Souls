@@ -49,9 +49,9 @@ public class LockOn : MonoBehaviour
     }
     public void LateUpdate()
     {
-        if (IsLocked)
+        if (IsLocked && EnemyHealth is not BossHealth)
         {
-            if(EnemyHealth.displayHealthbar != null)
+            if (EnemyHealth.displayHealthbar != null)
             {
                 RectTransform parent = (EnemyHealth.displayHealthbar as EnemyHealthbar).rt;
                 var vp2 = mainCam.WorldToViewportPoint(TargetEnemy.position);
@@ -92,12 +92,7 @@ public class LockOn : MonoBehaviour
     void OnLockOn()
     {
         if (IsLocked)
-        {
-            IsLocked = false;
-            EnemyHealth.HideHealthbar();
-            indicator.gameObject.SetActive(false);
-            EnemyHealth = null;
-        }
+            StopLocking();
         else if (enemiesInSight.Count > 0)
         {
             IsLocked = true;
@@ -106,6 +101,16 @@ public class LockOn : MonoBehaviour
         }
         else
             StartCoroutine(SmoothLook(Quaternion.LookRotation(player.forward)));
+    }
+
+    public void StopLocking()
+    {
+        IsLocked = false;
+
+        if (EnemyHealth != null && EnemyHealth is not BossHealth)
+            EnemyHealth.HideHealthbar();
+        indicator.gameObject.SetActive(false);
+        EnemyHealth = null;
     }
     IEnumerator CamLockedOnTarget(Transform targetEnemy)
     {
@@ -217,7 +222,7 @@ public class LockOn : MonoBehaviour
         EnemyHealth = TargetEnemy.gameObject.GetComponentInParent<EnemyHealth>();
         if (EnemyHealth != null)
         {
-            EnemyHealth.ShowHealthbar();
+            if (EnemyHealth is not BossHealth) EnemyHealth.ShowHealthbar();
             indicator.gameObject.SetActive(true);
         }
 
@@ -235,7 +240,8 @@ public class LockOn : MonoBehaviour
                 return false;
 
             indicator.gameObject.SetActive(false);
-            EnemyHealth.HideHealthbar();
+            if (EnemyHealth is not BossHealth)
+                EnemyHealth.HideHealthbar();
             List<Transform> enemies = enemiesInSight.OrderBy((e) => mainCam.WorldToViewportPoint(e.position).x).ToList();
 
             int targetIndex = enemies.FindIndex((e) => mainCam.WorldToViewportPoint(TargetEnemy.position).x == mainCam.WorldToViewportPoint(e.position).x);

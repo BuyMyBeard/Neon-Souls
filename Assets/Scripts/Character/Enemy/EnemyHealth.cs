@@ -10,6 +10,7 @@ public class EnemyHealth : Health
     public Transform healthbarContainer;
     public Coroutine showHealthbarCoroutine = null;
     public int healthBarDisplayCounter = 0;
+    public bool hasAlreadyDiedOnce { get; private set; } = false;
 
     protected override void Awake()
     {
@@ -74,6 +75,7 @@ public class EnemyHealth : Health
     protected override void Die()
     {
         base.Die();
+        hasAlreadyDiedOnce = true;
         GetComponent<Enemy>().GiveXp();
     }
 }

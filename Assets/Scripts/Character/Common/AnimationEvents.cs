@@ -34,13 +34,13 @@ public abstract class AnimationEvents : MonoBehaviour
     }
     public virtual void ResetAll()
     {
+        DisableAllWeaponColliders();
+        if (health.IsDead) return;
         EnableActions();
         StopIFrame();
         UnFreezeRotation();
-        DisableAllWeaponColliders();
         EndStagger();
         RestoreTurnSpeed();
-        Debug.Log("Resetted all");
     }
     public virtual void FallApart() => fallApart.Decompose();
     public virtual void FreezeMovement() { }

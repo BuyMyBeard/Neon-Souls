@@ -8,13 +8,13 @@ public class HeavyElite : MeleeEnemy
 {
     protected override void InRangeInit()
     {
-        base.InRangeInit();
+        inRangeInitEvent.Invoke();
         agent.enabled = true;
         agent.updateRotation = true;
+        agent.speed = BaseSpeed;
     }
     protected override void InRangeMain()
     {
-        base.InRangeMain();
         agent.SetDestination(Target.position);
         animator.SetBool("IsWalking", Velocity.magnitude > 0);
     }
