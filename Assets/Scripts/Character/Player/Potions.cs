@@ -15,6 +15,8 @@ public class Potions : MonoBehaviour, IRechargeable
     IEnumerator refillHealthCoroutine;
     Animator animator;
     PlayerAnimationEvents animationEvents;
+    Color currentColor;
+    Material fluidMat;
     public float FillLevel
     {
         get => potionMat.GetFloat("_Height");
@@ -22,6 +24,8 @@ public class Potions : MonoBehaviour, IRechargeable
     }
     void Awake()
     {
+        fluidMat = potionObject.GetComponent<Renderer>().materials[1];
+        currentColor = fluidMat.GetColor("_EmissionColor");
         var potionDisplay = GameObject.FindGameObjectWithTag("PotionDisplay").GetComponent<Image>();
         potionMat = new Material(potionMat);
         potionDisplay.material = potionMat;
@@ -38,6 +42,13 @@ public class Potions : MonoBehaviour, IRechargeable
     public void DrinkOnePotion()
     {
         currentPotions--;
+        if (currentPotions <= 0)
+        {
+            fluidMat.SetColor("_EmissionColor", Color.black);
+            Color c = fluidMat.GetColor("_BaseColor");
+            c.a = 0;
+            fluidMat.SetColor("_BaseColor", c);
+        }
         StartCoroutine(UpdateFillLevelProgressively());
         
         refillHealthCoroutine = RefillHealth();
@@ -93,6 +104,10 @@ public class Potions : MonoBehaviour, IRechargeable
 
     public void Recharge()
     {
+        fluidMat.SetColor("_EmissionColor", currentColor);
+        Color c = fluidMat.GetColor("_BaseColor");
+        c.a = 1;
+        fluidMat.SetColor("_BaseColor", c);
         ResetPotions();
     }
     public void ShowPotion()
@@ -102,5 +117,12 @@ public class Potions : MonoBehaviour, IRechargeable
     public void HidePotion()
     {
         potionObject.SetActive(false);
+    }
+
+    public void SetLiquidColor(Color color)
+    {
+        currentColor = color;
+        if (currentPotions > 0)
+            fluidMat.SetColor("_EmissionColor", color);
     }
 }

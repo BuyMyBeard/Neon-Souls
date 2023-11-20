@@ -115,6 +115,7 @@ public class FallApart : MonoBehaviour, IRechargeable
         {
             if (weapon.deathBehaviour == MeleeWeapon.DeathBehaviour.Destroy) continue;
             MeleeWeapon ragdollWeapon = Instantiate(weapon, weapon.transform.position, weapon.transform.rotation, null);
+            ragdollWeapon.transform.localScale = weapon.transform.lossyScale;
             Rigidbody rb = ragdollWeapon.GetComponent<Rigidbody>();
             weapon.gameObject.SetActive(false);
             ragdollWeapon.gameObject.layer = 16;

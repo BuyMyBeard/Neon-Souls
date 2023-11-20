@@ -1,22 +1,35 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+
+
+public enum SupportedDevices { NotSupported, Gamepad, Keyboard }
 /// <summary>
 /// This is an example for how to override the default display behavior of bindings. The component
 /// hooks into <see cref="RebindActionUI.updateBindingUIEvent"/> which is triggered when UI display
 /// of a binding should be refreshed. It then checks whether we have an icon for the current binding
 /// and if so, replaces the default text display with an icon.
 /// </summary>
+
 public class ButtonsIcons : MonoBehaviour
 {
     public GamepadIcons xbox;
     public GamepadIcons ps4;
     public KeyboardIcons keyboard;
+    [SerializeField] List<PromptUpdate> promptUpdates;
+    [Serializable]
+    struct PromptUpdate
+    {
+        public SelectableRebindAction binding;
+        public Image image;
+        public SupportedDevices supportedDevice;
+    }
 
-    protected void OnEnable()
+    protected void Awake()
     {
         // Hook into all updateBindingUIEvents on all RebindActionUI components in our hierarchy.
         var rebindUIComponents = transform.GetComponentsInChildren<SelectableRebindAction>();
@@ -33,14 +46,27 @@ public class ButtonsIcons : MonoBehaviour
             return;
 
         var icon = default(Sprite);
+        SupportedDevices device = default;
         if (InputSystem.IsFirstLayoutBasedOnSecond(deviceLayoutName, "DualShockGamepad"))
+        {
             icon = ps4.GetSprite(controlPath);
+            device = SupportedDevices.Gamepad;
+
+        }
         else if (InputSystem.IsFirstLayoutBasedOnSecond(deviceLayoutName, "Gamepad"))
+        {
             icon = xbox.GetSprite(controlPath);
+            device = SupportedDevices.Gamepad;
+        }
         else if (InputSystem.IsFirstLayoutBasedOnSecond(deviceLayoutName, "Keyboard") || InputSystem.IsFirstLayoutBasedOnSecond(deviceLayoutName, "Mouse"))
+        {
             icon = keyboard.GetSprite(controlPath);
+            device = SupportedDevices.Keyboard;
+
+        }
 
         var textComponent = component.bindingText;
+
 
         // Grab Image component.
         var imageGO = textComponent.transform.parent.Find("ActionBindingIcon");
@@ -51,6 +77,9 @@ public class ButtonsIcons : MonoBehaviour
             textComponent.gameObject.SetActive(false);
             imageComponent.sprite = icon;
             imageComponent.gameObject.SetActive(true);
+            int index = promptUpdates.FindIndex((promptUpdate => promptUpdate.binding == component && device == promptUpdate.supportedDevice));
+            if (index != -1)
+                promptUpdates[index].image.sprite = icon;
         }
         else
         {

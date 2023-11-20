@@ -10,13 +10,11 @@ public class EnemyHealth : Health
     public Transform healthbarContainer;
     public Coroutine showHealthbarCoroutine = null;
     public int healthBarDisplayCounter = 0;
-    bool staggerable;
-    Stagger stagger;
+    public bool hasAlreadyDiedOnce { get; private set; } = false;
 
     protected override void Awake()
     {
         base.Awake();
-        staggerable = TryGetComponent(out stagger);
         enemy = GetComponent<Enemy>();
     }
     private void OnDisable()
@@ -77,6 +75,7 @@ public class EnemyHealth : Health
     protected override void Die()
     {
         base.Die();
+        hasAlreadyDiedOnce = true;
         GetComponent<Enemy>().GiveXp();
     }
 }
