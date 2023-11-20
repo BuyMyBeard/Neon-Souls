@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public enum EnemyAction { None, SliceOverHead, BackhandSlice, SpinAttack, MaleniaAttack, Block, RollAttack, GunAttack, Shoot };
+public enum EnemyAction { None, SliceOverHead, BackhandSlice, SpinAttack, MaleniaAttack, Block, RollAttack, GunAttack, Shoot, AgileEliteAttack, HeavyEliteAttack, PunchSlice };
 public class EnemyMeleeAttack : MeleeAttack
 {
     float timeSinceLastAction = 0;
@@ -65,36 +65,25 @@ public class EnemyMeleeAttack : MeleeAttack
                 enemyAnimationEvents.DisableActions();
                 break;
 
-            case EnemyAction.BackhandSlice:
-                animator.SetTrigger(action.ToString());
-                enemyAnimationEvents.FreezeMovement();
-                enemyAnimationEvents.DisableActions();
-                break;
-
             case EnemyAction.SpinAttack:
+            case EnemyAction.HeavyEliteAttack:
                 animator.SetTrigger(action.ToString());
                 enemyAnimationEvents.FreezeMovement();
                 enemyAnimationEvents.FreezeRotation();
                 enemyAnimationEvents.DisableActions();
                 break;
 
+            case EnemyAction.BackhandSlice:
             case EnemyAction.MaleniaAttack:
-                animator.SetTrigger(action.ToString());
-                enemyAnimationEvents.FreezeMovement();
-                enemyAnimationEvents.DisableActions();
-                break;
-
             case EnemyAction.GunAttack:
+            case EnemyAction.Shoot:
+            case EnemyAction.AgileEliteAttack:
+            case EnemyAction.PunchSlice:
                 animator.SetTrigger(action.ToString());
                 enemyAnimationEvents.FreezeMovement();
                 enemyAnimationEvents.DisableActions();
                 break;
 
-            case EnemyAction.Shoot:
-                animator.SetTrigger(action.ToString());
-                enemyAnimationEvents.DisableActions();
-                enemyAnimationEvents.FreezeMovement();
-                break;
             default:
                 break;
         }

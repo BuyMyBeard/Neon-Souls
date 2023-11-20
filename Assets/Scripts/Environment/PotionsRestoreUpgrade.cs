@@ -24,7 +24,7 @@ public class PotionsRestoreUpgrade : Powerup
         base.Apply();
 
         potions.restoreValue += potionRestoreBonus;
-        potions.potionObject.GetComponent<Renderer>().materials[1].SetColor("_EmissionColor", upgradeColors[currentLevel] * hdrMultiplier);
+        potions.SetLiquidColor(upgradeColors[currentLevel] * hdrMultiplier);
         potions.potionMat.SetColor("_Fluid", upgradeColors[currentLevel]);
         currentLevel++;
     }

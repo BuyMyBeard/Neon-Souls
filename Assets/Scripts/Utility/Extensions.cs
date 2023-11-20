@@ -36,6 +36,12 @@ public static class Extensions
             if (param.type == AnimatorControllerParameterType.Trigger)
                 animator.ResetTrigger(param.name);
     }
+    public static void ResetAllBooleans(this Animator animator)
+    {
+        foreach (var param in animator.parameters)
+            if (param.type == AnimatorControllerParameterType.Bool)
+                animator.SetBool(param.name, false);
+    }
     public static T PickRandom<T>(this IEnumerable<WeightedAction<T>> possibleActions)
     {
         float totalWeight = possibleActions.Sum(action => action.weight);

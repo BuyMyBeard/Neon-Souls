@@ -38,6 +38,7 @@ public class MeleeAttack : MonoBehaviour
         mw.ColliderEnabled = true;
         mw.damage = Mathf.FloorToInt(baseDamage * attackDef.baseDamageMultiplier) + bonusDamage;
         mw.staminaBlockCost = attackDef.staminaCost;
+        mw.blockable = attackDef.blockable;
     }
     /// <summary>
     /// Disables the children weapon collider

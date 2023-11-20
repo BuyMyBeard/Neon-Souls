@@ -327,12 +327,14 @@ public class SelectableRebindAction : Selectable, ISubmitHandler, IPointerClickH
     }
     protected override void Start()
     {
-        Navigation customNav = new Navigation();
-        customNav.mode = Navigation.Mode.Explicit;
-        customNav.selectOnUp = selectOnUp;
-        customNav.selectOnDown = selectOnDown;
-        customNav.selectOnLeft = selectOnLeft;
-        customNav.selectOnRight = selectOnRight;
+        Navigation customNav = new Navigation
+        {
+            mode = Navigation.Mode.Explicit,
+            selectOnUp = selectOnUp,
+            selectOnDown = selectOnDown,
+            selectOnLeft = selectOnLeft,
+            selectOnRight = selectOnRight
+        };
         navigation = customNav;
         // targetGraphic = GetComponent<Image>();
     }

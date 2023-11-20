@@ -30,16 +30,19 @@ public abstract class AnimationEvents : MonoBehaviour
     }
     public void DisableWeaponCollider(AttackDef attackDef) => attack.DisableWeaponCollider(attackDef);
     public virtual void DisableAllWeaponColliders() => attack.DisableAllWeaponColliders();
-    public void EndStagger() => stagger.IsStaggered = false;
+    public void EndStagger()
+    {
+        if (stagger != null) stagger.IsStaggered = false;
+    }
     public virtual void ResetAll()
     {
+        DisableAllWeaponColliders();
+        if (health.IsDead) return;
         EnableActions();
         StopIFrame();
         UnFreezeRotation();
-        DisableAllWeaponColliders();
         EndStagger();
         RestoreTurnSpeed();
-        Debug.Log("Resetted all");
     }
     public virtual void FallApart() => fallApart.Decompose();
     public virtual void FreezeMovement() { }
