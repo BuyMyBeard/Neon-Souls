@@ -208,31 +208,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f1a8833f20644bc48a8f8dec102dc569, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.89127
+      value: 49.10336
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f1a8833f20644bc48a8f8dec102dc569, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.036
+      value: -18.965137
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f1a8833f20644bc48a8f8dec102dc569, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 34.731136
+      value: 13.473022
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f1a8833f20644bc48a8f8dec102dc569, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: -0.7066051
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f1a8833f20644bc48a8f8dec102dc569, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f1a8833f20644bc48a8f8dec102dc569, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.7076081
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f1a8833f20644bc48a8f8dec102dc569, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f1a8833f20644bc48a8f8dec102dc569, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -240,7 +240,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f1a8833f20644bc48a8f8dec102dc569, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -269.919
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f1a8833f20644bc48a8f8dec102dc569, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -1202,6 +1202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6e2720a882e24a4b9c3ebb572c076de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canRespawn: 1
   baseTurnSpeed: 200
   xpPrice: 20
   turnSpeed: 200
@@ -1225,6 +1226,7 @@ MonoBehaviour:
   closeExitEvent:
     m_PersistentCalls:
       m_Calls: []
+  lockable: {fileID: 6271476621328002723}
   poolTag: BulletPool
   pool: {fileID: 8023061886880811016, guid: 95add22e22201944bb8bc6c68eb728bd, type: 3}
   gunMuzzle: {fileID: 5973898160111761695}
