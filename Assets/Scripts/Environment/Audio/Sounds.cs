@@ -6,7 +6,7 @@ using UnityEngine.Audio;
 
 [RequireComponent(typeof(AudioSource))]
 
-public class Sounds : MonoBehaviour
+public class Sounds : MonoBehaviour        
 {
     readonly Dictionary<Sound, AudioSource> soundLoops = new();
     AudioSource soundSource = null;
