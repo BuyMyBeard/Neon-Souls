@@ -82,4 +82,13 @@ public class Block : MonoBehaviour
         IsBlocking = false;
         animator.SetBool("IsBlocking", false);
     }
+    public void GuardBreak()
+    {
+        IsBlocking = false;
+        animator.SetTrigger("GuardBreakTop");
+        animator.SetTrigger("GuardBreak");
+        animationEvents.FreezeRotation();
+        animationEvents.FreezeMovement();
+        animationEvents.DisableActions();
+    }
 }
