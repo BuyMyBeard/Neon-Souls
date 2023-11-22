@@ -11,7 +11,7 @@ public class MusicTransitionManager : MonoBehaviour
     //    public Transform transform;
     //    public float lowPassVal;
     //}
-    MusicManager musicManager;
+    AudioLoop musicManager;
     Transform player;
     //[SerializeField] List<Checkpoint> checkpoints;
     [SerializeField] bool isInTrigger = false;
@@ -20,7 +20,7 @@ public class MusicTransitionManager : MonoBehaviour
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<CharacterController>().transform;
-        musicManager = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<MusicManager>();
+        musicManager = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<AudioLoop>();
     }
 
     private void OnTriggerEnter(Collider other)
