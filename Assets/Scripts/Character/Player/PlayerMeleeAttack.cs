@@ -58,6 +58,8 @@ public class PlayerMeleeAttack : MeleeAttack ,IStat
     {
         canComboLight = false; 
         canComboHeavy = false;
+        animator.ResetTrigger("LightAttack");
+        animator.ResetTrigger("HeavyAttack");
         animator.SetBool("Attacking", false);
     }
 }
