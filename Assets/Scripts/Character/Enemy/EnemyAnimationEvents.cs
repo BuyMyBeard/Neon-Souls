@@ -34,8 +34,10 @@ public class EnemyAnimationEvents : AnimationEvents
     public override void ResetAll()
     {
         base.ResetAll();
+        if (health.IsDead) return;
         UnFreezeMovement();
         RestoreTurnSpeed();
         UnFreezeRotation();
+        enemy.EnableLockOn();
     }
 }
