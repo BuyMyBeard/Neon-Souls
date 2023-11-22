@@ -22,7 +22,7 @@ public class Stamina : MonoBehaviour, IRechargeable,IStat
     public float Value => maxStamina;
 
     public void StopRegen() => canRegen = false;
-    public void StartRegen() => StartCoroutine(RegenCooldown());
+    public void StartRegenAfterCooldown() => StartCoroutine(RegenCooldown());
     IEnumerator RegenCooldown()
     {
         yield return new WaitForSeconds(timeBeforeRegenKicksIn);
