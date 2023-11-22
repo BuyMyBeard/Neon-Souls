@@ -11,6 +11,9 @@ public class MeteorAttack : MonoBehaviour, IRechargeable
     [SerializeField] float maxCooldown = 45;
     [SerializeField] GameObject cracksDecal;
     [SerializeField] GameObject shadowDecal;
+    [SerializeField] AnimationCurve screenShakeFreq;
+    [SerializeField] AnimationCurve screenShakeAmp;
+    [SerializeField] float screenShakeDuration = 1;
     Enemy enemy;
     EnemyAnimationEvents enemyAnimationEvents;
     Animator animator;
@@ -79,6 +82,7 @@ public class MeteorAttack : MonoBehaviour, IRechargeable
         agent.enabled = true;
         collider.enabled = true;
         enemy.ChangeMode(Enemy.ModeId.InRange);
+        ScreenShake.StartShake(screenShakeAmp, screenShakeFreq, screenShakeDuration);
         Instantiate(cracksDecal).transform.position = transform.position;
     }
     IEnumerator AttackPeriodically()
