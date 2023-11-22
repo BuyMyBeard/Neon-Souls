@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40111a3f894eb424aa9ed1079e7ce06f, type: 3}
+  m_Script: {fileID: 11500000, guid: e367bc8aaede46e4ca345480cd8d16a1, type: 3}
   m_Name: Roll
   m_EditorClassIdentifier: 
-  sound: 5
-  volume: 0.5
+  soundPool:
+  - actionName: 21
+    weight: 1
+  volume: 1

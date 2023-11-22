@@ -13,8 +13,10 @@ public class PlayerHealth : Health, IStat
     Block block;
     public bool isAutoParryOn = false;
     GameManager gameManager;
-    PlayerAnimationEvents playerAnimationEvents;
     MeleeWeapon sword;
+    [SerializeField] RandomSoundDef blockDef;
+    [SerializeField] RandomSoundDef parryDef;
+
     private new void Awake()
     {
         base.Awake();
@@ -22,7 +24,7 @@ public class PlayerHealth : Health, IStat
         stamina = GetComponent<Stamina>();
         block = GetComponent<Block>();
         gameManager = FindObjectOfType<GameManager>();
-        playerAnimationEvents = GetComponentInChildren<PlayerAnimationEvents>();
+        animationEvents = GetComponentInChildren<PlayerAnimationEvents>();
         sword = GetComponentInChildren<MeleeWeapon>();
     }
     public override void HandleHealthbar(int damage)
@@ -32,6 +34,11 @@ public class PlayerHealth : Health, IStat
     public override void InflictBlockableDamage(int damage, int staminaBlockCost, Transform attackerPosition)
     {
         if (invincible) return;
+        if (block.IsParrying)
+            animationEvents.PlaySoundRandom(parryDef);
+        else if (block.IsBlocking)
+            animationEvents.PlaySoundRandom(blockDef);
+
         if ((block.IsParrying || block.IsBlocking && isAutoParryOn) && !stamina.IsExhausted && IsAttackerInFront(attackerPosition))
         {
             // Haptics.ImpactLight();
@@ -79,11 +86,11 @@ public class PlayerHealth : Health, IStat
             animator.Play("Idle");
         base.Recharge();
         displayHealthbar.Add(maxHealth, maxHealth);
-        playerAnimationEvents.HidePotion();
-        playerAnimationEvents.EnableActions();
-        playerAnimationEvents.UnFreezeMovement();
-        playerAnimationEvents.UnFreezeRotation();
-        playerAnimationEvents.StopIFrame();
+        (animationEvents as PlayerAnimationEvents).HidePotion();
+        animationEvents.EnableActions();
+        animationEvents.UnFreezeMovement();
+        animationEvents.UnFreezeRotation();
+        animationEvents.StopIFrame();
         GetComponent<CameraMovement>().SyncFollowTarget();
         sword.gameObject.SetActive(true);
     }
