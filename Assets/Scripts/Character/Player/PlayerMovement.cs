@@ -38,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
     bool wasSprinting = false;
     bool isDecelerating = false;
     [HideInInspector] public float turnSpeed;
+    Vector2 prevInput = Vector2.zero;
 
     public bool IsSprinting { get; private set; } = false;
     Vector2 previousMovement = Vector2.zero;
@@ -95,7 +96,14 @@ public class PlayerMovement : MonoBehaviour
     // Someone refactor this pls :) I'm sowwwy
     void HandleMovement()
     {
-        Vector2 movementInput = playerController.Move; 
+        Vector2 movementInput = playerController.Move;
+        if ((prevInput - movementInput).magnitude > 1.05)
+        {
+            movementInput = prevInput;
+            prevInput = Vector2.zero;
+        }
+        else
+            prevInput = movementInput;
         float movementMagnitude = movementInput.magnitude;
         IsSprinting = playerController.IsSprinting && movementMagnitude >= runThreshold && stamina.CanRun && !movementReduced && animationEvents.ActionAvailable;
         animator.SetBool("IsSprinting", IsSprinting);
