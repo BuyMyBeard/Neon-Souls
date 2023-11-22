@@ -2,7 +2,24 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum Sound { PotionDrink, Kindle, Died, NakedRoll, LightRoll }
+public enum Sound
+{
+    Footstep1,
+    Footstep2,
+    Footstep3,
+    Footstep4,
+    Footstep5,
+    Footstep6,
+    Footstep7,
+    Footstep8,
+    Footstep9,
+    Footstep10,
+    PotionDrink,
+    Kindle,
+    Died,
+    NakedRoll,
+    LightRoll
+}
 
 public class AudioClips : MonoBehaviour
 {

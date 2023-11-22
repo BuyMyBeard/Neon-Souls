@@ -50,5 +50,5 @@ public abstract class AnimationEvents : MonoBehaviour
     public abstract void ChangeTurnSpeed(float turnSpeed);
     public abstract void RestoreTurnSpeed();
     public virtual void PlaySound(SoundDef sound) => sounds.Play(sound.sound, sound.volume);
-    public virtual void PlaySound(RandomSoundDef soundPool) => sounds.PlayRandom(soundPool);
+    public virtual void PlaySoundRandom(RandomSoundDef soundPool) => sounds.PlayRandom(soundPool);
 }

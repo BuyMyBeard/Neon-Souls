@@ -5,13 +5,13 @@ using UnityEngine.Audio;
 
 public class SoundTrigger : MonoBehaviour
 {
-    MusicManager musicManager;
+    AudioLoop musicManager;
     [SerializeField] AudioMixerSnapshot snapshot;
     [SerializeField] float time;
     // Start is called before the first frame update
     void Awake()
     {
-        musicManager = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<MusicManager>();
+        musicManager = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<AudioLoop>();
     }
 
     private void OnTriggerEnter(Collider other)
