@@ -83,7 +83,8 @@ public class PlayerMovement : MonoBehaviour
 
         movement = Quaternion.Euler(0, camera.transform.eulerAngles.y, 0) * movement; //handle camera rotation
         Quaternion movementForward;
-        if (lockOn.IsLocked && !playerController.IsSprinting)      
+        IsSprinting = playerController.IsSprinting && playerController.Move.magnitude >= runThreshold && stamina.CanRun && !movementReduced && animationEvents.ActionAvailable;
+        if (lockOn.IsLocked && !IsSprinting)     
         {
             Vector3 lockOnDirection = lockOn.TargetEnemy.position - characterController.transform.position;
             lockOnDirection.y = 0;

@@ -18,6 +18,9 @@ public class ShockWaveAttack : MonoBehaviour, IRechargeable
     [SerializeField] float maxCooldown = 45;
     [SerializeField] GameObject smallCracks;
     [SerializeField] GameObject largeCracks;
+    [SerializeField] AnimationCurve screenShakeFreq;
+    [SerializeField] AnimationCurve screenShakeAmp;
+    [SerializeField] float screenShakeDuration = 2;
     PlayerHealth playerHealth;
     Enemy enemy;
     Health health;
@@ -42,6 +45,7 @@ public class ShockWaveAttack : MonoBehaviour, IRechargeable
         Instantiate(firstWave? smallCracks : largeCracks, transform.position, smallCracks.transform.rotation);
 
         shockWaveMaterial.SetFloat("_Size", size);
+        ScreenShake.StartShake(screenShakeAmp, screenShakeFreq, screenShakeDuration);
         Haptics.Impact();
         for (float t = 0; t < 1; t += Time.deltaTime / duration)
         {
