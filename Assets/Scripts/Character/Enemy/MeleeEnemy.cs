@@ -6,25 +6,24 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class MeleeEnemy : Enemy
 {
+    protected enum CloseMovementType { StrafeLeft, StrafeRight, None }
+    [SerializeField] protected WeightedAction<CloseMovementType>[] closeMovementChance;
+    [SerializeField] protected float sprintingSpeed = 5;
+    [SerializeField] protected float strafingSpeed = .7f;
+    [SerializeField] protected float idealRange = 2;
+    [SerializeField] protected float idealRangeTopMargin = .2f;
+    [SerializeField] protected float idealRangeBottomMargin = .5f;
+    protected CloseMovementType currentMovement = CloseMovementType.None;
+    protected float timeSinceLastMovementChange = 0f;
+    protected float TimeBeforeNextMovementChange;
+    [SerializeField] protected float movementChangeTimeMin = 1;
+    [SerializeField] protected float movementChangeTimeMax = 5;
 
-    enum CloseMovementType { StrafeLeft, StrafeRight, None }
-    [SerializeField] WeightedAction<CloseMovementType>[] closeMovementChance;
-    [SerializeField] float sprintingSpeed = 5;
-    [SerializeField] float strafingSpeed = .7f;
-    [SerializeField] float idealRange = 2;
-    [SerializeField] float idealRangeTopMargin = .2f;
-    [SerializeField] float idealRangeBottomMargin = .5f;
-    CloseMovementType currentMovement = CloseMovementType.None;
-    float timeSinceLastMovementChange = 0f;
-    float TimeBeforeNextMovementChange;
-    [SerializeField] float movementChangeTimeMin = 1;
-    [SerializeField] float movementChangeTimeMax = 5;
+    protected Direction moveDirection = Direction.None;
 
-    Direction moveDirection = Direction.None;
-
-    bool OverMargin => DistanceFromPlayer > idealRange + idealRangeTopMargin;
-    bool UnderMargin => DistanceFromPlayer < idealRange - idealRangeBottomMargin;
-    bool InMargin => !OverMargin && !UnderMargin;
+    protected bool OverMargin => DistanceFromPlayer > idealRange + idealRangeTopMargin;
+    protected bool UnderMargin => DistanceFromPlayer < idealRange - idealRangeBottomMargin;
+    protected bool InMargin => !OverMargin && !UnderMargin;
     protected override void Update()
     {
         base.Update();
@@ -102,8 +101,8 @@ public class MeleeEnemy : Enemy
             }
         }
     }
-    enum Direction { In, Out, None}
-    IEnumerator StayInIdeal()
+    protected enum Direction { In, Out, None}
+    protected IEnumerator StayInIdeal()
     {
         moveDirection = Direction.None;
         while (true)
@@ -121,7 +120,7 @@ public class MeleeEnemy : Enemy
         }
     }
 
-    void PickRandomMovement()
+    protected void PickRandomMovement()
     {
         timeSinceLastMovementChange = 0;
         TimeBeforeNextMovementChange = Random.Range(movementChangeTimeMin, movementChangeTimeMax);

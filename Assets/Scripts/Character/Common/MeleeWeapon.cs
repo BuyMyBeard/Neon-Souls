@@ -9,6 +9,7 @@ using UnityEngine.Events;
 public class MeleeWeapon : MonoBehaviour
 {
     public enum DeathBehaviour { Destroy, DetachEarly }
+    [HideInInspector] public bool blockable = false;
     [HideInInspector] public UnityEvent<Collider> onTrigger;
     [HideInInspector] public int damage;
     [HideInInspector] public int staminaBlockCost;
@@ -16,17 +17,20 @@ public class MeleeWeapon : MonoBehaviour
     new Collider collider;
     readonly List<Health> opponentsHit = new();
     Transform user = null;
+    TrailRenderer trailRenderer;
     public bool ColliderEnabled
     {
         get => collider.enabled;
         set
         {
+            if (trailRenderer != null) trailRenderer.emitting = value;
             collider.enabled = value;
             opponentsHit.Clear();
         }
     }
     void Awake()
     {
+        trailRenderer = GetComponentInChildren<TrailRenderer>();
         collider = GetComponent<Collider>();
         ColliderEnabled = false;
         collider.isTrigger = true;
@@ -47,7 +51,10 @@ public class MeleeWeapon : MonoBehaviour
         else if (!opponentsHit.Contains(opponentHealth))
         {
             opponentsHit.Add(opponentHealth);
-            opponentHealth.InflictBlockableDamage(damage, staminaBlockCost, user);
+            if (blockable)
+                opponentHealth.InflictBlockableDamage(damage, staminaBlockCost, user);
+            else
+                opponentHealth.InflictDamage(damage, user);
         }
     }
 }

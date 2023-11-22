@@ -46,12 +46,13 @@ public class PlayerAnimationEvents : AnimationEvents
     public override void ResetAll()
     {
         base.ResetAll();
+        ClearHand();
+        HidePotion();
+        if (health.IsDead) return;
         UnFreezeMovement();
         UnFreezeCamera();
-        HidePotion();
         RestoreMovement();
         ResetCombo();
-        ClearHand();
     }
     public void DoInteraction() => interact.DoInteraction();
 
