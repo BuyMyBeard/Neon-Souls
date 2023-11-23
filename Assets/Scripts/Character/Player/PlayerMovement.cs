@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float deceleration = 15;
     [Tooltip("Stamina/s")]
     [SerializeField] float sprintStaminaCost = 15;
+    [SerializeField] float timeToConsiderFalling = .5f;
     float currentSpeed = 0;
     new Camera camera;
     Vector3 movement;
@@ -42,6 +43,8 @@ public class PlayerMovement : MonoBehaviour
     bool isGrounded = false;
     [SerializeField] float groundCheckDistance = .8f;
     [SerializeField] LayerMask groundLayer;
+    bool wasFalling = false;
+    float timeSinceWasGrounded = 0;
 
     public bool IsSprinting { get; private set; } = false;
     Vector2 previousMovement = Vector2.zero;
@@ -73,12 +76,34 @@ public class PlayerMovement : MonoBehaviour
     {
         characterController.Move(new Vector3(0, Gravity, 0));
         isGrounded = characterController.isGrounded;
-        animator.SetBool("IsFalling", !isGrounded);
+        bool isFalling = !isGrounded;
 
         if (characterController.isGrounded)
+        {
             dropSpeed = -1f;
+            timeSinceWasGrounded = 0;
+        }
         else
-            animator.SetBool("IsFalling", !(dropSpeed < 0 && Physics.Raycast(characterController.transform.position, Vector3.down, groundCheckDistance, groundLayer)));
+        {
+            timeSinceWasGrounded += Time.deltaTime;
+            if (timeSinceWasGrounded > timeToConsiderFalling)
+                isFalling = !(dropSpeed < 0 && Physics.Raycast(characterController.transform.position, Vector3.down, groundCheckDistance, groundLayer));
+            else isFalling = false;
+        }
+
+        if (!isFalling && wasFalling)
+        {
+            animationEvents.ResetAll();
+        }
+        else if (isFalling && !wasFalling)
+        {
+            animationEvents.DisableActions();
+            animationEvents.FreezeMovement();
+        }
+
+        wasFalling = isFalling;
+        animator.SetBool("IsFalling", isFalling);
+
         HandleMovement();
 
         movement = Quaternion.Euler(0, camera.transform.eulerAngles.y, 0) * movement; //handle camera rotation
