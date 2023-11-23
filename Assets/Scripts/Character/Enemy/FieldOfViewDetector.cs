@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.InputSystem.XR;
 using Unity.Mathematics;
 using Unity.VisualScripting;
+using UnityEngine.AI;
+using System.Linq;
 
 [RequireComponent(typeof(Enemy))]
 public class FieldOfViewDetector : MonoBehaviour, IPlayerDetector
@@ -17,8 +19,10 @@ public class FieldOfViewDetector : MonoBehaviour, IPlayerDetector
     [Range(0f, 90f)]
     [SerializeField] float viewAngle = 90f;
     [SerializeField] float timeToForget = 10;
+    [SerializeField] bool ignoreIfUnreachable = true;
     Transform playerTarget;
     Enemy enemy;
+    NavMeshAgent agent;
     public float DotViewAngle { get => math.remap(0, 180, 1, 0, viewAngle); }
     private void Awake()
     {
@@ -26,6 +30,7 @@ public class FieldOfViewDetector : MonoBehaviour, IPlayerDetector
         playerTarget = GameObject.FindGameObjectWithTag("PlayerTarget").transform;
         enemy.idleInitEvent.AddListener(StartDetectingPlayer);
         enemy.idleExitEvent.AddListener(StopDetectingPlayer);
+        agent = GetComponent<NavMeshAgent>();
     }
     bool IsPlayerSighted
     {
@@ -35,6 +40,14 @@ public class FieldOfViewDetector : MonoBehaviour, IPlayerDetector
             Vector3 directionToTarget = playerTarget.position - eyes.position;
 
             return (IsInViewAngle(directionToTarget) && TargetInRangeAndSight(directionToTarget, distanceToTarget));
+        }
+    }
+    bool CanReachTarget
+    {
+        get
+        {
+            NavMeshPath path = new NavMeshPath();
+            return agent.CalculatePath(playerTarget.position, path) && path.status == NavMeshPathStatus.PathComplete;
         }
     }
     bool IsInViewAngle(Vector3 directionToTarget)
@@ -58,7 +71,7 @@ public class FieldOfViewDetector : MonoBehaviour, IPlayerDetector
     }
     IEnumerator DetectPlayer()
     {
-        yield return new WaitUntil(() => IsPlayerSighted);
+        yield return new WaitUntil(() => IsPlayerSighted && (!ignoreIfUnreachable || CanReachTarget));
         enemy.ChangeMode(Enemy.ModeId.InRange);
     }
 
