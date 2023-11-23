@@ -139,7 +139,7 @@ public class LockOn : MonoBehaviour
             euler.z = 0;
             euler.x = euler.x > 180 ? euler.x - 360 : euler.x;
             euler.x = Mathf.Clamp(euler.x, cameraMovement.CamMinClamp, cameraMovement.CameraMaxClamp);
-            camFollowTarget.transform.localEulerAngles = new Vector3(euler.x, euler.y, 0);
+            camFollowTarget.eulerAngles = new Vector3(euler.x, euler.y, 0);
 
             if (Vector3.Distance(camFollowTarget.position, targetEnemy.position) > viewRadius * maxLockOnDistance)
                 StopLocking();
@@ -202,7 +202,7 @@ public class LockOn : MonoBehaviour
             euler.z = 0;
             euler.x = euler.x > 180 ? euler.x - 360 : euler.x;
             euler.x = Mathf.Clamp(euler.x, cameraMovement.CamMinClamp, cameraMovement.CameraMaxClamp);
-            camFollowTarget.transform.localEulerAngles = new Vector3(euler.x, euler.y, 0);
+            camFollowTarget.transform.eulerAngles = new Vector3(euler.x, euler.y, 0);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
