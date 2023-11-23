@@ -18,7 +18,7 @@ public class MenuManager : MonoBehaviour
     XpMenuManager xpMenu;
     [HideInInspector] public SelectableRebindAction currentlyRebinding;
     public bool isInLevelingMenu = false;
-    public bool Paused { get; private set; } = true;
+    public bool Paused { get; private set; } = false;
     public SubMenus CurrentSubMenu { get; private set; } = SubMenus.None;
     public bool IsInSubMenu { get => CurrentSubMenu != SubMenus.None; }
     public bool IsInMainMenu { get => SceneManager.GetActiveScene().buildIndex == 0; }
