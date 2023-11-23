@@ -99,6 +99,8 @@ public class DisplayBar : MonoBehaviour
             catchUpCoroutine = CatchUp(TrueValue);
             StartCoroutine(catchUpCoroutine);
         }
+        Debug.Log("Add true value : " + TrueValue);
+        Debug.Log("Add lingered value : " + LingeredValue);
     }
     /// <summary>
     /// Removes a value from the display bar
@@ -138,6 +140,8 @@ public class DisplayBar : MonoBehaviour
             if (!ShowDamageValue)
                 StartCoroutine(DamageDisplayTimer());
         }
+        Debug.Log("Remove true value : " + TrueValue);
+        Debug.Log("Remove lingered value : " + LingeredValue);
     }
     public void Set(float value, float max)
     {
@@ -205,10 +209,10 @@ public class DisplayBar : MonoBehaviour
     {
         isCatchingUp = true;
         float start = LingeredValue;
-        for (float t = 0; t <= 1; t += Time.deltaTime * catchUpSpeed)
+        for (float t = start; t >= goal; t -= Time.deltaTime * catchUpSpeed)
         {
             yield return null;
-            LingeredValue = Mathf.Lerp(start, goal, t);
+            LingeredValue = t;
         }
         LingeredValue = goal;
         isCatchingUp = false;
