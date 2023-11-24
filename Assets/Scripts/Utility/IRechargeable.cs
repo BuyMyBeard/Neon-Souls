@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IRechargeable
 {
-    public void Recharge();
+    public void Recharge(RechargeType rechargeType = RechargeType.Respawn);
 }

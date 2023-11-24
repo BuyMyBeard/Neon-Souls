@@ -74,7 +74,7 @@ public class BossManager : MonoBehaviour, IRechargeable
         boss1Events.UnFreezeMovement();
         boss2Events.UnFreezeMovement();
     }
-    public void Recharge()
+    public void Recharge(RechargeType rechargeType)
     {
         if (defeated) return;
         ResetBosses();

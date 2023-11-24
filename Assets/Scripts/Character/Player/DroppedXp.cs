@@ -23,7 +23,7 @@ public class DroppedXp : MonoBehaviour, IRechargeable
         playerXp.GainXp(DroppedXpAmount);
         Destroy(gameObject);
     }
-    public void Recharge()
+    public void Recharge(RechargeType rechargeType)
     {
         collider.enabled = true;
     }

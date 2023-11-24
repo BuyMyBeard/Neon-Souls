@@ -27,9 +27,9 @@ public class TimedManaRecovery : TimedPowerup
         base.Apply();
         StartCoroutine(nameof(RecoverMana));
     }
-    public override void Recharge()
+    public override void Recharge(RechargeType rechargeType)
     {
-        base.Recharge();
+        base.Recharge(rechargeType);
         StopCoroutine(nameof(RecoverMana));
     }
 }

@@ -22,6 +22,7 @@ public class Spells : MonoBehaviour,IStat
     LockOn lockOn;
     Stamina stamina;
     Mana mana;
+    InputInterface inputInterface;
     public int damageScalingBonus = 0;
 
     public float Value => fireballPrefab.GetComponent<Fireball>().BaseDamage;
@@ -35,10 +36,11 @@ public class Spells : MonoBehaviour,IStat
         lockOn = GetComponent<LockOn>();
         stamina = GetComponent<Stamina>();
         mana = GetComponent<Mana>();
+        inputInterface = GetComponent<InputInterface>();
     }
     void OnCastSpell()
     {
-        if (!animationEvents.ActionAvailable || !mana.CanCast(manaCost)) return;
+        if (!animationEvents.ActionAvailable || !mana.CanCast(manaCost) || inputInterface.PausedThisFrame) return;
 
         animationEvents.DisableActions();
         animationEvents.FreezeMovement();

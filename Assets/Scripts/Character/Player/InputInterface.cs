@@ -5,14 +5,14 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.Windows;
-public class PlayerController : MonoBehaviour
+public class InputInterface : MonoBehaviour
 {
     public Vector2 Look { get; private set; } = Vector2.zero;
     public Vector2 Move { get; private set; } = Vector2.zero;
     public bool IsSprinting { get; private set; } = false;
     public bool BlockInput { get; private set; } = false;
 
-    private bool pausedThisFrame = false;
+    public bool PausedThisFrame { get; private set; } = false;
     public string CurrentControlScheme { get => playerInput.currentControlScheme; }
     public bool KeyboardAndMouseActive { get => CurrentControlScheme == "Keyboard&Mouse"; }
     public bool GamepadActive { get => CurrentControlScheme == "Gamepad"; }
@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
     MenuManager menuManager;
     XpMenuManager xpMenuManager;
     BossManager bossManager;
+
+    bool ignoreDodgeInput = false;
 
     List<IControlsChangedListener> controlsChangedListeners;
     public void SwitchToPlayerControls() => playerInput.SwitchCurrentActionMap("PlayerControls");
@@ -46,6 +48,7 @@ public class PlayerController : MonoBehaviour
         parryAction.started += Parry_started;
         blockAction.canceled += Block_canceled;
     }
+
     private void OnDisable()
     {
         dodgeAction.performed -= Dodge_performed;
@@ -61,6 +64,7 @@ public class PlayerController : MonoBehaviour
 
     private void Parry_started(InputAction.CallbackContext obj)
     {
+        if (PausedThisFrame) return;
         BlockInput = true;
         gameObject.SendMessage("OnParry");
     }
@@ -77,44 +81,56 @@ public class PlayerController : MonoBehaviour
 
     private void Dodge_performed(InputAction.CallbackContext obj)
     {
-        SendMessage("OnDodge");
+        if (ignoreDodgeInput)
+            ignoreDodgeInput = false;
+        else
+            SendMessage("OnDodge");
     }
     void OnPlayerPause()
     {
+        if (PausedThisFrame) return;
         if (bossManager != null && bossManager.CutsceneInProgress)
             Time.timeScale = 10;
-        else if (!pausedThisFrame)
+        else
             StartCoroutine(Pause());
     }
 
 
     IEnumerator Pause()
     {
-        pausedThisFrame = true;
+        PausedThisFrame = true;
+        ignoreDodgeInput = true;
         yield return null;
         if (menuManager.Paused) menuManager.Resume();
         else menuManager.Pause();
         yield return null;
-        pausedThisFrame = false;
+        PausedThisFrame = false;
+
+        // This is so fucking dumb but I have to do it, there is no other way
+        yield return new WaitForSecondsRealtime(1);
+        ignoreDodgeInput = false;
+    }
+    IEnumerator HideXpMenu()
+    {
+        PausedThisFrame = true;
+        ignoreDodgeInput = true;
+        yield return null;
+        xpMenuManager.Hide();
+        xpMenuManager.ResetAffichage();
+        yield return null;
+        PausedThisFrame = false;
+
+        yield return new WaitForSecondsRealtime(1);
+        ignoreDodgeInput = false;
     }
 
-    void OnUIPause()
+    public void OnUIPause()
     {
+        if (PausedThisFrame) return;
         if (xpMenuManager.Active)
-        {
-            xpMenuManager.Hide();
-            xpMenuManager.ResetAffichage();
-        }
-        else if (!pausedThisFrame)
+            StartCoroutine(HideXpMenu());
+        else
             StartCoroutine(Pause());
-    }
-    void OnDodge()
-    {
-        Debug.Log("dodged");
-    }
-    void OnRun()
-    {
-        Debug.Log("ran");
     }
 
     void OnMove(InputValue val) => Move = val.Get<Vector2>();
