@@ -35,6 +35,7 @@ public class MenuManager : MonoBehaviour
     private void Start()
     {
         if (!IsInMainMenu) menuDisplay.SetActive(false);
+        else Paused = true;
     }
     private void OnEnable()
     {

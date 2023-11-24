@@ -12,6 +12,7 @@ public class Settings : MonoBehaviour
     [SerializeField] TMP_Dropdown colorblindFilter;
     [SerializeField] AudioMixer audioMixer;
     [SerializeField] Material colorblindnessCorrectionMaterial;
+    bool rebindActionDisplayInitialized = false;
     private void Awake()
     {
         InitiateValues();
@@ -90,4 +91,12 @@ public class Settings : MonoBehaviour
         colorblindFilterIntensity.interactable = Preferences.ColorblindFilter != 0;
     }
     void UpdateColorBlindFilterIntensity() => colorblindnessCorrectionMaterial.SetFloat("_Intensity", Preferences.ColorblindFilterIntensity);
+
+    public void InitRebindActionDisplay()
+    {
+        if (rebindActionDisplayInitialized) return;
+        foreach (var r in GetComponentsInChildren<SelectableRebindAction>())
+            r.UpdateBindingDisplay();
+        rebindActionDisplayInitialized = true;
+    }
 }
