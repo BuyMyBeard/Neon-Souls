@@ -88,7 +88,7 @@ public class Stamina : MonoBehaviour, IRechargeable,IStat
         CanRun = true;
     }
 
-    public void Recharge()
+    public void Recharge(RechargeType rechargeType)
     {
         ResetStamina();
         playerStaminabar.Add(maxStamina, maxStamina);

@@ -99,7 +99,7 @@ public abstract class Health : MonoBehaviour, IRechargeable
     /// </summary>
     public void Round() => CurrentHealth = Mathf.RoundToInt(CurrentHealth);
 
-    public virtual void Recharge()
+    public virtual void Recharge(RechargeType rechargeType)
     {
         ResetHealth();
         invincible = false;

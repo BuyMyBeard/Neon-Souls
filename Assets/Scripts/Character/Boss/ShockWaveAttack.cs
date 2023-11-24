@@ -110,7 +110,7 @@ public class ShockWaveAttack : MonoBehaviour, IRechargeable
         }
     }
 
-    public void Recharge()
+    public void Recharge(RechargeType rechargeType)
     {
         StopCoroutine(nameof(AttackPeriodically));
         StartCoroutine(nameof(AttackPeriodically));

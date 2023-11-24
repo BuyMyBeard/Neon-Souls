@@ -99,8 +99,6 @@ public class DisplayBar : MonoBehaviour
             catchUpCoroutine = CatchUp(TrueValue);
             StartCoroutine(catchUpCoroutine);
         }
-        Debug.Log("Add true value : " + TrueValue);
-        Debug.Log("Add lingered value : " + LingeredValue);
     }
     /// <summary>
     /// Removes a value from the display bar
@@ -140,8 +138,6 @@ public class DisplayBar : MonoBehaviour
             if (!ShowDamageValue)
                 StartCoroutine(DamageDisplayTimer());
         }
-        Debug.Log("Remove true value : " + TrueValue);
-        Debug.Log("Remove lingered value : " + LingeredValue);
     }
     public void Set(float value, float max)
     {

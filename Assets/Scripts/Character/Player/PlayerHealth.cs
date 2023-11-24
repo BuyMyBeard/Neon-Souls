@@ -80,19 +80,26 @@ public class PlayerHealth : Health, IStat
         base.Die();      
         gameManager.PlayerDie();
     }
-    public override void Recharge()
+    public override void Recharge(RechargeType rechargeType)
     {
-        if (IsDead)
+        if (rechargeType == RechargeType.Respawn)
+        {
             animator.Play("Idle");
-        base.Recharge();
-        displayHealthbar.Add(maxHealth, maxHealth);
-        playerAnimationEvents.HidePotion();
-        playerAnimationEvents.EnableActions();
-        playerAnimationEvents.UnFreezeMovement();
-        playerAnimationEvents.UnFreezeRotation();
-        playerAnimationEvents.StopIFrame();
-        GetComponent<CameraMovement>().SyncFollowTarget();
-        sword.gameObject.SetActive(true);
+            base.Recharge(rechargeType);
+            displayHealthbar.Add(maxHealth, maxHealth);
+            playerAnimationEvents.HidePotion();
+            playerAnimationEvents.EnableActions();
+            playerAnimationEvents.UnFreezeMovement();
+            playerAnimationEvents.UnFreezeRotation();
+            playerAnimationEvents.StopIFrame();
+            GetComponent<CameraMovement>().SyncFollowTarget();
+            sword.gameObject.SetActive(true);
+        }
+        else
+        {
+            ResetHealth();
+            displayHealthbar.Add(maxHealth, maxHealth);
+        }
     }
     public void UpgradeStat(int upgrade)
     {

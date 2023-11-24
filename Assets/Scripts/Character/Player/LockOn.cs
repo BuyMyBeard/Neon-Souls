@@ -19,7 +19,7 @@ public class LockOn : MonoBehaviour
     Transform player;
     Transform camFollowTarget;
     bool isSmoothLooking = false;
-    PlayerController playerController;
+    InputInterface inputInterface;
     Camera mainCam;
     CameraMovement cameraMovement;
     Coroutine CamLockOnTargetCoroutine;
@@ -35,7 +35,7 @@ public class LockOn : MonoBehaviour
     {
         canvas = FindObjectOfType<DisplayBar>().GetComponentInParent<Canvas>();
         player = GetComponentInChildren<CharacterController>().transform;
-        playerController = GetComponent<PlayerController>();
+        inputInterface = GetComponent<InputInterface>();
         camFollowTarget = GameObject.Find("FollowTarget").transform;
         mainCam = Camera.main;
         indicator = GameObject.FindGameObjectWithTag("Indicator").GetComponent<RectTransform>();
@@ -70,18 +70,18 @@ public class LockOn : MonoBehaviour
     {
         while (true)
         {
-            if (playerController.KeyboardAndMouseActive)
+            if (inputInterface.KeyboardAndMouseActive)
             {
-                yield return new WaitUntil(() => IsLocked && Mathf.Abs(playerController.Look.x) > mouseThreshold || playerController.GamepadActive);
+                yield return new WaitUntil(() => IsLocked && Mathf.Abs(inputInterface.Look.x) > mouseThreshold || inputInterface.GamepadActive);
             }
             else
             {
-                yield return new WaitUntil(() => IsLocked && Mathf.Abs(playerController.Look.x) > 0.5f || playerController.KeyboardAndMouseActive);
+                yield return new WaitUntil(() => IsLocked && Mathf.Abs(inputInterface.Look.x) > 0.5f || inputInterface.KeyboardAndMouseActive);
             }
             bool enemyAvailable = false;
-            if (playerController.Look.x > 0)
+            if (inputInterface.Look.x > 0)
                 enemyAvailable = SwitchLockedEnemy(Directions.Left);
-            else if (playerController.Look.x < 0)
+            else if (inputInterface.Look.x < 0)
                 enemyAvailable = SwitchLockedEnemy(Directions.Right);
             if (!enemyAvailable)
                 continue;
