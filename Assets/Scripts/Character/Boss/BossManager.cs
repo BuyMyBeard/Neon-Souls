@@ -41,7 +41,7 @@ public class BossManager : MonoBehaviour, IRechargeable
     }
     void Start()
     {
-        ResetBosses();
+        StartCoroutine(ResetBosses());
     }
         
     [ContextMenu("Start Boss Fight")]
@@ -76,12 +76,20 @@ public class BossManager : MonoBehaviour, IRechargeable
     }
     public void Recharge(RechargeType rechargeType)
     {
-        if (defeated) return;
-        ResetBosses();
+        // Doesn't work for now because conflict with other Recharge method for enemy
+        if (defeated)
+            return;
+
+        StartCoroutine(ResetBosses());
     }
 
-    void ResetBosses()
+    IEnumerator ResetBosses()
     {
+        bossbar1.Hide();
+        bossbar2.Hide();
+        bossbar1.Set(1, 1);
+        bossbar2.Set(1, 1);
+        yield return null;
         boss1Events.DisableActions();
         boss2Events.DisableActions();
         boss1Events.FreezeMovement();
@@ -90,19 +98,15 @@ public class BossManager : MonoBehaviour, IRechargeable
         animator2.ResetAllTriggers();
         animator1.ResetAllBooleans();
         animator2.ResetAllBooleans();
+        animator1.SetBool("ExtendAttacks", false);
+        animator2.SetBool("ExtendAttacks", false);
+        StopCoroutine(nameof(WaitForDeath));
+        boss1Health.invincible = true;
+        boss2Health.invincible = true;
         animator1.Play("PoseLeft");
         animator1.speed = 0;
         animator2.Play("PoseRight");
         animator2.speed = 0;
-        animator1.SetBool("ExtendAttacks", false);
-        animator2.SetBool("ExtendAttacks", false);
-        bossbar1.Hide();
-        bossbar2.Hide();
-        bossbar1.Set(1, 1);
-        bossbar2.Set(1, 1);
-        StopCoroutine(nameof(WaitForDeath));
-        boss1Health.invincible = true;
-        boss2Health.invincible = true;
     }
     void StopCutscene()
     {
