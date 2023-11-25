@@ -72,11 +72,11 @@ public class LockOn : MonoBehaviour
         {
             if (inputInterface.KeyboardAndMouseActive)
             {
-                yield return new WaitUntil(() => IsLocked && Mathf.Abs(inputInterface.Look.x) > mouseThreshold || inputInterface.GamepadActive);
+                yield return new WaitUntil(() => IsLocked && (Mathf.Abs(inputInterface.Look.x) > mouseThreshold || inputInterface.GamepadActive));
             }
             else
             {
-                yield return new WaitUntil(() => IsLocked && Mathf.Abs(inputInterface.Look.x) > 0.5f || inputInterface.KeyboardAndMouseActive);
+                yield return new WaitUntil(() => IsLocked && (Mathf.Abs(inputInterface.Look.x) > 0.5f || inputInterface.KeyboardAndMouseActive));
             }
             bool enemyAvailable = false;
             if (inputInterface.Look.x > 0)
@@ -179,7 +179,7 @@ public class LockOn : MonoBehaviour
         }
     }
     // Use Camera.WorldToViewportPoint() for enemyPos
-    bool EnemyInCamAngle(Vector3 enemyPos) => enemyPos.x > 0 && enemyPos.x < 1 && enemyPos.y > 0 && enemyPos.y < 1;
+    bool EnemyInCamAngle(Vector3 enemyPos) => enemyPos.x > 0 && enemyPos.x < 1 && enemyPos.y > 0 && enemyPos.y < 1 && enemyPos.z > 0;
     bool EnemyInRangeAndSight(Vector3 directionToEnemy, float distanceToTarget) => !Physics.Raycast(Camera.main.transform.position, directionToEnemy, distanceToTarget, environmentMask);
     IEnumerator FindEnemiesCoroutine()
     {
@@ -245,11 +245,14 @@ public class LockOn : MonoBehaviour
                 targetIndex--;
             else if (dir == Directions.Left)
                 targetIndex++;
-
+            Debug.Log(targetIndex);
             if (targetIndex >= 0 && targetIndex < enemies.Count)
                 TargetEnemy = enemies[targetIndex];
             else
+            {
+                indicator.gameObject.SetActive(true);
                 return false;
+            }
             LookAtTarget(true);
             return true;
         }
