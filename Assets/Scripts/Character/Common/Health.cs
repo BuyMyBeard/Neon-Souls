@@ -12,6 +12,7 @@ public abstract class Health : MonoBehaviour, IRechargeable
     public bool invincible = false;
     protected Animator animator;
     public UnityEvent OnHit;
+    [HideInInspector] public UnityEvent<Health> OnHitWithParam;
     public float CurrentHealth { get; protected set; }
     public bool IsDead { get => CurrentHealth <= 0; }
     public float MaxHealth { get => maxHealth; }
@@ -49,6 +50,7 @@ public abstract class Health : MonoBehaviour, IRechargeable
         if (attackerPosition != null)
             stagger.BecomeStaggered(attackerPosition);
         OnHit.Invoke();
+        OnHitWithParam.Invoke(this);
         CurrentHealth -= damage;
         HandleHealthbar(damage);
         if (IsDead)
@@ -99,7 +101,7 @@ public abstract class Health : MonoBehaviour, IRechargeable
     /// </summary>
     public void Round() => CurrentHealth = Mathf.RoundToInt(CurrentHealth);
 
-    public virtual void Recharge()
+    public virtual void Recharge(RechargeType rechargeType)
     {
         ResetHealth();
         invincible = false;

@@ -9,6 +9,7 @@ public class Roll : MonoBehaviour
     Animator animator;
     PlayerAnimationEvents animationEvents;
     Stamina stamina;
+    InputInterface inputInterface;
     IEnumerator bufferCoroutine;
     Health health;
 
@@ -18,9 +19,11 @@ public class Roll : MonoBehaviour
         animationEvents = GetComponentInChildren<PlayerAnimationEvents>();
         stamina = GetComponent<Stamina>();
         health = GetComponent<Health>();
+        inputInterface = GetComponent<InputInterface>();
     }
     void OnDodge()
     {
+        if (inputInterface.PausedThisFrame) return;
         if (!animationEvents.ActionAvailable || stamina.IsExhausted)
         {
             if (bufferCoroutine != null)
