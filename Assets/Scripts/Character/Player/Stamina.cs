@@ -9,24 +9,34 @@ public class Stamina : MonoBehaviour, IRechargeable,IStat
     [SerializeField] float staminaRegenRate = 100f;
     [SerializeField] float blockingRegenMultiplier = .5f;
     [SerializeField] int staminaRequiredToRun = 20;
-    [SerializeField] float timeBeforeRegenKicksIn = 0.5f;
     [SerializeField]int upgradeStam;
 
     Block block;
     PlayerAnimationEvents animationEvents;
     PlayerMovement playerMovement;
+    Coroutine regenCooldown;
     public bool CanRun { get; private set; } = true;
     bool canRegen = true;
     public bool IsExhausted { get => currentStamina <= 0; }
     public int Upgrade => upgradeStam;
     public float Value => maxStamina;
 
-    public void StopRegen() => canRegen = false;
-    public void StartRegen() => StartCoroutine(RegenCooldown());
-    IEnumerator RegenCooldown()
+    public void StopRegen()
     {
-        yield return new WaitForSeconds(timeBeforeRegenKicksIn);
-        if (animationEvents.ActionAvailable) canRegen = true;
+        if (regenCooldown != null)
+            StopCoroutine(regenCooldown);
+        canRegen = false;
+    }
+    public void StartRegenAfterCooldown(float cooldown = .7f)
+    {
+        if (regenCooldown != null)
+            StopCoroutine(regenCooldown);
+        regenCooldown = StartCoroutine(RegenCooldown(cooldown));
+    }
+    IEnumerator RegenCooldown(float cooldown)
+    {
+        yield return new WaitForSeconds(cooldown);
+        canRegen = true;
     }
 
     private void Awake()
@@ -78,7 +88,7 @@ public class Stamina : MonoBehaviour, IRechargeable,IStat
         CanRun = true;
     }
 
-    public void Recharge()
+    public void Recharge(RechargeType rechargeType)
     {
         ResetStamina();
         playerStaminabar.Add(maxStamina, maxStamina);

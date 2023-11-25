@@ -18,10 +18,14 @@ public class ShockWaveAttack : MonoBehaviour, IRechargeable
     [SerializeField] float maxCooldown = 45;
     [SerializeField] GameObject smallCracks;
     [SerializeField] GameObject largeCracks;
+    [SerializeField] AnimationCurve screenShakeFreq;
+    [SerializeField] AnimationCurve screenShakeAmp;
+    [SerializeField] float screenShakeDuration = 2;
     PlayerHealth playerHealth;
     Enemy enemy;
     Health health;
     EnemyAnimationEvents enemyAnimationEvents;
+    EnemyMeleeAttack meleeAttack;
     Animator animator;
     bool firstWave = false;
     private void Awake()
@@ -31,6 +35,7 @@ public class ShockWaveAttack : MonoBehaviour, IRechargeable
         enemyAnimationEvents = GetComponent<EnemyAnimationEvents>();
         animator = GetComponent<Animator>();
         health = GetComponent<Health>();
+        meleeAttack = GetComponent<EnemyMeleeAttack>();
     }
     void Start()
     {
@@ -42,6 +47,7 @@ public class ShockWaveAttack : MonoBehaviour, IRechargeable
         Instantiate(firstWave? smallCracks : largeCracks, transform.position, smallCracks.transform.rotation);
 
         shockWaveMaterial.SetFloat("_Size", size);
+        ScreenShake.StartShake(screenShakeAmp, screenShakeFreq, screenShakeDuration);
         Haptics.Impact();
         for (float t = 0; t < 1; t += Time.deltaTime / duration)
         {
@@ -72,11 +78,14 @@ public class ShockWaveAttack : MonoBehaviour, IRechargeable
     [ContextMenu("Start Attack")]
     public void StartAttack()
     {
+        if (health.IsDead) return;
+        meleeAttack.actionQueued = true;
         firstWave = true;
         animator.SetTrigger("ShockwaveAttack");
         enemyAnimationEvents.FreezeMovement();
         enemyAnimationEvents.FreezeRotation();
         enemyAnimationEvents.DisableActions();
+        meleeAttack.actionQueued = false;
     }
     private void OnDestroy()
     {
@@ -102,12 +111,14 @@ public class ShockWaveAttack : MonoBehaviour, IRechargeable
             yield return new WaitUntil(() => enemyAnimationEvents.ActionAvailable);
             StartAttack();
             yield return new WaitUntil(() => enemyAnimationEvents.ActionAvailable);
+            meleeAttack.actionQueued = false;
             yield return new WaitForSeconds(Random.Range(minCooldown, maxCooldown));
         }
     }
 
-    public void Recharge()
+    public void Recharge(RechargeType rechargeType)
     {
+        meleeAttack.actionQueued = false;
         StopCoroutine(nameof(AttackPeriodically));
         StartCoroutine(nameof(AttackPeriodically));
     }

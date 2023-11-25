@@ -40,7 +40,7 @@ public class BonfireManager : MonoBehaviour
     {
         // Ajouter Le Siting Animation et Tout autre behaviour quand le hero interagie avec le bonfire une fois activé
         SetCurrentBonfire(bonefire);
-        gameManager.RechargeEverything();
+        gameManager.RechargeEverything(RechargeType.Rest);
     }
     private void SetCurrentBonfire(Bonfire bonfire)
     {

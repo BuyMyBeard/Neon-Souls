@@ -10,6 +10,7 @@ public class PlayerMeleeAttack : MeleeAttack ,IStat
 {
     Stamina stamina;
     PlayerAnimationEvents animationEvents;
+    InputInterface inputInterface;
     [SerializeField] int dmgUpgrade = 0;
     public float Value => baseDamage;
     public int Upgrade => dmgUpgrade;
@@ -20,6 +21,7 @@ public class PlayerMeleeAttack : MeleeAttack ,IStat
         base.Awake();
         stamina = GetComponent<Stamina>();
         animationEvents = GetComponentInChildren<PlayerAnimationEvents>();
+        inputInterface = GetComponent<InputInterface>();
     }
     public override void InitWeaponCollider(AttackDef attackDef)
     {
@@ -36,7 +38,7 @@ public class PlayerMeleeAttack : MeleeAttack ,IStat
     }
     void OnLightAttack()
     {
-        if ((!canComboLight && !animationEvents.ActionAvailable) || stamina.IsExhausted || health.IsDead) return;
+        if ((!canComboLight && !animationEvents.ActionAvailable) || stamina.IsExhausted || health.IsDead || inputInterface.PausedThisFrame) return;
 
         animator.ResetTrigger("LightAttack");
         animator.SetTrigger("LightAttack");
@@ -44,7 +46,7 @@ public class PlayerMeleeAttack : MeleeAttack ,IStat
     }
     void OnHeavyAttack()
     {
-        if (!canComboHeavy && !animationEvents.ActionAvailable || stamina.IsExhausted || health.IsDead) return;
+        if (!canComboHeavy && !animationEvents.ActionAvailable || stamina.IsExhausted || health.IsDead || inputInterface.PausedThisFrame) return;
 
         animator.ResetTrigger("HeavyAttack");
         animator.SetTrigger("HeavyAttack");
@@ -58,6 +60,8 @@ public class PlayerMeleeAttack : MeleeAttack ,IStat
     {
         canComboLight = false; 
         canComboHeavy = false;
+        animator.ResetTrigger("LightAttack");
+        animator.ResetTrigger("HeavyAttack");
         animator.SetBool("Attacking", false);
     }
 }

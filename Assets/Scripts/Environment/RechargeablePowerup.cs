@@ -41,7 +41,7 @@ public abstract class RechargeablePowerup : Powerup, IRechargeable
             statusIconInstance = null;
     }
 
-    public virtual void Recharge()
+    public virtual void Recharge(RechargeType rechargeType)
     {
         IsVisibleAndTangible = true;
         if (isActive)

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Spawner : MonoBehaviour, IRechargeable
 { 
-    public abstract void Recharge();
+    public abstract void Recharge(RechargeType rechargeType);
     [SerializeField] protected GameObject entity;
     [SerializeField] Color gizmosColor;
     [SerializeField] Mesh gizmosMesh;
