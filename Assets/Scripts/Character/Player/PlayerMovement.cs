@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 [RequireComponent(typeof(LockOn))]
-[RequireComponent(typeof(PlayerController))]
+[RequireComponent(typeof(InputInterface))]
 [RequireComponent(typeof(Stamina))]
 
 public class PlayerMovement : MonoBehaviour
@@ -21,11 +21,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float deceleration = 15;
     [Tooltip("Stamina/s")]
     [SerializeField] float sprintStaminaCost = 15;
+    [SerializeField] float timeToConsiderFalling = .5f;
     float currentSpeed = 0;
     new Camera camera;
     Vector3 movement;
     Vector3 direction = Vector3.forward;
-    PlayerController playerController;
+    InputInterface inputInterface;
     Animator animator;
     LockOn lockOn;
     Stamina stamina;
@@ -38,6 +39,12 @@ public class PlayerMovement : MonoBehaviour
     bool wasSprinting = false;
     bool isDecelerating = false;
     [HideInInspector] public float turnSpeed;
+    Vector2 prevInput = Vector2.zero;
+    bool isGrounded = false;
+    [SerializeField] float groundCheckDistance = .8f;
+    [SerializeField] LayerMask groundLayer;
+    bool wasFalling = false;
+    float timeSinceWasGrounded = 0;
 
     public bool IsSprinting { get; private set; } = false;
     Vector2 previousMovement = Vector2.zero;
@@ -45,9 +52,6 @@ public class PlayerMovement : MonoBehaviour
     {
         get
         {
-            if (characterController.isGrounded)
-                dropSpeed = -1f;
-
             dropSpeed += Physics.gravity.y * Time.deltaTime;
             return dropSpeed * Time.deltaTime;
         }
@@ -56,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
     {
         characterController = GetComponentInChildren<CharacterController>();
         camera = Camera.main;
-        playerController = GetComponent<PlayerController>();
+        inputInterface = GetComponent<InputInterface>();
         animator = GetComponentInChildren<Animator>();
         lockOn = GetComponent<LockOn>();
         stamina = GetComponent<Stamina>();
@@ -70,12 +74,42 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        movement.y = Gravity;
+        characterController.Move(new Vector3(0, Gravity, 0));
+        isGrounded = characterController.isGrounded;
+        bool isFalling = !isGrounded;
+
+        if (characterController.isGrounded)
+        {
+            dropSpeed = -1f;
+            timeSinceWasGrounded = 0;
+        }
+        else
+        {
+            timeSinceWasGrounded += Time.deltaTime;
+            if (timeSinceWasGrounded > timeToConsiderFalling)
+                isFalling = !(dropSpeed < 0 && Physics.Raycast(characterController.transform.position, Vector3.down, groundCheckDistance, groundLayer));
+            else isFalling = false;
+        }
+
+        if (!isFalling && wasFalling)
+        {
+            animationEvents.ResetAll();
+        }
+        else if (isFalling && !wasFalling)
+        {
+            animationEvents.DisableActions();
+            animationEvents.FreezeMovement();
+        }
+
+        wasFalling = isFalling;
+        animator.SetBool("IsFalling", isFalling);
+
         HandleMovement();
 
         movement = Quaternion.Euler(0, camera.transform.eulerAngles.y, 0) * movement; //handle camera rotation
         Quaternion movementForward;
-        if (lockOn.IsLocked && !playerController.IsSprinting)      
+        IsSprinting = inputInterface.IsSprinting && inputInterface.Move.magnitude >= runThreshold && stamina.CanRun && !movementReduced && animationEvents.ActionAvailable;
+        if (lockOn.IsLocked && !IsSprinting)     
         {
             Vector3 lockOnDirection = lockOn.TargetEnemy.position - characterController.transform.position;
             lockOnDirection.y = 0;
@@ -95,9 +129,16 @@ public class PlayerMovement : MonoBehaviour
     // Someone refactor this pls :) I'm sowwwy
     void HandleMovement()
     {
-        Vector2 movementInput = playerController.Move; 
+        Vector2 movementInput = inputInterface.Move;
+        if ((prevInput - movementInput).magnitude > 1.05)
+        {
+            movementInput = prevInput;
+            prevInput = Vector2.zero;
+        }
+        else
+            prevInput = movementInput;
         float movementMagnitude = movementInput.magnitude;
-        IsSprinting = playerController.IsSprinting && movementMagnitude >= runThreshold && stamina.CanRun && !movementReduced && animationEvents.ActionAvailable;
+        IsSprinting = inputInterface.IsSprinting && movementMagnitude >= runThreshold && stamina.CanRun && !movementReduced && animationEvents.ActionAvailable;
         animator.SetBool("IsSprinting", IsSprinting);
         if (movementFrozen)
         {
@@ -127,7 +168,7 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetFloat("MovementSpeedMultiplier", 1);
             }
 
-            if (lockOn.IsLocked && !playerController.IsSprinting)
+            if (lockOn.IsLocked && !inputInterface.IsSprinting)
             {
                 Vector2 blending = movementInput.normalized;
                 animator.SetFloat("MovementX", blending.x);
@@ -168,7 +209,7 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     public void SyncRotation()
     {
-        Vector2 movementInput = playerController.Move;
+        Vector2 movementInput = inputInterface.Move;
         if (movementInput.magnitude < deadZone) return;
         direction = Quaternion.Euler(0, camera.transform.eulerAngles.y, 0) * new Vector3(movementInput.x, 0, movementInput.y);
         Quaternion movementForward = Quaternion.LookRotation(direction, Vector3.up);

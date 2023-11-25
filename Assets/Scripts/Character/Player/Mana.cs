@@ -49,7 +49,7 @@ public class Mana : MonoBehaviour, IRechargeable,IStat
             currentMana = maxMana;
         playerManabar.Add(value, maxMana, shouldLinger);
     }
-    public void Recharge()
+    public void Recharge(RechargeType rechargeType)
     {
         ResetMana();
         playerManabar.Add(maxMana, maxMana);

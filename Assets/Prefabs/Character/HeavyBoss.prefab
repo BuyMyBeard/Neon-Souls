@@ -311,6 +311,55 @@ MonoBehaviour:
   maxCooldown: 45
   smallCracks: {fileID: 656291784504956674, guid: 0a4c137af39667e4d88537ad567c2d3e, type: 3}
   largeCracks: {fileID: 4051992986328229960, guid: 147743aa267b7c74ab03eeacdbf93066, type: 3}
+  screenShakeFreq:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 2
+      inSlope: -0.00024189617
+      outSlope: -0.00024189617
+      tangentMode: 0
+      weightedMode: 1
+      inWeight: 0
+      outWeight: 0.33067673
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.009569367
+      outSlope: -0.009569367
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.8480385
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  screenShakeAmp:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 2
+      inSlope: -0.00024189617
+      outSlope: -0.00024189617
+      tangentMode: 0
+      weightedMode: 1
+      inWeight: 0
+      outWeight: 0.33067673
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.009569367
+      outSlope: -0.009569367
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.8480385
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  screenShakeDuration: 1
 --- !u!114 &6251258415736539912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,7 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40ff0b17012318c44ab62683cf3c10e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 300
+  maxHealth: 100
   timeShowingHealthbar: 3
   displayHealthbar: {fileID: 0}
   invincible: 0

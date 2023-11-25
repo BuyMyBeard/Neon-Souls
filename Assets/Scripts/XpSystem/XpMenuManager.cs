@@ -13,7 +13,7 @@ public class XpMenuManager : MonoBehaviour
 {
     [SerializeField] Selectable firstSelected;
     Canvas menuDisplay;
-    PlayerController playerController;
+    InputInterface inputInterface;
     ButtonXp[] buttons;
     XpManager xpManager;
     MenuManager menuManager;
@@ -23,7 +23,7 @@ public class XpMenuManager : MonoBehaviour
     {
         menuDisplay = GetComponentInChildren<Canvas>();
         buttons = FindObjectsOfType<ButtonXp>();
-        playerController = FindObjectOfType<PlayerController>();
+        inputInterface = FindObjectOfType<InputInterface>();
         xpManager = GetComponent<XpManager>();
         menuManager = FindObjectOfType<MenuManager>();
     }
@@ -39,8 +39,9 @@ public class XpMenuManager : MonoBehaviour
         {
             button.ChangeColor(Color.white);
         }
+        menuManager.Paused = false;
         menuManager.ResetOverride();
-        playerController.SwitchToPlayerControls();
+        inputInterface.SwitchToPlayerControls();
         Time.timeScale = 1f;
         Active = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -49,8 +50,9 @@ public class XpMenuManager : MonoBehaviour
     [ContextMenu("Show")]
     public void Show()
     {
+        menuManager.Paused = true;
         menuManager.OverrideFirstSelected(firstSelected);
-        playerController.SwitchToUI();
+        inputInterface.SwitchToUI();
         Active = true;
         xpManager.RefreshXPAmountRender();
         Time.timeScale = 0f;

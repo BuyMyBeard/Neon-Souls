@@ -25,7 +25,7 @@ public class PlayerAnimationEvents : AnimationEvents
     public override void EnableActions()
     {
         base.EnableActions();
-        stamina.StartRegen();
+        stamina.StartRegenAfterCooldown();
     }
     public override void FreezeMovement() => playerMovement.movementFrozen = true;
     public override void UnFreezeMovement() => playerMovement.movementFrozen = false;

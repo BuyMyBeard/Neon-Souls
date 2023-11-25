@@ -42,7 +42,7 @@ public class TrapActivation : MonoBehaviour,IRechargeable
         physicalSwitch.position = endPosition;
     }
 
-    public void Recharge()
+    public void Recharge(RechargeType rechargeType)
     {
         ResetTrap();
     }
