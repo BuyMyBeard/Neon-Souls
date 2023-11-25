@@ -61,12 +61,14 @@ public class ButtonPrompt : MonoBehaviour, IControlsChangedListener
     [SerializeField] Image gamepadInteractIcon;
     public Interactable currentPrompt;
     //bool onCooldown = false;
+    Settings settings;
 
     void Awake()
     {
         // TODO: find player transform
         // player = FindObjectOfType<PlayerMove>().transform;
         HidePrompt();
+        settings = FindObjectOfType<Settings>(true);
     }
     public void Interact()
     {
@@ -122,6 +124,7 @@ public class ButtonPrompt : MonoBehaviour, IControlsChangedListener
     }
     public void ProposePrompt(Interactable interactable)
     {
+        settings.InitRebindActionDisplay();
         if (!possiblePrompts.Contains(interactable))
             possiblePrompts.Add(interactable);
     }

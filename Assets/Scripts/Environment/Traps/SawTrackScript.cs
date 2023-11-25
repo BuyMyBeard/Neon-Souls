@@ -85,7 +85,7 @@ public class SawTrackScript : MonoBehaviour, IRechargeable
         }
     }
 
-    public void Recharge()
+    public void Recharge(RechargeType rechargeType)
     {
         ResetTrap();
     }

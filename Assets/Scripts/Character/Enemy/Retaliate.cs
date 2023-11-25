@@ -10,6 +10,8 @@ public class Retaliate : MonoBehaviour
     EnemyAnimationEvents enemyAnimationEvents;
     Stagger stagger;
     Enemy enemy;
+    Health health;
+    EnemyMeleeAttack meleeAttack;
     private void Awake()
     {
         enemy = GetComponent<Enemy>();
@@ -17,6 +19,8 @@ public class Retaliate : MonoBehaviour
         enemyAnimationEvents = GetComponent<EnemyAnimationEvents>();
         if (TryGetComponent(out stagger))
             stagger.onStagger.AddListener(StartLookForRetaliation);
+        meleeAttack = GetComponent<EnemyMeleeAttack>();
+        health = GetComponent<Health>();
     }
     
     public void StartLookForRetaliation()
@@ -42,6 +46,7 @@ public class Retaliate : MonoBehaviour
 
     void DoRetaliation()
     {
+        if (!enemyAnimationEvents.ActionAvailable || health.IsDead || meleeAttack.actionQueued) return;
         EnemyAction action = possibleRetaliations.PickRandom();
         switch (action)
         {

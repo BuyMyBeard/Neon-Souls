@@ -17,6 +17,7 @@ public class Potions : MonoBehaviour, IRechargeable
     PlayerAnimationEvents animationEvents;
     Color currentColor;
     Material fluidMat;
+    InputInterface inputInterface;
     public float FillLevel
     {
         get => potionMat.GetFloat("_Height");
@@ -33,7 +34,7 @@ public class Potions : MonoBehaviour, IRechargeable
         ResetPotions();
         animator = GetComponentInChildren<Animator>();
         animationEvents = GetComponentInChildren<PlayerAnimationEvents>();
-        
+        inputInterface = GetComponent<InputInterface>();
     }
     private void Start()
     {
@@ -71,7 +72,7 @@ public class Potions : MonoBehaviour, IRechargeable
     }
     void OnConsumable()
     {
-        if (!animationEvents.ActionAvailable) return;
+        if (!animationEvents.ActionAvailable || inputInterface.PausedThisFrame) return;
 
         if (currentPotions > 0)
             animator.SetTrigger("Drink");
@@ -101,7 +102,7 @@ public class Potions : MonoBehaviour, IRechargeable
         health.Round();
     }
 
-    public void Recharge()
+    public void Recharge(RechargeType rechargeType)
     {
         fluidMat.SetColor("_EmissionColor", currentColor);
         Color c = fluidMat.GetColor("_BaseColor");

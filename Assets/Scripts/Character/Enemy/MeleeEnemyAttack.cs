@@ -18,6 +18,7 @@ public class EnemyMeleeAttack : MeleeAttack
     [SerializeField] float minActionCooldown = 1;
     [Range(0f, 10f)]
     [SerializeField] float maxActionCooldown = 2;
+    public bool actionQueued = false;
     protected override void Awake()
     {
         base.Awake();
@@ -56,6 +57,7 @@ public class EnemyMeleeAttack : MeleeAttack
     }
     private void DoAction(EnemyAction action)
     {
+        if (health.IsDead || !enemyAnimationEvents.ActionAvailable || actionQueued) return;
         switch(action)
         {
             case EnemyAction.SliceOverHead:

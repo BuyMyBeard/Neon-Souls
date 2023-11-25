@@ -26,7 +26,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] float followTargetVerticalOffset = 0;
 
     CharacterController characterController;
-    PlayerController playerController;
+    InputInterface inputInterface;
 
     public float CamMinClamp => camMinClamp;
     public float CameraMaxClamp => camMaxClamp;
@@ -37,7 +37,7 @@ public class CameraMovement : MonoBehaviour
     void Awake()
     {   
         characterController = GetComponentInChildren<CharacterController>();
-        playerController = GetComponent<PlayerController>();
+        inputInterface = GetComponent<InputInterface>();
     }
     void Update()
     {
@@ -45,12 +45,12 @@ public class CameraMovement : MonoBehaviour
             return;
 
         followTarget.position = Vector3.Lerp(followTarget.position, characterController.transform.position + Vector3.up * followTargetVerticalOffset, Time.deltaTime * catchUpSpeed);
-        float appliedXSens = playerController.GamepadActive ? Preferences.ControllerSensitivityX : Preferences.MouseSensitivity;
-        float appliedYSens = playerController.GamepadActive ? Preferences.ControllerSensivityY : Preferences.MouseSensitivity;
+        float appliedXSens = inputInterface.GamepadActive ? Preferences.ControllerSensitivityX : Preferences.MouseSensitivity;
+        float appliedYSens = inputInterface.GamepadActive ? Preferences.ControllerSensivityY : Preferences.MouseSensitivity;
         int invertX;
         int invertY;
 
-        if (playerController.GamepadActive)
+        if (inputInterface.GamepadActive)
         {
             invertX = Preferences.ControllerInvertX ? -1 : 1;
             invertY = Preferences.ControllerInvertY ? -1 : 1;
@@ -63,9 +63,9 @@ public class CameraMovement : MonoBehaviour
         }
 
         // Quaternion * Quaternion is the same as applying rotation from second to first
-        Quaternion cameraRotation = followTarget.transform.rotation *= Quaternion.AngleAxis(playerController.Look.x * appliedXSens * invertX * Time.deltaTime, Vector3.up);
+        Quaternion cameraRotation = followTarget.transform.localRotation *= Quaternion.AngleAxis(inputInterface.Look.x * appliedXSens * invertX * Time.deltaTime, Vector3.up);
 
-        cameraRotation *= Quaternion.AngleAxis(-playerController.Look.y * appliedYSens * invertY * Time.deltaTime, Vector3.right);
+        cameraRotation *= Quaternion.AngleAxis(-inputInterface.Look.y * appliedYSens * invertY * Time.deltaTime, Vector3.right);
 
         Vector3 cameraAngles = cameraRotation.eulerAngles;
 
@@ -87,7 +87,7 @@ public class CameraMovement : MonoBehaviour
         // Moves Camera behind the player when no look input is given
         Vector3 movementDirection = characterController.velocity;
         movementDirection.y = 0;
-        if (movementDirection.magnitude > 0 && playerController.Look.magnitude == 0)
+        if (movementDirection.magnitude > 0 && inputInterface.Look.magnitude == 0)
         {
             driftTime += Time.deltaTime;
             if (driftTime < driftTimer) return;
