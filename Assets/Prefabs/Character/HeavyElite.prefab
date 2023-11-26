@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 935491110627241153, guid: 0bc4cf1970ccb384780027ac1bf4846e, type: 3}
+      propertyPath: m_BaseOffset
+      value: -0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 1649178268277421920, guid: 0bc4cf1970ccb384780027ac1bf4846e, type: 3}
       propertyPath: m_Name
       value: HeavyElite
@@ -106,6 +110,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnHitWithParam:
+    m_PersistentCalls:
+      m_Calls: []
   enemy: {fileID: 0}
   healthbarContainer: {fileID: 4438152205960399988}
   healthBarDisplayCounter: 0
