@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor.PackageManager;
 using UnityEngine;
+public enum RechargeType { Respawn, Rest }
 
 public class GameManager : MonoBehaviour
 {
@@ -37,16 +38,13 @@ public class GameManager : MonoBehaviour
         bonfireManager.Respawn();
         RechargeEverything();
     }
-    [ContextMenu("Recharge Everything")]
-    public void RechargeEverything()
+    public void RechargeEverything(RechargeType rechargeType = RechargeType.Respawn)
     {
-        // TODO: Enemy Spawns , Piege Recharge
         foreach (IRechargeable rechargeable in rechargeables)
-            rechargeable.Recharge();
+            rechargeable.Recharge(rechargeType);
 
-        int count = tempRechargeables.Count;
         foreach(var rechargeable in tempRechargeables)
-            rechargeable.Recharge();
+            rechargeable.Recharge(rechargeType);
     }
     /// <summary>
     /// Adds Object to list of objects that will be recharged at bonfire or death. These items should be destroyed after, since the list will be cleared.

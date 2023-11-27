@@ -14,11 +14,11 @@ public class MenuManager : MonoBehaviour
     Selectable firstSelectedOverride;
     EventSystem eventSystem;
     InputSystemUIInputModule inputModule;
-    PlayerController playerController;
+    InputInterface inputInterface;
     XpMenuManager xpMenu;
     [HideInInspector] public SelectableRebindAction currentlyRebinding;
     public bool isInLevelingMenu = false;
-    public bool Paused { get; private set; } = true;
+    public bool Paused { get; set; } = false;
     public SubMenus CurrentSubMenu { get; private set; } = SubMenus.None;
     public bool IsInSubMenu { get => CurrentSubMenu != SubMenus.None; }
     public bool IsInMainMenu { get => SceneManager.GetActiveScene().buildIndex == 0; }
@@ -28,13 +28,14 @@ public class MenuManager : MonoBehaviour
         inputModule = eventSystem.GetComponent<InputSystemUIInputModule>();
         if (!IsInMainMenu)
         {
-            playerController = FindObjectOfType<PlayerController>();
+            inputInterface = FindObjectOfType<InputInterface>();
             xpMenu = FindObjectOfType<XpMenuManager>();
         }     
     }
     private void Start()
     {
         if (!IsInMainMenu) menuDisplay.SetActive(false);
+        else Paused = true;
     }
     private void OnEnable()
     {
@@ -68,13 +69,7 @@ public class MenuManager : MonoBehaviour
 
     private void BackInput(InputAction.CallbackContext obj)
     {
-        if (!IsInMainMenu && xpMenu.Active)
-        {
-            xpMenu.Hide();
-            xpMenu.ResetAffichage();
-        }
-        else if (Paused)
-            GoBack();
+        GoBack();
     }
     public void GoBack()
     {
@@ -86,7 +81,7 @@ public class MenuManager : MonoBehaviour
         yield return null;
         if (!IsInSubMenu && !IsInMainMenu)
         {
-            Resume();
+            inputInterface.OnUIPause();
         }
         else
         {
@@ -133,7 +128,7 @@ public class MenuManager : MonoBehaviour
         Paused = true;
         Time.timeScale = 0;
         menuDisplay.SetActive(true);
-        playerController.SwitchToUI();
+        inputInterface.SwitchToUI();
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
@@ -142,7 +137,7 @@ public class MenuManager : MonoBehaviour
         Paused = false;
         Time.timeScale = 1;
         menuDisplay.SetActive(false);
-        playerController.SwitchToPlayerControls();
+        inputInterface.SwitchToPlayerControls();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }

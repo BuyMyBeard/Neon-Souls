@@ -13,6 +13,8 @@ public class Patrol : MonoBehaviour
     NavMeshAgent agent;
     [SerializeField] float minRemainingDistance = .1f;
 
+    int currentTaskIndex = 0;
+
     [Serializable]
     public struct Task
     {
@@ -29,21 +31,20 @@ public class Patrol : MonoBehaviour
         enemy.idleInitEvent.AddListener(StartPatrolling);
         enemy.idleExitEvent.AddListener(StopPatrolling);
     }
-    private void StartPatrolling() => StartCoroutine(nameof(PatrolAround));
-    private void StopPatrolling() => StopCoroutine(nameof(PatrolAround));
+    public void StartPatrolling() => StartCoroutine(nameof(PatrolAround));
+    public void StopPatrolling() => StopCoroutine(nameof(PatrolAround));
     IEnumerator PatrolAround()
     {
-        int i = 0;
         while (true)
         {
-            Task currentTask = tasks[i];
+            Task currentTask = tasks[currentTaskIndex];
             agent.SetDestination(currentTask.patrolPoint.transform.position);
             yield return null;
             yield return new WaitUntil(() => agent.remainingDistance < minRemainingDistance);
             agent.ResetPath();
             if (currentTask.waitTime < 0) break;
             yield return new WaitForSeconds(currentTask.waitTime);
-            i = (i + 1) % tasks.Length;
+            currentTaskIndex = (currentTaskIndex + 1) % tasks.Length;
         }
     }
 }

@@ -103,7 +103,7 @@ public class FallApart : MonoBehaviour, IRechargeable
         Instantiate(droppedXp, character.transform.position, Quaternion.identity);
     }
 
-    public void Recharge()
+    public void Recharge(RechargeType rechargeType)
     {
         if (CompareTag("Player")) model.SetActive(true);
         ReenableWeapons();

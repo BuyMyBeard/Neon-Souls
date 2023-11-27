@@ -11,8 +11,12 @@ public class MeteorAttack : MonoBehaviour, IRechargeable
     [SerializeField] float maxCooldown = 45;
     [SerializeField] GameObject cracksDecal;
     [SerializeField] GameObject shadowDecal;
+    [SerializeField] AnimationCurve screenShakeFreq;
+    [SerializeField] AnimationCurve screenShakeAmp;
+    [SerializeField] float screenShakeDuration = 1;
     Enemy enemy;
     EnemyAnimationEvents enemyAnimationEvents;
+    EnemyMeleeAttack meleeAttack;
     Animator animator;
     NavMeshAgent agent;
     GameObject model;
@@ -30,6 +34,7 @@ public class MeteorAttack : MonoBehaviour, IRechargeable
         model = enemy.transform.GetChild(0).gameObject;
         collider = GetComponent<Collider>();
         health = GetComponent<Health>();
+        meleeAttack = GetComponent<EnemyMeleeAttack>();
     }
     void Start()
     {
@@ -39,6 +44,8 @@ public class MeteorAttack : MonoBehaviour, IRechargeable
     [ContextMenu("Start Attack")]
     public void StartAttack()
     {
+        if (health.IsDead) return;
+        meleeAttack.actionQueued = true;
         animator.SetTrigger("MeteorLaunch");
         enemy.ChangeMode(Enemy.ModeId.Idle);
         enemyAnimationEvents.FreezeMovement();
@@ -79,6 +86,7 @@ public class MeteorAttack : MonoBehaviour, IRechargeable
         agent.enabled = true;
         collider.enabled = true;
         enemy.ChangeMode(Enemy.ModeId.InRange);
+        ScreenShake.StartShake(screenShakeAmp, screenShakeFreq, screenShakeDuration);
         Instantiate(cracksDecal).transform.position = transform.position;
     }
     IEnumerator AttackPeriodically()
@@ -90,12 +98,14 @@ public class MeteorAttack : MonoBehaviour, IRechargeable
             yield return new WaitUntil(() => enemyAnimationEvents.ActionAvailable);
             StartAttack();
             yield return new WaitUntil(() => enemyAnimationEvents.ActionAvailable);
+            meleeAttack.actionQueued = false;
             yield return new WaitForSeconds(Random.Range(minCooldown, maxCooldown));
         }
     }
 
-    public void Recharge()
+    public void Recharge(RechargeType rechargeType)
     {
+        meleeAttack.actionQueued = false;
         StopCoroutine(nameof(AttackPeriodically));
         StartCoroutine(nameof(AttackPeriodically));
     }

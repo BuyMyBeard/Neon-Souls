@@ -35,10 +35,10 @@ public abstract class TimedPowerup : RechargeablePowerup
             revertAfterTime = null;
         }
     }
-    public override void Recharge()
+    public override void Recharge(RechargeType rechargeType)
     {
         StopRevertAfterTime();
-        base.Recharge();
+        base.Recharge(rechargeType);
     }
 
     public override void Apply()

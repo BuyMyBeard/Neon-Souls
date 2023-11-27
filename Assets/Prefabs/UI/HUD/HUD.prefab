@@ -1798,6 +1798,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlusOneIcon
       objectReference: {fileID: 0}
+    - target: {fileID: 1916209395070905512, guid: c115ba2c0338cfe4980a54776d0c280f, type: 3}
+      propertyPath: m_TagString
+      value: PlusOneIcon
+      objectReference: {fileID: 0}
     - target: {fileID: 4142483320462923106, guid: c115ba2c0338cfe4980a54776d0c280f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2128,7 +2132,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8452686373997323866, guid: 06d8ebb3263957845a4ded3bd398ca91, type: 3}
       propertyPath: m_Value
-      value: 0.345
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

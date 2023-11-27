@@ -9,7 +9,7 @@ public class DestroyOnRecharge : MonoBehaviour, IRechargeable
         yield return null;
         GameManager.Instance.AddTemporaryRechargeable(this);
     }
-    public void Recharge()
+    public void Recharge(RechargeType rechargeType)
     {
         Destroy(gameObject);
     }
