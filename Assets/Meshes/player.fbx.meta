@@ -1021,7 +1021,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.49358755
+      - time: 0.46627936
         functionName: PlaySoundRandom
         data: 
         objectReferenceParameter: {fileID: 11400000, guid: 0d6c614802c4c0847932b9985283e0b5, type: 2}
@@ -1071,27 +1071,6 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.7511737
-        functionName: ResetAll
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.2112676
-        functionName: InitWeaponCollider
-        data: 
-        objectReferenceParameter: {fileID: 11400000, guid: 56e4feabdecf1854da02aa0c7330c038, type: 2}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.29577467
-        functionName: DisableWeaponCollider
-        data: 
-        objectReferenceParameter: {fileID: 11400000, guid: 56e4feabdecf1854da02aa0c7330c038, type: 2}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
       - time: 0.09389671
         functionName: UnFreezeRotation
         data: 
@@ -1106,10 +1085,31 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.26872247
+      - time: 0.2112676
+        functionName: InitWeaponCollider
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 56e4feabdecf1854da02aa0c7330c038, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.25961974
         functionName: PlaySoundRandom
         data: 
         objectReferenceParameter: {fileID: 11400000, guid: 0d6c614802c4c0847932b9985283e0b5, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.29577467
+        functionName: DisableWeaponCollider
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 56e4feabdecf1854da02aa0c7330c038, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.7511737
+        functionName: ResetAll
+        data: 
+        objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -1156,6 +1156,13 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.35329938
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 0d6c614802c4c0847932b9985283e0b5, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.53051645
         functionName: DisableWeaponCollider
         data: 
@@ -1167,13 +1174,6 @@ ModelImporter:
         functionName: ResetAll
         data: 
         objectReferenceParameter: {fileID: 11400000, guid: 48161fd11ddbafa41b33bf1bbd3d6610, type: 2}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.32599118
-        functionName: PlaySoundRandom
-        data: 
-        objectReferenceParameter: {fileID: 11400000, guid: 0d6c614802c4c0847932b9985283e0b5, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
