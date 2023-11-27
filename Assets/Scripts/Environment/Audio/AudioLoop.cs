@@ -8,23 +8,26 @@ public class AudioLoop : MonoBehaviour
 {
     [HideInInspector]
     public AudioSource audioSource;
-    public int loopStartSample;
-    public int loopEndSample;
+    [SerializeField] LoopingAudio loopingAudio;
     public bool isLoopEnabled;
+    [SerializeField] bool playOnAwake = false;
     [SerializeField] int startSampleDebug = 0;
     // Start is called before the first frame update
     void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        if (loopEndSample == 0)
-            loopEndSample = audioSource.clip.samples;
+        audioSource.clip = loopingAudio.audioClip;
+        if (playOnAwake)
+            audioSource.Play();
+        if (loopingAudio.loopEndSample == 0)
+            loopingAudio.loopEndSample = audioSource.clip.samples;
         audioSource.timeSamples = startSampleDebug;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isLoopEnabled && audioSource.timeSamples > loopEndSample)
-            audioSource.timeSamples = loopStartSample;
+        if (isLoopEnabled && audioSource.timeSamples > loopingAudio.loopEndSample)
+            audioSource.timeSamples = loopingAudio.loopStartSample;
     }
 }

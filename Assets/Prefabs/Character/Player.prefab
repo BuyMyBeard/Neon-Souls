@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6693405866558012212}
   - component: {fileID: 113600907483560856}
   - component: {fileID: 3031059999632461423}
+  - component: {fileID: 3312491562715235973}
   m_Layer: 0
   m_Name: VCam
   m_TagString: MainCamera
@@ -27,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 239097307445888987}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.079872124, y: -0, z: -0, w: 0.99680513}
-  m_LocalPosition: {x: 0, y: 3.4489498, z: -4.05}
+  m_LocalRotation: {x: 0.079872705, y: -0, z: -0, w: 0.9968051}
+  m_LocalPosition: {x: 0, y: 3.4489503, z: -4.049988}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -120,6 +121,18 @@ MonoBehaviour:
   m_Damping: 7.6
   m_MinFOV: 30
   m_MaxFOV: 60
+--- !u!114 &3312491562715235973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239097307445888987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6943a6a28e1a9b4da39acb50eddaa97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1291937762287850455
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,7 +313,6 @@ MonoBehaviour:
   staminaRegenRate: 30
   blockingRegenMultiplier: 0.5
   staminaRequiredToRun: 20
-  timeBeforeRegenKicksIn: 0.7
   upgradeStam: 10
 --- !u!114 &931004792272011639
 MonoBehaviour:
@@ -359,7 +371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ee03e7535209b84cab4672b4235ef0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buffer: 0.2
+  buffer: 0.5
   staminaCost: 20
 --- !u!114 &1389185903735294112
 MonoBehaviour:
@@ -385,7 +397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b1a02d2585d5f498e79de8d9556e4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parryTime: 0.5
+  parryTime: 0.2
   parryResetTime: 1
   DamageModifier: 0.2
   blockAngle: 45
@@ -408,7 +420,20 @@ MonoBehaviour:
   OnHit:
     m_PersistentCalls:
       m_Calls: []
+  OnHitWithParam:
+    m_PersistentCalls:
+      m_Calls: []
   upgradeHp: 10
+  blockSoundDefs:
+  - blockSound: 1
+    randomSoundDef: {fileID: 11400000, guid: aed31d289cf05a749af91b6c5565565c, type: 2}
+  - blockSound: 2
+    randomSoundDef: {fileID: 11400000, guid: 1e9b2564ad43d874bac2b48864c35a8f, type: 2}
+  parrySoundDefs:
+  - blockSound: 1
+    randomSoundDef: {fileID: 11400000, guid: 406d5fc3b37d29542a643fa0e6d9f98f, type: 2}
+  - blockSound: 2
+    randomSoundDef: {fileID: 11400000, guid: 1e9b2564ad43d874bac2b48864c35a8f, type: 2}
   isAutoParryOn: 0
 --- !u!114 &1956206164484021501
 MonoBehaviour:
@@ -626,6 +651,7 @@ GameObject:
   - component: {fileID: 325485030671184781}
   - component: {fileID: 2397417085325163579}
   - component: {fileID: 3690558508142469656}
+  - component: {fileID: 654134669762357109}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -711,6 +737,23 @@ MonoBehaviour:
   CameraRadius: 0.2
   DampingIntoCollision: 0
   DampingFromCollision: 2
+--- !u!114 &654134669762357109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4019678906650283313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 0
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &5939591426321338313
 GameObject:
   m_ObjectHideFlags: 0
@@ -1886,6 +1929,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 292e7c691eb76c545a28c88765172b9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockSound: 1
   blockable: 0
   onTrigger:
     m_PersistentCalls:

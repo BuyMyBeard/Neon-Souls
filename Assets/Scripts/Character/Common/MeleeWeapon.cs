@@ -2,13 +2,12 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-
-
 [RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(Rigidbody))]
 public class MeleeWeapon : MonoBehaviour
 {
     public enum DeathBehaviour { Destroy, DetachEarly }
+    [SerializeField] BlockSound blockSound = BlockSound.SwordClash;
     [HideInInspector] public bool blockable = false;
     [HideInInspector] public UnityEvent<Collider> onTrigger;
     [HideInInspector] public int damage;
@@ -52,7 +51,7 @@ public class MeleeWeapon : MonoBehaviour
         {
             opponentsHit.Add(opponentHealth);
             if (blockable)
-                opponentHealth.InflictBlockableDamage(damage, staminaBlockCost, user);
+                opponentHealth.InflictBlockableDamage(damage, staminaBlockCost, user, blockSound);
             else
                 opponentHealth.InflictDamage(damage, user);
         }

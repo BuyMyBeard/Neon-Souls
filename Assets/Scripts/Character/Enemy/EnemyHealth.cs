@@ -66,7 +66,7 @@ public class EnemyHealth : Health
             displayHealthbar = null;
         }
     }
-    public override void InflictBlockableDamage(int damage, int staminaBlockCost, Transform attackerPosition)
+    public override void InflictBlockableDamage(int damage, int staminaBlockCost, Transform attackerPosition, BlockSound blockSound = BlockSound.SwordClash)
     {
         InflictDamage(damage);
         if (staggerable)

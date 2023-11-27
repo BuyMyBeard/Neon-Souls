@@ -23,7 +23,6 @@ public class DoorSound : MonoBehaviour
     private void Update()
     {
         float pitch = rb.angularVelocity­.magnitude / Time.deltaTime * pitchFactor;
-        Debug.Log(pitch);
         audioSource.pitch = pitch;
     }
 }

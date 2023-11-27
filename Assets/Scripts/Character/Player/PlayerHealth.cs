@@ -1,12 +1,28 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UIElements;
 
+public enum BlockSound
+{
+    NoSound,
+    SwordClash,
+    PunchBlock
+}
+[Serializable]
+struct BlockSoundToRandomSoundDef
+{
+    public BlockSound blockSound;
+    public RandomSoundDef randomSoundDef;
+}
 public class PlayerHealth : Health, IStat
 {
     [SerializeField] int upgradeHp = 10;
+    [SerializeField] BlockSoundToRandomSoundDef[] blockSoundDefs;
+    [SerializeField] BlockSoundToRandomSoundDef[] parrySoundDefs;
     public int Upgrade { get => upgradeHp;}
     public float Value => MaxHealth;
     Stamina stamina;
@@ -14,8 +30,6 @@ public class PlayerHealth : Health, IStat
     public bool isAutoParryOn = false;
     GameManager gameManager;
     MeleeWeapon sword;
-    [SerializeField] RandomSoundDef blockDef;
-    [SerializeField] RandomSoundDef parryDef;
 
     private new void Awake()
     {
@@ -31,16 +45,18 @@ public class PlayerHealth : Health, IStat
     {
         displayHealthbar.Remove(damage, maxHealth, true);//TODO: change to false.
     }
-    public override void InflictBlockableDamage(int damage, int staminaBlockCost, Transform attackerPosition)
+    private RandomSoundDef FindInStructArray(BlockSoundToRandomSoundDef[] array, BlockSound blockSound) => Array.Find(array, e => e.blockSound == blockSound).randomSoundDef;
+    public override void InflictBlockableDamage(int damage, int staminaBlockCost, Transform attackerPosition, BlockSound blockSound = BlockSound.SwordClash)
     {
+        Debug.Log("InflictBlockableDamage");
         if (invincible) return;
-        if (block.IsParrying)
-            animationEvents.PlaySoundRandom(parryDef);
-        else if (block.IsBlocking)
-            animationEvents.PlaySoundRandom(blockDef);
+        {
+        }
 
         if ((block.IsParrying || block.IsBlocking && isAutoParryOn) && !stamina.IsExhausted && IsAttackerInFront(attackerPosition))
         {
+            if (blockSound != BlockSound.NoSound)
+                animationEvents.PlaySoundRandom(FindInStructArray(parrySoundDefs, blockSound));
             // Haptics.ImpactLight();
             stamina.Remove(staminaBlockCost);
             block.ResetParryWindow();
@@ -49,6 +65,8 @@ public class PlayerHealth : Health, IStat
         }
         else if (block.IsBlocking && !stamina.IsExhausted && IsAttackerInFront(attackerPosition)) 
         {
+            if (blockSound != BlockSound.NoSound)
+                animationEvents.PlaySoundRandom(FindInStructArray(blockSoundDefs, blockSound));
             // Haptics.Impact();
             int damageReduced = (int) (damage * block.DamageModifier);
             stamina.Remove(staminaBlockCost);

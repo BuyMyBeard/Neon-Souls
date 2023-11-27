@@ -18,7 +18,6 @@ public enum Sound
     Parry2,
     Parry3,
     Parry4,
-    Parry5,
     Block1,
     Block2,
     Block3,
@@ -26,12 +25,16 @@ public enum Sound
     Swing1,
     Swing2,
     Roll1,
-    Roll2,
     PotionDrink,
     Kindle,
     Died,
     NakedRoll,
-    LightRoll
+    LightRoll,
+    Swoosh,
+    PunchBlock,
+    EliteAttack,
+    EliteAttackShort,
+    EliteAttackTelegraph
 }
 
 public class AudioClips : MonoBehaviour

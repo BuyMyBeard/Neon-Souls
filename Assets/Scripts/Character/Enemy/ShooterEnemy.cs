@@ -58,7 +58,8 @@ public class ShooterEnemy : Enemy
     {
         while (true)
         {
-            yield return new WaitUntil(() => enemyAnimationEvents.ActionAvailable);animator.SetTrigger("Shoot");
+            yield return new WaitUntil(() => enemyAnimationEvents.ActionAvailable);
+            animator.SetTrigger("Shoot");
             enemyAnimationEvents.DisableActions();
             enemyAnimationEvents.FreezeMovement();
             
