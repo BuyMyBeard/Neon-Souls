@@ -9,32 +9,44 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3523404448885030510, guid: 7311d47449de494488aa777f211f14c1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7789385
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523404448885030510, guid: 7311d47449de494488aa777f211f14c1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8844755
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523404448885030510, guid: 7311d47449de494488aa777f211f14c1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.84163624
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523404448885030510, guid: 7311d47449de494488aa777f211f14c1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.030569
+      value: 1.343
       objectReference: {fileID: 0}
     - target: {fileID: 3523404448885030510, guid: 7311d47449de494488aa777f211f14c1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -51.662884
+      value: -0.059958935
       objectReference: {fileID: 0}
     - target: {fileID: 3523404448885030510, guid: 7311d47449de494488aa777f211f14c1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -54.30454
-      objectReference: {fileID: 0}
-    - target: {fileID: 3523404448885030510, guid: 7311d47449de494488aa777f211f14c1, type: 3}
-      propertyPath: m_LocalRotation.w
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3523404448885030510, guid: 7311d47449de494488aa777f211f14c1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523404448885030510, guid: 7311d47449de494488aa777f211f14c1, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3523404448885030510, guid: 7311d47449de494488aa777f211f14c1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3523404448885030510, guid: 7311d47449de494488aa777f211f14c1, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3523404448885030510, guid: 7311d47449de494488aa777f211f14c1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -52,8 +64,114 @@ PrefabInstance:
       propertyPath: m_Name
       value: interior_door Variant
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8286667826803195313, guid: 7311d47449de494488aa777f211f14c1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.07
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5322612188281294361, guid: 7311d47449de494488aa777f211f14c1, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4300503342236493012, guid: 7311d47449de494488aa777f211f14c1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3305341426413883539}
+    - targetCorrespondingSourceObject: {fileID: 4300503342236493012, guid: 7311d47449de494488aa777f211f14c1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 983914357663503404}
+    - targetCorrespondingSourceObject: {fileID: 4300503342236493012, guid: 7311d47449de494488aa777f211f14c1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7746418302586476364}
   m_SourcePrefab: {fileID: 100100000, guid: 7311d47449de494488aa777f211f14c1, type: 3}
+--- !u!1 &8805412694519849609 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4300503342236493012, guid: 7311d47449de494488aa777f211f14c1, type: 3}
+  m_PrefabInstance: {fileID: 4728050840717280861}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &3305341426413883539
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8805412694519849609}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!59 &983914357663503404
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8805412694519849609}
+  m_ConnectedBody: {fileID: 0}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 1, y: 0, z: 0}
+  m_Axis: {x: 0, y: 1, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: -51.56556, y: 3.8125, z: 400.1875}
+  serializedVersion: 2
+  m_UseSpring: 1
+  m_Spring:
+    spring: 5
+    damper: 5
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 1
+  m_ExtendedLimits: 0
+  m_UseAcceleration: 0
+  m_Limits:
+    min: -90
+    max: 90
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
+--- !u!65 &7746418302586476364
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8805412694519849609}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.7450238, y: 4.007232, z: 0.3128497}
+  m_Center: {x: 0.031778738, y: -0.025010653, z: -0.032162458}
