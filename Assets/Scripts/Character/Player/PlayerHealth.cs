@@ -45,6 +45,7 @@ public class PlayerHealth : Health, IStat
             stamina.Remove(staminaBlockCost);
             block.ResetParryWindow();
             stagger.BlockHit(0.5f);
+            stamina.StopRegen();
         }
         else if (block.IsBlocking && !stamina.IsExhausted && IsAttackerInFront(attackerPosition)) 
         {
@@ -52,7 +53,13 @@ public class PlayerHealth : Health, IStat
             int damageReduced = (int) (damage * block.DamageModifier);
             stamina.Remove(staminaBlockCost);
             InflictDamage(damageReduced);
-            stagger.BlockHit(1);
+            if (stamina.IsExhausted)
+                block.GuardBreak();
+            else
+            {
+                stagger.BlockHit(1);
+                stamina.StopRegen();
+            }
         }
         else
         {
@@ -80,19 +87,26 @@ public class PlayerHealth : Health, IStat
         base.Die();      
         gameManager.PlayerDie();
     }
-    public override void Recharge()
+    public override void Recharge(RechargeType rechargeType)
     {
-        if (IsDead)
+        if (rechargeType == RechargeType.Respawn)
+        {
             animator.Play("Idle");
-        base.Recharge();
-        displayHealthbar.Add(maxHealth, maxHealth);
-        (animationEvents as PlayerAnimationEvents).HidePotion();
-        animationEvents.EnableActions();
-        animationEvents.UnFreezeMovement();
-        animationEvents.UnFreezeRotation();
-        animationEvents.StopIFrame();
-        GetComponent<CameraMovement>().SyncFollowTarget();
-        sword.gameObject.SetActive(true);
+            base.Recharge(rechargeType);
+            displayHealthbar.Add(maxHealth, maxHealth);
+            (animationEvents as PlayerAnimationEvents).HidePotion();
+            animationEvents.EnableActions();
+            animationEvents.UnFreezeMovement();
+            animationEvents.UnFreezeRotation();
+            animationEvents.StopIFrame();
+            GetComponent<CameraMovement>().SyncFollowTarget();
+            sword.gameObject.SetActive(true);
+        }
+        else
+        {
+            ResetHealth();
+            displayHealthbar.Add(maxHealth, maxHealth);
+        }
     }
     public void UpgradeStat(int upgrade)
     {

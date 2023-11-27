@@ -205,10 +205,10 @@ public class DisplayBar : MonoBehaviour
     {
         isCatchingUp = true;
         float start = LingeredValue;
-        for (float t = 0; t <= 1; t += Time.deltaTime * catchUpSpeed)
+        for (float t = start; t >= goal; t -= Time.deltaTime * catchUpSpeed)
         {
             yield return null;
-            LingeredValue = Mathf.Lerp(start, goal, t);
+            LingeredValue = t;
         }
         LingeredValue = goal;
         isCatchingUp = false;

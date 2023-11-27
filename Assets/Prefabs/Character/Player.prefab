@@ -256,10 +256,15 @@ MonoBehaviour:
   acceleration: 5
   deceleration: 25
   sprintStaminaCost: 20
+  timeToConsiderFalling: 0.2
   movementFrozen: 0
   rotationFrozen: 0
   movementReduced: 0
   turnSpeed: 600
+  groundCheckDistance: 1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 65545
 --- !u!114 &5681390686070186532
 MonoBehaviour:
   m_ObjectHideFlags: 0

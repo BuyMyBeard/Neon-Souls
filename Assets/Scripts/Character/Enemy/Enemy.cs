@@ -122,7 +122,7 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
     protected virtual void InRangeExit() => inRangeExitEvent.Invoke();
     protected virtual void CloseExit() => closeExitEvent.Invoke();
 
-    public virtual void Recharge()
+    public virtual void Recharge(RechargeType rechargeType)
     {
         if (!canRespawn && health.hasAlreadyDiedOnce) return;
         gameObject.SetActive(false);

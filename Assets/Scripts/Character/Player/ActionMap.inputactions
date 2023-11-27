@@ -57,7 +57,7 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Tap(duration=0.5)",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Interact",
@@ -93,7 +93,7 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Hold",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "PlayerPause",
@@ -102,7 +102,7 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "CastSpell",
@@ -446,7 +446,7 @@
                 {
                     "name": "",
                     "id": "f7e9eef3-0a13-420f-b734-2da5529e28e4",
-                    "path": "<Keyboard>/shift",
+                    "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",

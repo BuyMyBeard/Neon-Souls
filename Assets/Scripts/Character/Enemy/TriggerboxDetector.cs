@@ -30,7 +30,7 @@ public class TriggerboxDetector : MonoBehaviour, IRechargeable
         alreadyTriggered = true;
     }
 
-    public void Recharge()
+    public void Recharge(RechargeType rechargeType)
     {
         alreadyTriggered = false;
     }
