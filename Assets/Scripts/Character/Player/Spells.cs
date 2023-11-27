@@ -38,6 +38,7 @@ public class Spells : MonoBehaviour,IStat
         mana = GetComponent<Mana>();
         inputInterface = GetComponent<InputInterface>();
     }
+
     void OnCastSpell()
     {
         if (!animationEvents.ActionAvailable || !mana.CanCast(manaCost) || inputInterface.PausedThisFrame) return;
@@ -65,13 +66,9 @@ public class Spells : MonoBehaviour,IStat
             Rigidbody rb = fireball.GetComponent<Rigidbody>();
             Vector3 throwDirection;
             if (lockOn.IsLocked)
-            {
                 throwDirection = (lockOn.TargetEnemy.transform.position - fireball.transform.position).normalized;
-            }
             else
-            {
                 throwDirection = animator.transform.forward;
-            }
             rb.AddForce(throwDirection * throwSpeed + throwSpeed * lobeFactor * Vector3.up, ForceMode.VelocityChange);
             fireball.GetComponent<Collider>().enabled = true;
             fireball.thrown = true;
@@ -82,6 +79,7 @@ public class Spells : MonoBehaviour,IStat
     {
         damageScalingBonus += upgradeDmg * nbAmelioration;
     }
+
     public void ClearHand()
     {
         foreach (Transform t in attachPoint)
