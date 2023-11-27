@@ -943,7 +943,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: -0.1
+  m_BaseOffset: -0.05
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &6592103069110389925
@@ -1014,6 +1014,9 @@ MonoBehaviour:
   displayHealthbar: {fileID: 0}
   invincible: 0
   OnHit:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHitWithParam:
     m_PersistentCalls:
       m_Calls: []
   enemy: {fileID: 0}
@@ -1108,6 +1111,7 @@ MonoBehaviour:
     weight: 1
   minActionCooldown: 0
   maxActionCooldown: 3
+  actionQueued: 0
 --- !u!114 &2848173867034494544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1144,7 +1148,9 @@ MonoBehaviour:
     m_Bits: 1
   viewRange: 40
   viewAngle: 90
+  timeToDetect: 0.6
   timeToForget: 10
+  ignoreIfUnreachable: 1
 --- !u!114 &8060169484320416797
 MonoBehaviour:
   m_ObjectHideFlags: 0
