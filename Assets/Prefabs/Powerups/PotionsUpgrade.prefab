@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4873443377455402448}
   - component: {fileID: 1464151164391111420}
-  - component: {fileID: 7843888787557334164}
   - component: {fileID: -241352000750241827}
   - component: {fileID: 4140369731988189632}
+  - component: {fileID: 7442748885856587299}
   m_Layer: 22
   m_Name: PotionsUpgrade
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5.749231, y: 5.749231, z: 5.749231}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2b913c27a64a8644785af243a7ff3b08, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f096132838b77d3499395e11b8ccd9a3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -87,27 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &7843888787557334164
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4883428407219778389}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 0.2}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-241352000750241827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,7 +99,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7a56bff2ef9fca43ac80cd45e74f0b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statusIconDef: {fileID: 0}
   hdrMultiplier: 0
   upgradeColors:
   - {r: 0, g: 0.56486773, b: 1, a: 0}
@@ -142,3 +120,24 @@ MonoBehaviour:
   amplitude: 0.125
   frequency: 1.5
   verticalShift: 0
+--- !u!135 &7442748885856587299
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4883428407219778389}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.1
+  m_Center: {x: 0, y: 0, z: 0}
