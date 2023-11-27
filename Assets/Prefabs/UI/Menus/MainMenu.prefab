@@ -191,6 +191,7 @@ RectTransform:
   m_Children:
   - {fileID: 6021228643186780482}
   - {fileID: 1973889607644064068}
+  - {fileID: 8718800084607397146}
   m_Father: {fileID: 4464103042822869911}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1287,6 +1288,18 @@ PrefabInstance:
     - target: {fileID: 8373822459462133832, guid: 0c438b249933efb4086ae6f3cfa8c9b6, type: 3}
       propertyPath: m_SizeDelta.y
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373822459462133832, guid: 0c438b249933efb4086ae6f3cfa8c9b6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373822459462133832, guid: 0c438b249933efb4086ae6f3cfa8c9b6, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373822459462133832, guid: 0c438b249933efb4086ae6f3cfa8c9b6, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.78
       objectReference: {fileID: 0}
     - target: {fileID: 8373822459462133832, guid: 0c438b249933efb4086ae6f3cfa8c9b6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2422,17 +2435,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6007836649370282810, guid: 8bd9e572118e9fa48983337136b1d786, type: 3}
   m_PrefabInstance: {fileID: 7008672229631822557}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7928058849282092230}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4aebca5eed5c5da4fb8c5cf6dcb8fd53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &7928058849282092230 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1100516335240111643, guid: 8bd9e572118e9fa48983337136b1d786, type: 3}
-  m_PrefabInstance: {fileID: 7008672229631822557}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8718800084607397146 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1854542113445963719, guid: 8bd9e572118e9fa48983337136b1d786, type: 3}
