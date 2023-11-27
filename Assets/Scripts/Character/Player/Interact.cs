@@ -26,6 +26,7 @@ public class Interact : MonoBehaviour
         animationEvents.StartIFrame();
         animationEvents.FreezeMovement();
         animationEvents.FreezeRotation();
+        animationEvents.BecomeIntangible();
     }
     public void DoInteraction() => buttonPrompt.Interact();
 }
