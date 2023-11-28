@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] float timeBeforeRespawn = 5;
     [SerializeField] float timeBeforeDeathScreen = 2;
     DeathScreen deathScreen;
+    
     public static GameManager Instance { get; private set; }
 
     private void Awake()

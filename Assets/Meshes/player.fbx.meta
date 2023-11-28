@@ -343,15 +343,15 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.87593055
-        functionName: ResetAll
+      - time: 0.46590716
+        functionName: DoInteraction
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.46590716
-        functionName: DoInteraction
+      - time: 0.87593055
+        functionName: ResetAll
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -422,7 +422,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.8635236
+      - time: 0.86008716
         functionName: ResetAll
         data: 
         objectReferenceParameter: {instanceID: 0}
