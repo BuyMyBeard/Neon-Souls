@@ -61,7 +61,7 @@ public class FieldOfViewDetector : MonoBehaviour, IPlayerDetector
         float dot = Vector2.Dot(flatEnemyForward.normalized, flatDelta.normalized);
         return dot > DotViewAngle;
     }
-    bool TargetInRangeAndSight(Vector3 directionToTarget, float distanceToTarget) => !Physics.Raycast(eyes.position, directionToTarget, distanceToTarget, environmentMask);
+    bool TargetInRangeAndSight(Vector3 directionToTarget, float distanceToTarget) => distanceToTarget < viewRange && !Physics.Raycast(eyes.position, directionToTarget, distanceToTarget, environmentMask);
 
     void StartDetectingPlayer()
     {

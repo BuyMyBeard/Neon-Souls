@@ -111,6 +111,10 @@ MonoBehaviour:
   gravity: {x: 0, y: -2, z: 0}
   baseDamage: 100
   explosionPrefab: {fileID: 1220229783315324467, guid: 045fb833c50e62b4b9b072a8dc008b4d, type: 3}
+  AOE: 2
+  layerOfCollision:
+    serializedVersion: 2
+    m_Bits: 32768
   damageScalingBonus: 0
   thrown: 0
 --- !u!2083052967 &5761885082288585367

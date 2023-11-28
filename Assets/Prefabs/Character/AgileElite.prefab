@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: canRespawn
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 674013693528526250, guid: 9bcd525c4cd3c3840bc4b219bf587962, type: 3}
+      propertyPath: m_BaseOffset
+      value: -0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 1387694942897608203, guid: 9bcd525c4cd3c3840bc4b219bf587962, type: 3}
       propertyPath: m_Name
       value: AgileElite
@@ -107,6 +111,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnHitWithParam:
+    m_PersistentCalls:
+      m_Calls: []
   enemy: {fileID: 0}
   healthbarContainer: {fileID: 444156953822972847}
   healthBarDisplayCounter: 0
