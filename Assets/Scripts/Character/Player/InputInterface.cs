@@ -107,7 +107,7 @@ public class InputInterface : MonoBehaviour
         PausedThisFrame = false;
 
         // This is so fucking dumb but I have to do it, there is no other way
-        yield return new WaitForSecondsRealtime(1);
+        yield return new WaitForSecondsRealtime(.05f);
         ignoreDodgeInput = false;
     }
     IEnumerator HideXpMenu()
