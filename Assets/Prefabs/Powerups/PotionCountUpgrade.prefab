@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4873443377455402448}
   - component: {fileID: 1464151164391111420}
-  - component: {fileID: 7843888787557334164}
   - component: {fileID: -3086739510786462172}
   - component: {fileID: 4140369731988189632}
+  - component: {fileID: 7854218690938404785}
   m_Layer: 22
   m_Name: PotionCountUpgrade
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 7.0107923, y: 7.0107923, z: 7.0107923}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 78b2fa28264f7374c89a89483bbdfe98, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7e68cbf6d07def9408e5c19fbbb628d5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -87,8 +87,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &7843888787557334164
-BoxCollider:
+--- !u!114 &-3086739510786462172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4883428407219778389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceddfa82e8c7f2646833c8acfca30a1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4140369731988189632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4883428407219778389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626cc767d7f61c249a437fe039712040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spinSpeed: -90
+  amplitude: 0.125
+  frequency: 1.5
+  verticalShift: 1
+--- !u!135 &7854218690938404785
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -106,34 +134,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 0.2}
+  m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-3086739510786462172
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4883428407219778389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceddfa82e8c7f2646833c8acfca30a1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statusIconDef: {fileID: 0}
---- !u!114 &4140369731988189632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4883428407219778389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 626cc767d7f61c249a437fe039712040, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spinSpeed: -90
-  amplitude: 0.125
-  frequency: 1.5
-  verticalShift: 0
