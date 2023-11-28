@@ -43,6 +43,16 @@ public class PlayerAnimationEvents : AnimationEvents
     public void ThrowSpell() => spells.ThrowFireball();
     public void StopStaminaRegen() => stamina.StopRegen();
     public void ClearHand() => spells.ClearHand();
+    public void BecomeIntangible()
+    {
+        Physics.IgnoreLayerCollision(11, 13, true);
+        Physics.IgnoreLayerCollision(11, 29, true);
+    }
+    public void RestoreTangibility()
+    {
+        Physics.IgnoreLayerCollision(11, 13, false);
+        Physics.IgnoreLayerCollision(11, 29, false);
+    }
     public override void ResetAll()
     {
         base.ResetAll();
@@ -53,9 +63,9 @@ public class PlayerAnimationEvents : AnimationEvents
         UnFreezeCamera();
         RestoreMovement();
         ResetCombo();
+        RestoreTangibility();
     }
     public void DoInteraction() => interact.DoInteraction();
-
     public override void ChangeTurnSpeed(float turnSpeed) => playerMovement.turnSpeed = turnSpeed;
     public override void RestoreTurnSpeed() => playerMovement.RestoreTurnSpeed();
     public void ResetCombo() => playerMeleeAttack.ResetCombo();
