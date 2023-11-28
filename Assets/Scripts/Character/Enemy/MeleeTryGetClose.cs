@@ -34,6 +34,4 @@ public class MeleeTryGetClose : MonoBehaviour
         yield return new WaitUntil(() => enemy.DistanceFromPlayer > closeOut);
         enemy.ChangeMode(Enemy.ModeId.InRange);
     }
-    
-
 }

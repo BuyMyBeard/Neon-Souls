@@ -39,7 +39,8 @@ public class ShockWaveAttack : MonoBehaviour, IRechargeable
     }
     void Start()
     {
-        StartCoroutine(nameof(AttackPeriodically));
+        enemy.inRangeInitEvent.AddListener(delegate () { StartCoroutine(nameof(AttackPeriodically)); });
+        enemy.inRangeExitEvent.AddListener(delegate () { StopCoroutine(nameof(AttackPeriodically)); });
     }
     IEnumerator Shockwave()
     {
@@ -119,7 +120,5 @@ public class ShockWaveAttack : MonoBehaviour, IRechargeable
     public void Recharge(RechargeType rechargeType)
     {
         meleeAttack.actionQueued = false;
-        StopCoroutine(nameof(AttackPeriodically));
-        StartCoroutine(nameof(AttackPeriodically));
     }
 }

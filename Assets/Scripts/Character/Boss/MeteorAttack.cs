@@ -38,7 +38,8 @@ public class MeteorAttack : MonoBehaviour, IRechargeable
     }
     void Start()
     {
-        StartCoroutine(nameof(AttackPeriodically));
+        enemy.inRangeInitEvent.AddListener(delegate() { StartCoroutine(nameof(AttackPeriodically)); });
+        enemy.inRangeExitEvent.AddListener(delegate() { StopCoroutine(nameof(AttackPeriodically)); });
     }
 
     [ContextMenu("Start Attack")]
@@ -106,7 +107,5 @@ public class MeteorAttack : MonoBehaviour, IRechargeable
     public void Recharge(RechargeType rechargeType)
     {
         meleeAttack.actionQueued = false;
-        StopCoroutine(nameof(AttackPeriodically));
-        StartCoroutine(nameof(AttackPeriodically));
     }
 }
