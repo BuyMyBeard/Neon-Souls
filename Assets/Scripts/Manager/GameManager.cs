@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.PackageManager;
+//using UnityEditor.PackageManager;
 using UnityEngine;
 public enum RechargeType { Respawn, Rest }
 
@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] float timeBeforeRespawn = 5;
     [SerializeField] float timeBeforeDeathScreen = 2;
     DeathScreen deathScreen;
+    
     public static GameManager Instance { get; private set; }
 
     private void Awake()

@@ -19,7 +19,7 @@ public class SawScript : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        initialPosition = transform.position;
+        initialPosition = transform.localPosition;
         model = transform.GetChild(0);
     }
     void Update()
@@ -45,7 +45,7 @@ public class SawScript : MonoBehaviour
     }
     IEnumerator SawCoroutine()
     {
-        yield return new WaitUntil(() => transform.position.x > initialPosition.x + travelDistance);
+       yield return new WaitUntil(() => transform.localPosition.z > initialPosition.z + travelDistance);
     }
     private void OnTriggerEnter(Collider other)
     {

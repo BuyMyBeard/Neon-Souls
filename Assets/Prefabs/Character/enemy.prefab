@@ -854,7 +854,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: -0.1
+  m_BaseOffset: -0.05
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &6592103069110389925
@@ -1023,6 +1023,24 @@ MonoBehaviour:
   minActionCooldown: 0
   maxActionCooldown: 3
   actionQueued: 0
+--- !u!114 &2848173867034494544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14118305191808067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afdd695e8c9f5a54d958e387c78a0f6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tasks:
+  - patrolPoint: {fileID: 4116433395137489833}
+    waitTime: 3
+  - patrolPoint: {fileID: 5730709831338715657}
+    waitTime: 3
+  minRemainingDistance: 0.2
 --- !u!114 &6484954475046364963
 MonoBehaviour:
   m_ObjectHideFlags: 0

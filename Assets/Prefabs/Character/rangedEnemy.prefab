@@ -1171,6 +1171,9 @@ MonoBehaviour:
   OnHit:
     m_PersistentCalls:
       m_Calls: []
+  OnHitWithParam:
+    m_PersistentCalls:
+      m_Calls: []
   enemy: {fileID: 0}
   healthbarContainer: {fileID: 4246594712974006937}
   healthBarDisplayCounter: 0
@@ -1193,7 +1196,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: -0.1
+  m_BaseOffset: -0.05
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &8540323699860276234
@@ -1256,7 +1259,9 @@ MonoBehaviour:
     m_Bits: 1
   viewRange: 40
   viewAngle: 90
+  timeToDetect: 0.6
   timeToForget: 10
+  ignoreIfUnreachable: 1
 --- !u!136 &6020425643674301076
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1342,6 +1347,7 @@ MonoBehaviour:
   initiateActions: []
   minActionCooldown: 0
   maxActionCooldown: 3
+  actionQueued: 0
 --- !u!114 &1065129162206949362
 MonoBehaviour:
   m_ObjectHideFlags: 0

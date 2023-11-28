@@ -12,7 +12,7 @@ public class PlayerMeleeAttack : MeleeAttack ,IStat
     PlayerAnimationEvents animationEvents;
     InputInterface inputInterface;
     [SerializeField] int dmgUpgrade = 0;
-    public float Value => baseDamage;
+    public float Value => bonusDamage + baseDamage;
     public int Upgrade => dmgUpgrade;
     bool canComboLight = false;
     bool canComboHeavy = false;
