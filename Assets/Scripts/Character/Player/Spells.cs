@@ -25,7 +25,7 @@ public class Spells : MonoBehaviour,IStat
     InputInterface inputInterface;
     public int damageScalingBonus = 0;
 
-    public float Value => fireballPrefab.GetComponent<Fireball>().BaseDamage;
+    public float Value => fireballPrefab.GetComponent<Fireball>().BaseDamage + damageScalingBonus;
 
     public int Upgrade => upgradeDmg;
 

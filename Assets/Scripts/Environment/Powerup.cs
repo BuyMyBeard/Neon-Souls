@@ -36,7 +36,7 @@ public abstract class Powerup : MonoBehaviour
         IsVisibleAndTangible = false;
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         Apply();
     }

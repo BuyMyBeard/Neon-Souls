@@ -121,7 +121,7 @@ public class MenuManager : MonoBehaviour
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("LoadingScreen");
     }
     public void Pause()
     {

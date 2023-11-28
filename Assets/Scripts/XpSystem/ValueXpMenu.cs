@@ -23,7 +23,6 @@ public class ValueXpMenu : MonoBehaviour
 
     PlayerExperience playerExperience;
     public IStat TargetedStat { get; private set; }
-
     public float Ameliorateur { get; private set; }
     
     TextMeshProUGUI TextUi;
