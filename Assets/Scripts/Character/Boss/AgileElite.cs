@@ -55,7 +55,7 @@ public class AgileElite : MeleeEnemy
     }
     protected override void InRangeInit()
     {
-        inRangeInitEvent.Invoke();
+        base.InRangeInit();
         agent.enabled = true;
         agent.updateRotation = true;
         agent.speed = BaseSpeed;
