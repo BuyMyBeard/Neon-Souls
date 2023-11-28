@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 239097307445888987}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.079872705, y: -0, z: -0, w: 0.9968051}
-  m_LocalPosition: {x: 0, y: 3.4489503, z: -4.049988}
+  m_LocalRotation: {x: -0.079872735, y: -0.0000000068212462, z: 5.465768e-10, w: -0.9968051}
+  m_LocalPosition: {x: 0, y: 3.4489505, z: -4.049987}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -908,6 +908,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4316101263382069836}
+  - component: {fileID: 2038603495956704636}
   m_Layer: 0
   m_Name: FollowTarget
   m_TagString: FollowTarget
@@ -930,6 +931,14 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5255728828956238318}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &2038603495956704636
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7010702175356666323}
+  m_Enabled: 1
 --- !u!1001 &5797210891016547960
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1576,9 +1585,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7098539124076227250}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3598664830754895602}
     - targetCorrespondingSourceObject: {fileID: -2775852485278277196, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7355795546116247376}
@@ -2130,8 +2136,8 @@ CharacterController:
   serializedVersion: 3
   m_Height: 2
   m_Radius: 0.32
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_SlopeLimit: 25
+  m_StepOffset: 0.25
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.09, z: 0}
@@ -2176,14 +2182,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceDePousser: 2
---- !u!81 &3598664830754895602
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7178294909268747140}
-  m_Enabled: 1
 --- !u!1 &7403290559235418197 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8511027676247312768, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}

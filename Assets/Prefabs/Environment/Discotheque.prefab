@@ -27162,6 +27162,7 @@ Transform:
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8106899438404789285}
   - {fileID: 7069345212997911142}
   - {fileID: 8695900371903158986}
   - {fileID: 2204882892968493046}
@@ -37487,6 +37488,68 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1654854500044570621, guid: c902eb14e2b0d364f9d87c612f37ba7a, type: 3}
   m_PrefabInstance: {fileID: 8284180638933903068}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8367761364076786495
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 9122990736339285300}
+    m_Modifications:
+    - target: {fileID: 333614600067389210, guid: 65aaca92f63f5ee4abfed271602377de, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.733332
+      objectReference: {fileID: 0}
+    - target: {fileID: 333614600067389210, guid: 65aaca92f63f5ee4abfed271602377de, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -8.549999
+      objectReference: {fileID: 0}
+    - target: {fileID: 333614600067389210, guid: 65aaca92f63f5ee4abfed271602377de, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.2499924
+      objectReference: {fileID: 0}
+    - target: {fileID: 333614600067389210, guid: 65aaca92f63f5ee4abfed271602377de, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.00000065565104
+      objectReference: {fileID: 0}
+    - target: {fileID: 333614600067389210, guid: 65aaca92f63f5ee4abfed271602377de, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 333614600067389210, guid: 65aaca92f63f5ee4abfed271602377de, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 333614600067389210, guid: 65aaca92f63f5ee4abfed271602377de, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 333614600067389210, guid: 65aaca92f63f5ee4abfed271602377de, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 333614600067389210, guid: 65aaca92f63f5ee4abfed271602377de, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 333614600067389210, guid: 65aaca92f63f5ee4abfed271602377de, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139316816320296698, guid: 65aaca92f63f5ee4abfed271602377de, type: 3}
+      propertyPath: m_Name
+      value: Hallway Music Transition Manager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 65aaca92f63f5ee4abfed271602377de, type: 3}
+--- !u!4 &8106899438404789285 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 333614600067389210, guid: 65aaca92f63f5ee4abfed271602377de, type: 3}
+  m_PrefabInstance: {fileID: 8367761364076786495}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8510377207149763881
 PrefabInstance:
