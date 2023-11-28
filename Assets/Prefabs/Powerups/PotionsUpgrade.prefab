@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -241352000750241827}
   - component: {fileID: 4140369731988189632}
   - component: {fileID: 7442748885856587299}
+  - component: {fileID: 3547874192329415482}
   m_Layer: 22
   m_Name: PotionsUpgrade
   m_TagString: Untagged
@@ -103,7 +104,7 @@ MonoBehaviour:
   upgradeColors:
   - {r: 0, g: 0.56486773, b: 1, a: 0}
   - {r: 0.12454414, g: 1, b: 0, a: 0}
-  potionRestoreBonus: 10
+  potionRestoreBonus: 40
   SecondUpgradeSprite: {fileID: 21300000, guid: 4d80a20f95ccc8141afd5bec49f47e1f, type: 3}
 --- !u!114 &4140369731988189632
 MonoBehaviour:
@@ -142,3 +143,17 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3547874192329415482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4883428407219778389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f997b13f76a6614e84064136f29ef17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyToDefeat: {fileID: 0}
+  spawnDelay: 1

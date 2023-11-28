@@ -7,13 +7,13 @@ public class Bonfire : Interactable
     XpMenuManager xpMenuManager;
     BonfireManager bonfireManager;
     public bool active = false;
-    [SerializeField] Vector3 respawnOffset = Vector3.zero;
+    [SerializeField] Transform respawnPosition;
     new Light light;
     [SerializeField] Zone zone;
     Sounds sounds;
-
+    
     public Zone Zone => zone;
-    public Vector3 RespawnOffset => respawnOffset;
+    public Vector3 RespawnPosition => respawnPosition.position;
 
     public override string animationTriggerName => "Interact";
 
