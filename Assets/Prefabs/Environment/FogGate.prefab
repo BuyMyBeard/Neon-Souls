@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6983522814858811813}
   - component: {fileID: 2965442851643135137}
   - component: {fileID: 5022152960365154551}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: FogGate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,7 +50,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   snapObject: {fileID: 2039935771764718550}
-  promptMessage: Enter Fog Gate
+  promptMessage: Traverser la brume
 --- !u!1 &6427339789330974694
 GameObject:
   m_ObjectHideFlags: 0
