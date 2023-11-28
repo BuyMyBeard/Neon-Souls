@@ -145,6 +145,10 @@ public class MenuManager : MonoBehaviour
     {
         Application.Quit();
     }
+    public void Credits()
+    {
+        SceneManager.LoadScene(2);
+    }
     public void MainMenu()
     {
         Paused = true;

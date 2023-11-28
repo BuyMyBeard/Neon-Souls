@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Light))]
+[RequireComponent(typeof(Sounds))]
 public class Bonfire : Interactable
 {
     XpMenuManager xpMenuManager;
@@ -9,7 +11,10 @@ public class Bonfire : Interactable
     public bool active = false;
     [SerializeField] Transform respawnPosition;
     new Light light;
-
+    [SerializeField] Zone zone;
+    Sounds sounds;
+    
+    public Zone Zone => zone;
     public Vector3 RespawnPosition => respawnPosition.position;
 
     public override string animationTriggerName => "Interact";
@@ -20,6 +25,7 @@ public class Bonfire : Interactable
         xpMenuManager = FindObjectOfType<XpMenuManager>();
         bonfireManager = FindObjectOfType<BonfireManager>();
         light = GetComponent<Light>();
+        sounds = GetComponent<Sounds>();
     }
     private IEnumerator Start()
     {
@@ -29,6 +35,7 @@ public class Bonfire : Interactable
     }
     public override void Interact()
     {
+        sounds.Play(Sound.Kindle, .25f);
         if (active) 
         {
             bonfireManager.SitAtBonfire(this);
@@ -40,7 +47,7 @@ public class Bonfire : Interactable
         active = true;
         bonfireManager.ActivateBonfire(this);
         StartCoroutine(FlickerCollider());
-        promptMessage = "Jouer à l'arcade";
+        promptMessage = "Jouer ï¿½ l'arcade";
     }
     IEnumerator FlickerCollider()
     {

@@ -6,17 +6,11 @@ public class ActivateAfterDefeating : MonoBehaviour
 {
     [SerializeField] EnemyHealth enemyToDefeat;
     [SerializeField] float spawnDelay = 1.0f;
-    new Renderer renderer;
-    new Collider collider;
-
-    private void Awake()
-    {
-        Renderer renderer = GetComponent<Renderer>();
-        Collider collider = GetComponent<Collider>();
-    }
 
     private IEnumerator Start()
     {
+        Renderer renderer = GetComponent<Renderer>();
+        Collider collider = GetComponent<Collider>();
         renderer.enabled = false;
         collider.enabled = false;
 

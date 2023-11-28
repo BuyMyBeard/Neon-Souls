@@ -12,7 +12,6 @@ public class Roll : MonoBehaviour
     InputInterface inputInterface;
     IEnumerator bufferCoroutine;
     Health health;
-
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();

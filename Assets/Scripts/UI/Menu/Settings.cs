@@ -17,6 +17,10 @@ public class Settings : MonoBehaviour
     {
         InitiateValues();
     }
+    private void Update()
+    {
+        //songPosition.value = musicManager.audioSource.timeSamples;
+    }
     public void ChangeMasterVolume(float volume)
     {
         Preferences.MasterVolume = volume;
@@ -31,6 +35,22 @@ public class Settings : MonoBehaviour
     {
         Preferences.MusicVolume = volume;
         UpdateMusic();
+    }
+    public void ChangeSongPosition(float pos)
+    {
+        //musicManager.audioSource.timeSamples = Mathf.FloorToInt(pos);
+    }
+    public void SetStartLoop()
+    {
+        //musicManager.loopStartSample = musicManager.audioSource.timeSamples;
+    }
+    public void SetEndLoop()
+    {
+        //musicManager.loopEndSample = musicManager.audioSource.timeSamples;
+    }
+    public void SetLoopEnabled(bool enabled)
+    {
+        //musicManager.isLoopEnabled = enabled;
     }
     public void ChangeControllerSensX(float sens) => Preferences.ControllerSensitivityX = sens;
     public void ChangeControllerSensY(float sens) => Preferences.ControllerSensivityY = sens;

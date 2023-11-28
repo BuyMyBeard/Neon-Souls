@@ -5,10 +5,13 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(AudioSource))]
 public class BossManager : MonoBehaviour, IRechargeable
 {
     [SerializeField] BossHealth boss1Health;
     [SerializeField] BossHealth boss2Health;
+    [SerializeField] float fadeSpeed;
+    [SerializeField] float volume;
     DisplayBar bossbar1;
     DisplayBar bossbar2;
 
@@ -21,6 +24,8 @@ public class BossManager : MonoBehaviour, IRechargeable
     Enemy boss2;
     PlayerAnimationEvents playerAnimationEvents;
     FadeFilter fadeFilter;
+    AudioSource audioSource;
+    ZoneTransitionManager zoneTransitionManager;
     public bool CutsceneInProgress { get; private set; } = false;
     bool defeated = false;
     void Awake()
@@ -38,6 +43,8 @@ public class BossManager : MonoBehaviour, IRechargeable
         bossbar2 = GameObject.FindGameObjectWithTag("BossBar2").GetComponent<DisplayBar>();
         boss1Health.displayHealthbar = bossbar1;
         boss2Health.displayHealthbar = bossbar2;
+        audioSource = GetComponent<AudioSource>();
+        zoneTransitionManager = FindObjectOfType<ZoneTransitionManager>();
     }
     void Start()
     {
@@ -54,6 +61,13 @@ public class BossManager : MonoBehaviour, IRechargeable
         playerAnimationEvents.FreezeRotation();
         cutscene.Play("Cutscene");
         CutsceneInProgress = true;
+        zoneTransitionManager.FadeNonBossesOut();
+        zoneTransitionManager.FadeCurrentZone();
+    }
+    void OnFadeFromBlack()
+    {
+        audioSource.volume = volume;
+        audioSource.Play();
     }
     void StartBossAnimation()
     {
@@ -85,6 +99,7 @@ public class BossManager : MonoBehaviour, IRechargeable
 
     IEnumerator ResetBosses()
     {
+        StartCoroutine(AudioFadeUtils.FadeOut(audioSource, fadeSpeed, true));
         bossbar1.Hide();
         bossbar2.Hide();
         bossbar1.Set(1, 1);
