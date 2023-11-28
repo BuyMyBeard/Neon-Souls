@@ -5,7 +5,7 @@ using UnityEngine;
 public class TrapBullet : MonoBehaviour
 {
     [SerializeField] float travelSpeed = 5f;
-    [SerializeField] float lifeSpan = 1f;
+    public float lifeSpan = 1f;
     [SerializeField] int bulletDamage = 60;
     [SerializeField] int staminaBlockCost = 20;
     Rigidbody rb;

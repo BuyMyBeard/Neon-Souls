@@ -794,6 +794,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4812795238270496}
+  - component: {fileID: 8645069942927205866}
   m_Layer: 0
   m_Name: CarvedPost2_double
   m_TagString: Untagged
@@ -821,6 +822,29 @@ Transform:
   - {fileID: 4570511790968942}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &8645069942927205866
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824894333012844}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.09
+  m_Height: 2.83
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.3069123, z: 0}
 --- !u!1 &1844584884181210
 GameObject:
   m_ObjectHideFlags: 0
@@ -1086,7 +1110,7 @@ Light:
     m_Strength: 1
     m_Bias: 0.05
     m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_NearPlane: 0.3
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -1542,7 +1566,7 @@ Light:
     m_Strength: 1
     m_Bias: 0.05
     m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_NearPlane: 0.3
     m_CullingMatrixOverride:
       e00: 1
       e01: 0

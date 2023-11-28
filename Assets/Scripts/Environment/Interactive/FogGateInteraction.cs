@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class FogGateInteraction : Interactable
 {
-    Animator playerAnimator;
-
+    bool disabled = false;
     public override string animationTriggerName => "WalkThroughFogGate";
 
     public override void Interact()
@@ -16,7 +15,6 @@ public class FogGateInteraction : Interactable
         foreach(Transform child in transform)
             child.gameObject.layer = 6;
         StartCoroutine(GivebackLayer());
-        Debug.Log("Fog");
     }
     IEnumerator GivebackLayer()
     {
@@ -24,5 +22,16 @@ public class FogGateInteraction : Interactable
         gameObject.layer = 0;
         foreach(Transform child in transform)
             child.gameObject.layer = 0;
+    }
+
+    public void Disable()
+    {
+        if (disabled) return;
+        disabled = true;
+        foreach (var collider in GetComponentsInChildren<Collider>())
+            collider.enabled = false;
+
+        GetComponentInChildren<ParticleSystem>().Stop();
+        
     }
 }

@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 239097307445888987}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.079872124, y: -0, z: -0, w: 0.99680513}
-  m_LocalPosition: {x: 0, y: 3.4489498, z: -4.05}
+  m_LocalRotation: {x: 0.07987199, y: -0, z: -0, w: 0.99680513}
+  m_LocalPosition: {x: 0.00000047683716, y: 3.4489498, z: -4.0500035}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -298,7 +298,6 @@ MonoBehaviour:
   staminaRegenRate: 30
   blockingRegenMultiplier: 0.5
   staminaRequiredToRun: 20
-  timeBeforeRegenKicksIn: 0.7
   upgradeStam: 10
 --- !u!114 &931004792272011639
 MonoBehaviour:
@@ -404,6 +403,9 @@ MonoBehaviour:
   displayHealthbar: {fileID: 0}
   invincible: 0
   OnHit:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHitWithParam:
     m_PersistentCalls:
       m_Calls: []
   upgradeHp: 10
@@ -1800,9 +1802,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.15
-  m_Height: 1.51
+  m_Height: 2.0570936
   m_Direction: 1
-  m_Center: {x: -0.000008161174, y: -0.33, z: -0.00000034830336}
+  m_Center: {x: -0.00006429249, y: -0.056450687, z: -0.00081773166}
 --- !u!1 &3845905489050742677 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2738080496605957824, guid: 08c5a1a401dc43a4db63e28e6d8d2f0d, type: 3}
@@ -1973,8 +1975,8 @@ CharacterController:
   serializedVersion: 3
   m_Height: 2
   m_Radius: 0.32
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_SlopeLimit: 25
+  m_StepOffset: 0.25
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.09, z: 0}
