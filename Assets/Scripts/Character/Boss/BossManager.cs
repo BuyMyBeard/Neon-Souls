@@ -55,14 +55,17 @@ public class BossManager : MonoBehaviour, IRechargeable
     public void StartCutscene()
     {
         if (defeated) return;
-        playerAnimationEvents.FreezeCamera();
-        playerAnimationEvents.FreezeMovement();
-        playerAnimationEvents.DisableActions();
-        playerAnimationEvents.FreezeRotation();
         cutscene.Play("Cutscene");
         CutsceneInProgress = true;
         zoneTransitionManager.FadeNonBossesOut();
         zoneTransitionManager.FadeCurrentZone();
+    }
+    void OnFadedToBlack()
+    {
+        playerAnimationEvents.FreezeCamera();
+        playerAnimationEvents.FreezeMovement();
+        playerAnimationEvents.DisableActions();
+        playerAnimationEvents.FreezeRotation();
     }
     void OnFadeFromBlack()
     {
