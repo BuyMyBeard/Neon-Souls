@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Light))]
+[RequireComponent(typeof(Sounds))]
 public class Bonfire : Interactable
 {
     XpMenuManager xpMenuManager;

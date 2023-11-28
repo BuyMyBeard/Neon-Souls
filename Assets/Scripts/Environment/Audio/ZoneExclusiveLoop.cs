@@ -25,7 +25,13 @@ public class ZoneExclusiveLoop : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(AudioFadeUtils.FadeIn(audioSource, fadeSpeed, maxVolume));
     }
-
+    public void Stop()
+    {
+        StopAllCoroutines();
+        audioSource.volume = 0.0f;
+        audioSource.timeSamples = 0;
+        audioSource.Pause();
+    }
     private void OnValidate()
     {
         maxVolume = GetComponent<AudioSource>().volume;

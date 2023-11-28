@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MusicTransitionManager : MonoBehaviour
+public class MusicTransitionManager : MonoBehaviour, IRechargeable
 {
     //[Serializable]
     //struct Checkpoint
@@ -20,7 +20,7 @@ public class MusicTransitionManager : MonoBehaviour
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<CharacterController>().transform;
-        audioLoop = GetComponentInParent<AudioLoop>();
+        audioLoop = transform.parent.GetComponentInChildren<AudioLoop>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -42,5 +42,9 @@ public class MusicTransitionManager : MonoBehaviour
             audioLoop.audioSource.GetComponent<AudioLowPassFilter>().cutoffFrequency = newLowPass;
             audioLoop.audioSource.volume = newVolume;
         }
+    }
+    public void Recharge(RechargeType rechargeType)
+    {
+        isInTrigger = false;
     }
 }

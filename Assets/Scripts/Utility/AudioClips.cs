@@ -35,7 +35,8 @@ public enum Sound
     EliteAttack,
     EliteAttackShort,
     EliteAttackTelegraph,
-    Shoot
+    Shoot,
+    FireballExplosion
 }
 
 public class AudioClips : MonoBehaviour
