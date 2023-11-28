@@ -13,45 +13,47 @@ public class MeleeAttack : MonoBehaviour
         public MeleeWeapon val;
     }
     [SerializeField] protected WeaponEnumCollider[] weaponCollidersStructs;
-    protected Dictionary<AttackWeapon, MeleeWeapon> weaponColliders = new();
+    //protected Dictionary<AttackWeapon, MeleeWeapon> weaponColliders = new();
     protected Animator animator;
     public bool isAttacking = false;
     public int baseDamage;
     public int bonusDamage = 0;
     protected Health health;
 
-    private void OnValidate()
+    /*private void OnValidate()
     {
         weaponColliders.Clear();
         foreach (var e in weaponCollidersStructs)
         {
             weaponColliders.Add(e.key, e.val);
         }
-    }
+    }*/
     /// <summary>
     /// Enables the weapon's collider and initializes the damage
     /// </summary>
     /// <param name="attackDef"></param>
     public virtual void InitWeaponCollider(AttackDef attackDef)
     {
-        MeleeWeapon mw = weaponColliders[attackDef.weapon];
+        MeleeWeapon mw = GetMeleeWeaponFromAttackDef(attackDef);//weaponColliders[attackDef.weapon];
         mw.ColliderEnabled = true;
         mw.damage = Mathf.FloorToInt(baseDamage * attackDef.baseDamageMultiplier) + bonusDamage;
         mw.staminaBlockCost = attackDef.staminaCost;
         mw.blockable = attackDef.blockable;
     }
+
     /// <summary>
     /// Disables the children weapon collider
     /// </summary>
     public void DisableWeaponCollider(AttackDef attackDef)
     {
-        weaponColliders[attackDef.weapon].ColliderEnabled = false;
+        GetMeleeWeaponFromAttackDef(attackDef).ColliderEnabled = false;
     }
     public void DisableAllWeaponColliders()
     {
-        foreach (var meleeWeapon in weaponColliders.Values)
+        foreach (var meleeWeapon in weaponCollidersStructs)
         {
-            meleeWeapon.ColliderEnabled = false;
+            meleeWeapon.val.ColliderEnabled = false;
+            //meleeWeapon.ColliderEnabled = false;
         }
         if (this is EnemyMeleeAttack) (this as EnemyMeleeAttack).StopFlickerBodyCollider();
     }
@@ -67,4 +69,6 @@ public class MeleeAttack : MonoBehaviour
 
         DisableAllWeaponColliders();
     }
+    protected MeleeWeapon GetMeleeWeaponFromAttackDef(AttackDef attackDef) => Array.Find(weaponCollidersStructs, (weapon) => weapon.key == attackDef.weapon).val;
+    
 }
