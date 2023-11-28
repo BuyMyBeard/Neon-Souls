@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(Collider))]
-public class TriggerboxDetector : MonoBehaviour, IRechargeable
+public class TriggerboxDetector : MonoBehaviour, IRechargeable, IPlayerDetector
 {
     [SerializeField] Enemy[] enemies;
     [SerializeField] Enemy.ModeId modeToChangeTo = Enemy.ModeId.InRange;
