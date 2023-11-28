@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4873443377455402448}
   - component: {fileID: 1464151164391111420}
-  - component: {fileID: 7843888787557334164}
   - component: {fileID: -927503172729660869}
   - component: {fileID: 451611766421086622}
+  - component: {fileID: 3909748594276142996}
   m_Layer: 22
   m_Name: AutoParry
   m_TagString: Untagged
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 350947092154f6d44a19e4c966e784c4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: aeba3a3fa7d46584faad70822ffbf5f8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -87,8 +87,39 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &7843888787557334164
-BoxCollider:
+--- !u!114 &-927503172729660869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4883428407219778389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6562e9a7f35c39b48a79a000a75f9bbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curve: {fileID: 11400000, guid: d22cc8e826b0a2745a123a63a24d70a4, type: 2}
+  statusIconDisappearTime: 1
+  statusIconDef: {fileID: 1015621139844491753, guid: a4eb40dc0094ba645b87eaf2cc5c75d4, type: 3}
+--- !u!114 &451611766421086622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4883428407219778389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626cc767d7f61c249a437fe039712040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spinSpeed: -90
+  amplitude: 0.125
+  frequency: 1.5
+  verticalShift: 1
+--- !u!135 &3909748594276142996
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -106,36 +137,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 0.2}
+  m_Radius: 0.782
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-927503172729660869
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4883428407219778389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6562e9a7f35c39b48a79a000a75f9bbe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statusIconDef: {fileID: 1015621139844491753, guid: a4eb40dc0094ba645b87eaf2cc5c75d4, type: 3}
-  curve: {fileID: 11400000, guid: d22cc8e826b0a2745a123a63a24d70a4, type: 2}
-  statusIconDisappearTime: 1
---- !u!114 &451611766421086622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4883428407219778389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 626cc767d7f61c249a437fe039712040, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spinSpeed: -90
-  amplitude: 0.125
-  frequency: 1.5
-  verticalShift: 0
