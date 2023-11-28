@@ -1451,7 +1451,7 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: 0.1826418
-        functionName: PlaySoundRandom
+        functionName: PlaySound
         data: 
         objectReferenceParameter: {fileID: 11400000, guid: 79edd8dcb5fd54045bdec2cf5d66cb42, type: 2}
         floatParameter: 0
@@ -1511,6 +1511,13 @@ ModelImporter:
         functionName: DisableWeaponCollider
         data: 
         objectReferenceParameter: {fileID: 11400000, guid: 724a5f4f6c9de574587010078588092c, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.057663128
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 0d6c614802c4c0847932b9985283e0b5, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -1594,16 +1601,16 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: 0.21145375
-        functionName: PlaySoundRandom
+        functionName: PlaySound
         data: 
         objectReferenceParameter: {fileID: 11400000, guid: 79edd8dcb5fd54045bdec2cf5d66cb42, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.7444934
-        functionName: PlaySoundRandom
+        functionName: PlaySound
         data: 
-        objectReferenceParameter: {fileID: 11400000, guid: 0d6c614802c4c0847932b9985283e0b5, type: 2}
+        objectReferenceParameter: {fileID: 11400000, guid: 79edd8dcb5fd54045bdec2cf5d66cb42, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -1686,6 +1693,20 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.4229075
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 0d6c614802c4c0847932b9985283e0b5, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.45850265
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.5253063
         functionName: DisableWeaponCollider
         data: 
@@ -1693,10 +1714,24 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.6828194
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 0d6c614802c4c0847932b9985283e0b5, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.6915994
         functionName: InitWeaponCollider
         data: 
         objectReferenceParameter: {fileID: 11400000, guid: 9d4e72b9a7cd0e64fbfb40acf53bd69f, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.7207891
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -1714,17 +1749,10 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.4229075
+      - time: 0.9377845
         functionName: PlaySoundRandom
         data: 
-        objectReferenceParameter: {fileID: 11400000, guid: 0d6c614802c4c0847932b9985283e0b5, type: 2}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.6828194
-        functionName: PlaySoundRandom
-        data: 
-        objectReferenceParameter: {fileID: 11400000, guid: 0d6c614802c4c0847932b9985283e0b5, type: 2}
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0

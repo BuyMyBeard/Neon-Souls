@@ -34,7 +34,8 @@ public enum Sound
     PunchBlock,
     EliteAttack,
     EliteAttackShort,
-    EliteAttackTelegraph
+    EliteAttackTelegraph,
+    Shoot
 }
 
 public class AudioClips : MonoBehaviour
