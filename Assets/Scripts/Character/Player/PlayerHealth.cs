@@ -30,6 +30,7 @@ public class PlayerHealth : Health, IStat
     public bool isAutoParryOn = false;
     GameManager gameManager;
     MeleeWeapon sword;
+    ZoneTransitionManager zoneTransitionManager;
 
     private new void Awake()
     {
@@ -40,6 +41,7 @@ public class PlayerHealth : Health, IStat
         gameManager = FindObjectOfType<GameManager>();
         animationEvents = GetComponentInChildren<PlayerAnimationEvents>();
         sword = GetComponentInChildren<MeleeWeapon>();
+        zoneTransitionManager = FindObjectOfType<ZoneTransitionManager>();
     }
     public override void HandleHealthbar(int damage)
     {
@@ -102,7 +104,8 @@ public class PlayerHealth : Health, IStat
     [ContextMenu("Die")]
     protected override void Die()
     {     
-        base.Die();      
+        base.Die();
+        zoneTransitionManager.FadeEverythingOut();
         gameManager.PlayerDie();
     }
     public override void Recharge(RechargeType rechargeType)
