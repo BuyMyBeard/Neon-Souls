@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 //using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
+[RequireComponent(typeof(Sounds))]
 public class FallApart : MonoBehaviour, IRechargeable
 {
     [SerializeField] float density = 10.0f;
@@ -18,6 +19,7 @@ public class FallApart : MonoBehaviour, IRechargeable
     [SerializeField] int partsLayer = 0;
     [SerializeField] GameObject droppedXp;
     MeleeWeapon[] meleeWeapons;
+    Sounds sounds;
 
     private void Awake()
     {
@@ -26,6 +28,7 @@ public class FallApart : MonoBehaviour, IRechargeable
         model = character.transform.GetChild(0).gameObject;
         parts = model.GetComponentsInChildren<Collider>();
         meleeWeapons = GetComponentsInChildren<MeleeWeapon>();
+        sounds = GetComponentInParent<Sounds>();
     }
 
     [ContextMenu("Activate")]
@@ -95,6 +98,7 @@ public class FallApart : MonoBehaviour, IRechargeable
         else model.SetActive(false);
         dummy.GetComponent<FallApart>().Activate();
         if (droppedXp == null) return;
+        sounds.Play(Sound.Died, .25f);
         DroppedXp previousDroppedXp = FindObjectOfType<DroppedXp>();
         if(previousDroppedXp != null ) { Destroy(previousDroppedXp.gameObject); }
         Instantiate(droppedXp, character.transform.position, Quaternion.identity);

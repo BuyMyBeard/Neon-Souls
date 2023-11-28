@@ -51,6 +51,7 @@ public class Potions : MonoBehaviour, IRechargeable
             fluidMat.SetColor("_BaseColor", c);
         }
         StartCoroutine(UpdateFillLevelProgressively());
+        
         refillHealthCoroutine = RefillHealth();
         StartCoroutine(refillHealthCoroutine);
 

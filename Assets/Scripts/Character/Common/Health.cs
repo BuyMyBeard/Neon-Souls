@@ -59,7 +59,7 @@ public abstract class Health : MonoBehaviour, IRechargeable
             Die();
         }
     }
-    public virtual void InflictBlockableDamage(int damage, int staminaBlockCost, Transform attackerPosition)
+    public virtual void InflictBlockableDamage(int damage, int staminaBlockCost, Transform attackerPosition, BlockSound blockSound = BlockSound.SwordClash)
     {
         // One day enemies might be able to block or have stamina idk
         // for now it's just

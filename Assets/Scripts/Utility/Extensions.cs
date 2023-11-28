@@ -24,6 +24,12 @@ public static class Extensions
         }
         return null;
     }
+    public static float Vector3InverseLerp(Vector3 a, Vector3 b, Vector3 value)
+    {
+        Vector3 AB = b - a;
+        Vector3 AV = value - a;
+        return Vector3.Dot(AV, AB) / Vector3.Dot(AB, AB);
+    }
     public static void ResetAllTriggers(this Animator animator)
     {
         foreach (var param in animator.parameters)
@@ -48,6 +54,10 @@ public static class Extensions
         }
         float pickedNumber = UnityEngine.Random.Range(0, totalWeight);
         return chanceList.Find(action => pickedNumber <= action.Item1).Item2;
+    }
+    public static bool IsBetween<T>(this T obj, T minBound, T maxBound) where T: IComparable
+    {
+        return obj.CompareTo(minBound) > -1 && obj.CompareTo(maxBound) < 1;
     }
 }
 [Serializable]

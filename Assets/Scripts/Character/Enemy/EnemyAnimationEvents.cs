@@ -15,7 +15,7 @@ public class EnemyAnimationEvents : AnimationEvents
     }
     public override void FreezeRotation() => enemy.rotationFrozen = true;
     public override void UnFreezeRotation() => enemy.rotationFrozen = false;
-    public void Shoot() => GetComponent<ShooterEnemy>().Shoot();
+    public void ShootEvent() => GetComponent<ShooterEnemy>().Shoot();
     public override void ChangeTurnSpeed(float turnSpeed) => enemy.turnSpeed = turnSpeed;
     public override void RestoreTurnSpeed() => enemy.RestoreTurnSpeed();
     public override void FreezeMovement()

@@ -76,64 +76,6 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Enemy|BlockHit
-      takeName: Enemy|BlockHit
-      internalID: 5537887114491303044
-      firstFrame: 0
-      lastFrame: 8
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Enemy|HeavyAttack
-      takeName: Enemy|HeavyAttack
-      internalID: -2340126502266193745
-      firstFrame: 0
-      lastFrame: 87
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
       name: Enemy|Idle
       takeName: Enemy|Idle
       internalID: -4906209774527793784
@@ -174,11 +116,11 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
@@ -186,7 +128,21 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.077435784
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5303644
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -216,10 +172,24 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.23376623
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.64224136
         functionName: ResetAll
         data: 
         objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.71047825
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -252,10 +222,31 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.22467533
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.64139944
         functionName: ResetAll
         data: 
         objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.6556313
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.9348422
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -288,10 +279,24 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.23636365
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.6443149
         functionName: ResetAll
         data: 
         objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.8294267
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -324,6 +329,13 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.2427921
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.6401446
         functionName: ResetAll
         data: 
@@ -331,93 +343,13 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Enemy|StartBlocking
-      takeName: Enemy|StartBlocking
-      internalID: 428998908239805187
-      firstFrame: 0
-      lastFrame: 8
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Enemy|StopBlocking
-      takeName: Enemy|StopBlocking
-      internalID: 5576873524249580828
-      firstFrame: 0
-      lastFrame: 8
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Enemy|ThrowSpell
-      takeName: Enemy|ThrowSpell
-      internalID: 5467330302725217967
-      firstFrame: 0
-      lastFrame: 71
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
+      - time: 0.841994
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -446,7 +378,21 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.4201444
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.92070484
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -475,7 +421,21 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.41409692
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.91189426
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -504,7 +464,21 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.44386408
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.86542135
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -533,7 +507,21 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.43612334
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.9162996
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -563,6 +551,34 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.14992808
+        functionName: StartFlickerBodyCollider
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.45971695
+        functionName: StopFlickerBodyCollider
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.50035685
+        functionName: FreezeRotation
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.50654274
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 0d6c614802c4c0847932b9985283e0b5, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.5217701
         functionName: InitWeaponCollider
         data: 
@@ -584,24 +600,52 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.50035685
-        functionName: FreezeRotation
+      - time: 0.13960546
+        functionName: PlaySoundRandom
         data: 
-        objectReferenceParameter: {instanceID: 0}
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.14992808
-        functionName: StartFlickerBodyCollider
+      - time: 0.22761759
+        functionName: PlaySoundRandom
         data: 
-        objectReferenceParameter: {instanceID: 0}
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.45971695
-        functionName: StopFlickerBodyCollider
+      - time: 0.3110774
+        functionName: PlaySoundRandom
         data: 
-        objectReferenceParameter: {instanceID: 0}
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.38088012
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.4522003
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5447648
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.9681335
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -648,6 +692,13 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.69886345
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 0d6c614802c4c0847932b9985283e0b5, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.71505016
         functionName: InitWeaponCollider
         data: 
@@ -666,6 +717,27 @@ ModelImporter:
         functionName: ResetAll
         data: 
         objectReferenceParameter: {fileID: 11400000, guid: 9d4e72b9a7cd0e64fbfb40acf53bd69f, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5159332
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.7450683
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.9863429
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -698,10 +770,38 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.1016692
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.27162367
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.4339909
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.4513422
         functionName: InitWeaponCollider
         data: 
         objectReferenceParameter: {fileID: 11400000, guid: af59c7ae3153e354d96dca2a6697fecd, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.4680161
+        functionName: PlaySound
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 79edd8dcb5fd54045bdec2cf5d66cb42, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -712,10 +812,24 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.57701355
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.8991925
         functionName: ResetAll
         data: 
         objectReferenceParameter: {fileID: 11400000, guid: af59c7ae3153e354d96dca2a6697fecd, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.969651
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -748,6 +862,13 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.29666606
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 0d6c614802c4c0847932b9985283e0b5, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.31471246
         functionName: InitWeaponCollider
         data: 
@@ -804,6 +925,13 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.68473345
+        functionName: FreezeRotation
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: a61a4871d7f407644b1e6163d475d3bb, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.6925078
         functionName: InitWeaponCollider
         data: 
@@ -825,10 +953,52 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.68473345
-        functionName: FreezeRotation
+      - time: 0.40969163
+        functionName: PlaySoundRandom
         data: 
-        objectReferenceParameter: {fileID: 11400000, guid: a61a4871d7f407644b1e6163d475d3bb, type: 2}
+        objectReferenceParameter: {fileID: 11400000, guid: 0d6c614802c4c0847932b9985283e0b5, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.52863437
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 0d6c614802c4c0847932b9985283e0b5, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.7004405
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 0d6c614802c4c0847932b9985283e0b5, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.1107739
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.2655539
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.7298938
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.9666161
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -861,10 +1031,38 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.15933232
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.25679758
+        functionName: FreezeRotation
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 51ec9c75eba23ef4881a631fd945f4dd, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.26707134
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.326284
         functionName: InitWeaponCollider
         data: 
         objectReferenceParameter: {fileID: 11400000, guid: 51ec9c75eba23ef4881a631fd945f4dd, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.33733913
+        functionName: PlaySound
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 79edd8dcb5fd54045bdec2cf5d66cb42, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -875,10 +1073,10 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.25679758
-        functionName: FreezeRotation
+      - time: 0.42185128
+        functionName: PlaySoundRandom
         data: 
-        objectReferenceParameter: {fileID: 11400000, guid: 51ec9c75eba23ef4881a631fd945f4dd, type: 2}
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -903,6 +1101,20 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.5154185
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 0d6c614802c4c0847932b9985283e0b5, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5356601
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.570997
         functionName: DisableWeaponCollider
         data: 
@@ -914,6 +1126,13 @@ ModelImporter:
         functionName: ResetAll
         data: 
         objectReferenceParameter: {fileID: 11400000, guid: 724a5f4f6c9de574587010078588092c, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.98634297
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -946,10 +1165,24 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.20864159
+        functionName: PlaySound
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 7faf3662177b4ef4ca55337ad8e79b30, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.35347432
         functionName: StartShockwave
         data: 
         objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5873479
+        functionName: PlaySound
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 790d4086537b28b43bf156dc0c43c160, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -1003,6 +1236,34 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.08801214
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.18209408
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.18664643
+        functionName: PlaySound
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: df9c96d3d51311545ac43185a8de92f6, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.72989374
+        functionName: PlaySound
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 79edd8dcb5fd54045bdec2cf5d66cb42, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -1032,6 +1293,13 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0
+        functionName: PlaySound
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 7faf3662177b4ef4ca55337ad8e79b30, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.09954548
         functionName: SyncLocation
         data: 
@@ -1175,17 +1443,17 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.8958036
-        functionName: ResetAll
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
       - time: 0.06882495
         functionName: InitWeaponCollider
         data: 
         objectReferenceParameter: {fileID: 11400000, guid: af59c7ae3153e354d96dca2a6697fecd, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.1826418
+        functionName: PlaySound
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 79edd8dcb5fd54045bdec2cf5d66cb42, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -1243,6 +1511,13 @@ ModelImporter:
         functionName: DisableWeaponCollider
         data: 
         objectReferenceParameter: {fileID: 11400000, guid: 724a5f4f6c9de574587010078588092c, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.057663128
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 0d6c614802c4c0847932b9985283e0b5, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -1325,6 +1600,20 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.21145375
+        functionName: PlaySound
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 79edd8dcb5fd54045bdec2cf5d66cb42, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.7444934
+        functionName: PlaySound
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 79edd8dcb5fd54045bdec2cf5d66cb42, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -1404,6 +1693,20 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.4229075
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 0d6c614802c4c0847932b9985283e0b5, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.45850265
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.5253063
         functionName: DisableWeaponCollider
         data: 
@@ -1411,10 +1714,24 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.6828194
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 0d6c614802c4c0847932b9985283e0b5, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.6915994
         functionName: InitWeaponCollider
         data: 
         objectReferenceParameter: {fileID: 11400000, guid: 9d4e72b9a7cd0e64fbfb40acf53bd69f, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.7207891
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -1429,6 +1746,13 @@ ModelImporter:
         functionName: ResetAll
         data: 
         objectReferenceParameter: {fileID: 11400000, guid: 9d4e72b9a7cd0e64fbfb40acf53bd69f, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.9377845
+        functionName: PlaySoundRandom
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: e81d487c36a0203408b1414363ebee31, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0

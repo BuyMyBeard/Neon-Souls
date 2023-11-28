@@ -1,20 +1,37 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 //using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UIElements;
 
+public enum BlockSound
+{
+    NoSound,
+    SwordClash,
+    PunchBlock
+}
+[Serializable]
+struct BlockSoundToRandomSoundDef
+{
+    public BlockSound blockSound;
+    public RandomSoundDef randomSoundDef;
+}
 public class PlayerHealth : Health, IStat
 {
     [SerializeField] int upgradeHp = 10;
+    [SerializeField] BlockSoundToRandomSoundDef[] blockSoundDefs;
+    [SerializeField] BlockSoundToRandomSoundDef[] parrySoundDefs;
     public int Upgrade { get => upgradeHp;}
     public float Value => MaxHealth;
     Stamina stamina;
     Block block;
     public bool isAutoParryOn = false;
     GameManager gameManager;
-    PlayerAnimationEvents playerAnimationEvents;
     MeleeWeapon sword;
+    ZoneTransitionManager zoneTransitionManager;
+
     private new void Awake()
     {
         base.Awake();
@@ -22,18 +39,26 @@ public class PlayerHealth : Health, IStat
         stamina = GetComponent<Stamina>();
         block = GetComponent<Block>();
         gameManager = FindObjectOfType<GameManager>();
-        playerAnimationEvents = GetComponentInChildren<PlayerAnimationEvents>();
+        animationEvents = GetComponentInChildren<PlayerAnimationEvents>();
         sword = GetComponentInChildren<MeleeWeapon>();
+        zoneTransitionManager = FindObjectOfType<ZoneTransitionManager>();
     }
     public override void HandleHealthbar(int damage)
     {
         displayHealthbar.Remove(damage, maxHealth, true);//TODO: change to false.
     }
-    public override void InflictBlockableDamage(int damage, int staminaBlockCost, Transform attackerPosition)
+    private RandomSoundDef FindInStructArray(BlockSoundToRandomSoundDef[] array, BlockSound blockSound) => Array.Find(array, e => e.blockSound == blockSound).randomSoundDef;
+    public override void InflictBlockableDamage(int damage, int staminaBlockCost, Transform attackerPosition, BlockSound blockSound = BlockSound.SwordClash)
     {
+        Debug.Log("InflictBlockableDamage");
         if (invincible) return;
+        {
+        }
+
         if ((block.IsParrying || block.IsBlocking && isAutoParryOn) && !stamina.IsExhausted && IsAttackerInFront(attackerPosition))
         {
+            if (blockSound != BlockSound.NoSound)
+                animationEvents.PlaySoundRandom(FindInStructArray(parrySoundDefs, blockSound));
             // Haptics.ImpactLight();
             stamina.Remove(staminaBlockCost);
             block.ResetParryWindow();
@@ -42,6 +67,8 @@ public class PlayerHealth : Health, IStat
         }
         else if (block.IsBlocking && !stamina.IsExhausted && IsAttackerInFront(attackerPosition)) 
         {
+            if (blockSound != BlockSound.NoSound)
+                animationEvents.PlaySoundRandom(FindInStructArray(blockSoundDefs, blockSound));
             // Haptics.Impact();
             int damageReduced = (int) (damage * block.DamageModifier);
             stamina.Remove(staminaBlockCost);
@@ -77,7 +104,8 @@ public class PlayerHealth : Health, IStat
     [ContextMenu("Die")]
     protected override void Die()
     {     
-        base.Die();      
+        base.Die();
+        zoneTransitionManager.FadeEverythingOut();
         gameManager.PlayerDie();
     }
     public override void Recharge(RechargeType rechargeType)
@@ -87,11 +115,11 @@ public class PlayerHealth : Health, IStat
             animator.Play("Idle");
             base.Recharge(rechargeType);
             displayHealthbar.Add(maxHealth, maxHealth);
-            playerAnimationEvents.HidePotion();
-            playerAnimationEvents.EnableActions();
-            playerAnimationEvents.UnFreezeMovement();
-            playerAnimationEvents.UnFreezeRotation();
-            playerAnimationEvents.StopIFrame();
+            (animationEvents as PlayerAnimationEvents).HidePotion();
+            animationEvents.EnableActions();
+            animationEvents.UnFreezeMovement();
+            animationEvents.UnFreezeRotation();
+            animationEvents.StopIFrame();
             GetComponent<CameraMovement>().SyncFollowTarget();
             sword.gameObject.SetActive(true);
         }

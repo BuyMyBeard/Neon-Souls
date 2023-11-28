@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
+[RequireComponent(typeof(ZoneTransitionManager))]
 public class BonfireManager : MonoBehaviour
 {
     [SerializeField]Material activeMats;
@@ -11,11 +12,13 @@ public class BonfireManager : MonoBehaviour
     CharacterController playerCharacter;
     GameManager gameManager;
     Bonfire currentBonfire;
+    ZoneTransitionManager zoneTransitionManager;
 
     public Vector3 RespawnPosition { get; private set; }
 
     private void Awake()
     {
+        zoneTransitionManager = GetComponent<ZoneTransitionManager>();
         gameManager = FindObjectOfType<GameManager>();
         currentBonfire = GameObject.FindGameObjectWithTag("StartingBonfire").GetComponent<Bonfire>();
         playerCharacter = FindObjectOfType<CharacterController>();
@@ -52,5 +55,6 @@ public class BonfireManager : MonoBehaviour
         playerCharacter.enabled = false;
         playerCharacter.transform.position = RespawnPosition;
         playerCharacter.enabled = true;
+        zoneTransitionManager.EnterZone(currentBonfire.Zone);
     }
 }
