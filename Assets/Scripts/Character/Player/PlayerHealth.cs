@@ -50,7 +50,7 @@ public class PlayerHealth : Health, IStat
     private RandomSoundDef FindInStructArray(BlockSoundToRandomSoundDef[] array, BlockSound blockSound) => Array.Find(array, e => e.blockSound == blockSound).randomSoundDef;
     public override void InflictBlockableDamage(int damage, int staminaBlockCost, Transform attackerPosition, BlockSound blockSound = BlockSound.SwordClash)
     {
-        Debug.Log("InflictBlockableDamage");
+        
         if (invincible) return;
         {
         }
