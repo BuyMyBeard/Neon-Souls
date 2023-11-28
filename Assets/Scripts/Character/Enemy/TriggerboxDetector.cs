@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(Collider))]
-public class TriggerboxDetector : MonoBehaviour, IRechargeable
+public class TriggerboxDetector : MonoBehaviour, IRechargeable, IPlayerDetector
 {
     [SerializeField] Enemy[] enemies;
     [SerializeField] Enemy.ModeId modeToChangeTo = Enemy.ModeId.InRange;
@@ -18,7 +18,6 @@ public class TriggerboxDetector : MonoBehaviour, IRechargeable
         collider.isTrigger = true;
         gameObject.layer = 22;
         if (TryGetComponent(out Renderer renderer)) renderer.enabled = false;
-        if (enemies.Length == 0) throw new MissingReferenceException("Enemy has not been assigned to triggerbox detector");
     }
 
 
