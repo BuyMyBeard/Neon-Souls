@@ -25,6 +25,7 @@ public class BossManager : MonoBehaviour, IRechargeable
     PlayerAnimationEvents playerAnimationEvents;
     FadeFilter fadeFilter;
     AudioSource audioSource;
+    ZoneTransitionManager zoneTransitionManager;
     public bool CutsceneInProgress { get; private set; } = false;
     bool defeated = false;
     void Awake()
@@ -43,6 +44,7 @@ public class BossManager : MonoBehaviour, IRechargeable
         boss1Health.displayHealthbar = bossbar1;
         boss2Health.displayHealthbar = bossbar2;
         audioSource = GetComponent<AudioSource>();
+        zoneTransitionManager = FindObjectOfType<ZoneTransitionManager>();
     }
     void Start()
     {
@@ -59,6 +61,8 @@ public class BossManager : MonoBehaviour, IRechargeable
         playerAnimationEvents.FreezeRotation();
         cutscene.Play("Cutscene");
         CutsceneInProgress = true;
+        zoneTransitionManager.FadeNonBossesOut();
+        zoneTransitionManager.FadeCurrentZone();
     }
     void OnFadeFromBlack()
     {
