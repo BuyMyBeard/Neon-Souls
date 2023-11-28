@@ -11,7 +11,7 @@ public class MusicTransitionManager : MonoBehaviour
     //    public Transform transform;
     //    public float lowPassVal;
     //}
-    AudioLoop musicManager;
+    AudioLoop audioLoop;
     Transform player;
     //[SerializeField] List<Checkpoint> checkpoints;
     [SerializeField] bool isInTrigger = false;
@@ -20,7 +20,7 @@ public class MusicTransitionManager : MonoBehaviour
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<CharacterController>().transform;
-        musicManager = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<AudioLoop>();
+        audioLoop = GetComponentInParent<AudioLoop>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -39,8 +39,8 @@ public class MusicTransitionManager : MonoBehaviour
             float progress = Extensions.Vector3InverseLerp(checkpoint1.transform.position, checkpoint2.transform.position, player.position);
             float newLowPass = Mathf.Lerp(checkpoint1.lowPassValue, checkpoint2.lowPassValue, progress);
             float newVolume = Mathf.Lerp(checkpoint1.volume, checkpoint2.volume, progress);
-            musicManager.audioSource.GetComponent<AudioLowPassFilter>().cutoffFrequency = newLowPass;
-            musicManager.audioSource.volume = newVolume;
+            audioLoop.audioSource.GetComponent<AudioLowPassFilter>().cutoffFrequency = newLowPass;
+            audioLoop.audioSource.volume = newVolume;
         }
     }
 }
