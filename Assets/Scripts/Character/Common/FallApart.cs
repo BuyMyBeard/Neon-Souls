@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 //using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
+[RequireComponent(typeof(Sounds))]
 public class FallApart : MonoBehaviour, IRechargeable
 {
     [SerializeField] float density = 10.0f;

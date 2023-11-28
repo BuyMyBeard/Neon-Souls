@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Sounds))]
 public abstract class AnimationEvents : MonoBehaviour
 {
     protected Health health;

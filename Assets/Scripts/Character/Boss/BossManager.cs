@@ -5,6 +5,7 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(AudioSource))]
 public class BossManager : MonoBehaviour, IRechargeable
 {
     [SerializeField] BossHealth boss1Health;
