@@ -77,7 +77,7 @@ public class XpManager : MonoBehaviour
             if (typeof(IRechargeable).IsAssignableFrom(stat.GetType()))
             {
                var i = (IRechargeable)stat;
-               i.Recharge();
+               i.Recharge(RechargeType.Rest);
             }
         }
         ResetXpManager();
