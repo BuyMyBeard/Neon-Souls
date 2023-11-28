@@ -4,29 +4,33 @@ using UnityEngine;
 
 public class AttackUp : TimedPowerup
 {
-    [SerializeField] int meleeBonus;
-    [SerializeField] int spellsBonus;
+    [SerializeField] float meleeBonus;
+    [SerializeField] float spellsBonus;
 
-    MeleeAttack meleeAttack;
+    PlayerMeleeAttack meleeAttack;
     Spells spells;
+    int meleeBonusGiven;
+    int spellsBonusGiven;
 
     protected override void Awake()
     {
         base.Awake();
-        meleeAttack = player.GetComponentInParent<MeleeAttack>();
+        meleeAttack = player.GetComponentInParent<PlayerMeleeAttack>();
         spells = player.GetComponentInParent<Spells>();
     }
     public override void Apply()
     {
         base.Apply();
-        meleeAttack.bonusDamage += meleeBonus;
-        spells.damageScalingBonus += spellsBonus;
+        meleeBonusGiven = (int)(meleeAttack.Value * meleeBonus);
+        spellsBonusGiven = (int)(meleeAttack.Value * spellsBonus);
+        meleeAttack.bonusDamage += meleeBonusGiven;
+        spells.damageScalingBonus += spellsBonusGiven;
     }
 
     public override void Revert()
     {
         base.Revert();
-        meleeAttack.bonusDamage -= meleeBonus;
-        spells.damageScalingBonus -= spellsBonus;
+        meleeAttack.bonusDamage -= meleeBonusGiven;
+        spells.damageScalingBonus -= spellsBonusGiven;
     }
 }
