@@ -31,6 +31,7 @@ public class PlayerHealth : Health, IStat
     GameManager gameManager;
     MeleeWeapon sword;
     ZoneTransitionManager zoneTransitionManager;
+    MusicTransitionManager[] musicTransitionManagers;
 
     private new void Awake()
     {
@@ -42,6 +43,7 @@ public class PlayerHealth : Health, IStat
         animationEvents = GetComponentInChildren<PlayerAnimationEvents>();
         sword = GetComponentInChildren<MeleeWeapon>();
         zoneTransitionManager = FindObjectOfType<ZoneTransitionManager>();
+        musicTransitionManagers = FindObjectsOfType<MusicTransitionManager>();
     }
     public override void HandleHealthbar(int damage)
     {
@@ -105,7 +107,10 @@ public class PlayerHealth : Health, IStat
     protected override void Die()
     {     
         base.Die();
+        foreach(var musicTransitionManager in musicTransitionManagers)
+            musicTransitionManager.isInTrigger = false;
         zoneTransitionManager.FadeEverythingOut();
+
         gameManager.PlayerDie();
     }
     public override void Recharge(RechargeType rechargeType)
