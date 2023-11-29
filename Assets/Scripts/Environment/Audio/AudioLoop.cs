@@ -17,7 +17,7 @@ public class AudioLoop : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = loopingAudio.audioClip;
-        if (playOnAwake)
+        if (playOnAwake && !audioSource.playOnAwake)
             audioSource.Play();
         if (loopingAudio.loopEndSample == 0)
             loopingAudio.loopEndSample = audioSource.clip.samples;
