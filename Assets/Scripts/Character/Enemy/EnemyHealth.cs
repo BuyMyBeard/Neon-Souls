@@ -45,7 +45,6 @@ public class EnemyHealth : Health
     }
     public void ShowHealthbar(int damage = 0)
     {
-        Debug.Log("Counter increased");
         healthBarDisplayCounter++;
         if (displayHealthbar != null)
         {
@@ -57,7 +56,6 @@ public class EnemyHealth : Health
     }
     public void HideHealthbar()
     {
-        Debug.Log("Counter decreased");
         healthBarDisplayCounter--;
         if (healthBarDisplayCounter <= 0 && displayHealthbar != null)
         {

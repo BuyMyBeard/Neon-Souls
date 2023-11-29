@@ -47,7 +47,7 @@ public class PlayerHealth : Health, IStat
     }
     public override void HandleHealthbar(int damage)
     {
-        displayHealthbar.Remove(damage, maxHealth, true);//TODO: change to false.
+        displayHealthbar.Remove(damage, maxHealth, false);
     }
     private RandomSoundDef FindInStructArray(BlockSoundToRandomSoundDef[] array, BlockSound blockSound) => Array.Find(array, e => e.blockSound == blockSound).randomSoundDef;
     public override void InflictBlockableDamage(int damage, int staminaBlockCost, Transform attackerPosition, BlockSound blockSound = BlockSound.SwordClash)

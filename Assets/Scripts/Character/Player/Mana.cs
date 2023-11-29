@@ -39,7 +39,7 @@ public class Mana : MonoBehaviour, IRechargeable,IStat
             currentMana -= value;
             if (currentMana < 0)
                 currentMana = 0;
-            playerManabar.Remove(value, maxMana, true, false);
+            playerManabar.Remove(value, maxMana, false, false);
         }
     }
     public void Add(float value, bool shouldLinger = true)
