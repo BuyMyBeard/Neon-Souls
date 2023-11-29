@@ -37,10 +37,10 @@ public class ShockWaveAttack : MonoBehaviour, IRechargeable
         health = GetComponent<Health>();
         meleeAttack = GetComponent<EnemyMeleeAttack>();
     }
-    void Start()
+    public void StartAttackPeriodically()
     {
-        enemy.inRangeInitEvent.AddListener(delegate () { StartCoroutine(nameof(AttackPeriodically)); });
-        enemy.inRangeExitEvent.AddListener(delegate () { StopCoroutine(nameof(AttackPeriodically)); });
+        StopCoroutine(nameof(AttackPeriodically));
+        StartCoroutine(nameof(AttackPeriodically));
     }
     IEnumerator Shockwave()
     {
@@ -49,7 +49,7 @@ public class ShockWaveAttack : MonoBehaviour, IRechargeable
 
         shockWaveMaterial.SetFloat("_Size", size);
         ScreenShake.StartShake(screenShakeAmp, screenShakeFreq, screenShakeDuration);
-        Haptics.Impact();
+        Haptics.ExplosionLong();
         for (float t = 0; t < 1; t += Time.deltaTime / duration)
         {
             if (Time.timeScale == 0)
@@ -80,7 +80,6 @@ public class ShockWaveAttack : MonoBehaviour, IRechargeable
     public void StartAttack()
     {
         if (health.IsDead) return;
-        meleeAttack.actionQueued = true;
         firstWave = true;
         animator.SetTrigger("ShockwaveAttack");
         enemyAnimationEvents.FreezeMovement();
@@ -106,11 +105,12 @@ public class ShockWaveAttack : MonoBehaviour, IRechargeable
     IEnumerator AttackPeriodically()
     {
         yield return new WaitUntil(() => health.CurrentHealth / health.MaxHealth < .5f);
-        animator.SetBool("ExtendAttacks", true);
+        meleeAttack.actionQueued = true;
         while (!health.IsDead)
         {
             yield return new WaitUntil(() => enemyAnimationEvents.ActionAvailable);
             StartAttack();
+            animator.SetBool("ExtendAttacks", true);
             yield return new WaitUntil(() => enemyAnimationEvents.ActionAvailable);
             meleeAttack.actionQueued = false;
             yield return new WaitForSeconds(Random.Range(minCooldown, maxCooldown));

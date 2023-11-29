@@ -45,7 +45,7 @@ public abstract class Health : MonoBehaviour, IRechargeable
     /// <param name="damage">Amount of damage applied</param>
     public void InflictDamage(int damage, Transform attackerPosition = null)
     {
-        if (invincible && IsDead)
+        if (invincible || IsDead)
             return;
         if (attackerPosition != null)
             stagger.BecomeStaggered(attackerPosition);

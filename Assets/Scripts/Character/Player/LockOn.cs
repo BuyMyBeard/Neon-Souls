@@ -249,7 +249,6 @@ public class LockOn : MonoBehaviour
                 targetIndex--;
             else if (dir == Directions.Left)
                 targetIndex++;
-            Debug.Log(targetIndex);
             if (targetIndex >= 0 && targetIndex < enemies.Count)
                 TargetEnemy = enemies[targetIndex];
             else

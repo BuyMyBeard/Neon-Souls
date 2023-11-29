@@ -1264,6 +1264,13 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.68386364
+        functionName: DisableLockOn
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 79edd8dcb5fd54045bdec2cf5d66cb42, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -1459,6 +1466,13 @@ ModelImporter:
         messageOptions: 0
       - time: 0.3991902
         functionName: DisableWeaponCollider
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: af59c7ae3153e354d96dca2a6697fecd, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.8946594
+        functionName: ResetAll
         data: 
         objectReferenceParameter: {fileID: 11400000, guid: af59c7ae3153e354d96dca2a6697fecd, type: 2}
         floatParameter: 0

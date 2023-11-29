@@ -19,5 +19,6 @@ public class ActivateAfterDefeating : MonoBehaviour
         yield return new WaitForSeconds(spawnDelay);
         renderer.enabled = true;
         collider.enabled = true;
+        transform.position = enemyToDefeat.transform.position;
     }
 }

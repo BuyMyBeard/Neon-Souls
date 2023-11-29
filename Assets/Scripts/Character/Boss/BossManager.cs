@@ -85,7 +85,9 @@ public class BossManager : MonoBehaviour, IRechargeable
     void ActivateBosses()
     {
         boss1.ChangeMode(Enemy.ModeId.InRange);
+        boss1.GetComponent<MeteorAttack>().StartAttackPeriodically();
         boss2.ChangeMode(Enemy.ModeId.InRange);
+        boss2.GetComponent<ShockWaveAttack>().StartAttackPeriodically();
         boss1Events.EnableActions();
         boss2Events.EnableActions();
         boss1Events.UnFreezeMovement();
@@ -152,6 +154,7 @@ public class BossManager : MonoBehaviour, IRechargeable
             yield return null;
         }
         fadeFilter.StartFadeIn(3);
+        zoneTransitionManager.FadeEverythingOut();
         yield return new WaitForSeconds(4);
         SceneManager.LoadScene(2);
     }

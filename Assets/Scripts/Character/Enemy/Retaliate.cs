@@ -25,13 +25,14 @@ public class Retaliate : MonoBehaviour
     
     public void StartLookForRetaliation()
     {
+        if (meleeAttack.actionQueued) return;
         StopCoroutine(LookForRetaliation());
         StartCoroutine(LookForRetaliation());
     }
 
     IEnumerator LookForRetaliation()
     {
-        yield return new WaitUntil(() => enemyAnimationEvents.ActionAvailable);
+        yield return new WaitUntil(() => enemyAnimationEvents.ActionAvailable && !meleeAttack.actionQueued);
         if (enemy.DistanceFromPlayer < retaliationRange)
             DoRetaliation();
 
