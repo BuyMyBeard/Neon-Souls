@@ -47,7 +47,7 @@ public class Bonfire : Interactable
         active = true;
         bonfireManager.ActivateBonfire(this);
         StartCoroutine(FlickerCollider());
-        promptMessage = "Jouer � l'arcade";
+        promptMessage = "Améliorer";
     }
     IEnumerator FlickerCollider()
     {
