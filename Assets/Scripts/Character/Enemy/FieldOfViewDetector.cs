@@ -28,7 +28,7 @@ public class FieldOfViewDetector : MonoBehaviour, IPlayerDetector
     NavMeshAgent agent;
     float timeInSight = 0;
     public float DotViewAngle { get => math.remap(0, 180, 1, 0, viewAngle); }
-    private void Awake()
+    private void Start()
     {
         enemy = GetComponent<Enemy>();
         playerTarget = GameObject.FindGameObjectWithTag("PlayerTarget").transform;

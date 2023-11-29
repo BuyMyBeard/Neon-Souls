@@ -65,7 +65,6 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
             new ModeDef { Id = ModeId.Close, Init = CloseInit, Main = CloseMain, Exit = CloseExit },
         };
         Mode = modeDefs[(int)ModeId.Idle];
-        Target = GameObject.FindGameObjectWithTag("PlayerTarget").transform;
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         enemyAnimationEvents = GetComponent<EnemyAnimationEvents>();
@@ -77,11 +76,12 @@ public abstract class Enemy : MonoBehaviour, IRechargeable
         xpManager = FindObjectOfType<XpManager>();
         OriginPos = transform.position;
         OriginRot = transform.rotation;
-        lockOn = Target.GetComponentInParent<LockOn>();
         health = GetComponent<EnemyHealth>();
     }
     protected virtual IEnumerator Start()
     {
+        Target = GameObject.FindGameObjectWithTag("PlayerTarget").transform;
+        lockOn = Target.GetComponentInParent<LockOn>();
         yield return null;
         Mode.Init();
     }
