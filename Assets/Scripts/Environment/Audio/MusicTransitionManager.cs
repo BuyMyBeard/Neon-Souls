@@ -14,7 +14,7 @@ public class MusicTransitionManager : MonoBehaviour, IRechargeable
     AudioLoop audioLoop;
     Transform player;
     //[SerializeField] List<Checkpoint> checkpoints;
-    [SerializeField] bool isInTrigger = false;
+    [SerializeField] public bool isInTrigger = false;
     [SerializeField] MusicTransitionCheckpoint checkpoint1;
     [SerializeField] MusicTransitionCheckpoint checkpoint2;
     void Awake()
