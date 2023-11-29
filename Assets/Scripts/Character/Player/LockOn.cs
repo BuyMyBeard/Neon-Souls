@@ -127,7 +127,7 @@ public class LockOn : MonoBehaviour
                 IsLocked = false;
                 indicator.gameObject.SetActive(false);
                 yield return new WaitForSeconds(healthbarLingerTimeOnEnemyDeath);
-                if (!IsLocked && EnemyHealth is not BossHealth)
+                if (!IsLocked && EnemyHealth is not BossHealth && EnemyHealth != null)
                 {
                     EnemyHealth.HideHealthbar();
                 }

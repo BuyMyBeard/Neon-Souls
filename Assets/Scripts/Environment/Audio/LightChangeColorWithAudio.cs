@@ -2,12 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
-[RequireComponent(typeof(Light))]
 public class LightChangeColorWithAudio : MonoBehaviour
 {
-    Light lightSource;
     AudioSource audioSource;
+    [SerializeField] List<Light> spotlights;
     [SerializeField] List<Color> colors;
     [SerializeField] int spectrumBandsToSkip;
     [SerializeField] int spectrumBandsToTake;
@@ -16,7 +14,6 @@ public class LightChangeColorWithAudio : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        lightSource = GetComponent<Light>();
         audioSource = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<AudioSource>();
     }
 
@@ -32,9 +29,10 @@ public class LightChangeColorWithAudio : MonoBehaviour
             do
             {
                 newColor = colors[Random.Range(0, colors.Count)];
-            } while (lightSource.color == newColor);
+            } while (spotlights[0].color == newColor);
 
-            lightSource.color = newColor;
+            foreach (var spotlight in spotlights)
+                spotlight.color = newColor;
         }
         avgHeight = newAvgHeight;
     }
