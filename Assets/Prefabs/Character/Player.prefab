@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 239097307445888987}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.07987216, y: -0, z: -0, w: 0.99680513}
-  m_LocalPosition: {x: 0.00000047683716, y: 3.4489498, z: -4.0499997}
+  m_LocalRotation: {x: 0.079872146, y: -0.00000062584877, z: 0.000000048428774, w: 0.99680513}
+  m_LocalPosition: {x: 0.00000500679, y: 3.4489517, z: -4.050004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -292,7 +292,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   potionMat: {fileID: 2100000, guid: 21d5ff8b15d9d45449cb46f8bc4be029, type: 2}
   potionObject: {fileID: 6145286124227111783}
-  maxPotions: 5
+  maxPotions: 2
   currentPotions: 0
   restoreValue: 60
   timeToDrinkOne: 0.5
@@ -469,7 +469,7 @@ MonoBehaviour:
   lobeFactor: 0.102
   staminaCost: 40
   manaCost: 25
-  upgradeDmg: 2
+  upgradeDmg: 10
   damageScalingBonus: 0
 --- !u!114 &2265787126803834102
 MonoBehaviour:

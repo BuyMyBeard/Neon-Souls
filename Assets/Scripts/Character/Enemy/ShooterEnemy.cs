@@ -13,12 +13,14 @@ public class ShooterEnemy : Enemy
     [SerializeField] Transform gunMuzzle;
     [SerializeField] float shootCooldown = 5;
     [SerializeField] float getAwayDistance = 5;
+    Sounds sounds;
 
     protected override void Awake()
     {
         base.Awake();
         var existingPool = GameObject.FindGameObjectWithTag(poolTag);
         pool = existingPool != null ? existingPool.GetComponent<ObjectPool>() : Instantiate(pool);
+        sounds = GetComponent<Sounds>();
     }
     protected override void InRangeExit()
     {
@@ -70,6 +72,7 @@ public class ShooterEnemy : Enemy
     public void Shoot()
     {
         var bullet = pool.SpawnObject(gunMuzzle, out Coroutine p_returnCoroutine).GetComponent<Bullet>();
+        sounds.Play(Sound.Shoot);
         bullet.target = Target;
         bullet.p_returnCoroutine = p_returnCoroutine;
     }

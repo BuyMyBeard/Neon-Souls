@@ -35,7 +35,12 @@ public class MenuManager : MonoBehaviour
     private void Start()
     {
         if (!IsInMainMenu) menuDisplay.SetActive(false);
-        else Paused = true;
+        else
+        {
+            Paused = true;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
     private void OnEnable()
     {

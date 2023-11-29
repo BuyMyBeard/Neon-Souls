@@ -36,17 +36,17 @@ public class MeteorAttack : MonoBehaviour, IRechargeable
         health = GetComponent<Health>();
         meleeAttack = GetComponent<EnemyMeleeAttack>();
     }
-    void Start()
+
+    public void StartAttackPeriodically()
     {
-        enemy.inRangeInitEvent.AddListener(delegate() { StartCoroutine(nameof(AttackPeriodically)); });
-        enemy.inRangeExitEvent.AddListener(delegate() { StopCoroutine(nameof(AttackPeriodically)); });
+        StopCoroutine(nameof(AttackPeriodically));
+        StartCoroutine(nameof(AttackPeriodically));
     }
 
     [ContextMenu("Start Attack")]
     public void StartAttack()
     {
         if (health.IsDead) return;
-        meleeAttack.actionQueued = true;
         animator.SetTrigger("MeteorLaunch");
         enemy.ChangeMode(Enemy.ModeId.Idle);
         enemyAnimationEvents.FreezeMovement();
@@ -61,8 +61,9 @@ public class MeteorAttack : MonoBehaviour, IRechargeable
     IEnumerator DoSyncLocation()
     {
         SkipThisFrameRootMotion = true;
-        transform.position = new Vector3(enemy.Target.position.x, transform.position.y, enemy.Target.position.z) + Vector3.forward * 0.001f + animator.deltaPosition;
-        transform.rotation = Quaternion.LookRotation(enemy.DirectionToPlayer, Vector3.up);
+        transform.SetPositionAndRotation(
+            new Vector3(enemy.Target.position.x, transform.position.y, enemy.Target.position.z) + Vector3.forward * 0.001f + animator.deltaPosition, 
+            Quaternion.LookRotation(enemy.DirectionToPlayer, Vector3.up));
         shadow.transform.parent = null;
         shadow.transform.position = new Vector3(transform.position.x, shadow.transform.position.y, transform.position.z);
         yield return null;
@@ -89,15 +90,17 @@ public class MeteorAttack : MonoBehaviour, IRechargeable
         enemy.ChangeMode(Enemy.ModeId.InRange);
         ScreenShake.StartShake(screenShakeAmp, screenShakeFreq, screenShakeDuration);
         Instantiate(cracksDecal).transform.position = transform.position;
+        Haptics.ExplosionLong();
     }
     IEnumerator AttackPeriodically()
     {
         yield return new WaitUntil(() => health.CurrentHealth / health.MaxHealth < .5f);
-        animator.SetBool("ExtendAttacks", true);
+        meleeAttack.actionQueued = true;
         while (!health.IsDead)
         {
             yield return new WaitUntil(() => enemyAnimationEvents.ActionAvailable);
             StartAttack();
+            animator.SetBool("ExtendAttacks", true);
             yield return new WaitUntil(() => enemyAnimationEvents.ActionAvailable);
             meleeAttack.actionQueued = false;
             yield return new WaitForSeconds(Random.Range(minCooldown, maxCooldown));

@@ -46,7 +46,6 @@ public class Roll : MonoBehaviour
         animationEvents.FreezeRotation();
         animationEvents.DisableActions();
         animationEvents.SyncRotation();
-        animationEvents.BecomeIntangible();
         stamina.Remove(staminaCost);
     }
 

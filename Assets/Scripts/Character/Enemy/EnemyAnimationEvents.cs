@@ -7,11 +7,13 @@ public class EnemyAnimationEvents : AnimationEvents
 {
     Enemy enemy;
     NavMeshAgent agent;
+    EnemyMeleeAttack meleeAttack;
     protected override void Awake()
     {
         base.Awake();
         enemy = GetComponent<Enemy>();
         agent = GetComponent<NavMeshAgent>();
+        meleeAttack = GetComponent<EnemyMeleeAttack>();
     }
     public override void FreezeRotation() => enemy.rotationFrozen = true;
     public override void UnFreezeRotation() => enemy.rotationFrozen = false;
@@ -39,5 +41,7 @@ public class EnemyAnimationEvents : AnimationEvents
         RestoreTurnSpeed();
         UnFreezeRotation();
         enemy.EnableLockOn();
+        meleeAttack.actionQueued = false;
+        meleeAttack.StopFlickerBodyCollider();
     }
 }

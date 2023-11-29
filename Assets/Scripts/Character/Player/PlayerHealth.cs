@@ -61,7 +61,7 @@ public class PlayerHealth : Health, IStat
         {
             if (blockSound != BlockSound.NoSound)
                 animationEvents.PlaySoundRandom(FindInStructArray(parrySoundDefs, blockSound));
-            // Haptics.ImpactLight();
+            Haptics.ImpactLight();
             stamina.Remove(staminaBlockCost);
             block.ResetParryWindow();
             stagger.BlockHit(0.5f);
@@ -71,7 +71,7 @@ public class PlayerHealth : Health, IStat
         {
             if (blockSound != BlockSound.NoSound)
                 animationEvents.PlaySoundRandom(FindInStructArray(blockSoundDefs, blockSound));
-            // Haptics.Impact();
+            Haptics.ImpactLight();
             int damageReduced = (int) (damage * block.DamageModifier);
             stamina.Remove(staminaBlockCost);
             InflictDamage(damageReduced);
@@ -85,7 +85,7 @@ public class PlayerHealth : Health, IStat
         }
         else
         {
-            // Haptics.ImpactHeavy();
+            Haptics.Impact();
             block.StopBlocking();
             InflictDamage(damage);
             stagger.BecomeStaggered(attackerPosition, 1);
