@@ -110,9 +110,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravity: {x: 0, y: -2, z: 0}
-  baseDamage: 100
+  baseDamage: 80
   explosionPrefab: {fileID: 1220229783315324467, guid: 045fb833c50e62b4b9b072a8dc008b4d, type: 3}
-  AOE: 2
+  AOE: 3
   layerOfCollision:
     serializedVersion: 2
     m_Bits: 32768
