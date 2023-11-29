@@ -9,6 +9,7 @@ public class ZoneTransitionManager : MonoBehaviour, IRechargeable
 {
     ZoneExclusiveLoop[] zoneLoops;
     [SerializeField] AudioSource bossMusic;
+    [SerializeField] AudioSource clubMusic;
     readonly List<AudioSource> enemiesAudioSources = new();
     Zone currentZone;
 
@@ -46,6 +47,7 @@ public class ZoneTransitionManager : MonoBehaviour, IRechargeable
             zoneLoop.StartFadeOut();
 
         StartCoroutine(AudioFadeUtils.FadeOut(bossMusic, 1, true));
+        StartCoroutine(AudioFadeUtils.FadeOut(clubMusic, 1, false));
 
         foreach (AudioSource audioSource in enemiesAudioSources)
             StartCoroutine(AudioFadeUtils.FadeOut(audioSource, 1, true));
