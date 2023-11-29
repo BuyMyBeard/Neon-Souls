@@ -28,6 +28,7 @@ public class LockOn : MonoBehaviour
     public EnemyHealth EnemyHealth { get; private set; } = null;
     Canvas canvas;
     [SerializeField] RectTransform indicator;
+    [SerializeField] float indicatorYOffset;
     [SerializeField] float minTopDownDistance = .2f;
 
 
@@ -54,10 +55,7 @@ public class LockOn : MonoBehaviour
             if (EnemyHealth.displayHealthbar != null)
             {
                 RectTransform parent = (EnemyHealth.displayHealthbar as EnemyHealthbar).rt;
-                var vp2 = mainCam.WorldToViewportPoint(TargetEnemy.position);
-                var sp2 = canvas.worldCamera.ViewportToScreenPoint(vp2);
-                RectTransformUtility.ScreenPointToWorldPointInRectangle(parent, sp2, canvas.worldCamera, out Vector3 worldPoint2);
-                indicator.position = worldPoint2;
+                indicator.position = new Vector2(parent.position.x, parent.position.y + indicatorYOffset);
             }
             else
             {
