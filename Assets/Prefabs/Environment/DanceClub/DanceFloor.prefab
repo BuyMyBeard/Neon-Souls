@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4334560027305170504}
+  - component: {fileID: 4183540617588837346}
   m_Layer: 0
   m_Name: DanceFloor
   m_TagString: Untagged
@@ -43,6 +44,26 @@ Transform:
   - {fileID: 902151213545325859}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4183540617588837346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3049004177587382228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80f63cc23486b30498f66ef436fbff7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileColors:
+  - {fileID: 2100000, guid: da84a8b3e547cf84c894cba76164e0e1, type: 2}
+  - {fileID: 2100000, guid: 52fda6e1a2d46bf40a92a5580fbc751b, type: 2}
+  - {fileID: 2100000, guid: 982f8a8830f44c246b1132e6ee905ede, type: 2}
+  - {fileID: 2100000, guid: 644efd6f456fc4949b62ac309996d715, type: 2}
+  - {fileID: 2100000, guid: 8ff77ce6652b6494b9738cab3b817f72, type: 2}
+  offsetDelay: 0.35
+  changeDelay: 0.46875
 --- !u!1001 &333323156614543160
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51,10 +72,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4334560027305170504}
     m_Modifications:
+    - target: {fileID: 368834497300691150, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 644efd6f456fc4949b62ac309996d715, type: 2}
+    - target: {fileID: 2631365361985921024, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8ff77ce6652b6494b9738cab3b817f72, type: 2}
+    - target: {fileID: 7058942073579575474, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: da84a8b3e547cf84c894cba76164e0e1, type: 2}
     - target: {fileID: 7412657649894553418, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
       propertyPath: m_Name
       value: dancefloor-fixed (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 7470637324662317881, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8ff77ce6652b6494b9738cab3b817f72, type: 2}
     - target: {fileID: 7896178451776515568, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 19.420013
@@ -113,10 +150,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4334560027305170504}
     m_Modifications:
+    - target: {fileID: 368834497300691150, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8ff77ce6652b6494b9738cab3b817f72, type: 2}
+    - target: {fileID: 2631365361985921024, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: da84a8b3e547cf84c894cba76164e0e1, type: 2}
+    - target: {fileID: 7058942073579575474, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 52fda6e1a2d46bf40a92a5580fbc751b, type: 2}
     - target: {fileID: 7412657649894553418, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
       propertyPath: m_Name
       value: dancefloor-fixed (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7470637324662317881, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: da84a8b3e547cf84c894cba76164e0e1, type: 2}
     - target: {fileID: 7896178451776515568, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 25.670006
@@ -175,10 +228,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4334560027305170504}
     m_Modifications:
+    - target: {fileID: 368834497300691150, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: da84a8b3e547cf84c894cba76164e0e1, type: 2}
+    - target: {fileID: 2631365361985921024, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 52fda6e1a2d46bf40a92a5580fbc751b, type: 2}
+    - target: {fileID: 7058942073579575474, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 982f8a8830f44c246b1132e6ee905ede, type: 2}
     - target: {fileID: 7412657649894553418, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
       propertyPath: m_Name
       value: dancefloor-fixed (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 7470637324662317881, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 52fda6e1a2d46bf40a92a5580fbc751b, type: 2}
     - target: {fileID: 7896178451776515568, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 13.170015
@@ -237,10 +306,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4334560027305170504}
     m_Modifications:
+    - target: {fileID: 368834497300691150, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 52fda6e1a2d46bf40a92a5580fbc751b, type: 2}
+    - target: {fileID: 2631365361985921024, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 982f8a8830f44c246b1132e6ee905ede, type: 2}
+    - target: {fileID: 7058942073579575474, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 644efd6f456fc4949b62ac309996d715, type: 2}
     - target: {fileID: 7412657649894553418, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
       propertyPath: m_Name
       value: dancefloor-fixed (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 7470637324662317881, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 982f8a8830f44c246b1132e6ee905ede, type: 2}
     - target: {fileID: 7896178451776515568, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 25.670013
@@ -299,10 +384,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4334560027305170504}
     m_Modifications:
+    - target: {fileID: 368834497300691150, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: da84a8b3e547cf84c894cba76164e0e1, type: 2}
+    - target: {fileID: 2631365361985921024, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 52fda6e1a2d46bf40a92a5580fbc751b, type: 2}
+    - target: {fileID: 7058942073579575474, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 982f8a8830f44c246b1132e6ee905ede, type: 2}
     - target: {fileID: 7412657649894553418, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
       propertyPath: m_Name
       value: dancefloor-fixed (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 7470637324662317881, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 52fda6e1a2d46bf40a92a5580fbc751b, type: 2}
     - target: {fileID: 7896178451776515568, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 25.669989
@@ -361,10 +462,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4334560027305170504}
     m_Modifications:
+    - target: {fileID: 368834497300691150, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 982f8a8830f44c246b1132e6ee905ede, type: 2}
+    - target: {fileID: 2631365361985921024, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 644efd6f456fc4949b62ac309996d715, type: 2}
+    - target: {fileID: 7058942073579575474, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8ff77ce6652b6494b9738cab3b817f72, type: 2}
     - target: {fileID: 7412657649894553418, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
       propertyPath: m_Name
       value: dancefloor-fixed (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 7470637324662317881, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 644efd6f456fc4949b62ac309996d715, type: 2}
     - target: {fileID: 7896178451776515568, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 19.419989
@@ -423,10 +540,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4334560027305170504}
     m_Modifications:
+    - target: {fileID: 368834497300691150, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 644efd6f456fc4949b62ac309996d715, type: 2}
+    - target: {fileID: 2631365361985921024, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8ff77ce6652b6494b9738cab3b817f72, type: 2}
+    - target: {fileID: 7058942073579575474, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: da84a8b3e547cf84c894cba76164e0e1, type: 2}
     - target: {fileID: 7412657649894553418, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
       propertyPath: m_Name
       value: dancefloor-fixed (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 7470637324662317881, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8ff77ce6652b6494b9738cab3b817f72, type: 2}
     - target: {fileID: 7896178451776515568, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 13.170007
@@ -485,10 +618,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4334560027305170504}
     m_Modifications:
+    - target: {fileID: 368834497300691150, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 982f8a8830f44c246b1132e6ee905ede, type: 2}
+    - target: {fileID: 2631365361985921024, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 644efd6f456fc4949b62ac309996d715, type: 2}
+    - target: {fileID: 7058942073579575474, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8ff77ce6652b6494b9738cab3b817f72, type: 2}
     - target: {fileID: 7412657649894553418, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
       propertyPath: m_Name
       value: dancefloor-fixed
       objectReference: {fileID: 0}
+    - target: {fileID: 7470637324662317881, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 644efd6f456fc4949b62ac309996d715, type: 2}
     - target: {fileID: 7896178451776515568, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 25.669998
@@ -547,10 +696,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4334560027305170504}
     m_Modifications:
+    - target: {fileID: 368834497300691150, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 52fda6e1a2d46bf40a92a5580fbc751b, type: 2}
+    - target: {fileID: 2631365361985921024, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 982f8a8830f44c246b1132e6ee905ede, type: 2}
+    - target: {fileID: 7058942073579575474, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 644efd6f456fc4949b62ac309996d715, type: 2}
     - target: {fileID: 7412657649894553418, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
       propertyPath: m_Name
       value: dancefloor-fixed (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7470637324662317881, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 982f8a8830f44c246b1132e6ee905ede, type: 2}
     - target: {fileID: 7896178451776515568, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 13.169998
@@ -609,10 +774,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4334560027305170504}
     m_Modifications:
+    - target: {fileID: 368834497300691150, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8ff77ce6652b6494b9738cab3b817f72, type: 2}
+    - target: {fileID: 2631365361985921024, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: da84a8b3e547cf84c894cba76164e0e1, type: 2}
+    - target: {fileID: 7058942073579575474, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 52fda6e1a2d46bf40a92a5580fbc751b, type: 2}
     - target: {fileID: 7412657649894553418, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
       propertyPath: m_Name
       value: dancefloor-fixed (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 7470637324662317881, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: da84a8b3e547cf84c894cba76164e0e1, type: 2}
     - target: {fileID: 7896178451776515568, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 13.169991
@@ -671,10 +852,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4334560027305170504}
     m_Modifications:
+    - target: {fileID: 368834497300691150, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8ff77ce6652b6494b9738cab3b817f72, type: 2}
+    - target: {fileID: 2631365361985921024, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: da84a8b3e547cf84c894cba76164e0e1, type: 2}
+    - target: {fileID: 7058942073579575474, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 52fda6e1a2d46bf40a92a5580fbc751b, type: 2}
     - target: {fileID: 7412657649894553418, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
       propertyPath: m_Name
       value: dancefloor-fixed (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7470637324662317881, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: da84a8b3e547cf84c894cba76164e0e1, type: 2}
     - target: {fileID: 7896178451776515568, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 19.419998
@@ -733,10 +930,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4334560027305170504}
     m_Modifications:
+    - target: {fileID: 368834497300691150, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 52fda6e1a2d46bf40a92a5580fbc751b, type: 2}
+    - target: {fileID: 2631365361985921024, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 982f8a8830f44c246b1132e6ee905ede, type: 2}
+    - target: {fileID: 7058942073579575474, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 644efd6f456fc4949b62ac309996d715, type: 2}
     - target: {fileID: 7412657649894553418, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
       propertyPath: m_Name
       value: dancefloor-fixed (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 7470637324662317881, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 982f8a8830f44c246b1132e6ee905ede, type: 2}
     - target: {fileID: 7896178451776515568, guid: e85b6b580c63bbd4383362e614b3979a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 19.420006
