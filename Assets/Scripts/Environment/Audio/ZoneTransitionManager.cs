@@ -47,7 +47,7 @@ public class ZoneTransitionManager : MonoBehaviour, IRechargeable
             zoneLoop.StartFadeOut();
 
         StartCoroutine(AudioFadeUtils.FadeOut(bossMusic, 1, true));
-        StartCoroutine(AudioFadeUtils.FadeOut(clubMusic, 1, false));
+        StartCoroutine(AudioFadeUtils.FadeOut(clubMusic, 2.0f, false));
 
         foreach (AudioSource audioSource in enemiesAudioSources)
             StartCoroutine(AudioFadeUtils.FadeOut(audioSource, 1, true));
