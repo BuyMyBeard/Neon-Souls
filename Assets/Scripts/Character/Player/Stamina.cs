@@ -78,7 +78,7 @@ public class Stamina : MonoBehaviour, IRechargeable,IStat
             currentStamina -= value;
             if (currentStamina < 0)
                 currentStamina = 0;
-            playerStaminabar.Remove(value, maxStamina, true, syncLingeredValue);
+            playerStaminabar.Remove(value, maxStamina, false, syncLingeredValue);
         }
     }
     private IEnumerator ExhaustionCooldown()

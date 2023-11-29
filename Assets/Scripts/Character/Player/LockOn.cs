@@ -30,6 +30,7 @@ public class LockOn : MonoBehaviour
     [SerializeField] RectTransform indicator;
     [SerializeField] float indicatorYOffset;
     [SerializeField] float minTopDownDistance = .2f;
+    RectTransform indicatorRT;
 
 
     public void Awake()
@@ -42,6 +43,7 @@ public class LockOn : MonoBehaviour
         indicator = GameObject.FindGameObjectWithTag("Indicator").GetComponent<RectTransform>();
         indicator.gameObject.SetActive(false);
         cameraMovement = GetComponent<CameraMovement>();
+        indicatorRT = indicator.GetComponent<RectTransform>();
     }
     public void Start()
     {
@@ -50,16 +52,20 @@ public class LockOn : MonoBehaviour
     }
     public void LateUpdate()
     {
-        if (IsLocked && EnemyHealth is not BossHealth)
+        if (IsLocked)
         {
             if (EnemyHealth.displayHealthbar != null)
             {
-                RectTransform parent = (EnemyHealth.displayHealthbar as EnemyHealthbar).rt;
-                indicator.position = new Vector2(parent.position.x, parent.position.y + indicatorYOffset);
+                RectTransform parent = (RectTransform)indicatorRT.parent;
+                var vp = Camera.main.WorldToViewportPoint(TargetEnemy.position + new Vector3(0, indicatorYOffset));
+                var sp = canvas.worldCamera.ViewportToScreenPoint(vp);
+                RectTransformUtility.ScreenPointToWorldPointInRectangle(parent, sp, canvas.worldCamera, out Vector3 worldPoint);
+                indicatorRT.position = worldPoint;
             }
             else
             {
-                EnemyHealth.ShowHealthbar();
+                if (EnemyHealth is not BossHealth)
+                    EnemyHealth.ShowHealthbar();
                 indicator.gameObject.SetActive(true);
             }
         }
