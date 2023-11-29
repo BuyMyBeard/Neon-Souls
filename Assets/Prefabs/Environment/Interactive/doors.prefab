@@ -423,9 +423,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 74f3f4b5f3da5fe47b108904376818d1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 958204655034692226}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 74f3f4b5f3da5fe47b108904376818d1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7192619003085369394}
   m_SourcePrefab: {fileID: 100100000, guid: 74f3f4b5f3da5fe47b108904376818d1, type: 3}
 --- !u!1 &1177584548665570319 stripped
 GameObject:
@@ -615,20 +612,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7192619003085369394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1177584548665570319}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f31264fa5ad278c479f0f6826d0f6e81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  angularVelocityThreshold: 0.7853982
-  basePitchVelocity: 0.1
 --- !u!4 &1953522396472503989 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 74f3f4b5f3da5fe47b108904376818d1, type: 3}
@@ -738,9 +721,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 74f3f4b5f3da5fe47b108904376818d1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8014246337410788027}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 74f3f4b5f3da5fe47b108904376818d1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7005824867377027934}
   m_SourcePrefab: {fileID: 100100000, guid: 74f3f4b5f3da5fe47b108904376818d1, type: 3}
 --- !u!4 &2429963026189374015 stripped
 Transform:
@@ -935,17 +915,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7005824867377027934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3094860060571568261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f31264fa5ad278c479f0f6826d0f6e81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  angularVelocityThreshold: 0.7853982
-  basePitchVelocity: 0.1
