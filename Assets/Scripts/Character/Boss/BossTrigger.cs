@@ -14,7 +14,7 @@ public class BossTrigger : MonoBehaviour, IRechargeable
     {
         bossManager = FindAnyObjectByType<BossManager>();
         bossTrigger = GetComponent<Collider>();
-        playerAnimationEvents = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAnimationEvents>();
+        playerAnimationEvents = FindObjectOfType<PlayerAnimationEvents>();
     }
     private void OnTriggerEnter(Collider other)
     {
