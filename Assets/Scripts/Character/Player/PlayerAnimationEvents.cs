@@ -46,12 +46,12 @@ public class PlayerAnimationEvents : AnimationEvents
     public void BecomeIntangible()
     {
         Physics.IgnoreLayerCollision(11, 13, true);
-        Physics.IgnoreLayerCollision(11, 29, true);
+        Physics.IgnoreLayerCollision(11, 28, true);
     }
     public void RestoreTangibility()
     {
         Physics.IgnoreLayerCollision(11, 13, false);
-        Physics.IgnoreLayerCollision(11, 29, false);
+        Physics.IgnoreLayerCollision(11, 28, false);
     }
     public override void ResetAll()
     {

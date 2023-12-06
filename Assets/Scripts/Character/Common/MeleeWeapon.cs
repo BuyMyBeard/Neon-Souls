@@ -45,7 +45,7 @@ public class MeleeWeapon : MonoBehaviour
     {
         Health opponentHealth = other.GetComponentInParent<Health>();
         if (opponentHealth == null)
-            throw new MissingComponentException("Character has missing Health component");
+            return;
         // To avoid hitting the same enemy multiple times with the same attack
         else if (!opponentsHit.Contains(opponentHealth))
         {

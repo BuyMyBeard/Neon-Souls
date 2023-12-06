@@ -7,21 +7,26 @@ public class FogGateInteraction : Interactable
 {
     bool disabled = false;
     public override string animationTriggerName => "WalkThroughFogGate";
+    Collider[] colliders;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        colliders = GetComponentsInChildren<Collider>();
+    }
 
     public override void Interact()
     {
         base.Interact();
-        gameObject.layer = 6;
-        foreach(Transform child in transform)
-            child.gameObject.layer = 6;
-        StartCoroutine(GivebackLayer());
+        foreach (Collider collider in colliders)
+            collider.enabled = false;
+        StartCoroutine(ReEnableColliders());
     }
-    IEnumerator GivebackLayer()
+    IEnumerator ReEnableColliders()
     {
         yield return new WaitForSeconds(3.12f);
-        gameObject.layer = 0;
-        foreach(Transform child in transform)
-            child.gameObject.layer = 0;
+        foreach (Collider collider in colliders)
+            collider.enabled = true;
     }
 
     public void Disable()
@@ -31,7 +36,6 @@ public class FogGateInteraction : Interactable
         foreach (var collider in GetComponentsInChildren<Collider>())
             collider.enabled = false;
 
-        GetComponentInChildren<ParticleSystem>().Stop();
-        
+        GetComponentInChildren<ParticleSystem>().Stop();      
     }
 }
