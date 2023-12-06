@@ -11,16 +11,13 @@ public static class AudioFadeUtils
             yield return null;
         }
         audioSource.volume = 0;
-        audioSource.Pause();
+        audioSource.Stop();
         if (setToZero)
             audioSource.timeSamples = 0;
     }
     public static IEnumerator FadeIn(AudioSource audioSource, float fadeSpeed, float maxVolume = 1.0f)
     {
-        if ((!audioSource.isPlaying) && (audioSource.time != 0))
-            audioSource.UnPause();
-        else
-            audioSource.Play();
+        audioSource.Play();
         while (audioSource.volume < maxVolume)
         {
             audioSource.volume += Time.deltaTime * fadeSpeed;

@@ -13,6 +13,7 @@ public class ZoneExclusiveLoop : MonoBehaviour
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        maxVolume = audioSource.volume;
     }
     public void StartFadeOut()
     {
@@ -30,10 +31,6 @@ public class ZoneExclusiveLoop : MonoBehaviour
         StopAllCoroutines();
         audioSource.volume = 0.0f;
         audioSource.timeSamples = 0;
-        audioSource.Pause();
-    }
-    private void OnValidate()
-    {
-        maxVolume = GetComponent<AudioSource>().volume;
+        audioSource.Stop();
     }
 }
