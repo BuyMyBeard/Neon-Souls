@@ -13,6 +13,7 @@ public class ZoneExclusiveLoop : MonoBehaviour
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        maxVolume = GetComponent<AudioSource>().volume;
     }
     public void StartFadeOut()
     {

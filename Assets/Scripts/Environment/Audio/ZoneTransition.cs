@@ -26,7 +26,7 @@ public class ZoneTransition : MonoBehaviour
         directionToPlayer = directionToPlayer.normalized;
         if (Vector3.Dot(directionToPlayer, transform.forward) > 0)
         {
-            Debug.Log("Entered");
+            Debug.Log($"Entered {System.Enum.GetName(typeof(Zone), enterZone)}");
             zoneTransitionManager.EnterZone(enterZone);
         }
         else
