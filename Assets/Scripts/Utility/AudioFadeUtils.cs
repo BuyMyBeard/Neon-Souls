@@ -21,7 +21,6 @@ public static class AudioFadeUtils
             audioSource.UnPause();
         else
             audioSource.Play();
-        audioSource.UnPause();
         while (audioSource.volume < maxVolume)
         {
             audioSource.volume += Time.deltaTime * fadeSpeed;
