@@ -20,6 +20,7 @@ public static class AudioFadeUtils
         audioSource.Play();
         while (audioSource.volume < maxVolume)
         {
+            Debug.Log($"{audioSource.isPlaying}, {audioSource.volume}");
             audioSource.volume += Time.deltaTime * fadeSpeed;
             yield return null;
         }
